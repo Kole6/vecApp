@@ -1,0 +1,67 @@
+{
+	"pages": [{
+			"path": "pages/tabBar/index/index",
+			"style": {
+				"navigationBarTitleText": "职教圈",
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/tabBar/info/info",
+			"style": {
+				"navigationBarTitleText": "新闻资讯"
+			}
+		},
+		{
+			"path": "pages/tabBar/me/me",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+		},
+		{
+			"path": "pages/list/list",
+			"style": {
+				"navigationBarTitleText": "zixun"
+			}
+		},
+		{
+			"path": "pages/detail/detail",
+			"style": {
+				"navigationBarTitleText": "zixun"
+			}
+		}
+    ],
+	"tabBar": {
+		"color": "#7a7e83",
+		"selectedColor": "#17D8A9",
+		// "borderStyle": "white",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/tabBar/index/index",
+				"text": "首页",
+				"iconPath": "static/img/home.png",
+				"selectedIconPath": "static/hoHL.png"
+			},
+			{
+				"pagePath": "pages/list/list",
+				"text": "资讯",
+				"iconPath": "static/template.png",
+				"selectedIconPath": "static/teHL.png"
+			}, 
+			{
+				"pagePath": "pages/tabBar/me/me",
+				"text": "我的",
+				"iconPath": "static/img/user.png",
+				"selectedIconPath": "static/meHL.png"
+			}
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "职教圈",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}
