@@ -53,13 +53,13 @@
 				<navigator url="/pages/special/doubleHigh/doubleHigh" hover-class="navigator-hover">
 					<button type="default">双高计划</button>
 				</navigator>
-				<navigator url="/pages/special/international/international"  hover-class="other-navigator-hover">
+				<navigator url="/pages/special/international/international" hover-class="other-navigator-hover">
 					<button type="default">国际合作交流</button>
 				</navigator>
-				<navigator url="/pages/special/educationList/educationList"  hover-class="other-navigator-hover">
+				<navigator url="/pages/special/educationList/educationList" hover-class="other-navigator-hover">
 					<button type="default">职教榜单</button>
 				</navigator>
-				<navigator url="/pages/special/serviceCentre/serviceCentre"  hover-class="other-navigator-hover">
+				<navigator url="/pages/special/serviceCentre/serviceCentre" hover-class="other-navigator-hover">
 					<button type="default">服务中心</button>
 				</navigator>
 			</view>
@@ -96,19 +96,14 @@
 		data() {
 			return {
 				swiperList: [{
+						sid: 4,
+						src: '自定义src4',
+						img: '/static/swiper-img/4.png'
+					},
+					{
 						sid: 1,
 						src: '自定义src1',
 						img: '/static/swiper-img/2.jpg'
-					},
-					{
-						sid: 2,
-						src: '自定义src2',
-						img: '/static/swiper-img/3.jpg'
-					},
-					{
-						sid: 3,
-						src: '自定义src3',
-						img: '/static/swiper-img/1.jpg'
 					}
 				],
 				list: [{
@@ -183,120 +178,5 @@
 </script>
 
 <style scoped lang="scss">
-	.content {
-		.navbar-body {
-			.city {
-				display: flex;
-				flex-direction: row;
-				align-items: center;
-				justify-content: center;
-				width: 100%;
-				margin-left: 8px;
-				white-space: nowrap;
-			}
-
-			.input-view {
-				width: 92%;
-				display: flex;
-				background-color: #e7e7e7;
-				height: 30px;
-				border-radius: 15px;
-				padding: 0 4%;
-				flex-wrap: nowrap;
-				margin: 7px 0;
-				line-height: 30px;
-				background: #f5f5f5;
-			}
-
-			.input-view .uni-icon {
-				line-height: 30px !important;
-			}
-
-			.input-view .input {
-				height: 30px;
-				line-height: 30px;
-				width: 94%;
-				padding: 0 3%;
-			}
-		}
-
-		.header {
-			display: flex;
-
-			.head-logo {
-				padding: 8px 8px 0px 10px;
-
-				image {
-					width: 94px;
-					height: 40px;
-				}
-			}
-
-			.head-search {
-				width: 100%;
-				padding: 0 5px;
-			}
-		}
-
-		.swiper-view {
-			.swiper {
-				width: 100%;
-				height: 280upx;
-
-				image {
-					width: 100%;
-					height: 280upx;
-				}
-			}
-		}
-
-		.example-title {
-			display: flex;
-			font-size: 32upx;
-			color: #464e52;
-			padding: 10px;
-			margin-top: 3px;
-			position: relative;
-			background-color: #fdfdfd;
-			border-bottom: 1px #f5f5f5 solid;
-
-			image {
-				width: 36upx;
-				height: 36upx;
-				margin-top: 4upx;
-				margin-right: 20upx;
-			}
-
-			span {
-				flex: 1;
-			}
-		}
-
-		.zhuan-ti {
-			padding: 2upx 30upx;
-			background: #fff;
-		}
-		.nav-list {
-			display: flex;
-			flex-wrap: wrap;
-			padding: 0px 40upx;
-			justify-content: space-between;
-		}
-
-		.example-body {
-			padding: 2upx 30upx;
-			background: #fff;
-
-			.image {
-				width: 50upx;
-				height: 50upx;
-			}
-
-			.text {
-				font-size: 26upx;
-				margin-top: 10upx;
-			}
-		}
-
-	}
+	@import "./index.scss"
 </style>
