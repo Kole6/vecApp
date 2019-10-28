@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<!-- 头部 -->
+		<!-- todo头部 -->
 		<!-- <view class="navbar-body">
 			<view style="height: 35upx;"></view>
 			<uni-nav-bar :fixed="false" color="#333333" background-color="#FFFFFF" right-icon="scan">
@@ -35,37 +35,54 @@
 				</swiper-item>
 			</swiper>
 		</view>
-		<!-- grid icon-->
+		<!-- 首页icon -->
 		<view class="example-body">
-			<uni-grid :column="4" @change="change" :show-border="false" :square="false">
-				<uni-grid-item v-for="(item, index) in list" :key="index">
+			<uni-grid :column="4" @change="toIndexicon" :show-border="false" :square="false">
+				<uni-grid-item v-for="(item, index) in iconList" :key="index">
 					<image :src="item.url" class="image" mode="aspectFill" />
 					<text class="text">{{ item.text }}</text>
 				</uni-grid-item>
 			</uni-grid>
 		</view>
+		<!-- todo热门专题 -->
 		<view class="example-title">
-			<image mode="aspectFill" src="/static/p102.png"></image>
+			<image mode="aspectFill" src="/static/p103.png"></image>
 			<span>热门专题</span>
 		</view>
 		<view class="zhuan-ti">
 			<view class="nav-list">
-				<navigator url="/pages/special/doubleHigh/doubleHigh" hover-class="navigator-hover">
-					<button type="default">双高计划</button>
+				<navigator url="/pages/special/doubleHigh/doubleHigh" hover-class="navigator-hover" >
+					<!-- <button class="" type="default">双高计划</button> -->
+					<view class="zhuan-btn">
+						<image mode="aspectFill" src="/static/p105.png"></image>
+						<p>双高计划</p>
+						<!-- <image mode="aspectFill" src="/static/p105.png" class="image2"></image> -->
+					</view>
 				</navigator>
 				<navigator url="/pages/special/international/international" hover-class="other-navigator-hover">
-					<button type="default">国际合作交流</button>
+					<!-- <button type="default">国际合作交流</button> -->
+					<view class="zhuan-btn">
+						
+						国际合作交流
+					</view>
 				</navigator>
 				<navigator url="/pages/special/educationList/educationList" hover-class="other-navigator-hover">
-					<button type="default">职教榜单</button>
+					<!-- <button type="default">职教榜单</button> -->
+					<view class="zhuan-btn">
+						职教榜单
+					</view>
 				</navigator>
 				<navigator url="/pages/special/serviceCentre/serviceCentre" hover-class="other-navigator-hover">
-					<button type="default">服务中心</button>
+					<!-- <button type="default">服务中心</button> -->
+					<view class="zhuan-btn">
+						服务中心
+					</view>
 				</navigator>
 			</view>
 		</view>
+		<!-- todo 资讯 -->
 		<view class="example-title">
-			<image mode="aspectFill" src="/static/p101.png"></image>
+			<image mode="aspectFill" src="/static/p104.png"></image>
 			<span>职教资讯</span>
 		</view>
 		<view class="example-body">
@@ -106,21 +123,25 @@
 						img: '/static/swiper-img/2.jpg'
 					}
 				],
-				list: [{
+				iconList: [{
 						url: '/static/home_icon1.png',
-						text: '院校库'
+						text: '院校库',
+						page: '/pages/indexIcon/schoolDatabase/schoolDatabase'
 					},
 					{
 						url: '/static/home_icon2.png',
-						text: '专业库'
+						text: '专业库',
+						page: '/pages/indexIcon/majorDatabase/majorDatabase'
 					},
 					{
 						url: '/static/home_icon3.png',
-						text: '资料库'
+						text: '资料库',
+						page: '/pages/indexIcon/materialDatabase/materialDatabase'
 					},
 					{
 						url: '/static/home_icon4.png',
-						text: 'VIP'
+						text: 'VIP',
+						page: '/pages/indexIcon/vip/vip'
 					}
 				],
 				list2: [{
@@ -162,17 +183,19 @@
 					showCancel: false
 				})
 			},
-			change(e) {
-				let {
-					index
-				} = e.detail
-				console.log(index)
-			},
 			confirm() {
 				uni.showToast({
 					title: '搜索'
 				})
-			}
+			},
+			toSwiper(swiper) {
+				console.log(swiper.sid);
+			},
+			toIndexicon(e) {
+				uni.navigateTo({
+					url: this.iconList[e.detail.index].page
+				});
+			},
 		}
 	}
 </script>

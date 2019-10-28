@@ -9,7 +9,6 @@
 				margin-left: 8px;
 				white-space: nowrap;
 			}
-
 			.input-view {
 				width: 92%;
 				display: flex;
@@ -56,8 +55,7 @@
 		.swiper-view {
 			.swiper {
 				width: 100%;
-				height: 280upx;
-
+				height: 260upx;
 				image {
 					width: 100%;
 					height: 280upx;
@@ -88,23 +86,49 @@
 		}
 
 		.zhuan-ti {
-			padding: 2upx 30upx;
+			padding: 0 50upx;
 			background: #fff;
+			.nav-list {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+				.zhuan-btn{
+					background: rgb(109,205,112);
+					width: 310upx;
+					height: 160upx;
+					margin-top: 18upx;
+					border-radius: 5upx;
+					p{
+						padding-left: 34upx;
+						color: white;
+						font-size: 32upx;
+					}
+					image:nth-child(1){
+						padding-top: 10upx;
+						padding-left: 20upx;
+						width: 85upx;
+						height: 85upx;
+					}
+					image2{
+						padding-top: 10upx;
+						padding-left: 20upx;
+						width: 130upx;
+						height: 130upx;
+						opacity: 0.5;
+						position: absolute;
+					}
+				}
+			}
 		}
-		.nav-list {
-			display: flex;
-			flex-wrap: wrap;
-			padding: 0px 40upx;
-			justify-content: space-between;
-		}
+		
 
 		.example-body {
-			padding: 2upx 30upx;
+			padding: 5upx 30upx;
 			background: #fff;
 
 			.image {
-				width: 50upx;
-				height: 50upx;
+				width: 70upx;
+				height: 70upx;
 			}
 
 			.text {

@@ -51,6 +51,28 @@
 			"style": {
 				"navigationBarTitleText": "职教中心"
 			}
+		},
+		{
+			"path": "pages/indexIcon/schoolDatabase/schoolDatabase",
+			"style": {
+				"navigationBarTitleText": "院校库"
+			}
+		}, {
+			"path": "pages/indexIcon/majorDatabase/majorDatabase",
+			"style": {
+				"navigationBarTitleText": "专业库"
+			}
+		}, {
+			"path": "pages/indexIcon/materialDatabase/materialDatabase",
+			"style": {
+				"navigationBarTitleText": "资料库"
+			}
+		},
+		{
+			"path": "pages/indexIcon/vip/vip",
+			"style": {
+				"navigationBarTitleText": "VIP"
+			}
 		}
 	],
 	"tabBar": {
