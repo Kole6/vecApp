@@ -31,8 +31,28 @@
 			"style": {
 				"navigationBarTitleText": "zixun"
 			}
+		}, {
+			"path": "pages/special/doubleHigh/doubleHigh",
+			"style": {
+				"navigationBarTitleText": "双高计划"
+			}
+		}, {
+			"path": "pages/special/international/international",
+			"style": {
+				"navigationBarTitleText": "国际交流合作"
+			}
+		}, {
+			"path": "pages/special/educationList/educationList",
+			"style": {
+				"navigationBarTitleText": "职教榜单"
+			}
+		}, {
+			"path": "pages/special/serviceCentre/serviceCentre",
+			"style": {
+				"navigationBarTitleText": "职教中心"
+			}
 		}
-    ],
+	],
 	"tabBar": {
 		"color": "#7a7e83",
 		"selectedColor": "#17D8A9",
@@ -49,7 +69,7 @@
 				"text": "资讯",
 				"iconPath": "static/template.png",
 				"selectedIconPath": "static/teHL.png"
-			}, 
+			},
 			{
 				"pagePath": "pages/tabBar/me/me",
 				"text": "我的",

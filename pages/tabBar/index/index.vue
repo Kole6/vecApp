@@ -50,16 +50,16 @@
 		</view>
 		<view class="zhuan-ti">
 			<view class="nav-list">
-				<navigator url="navigate/navigate?title=navigate" hover-class="navigator-hover">
+				<navigator url="/pages/special/doubleHigh/doubleHigh" hover-class="navigator-hover">
 					<button type="default">双高计划</button>
 				</navigator>
-				<navigator url="redirect/redirect?title=redirect"  hover-class="other-navigator-hover">
+				<navigator url="/pages/special/international/international"  hover-class="other-navigator-hover">
 					<button type="default">国际合作交流</button>
 				</navigator>
-				<navigator url="/pages/tabBar/extUI/extUI"  hover-class="other-navigator-hover">
+				<navigator url="/pages/special/educationList/educationList"  hover-class="other-navigator-hover">
 					<button type="default">职教榜单</button>
 				</navigator>
-				<navigator url="/pages/tabBar/extUI/extUI"  hover-class="other-navigator-hover">
+				<navigator url="/pages/special/serviceCentre/serviceCentre"  hover-class="other-navigator-hover">
 					<button type="default">服务中心</button>
 				</navigator>
 			</view>
