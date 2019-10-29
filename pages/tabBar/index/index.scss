@@ -1,54 +1,33 @@
 .content {
-		.navbar-body {
-			.city {
-				display: flex;
-				flex-direction: row;
-				align-items: center;
-				justify-content: center;
-				width: 100%;
-				margin-left: 8px;
-				white-space: nowrap;
-			}
-			.input-view {
-				width: 92%;
-				display: flex;
-				background-color: #e7e7e7;
-				height: 30px;
-				border-radius: 15px;
-				padding: 0 4%;
-				flex-wrap: nowrap;
-				margin: 7px 0;
-				line-height: 30px;
-				background: #f5f5f5;
-			}
-
-			.input-view .uni-icon {
-				line-height: 30px !important;
-			}
-
-			.input-view .input {
-				height: 30px;
-				line-height: 30px;
-				width: 94%;
-				padding: 0 3%;
+		.address_select {
+			image{
+				width: 160upx;
+				height: 66upx;
+				margin-left: 40upx;
+				margin-top: 10upx;
 			}
 		}
-
-		.header {
+		.search_box {
+			width: 340upx;
+			margin-right: 80upx;
+			height: 60upx;
+			background-color: #f5f5f5;
+			border-radius: 32upx;
 			display: flex;
-
-			.head-logo {
-				padding: 8px 8px 0px 10px;
-
-				image {
-					width: 94px;
-					height: 40px;
-				}
+			align-items: center;
+			padding: 0upx 40upx;
+			.icon_search {
+				background-image: url('/static/map_ic_search.png');
+				background-position: center center;
+				background-repeat: no-repeat;
+				background-size: cover;
+				width: 29upx;
+				height: 28upx;
+				margin-right: 20upx;
 			}
-
-			.head-search {
-				width: 100%;
-				padding: 0 5px;
+			.prompt {
+				font-size: 28upx;
+				color: #cccccc;
 			}
 		}
 
@@ -93,30 +72,42 @@
 				flex-wrap: wrap;
 				justify-content: space-between;
 				.zhuan-btn{
-					background: rgb(109,205,112);
 					width: 310upx;
 					height: 160upx;
 					margin-top: 18upx;
-					border-radius: 5upx;
+					border-radius: 20upx;
 					p{
-						padding-left: 34upx;
+						padding-left: 30upx;
 						color: white;
 						font-size: 32upx;
 					}
-					image:nth-child(1){
+					.image1{
 						padding-top: 10upx;
-						padding-left: 20upx;
+						padding-left: 25upx;
 						width: 85upx;
 						height: 85upx;
 					}
-					image2{
-						padding-top: 10upx;
-						padding-left: 20upx;
+					.image2{
+						padding-top: 38upx;
+						padding-left: 80upx;
 						width: 130upx;
 						height: 130upx;
-						opacity: 0.5;
+						opacity: 0.2;
 						position: absolute;
 					}
+					
+				}
+				.zhuan-btn1{
+					background-color: #6dcd70;
+				}
+				.zhuan-btn2{
+					background-color: #4d5cbc;
+				}
+				.zhuan-btn3{
+					background-color: #c4a6fb;
+				} 
+				.zhuan-btn4{
+					background-color: #9cddea;
 				}
 			}
 		}

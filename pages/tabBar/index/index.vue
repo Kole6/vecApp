@@ -1,32 +1,16 @@
 <template>
 	<view class="content">
-		<!-- todo头部 -->
-		<!-- <view class="navbar-body">
-			<view style="height: 35upx;"></view>
-			<uni-nav-bar :fixed="false" color="#333333" background-color="#FFFFFF" right-icon="scan">
-				<block slot="left">
-					<view class="city">
-						<view>北京</view>
-						<uni-icons type="arrowdown" color="#333333" size="22" />
-					</view>
-				</block>
-				<view class="input-view">
-					<uni-icons type="search" size="22" color="#666666" />
-					<input confirm-type="search" class="input" type="text" placeholder="输入搜索关键词" @confirm="confirm">
-				</view>
-			</uni-nav-bar>
-		</view> -->
-		<!-- #ifdef APP-PLUS -->
-		<view style="height: 35upx;"></view>
-		<!-- #endif -->
-		<view class="header">
-			<view class="head-logo">
-				<image mode="aspectFill" src="/static/u195.png"></image>
+		<!-- navBar -->
+		<nav-bar>
+			<view slot="left" class="address_select">
+				<image src="/static/logo-img.png" mode="aspectFill"></image>
 			</view>
-			<view class="head-search">
-				<uni-search-bar radius="100" clearButton="auto" @confirm="search" />
+			<view slot="right" class="search_box">
+				<text class="icon_search"></text>
+				<text class="prompt"> 学校 / 人名 / 专业 </text>
 			</view>
-		</view>
+		</nav-bar>
+		
 		<!-- 轮播图 -->
 		<view class="swiper-view">
 			<swiper class="swiper" indicator-dots="true" autoplay="true" circular="true" indicator-active-color="#ffffff">
@@ -44,43 +28,44 @@
 				</uni-grid-item>
 			</uni-grid>
 		</view>
-		<!-- todo热门专题 -->
+		<!-- 热门专题 -->
 		<view class="example-title">
 			<image mode="aspectFill" src="/static/p103.png"></image>
 			<span>热门专题</span>
 		</view>
 		<view class="zhuan-ti">
 			<view class="nav-list">
-				<navigator url="/pages/special/doubleHigh/doubleHigh" hover-class="navigator-hover" >
-					<!-- <button class="" type="default">双高计划</button> -->
-					<view class="zhuan-btn">
-						<image mode="aspectFill" src="/static/p105.png"></image>
+				<navigator url="/pages/special/doubleHigh/doubleHigh" hover-class="navigator-hover">
+					<view class="zhuan-btn  zhuan-btn1">
+						<image mode="aspectFill" src="/static/p202.png" class="image1"></image>
+						<image mode="aspectFill" src="/static/p202.png" class="image2"></image>
 						<p>双高计划</p>
-						<!-- <image mode="aspectFill" src="/static/p105.png" class="image2"></image> -->
 					</view>
 				</navigator>
 				<navigator url="/pages/special/international/international" hover-class="other-navigator-hover">
-					<!-- <button type="default">国际合作交流</button> -->
-					<view class="zhuan-btn">
-						
-						国际合作交流
+					<view class="zhuan-btn  zhuan-btn2">
+						<image mode="aspectFill" src="/static/p203.png" class="image1"></image>
+						<image mode="aspectFill" src="/static/p203.png" class="image2"></image>
+						<p>国际合作交流</p>
 					</view>
 				</navigator>
 				<navigator url="/pages/special/educationList/educationList" hover-class="other-navigator-hover">
-					<!-- <button type="default">职教榜单</button> -->
-					<view class="zhuan-btn">
-						职教榜单
+					<view class="zhuan-btn  zhuan-btn3">
+						<image mode="aspectFill" src="/static/p201.png" class="image1"></image>
+						<image mode="aspectFill" src="/static/p201.png" class="image2"></image>
+						<p>职教榜单</p>
 					</view>
 				</navigator>
 				<navigator url="/pages/special/serviceCentre/serviceCentre" hover-class="other-navigator-hover">
-					<!-- <button type="default">服务中心</button> -->
-					<view class="zhuan-btn">
-						服务中心
+					<view class="zhuan-btn  zhuan-btn4">
+						<image mode="aspectFill" src="/static/p204.png" class="image1"></image>
+						<image mode="aspectFill" src="/static/p204.png" class="image2"></image>
+						<p>服务中心</p>
 					</view>
 				</navigator>
 			</view>
 		</view>
-		<!-- todo 资讯 -->
+		<!-- todo2019/11/01 资讯 -->
 		<view class="example-title">
 			<image mode="aspectFill" src="/static/p104.png"></image>
 			<span>职教资讯</span>
@@ -97,18 +82,14 @@
 </template>
 
 <script>
-	import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue'
 	import uniGrid from '@/components/uni-grid/uni-grid.vue'
 	import uniGridItem from '@/components/uni-grid-item/uni-grid-item.vue'
-	import uniIcons from '@/components/uni-icons/uni-icons.vue'
-	import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue'
+	import navBar from "@/components/zhouWei-navBar";
 	export default {
 		components: {
-			uniSearchBar,
 			uniGrid,
 			uniGridItem,
-			uniIcons,
-			uniNavBar
+			navBar
 		},
 		data() {
 			return {
@@ -149,19 +130,7 @@
 						text: '院校库'
 					},
 					{
-						url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/gird-3.png',
-						text: '专业库'
-					},
-					{
-						url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-8.png',
-						text: '资料库'
-					},
-					{
-						url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-2.png',
-						text: '院校库'
-					},
-					{
-						url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/gird-3.png',
+						url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/gird-1.png',
 						text: '专业库'
 					},
 					{
@@ -170,7 +139,15 @@
 					},
 					{
 						url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-5.png',
-						text: 'VIP'
+						text: '院校库'
+					},
+					{
+						url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/gird-3.png',
+						text: '专业库'
+					},
+					{
+						url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-6.png',
+						text: '资料库'
 					}
 				]
 			}
