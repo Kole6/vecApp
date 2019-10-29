@@ -106,6 +106,24 @@
 			"style": {
 				"navigationBarTitleText": "VIP"
 			}
+		},
+		{
+			"path": "pages/indexIcon/schoolDatabase/BenkePage",
+			"style": {
+				"navigationBarTitleText": "本科层次职业教育"
+			}
+		},
+		{
+			"path": "pages/indexIcon/schoolDatabase/GaozhiPage",
+			"style": {
+				"navigationBarTitleText": "高职高专院校"
+			}
+		},
+		{
+			"path": "pages/indexIcon/schoolDatabase/ZhongzhiPage",
+			"style": {
+				"navigationBarTitleText": "中等职业学校"
+			}
 		}
 	],
 	"tabBar": {
