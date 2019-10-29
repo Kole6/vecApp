@@ -17,7 +17,10 @@
 		{
 			"path": "pages/tabBar/me/me",
 			"style": {
-				"navigationBarTitleText": "个人中心"
+				"navigationBarTitleText": "个人中心",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
@@ -98,7 +101,31 @@
 				"navigationBarTitleText": "搜索"
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/login/signIn/signIn",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/personal/account/account",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/personal/follow/follow",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/personal/feedback/feedback",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/personal/recommend/recommend",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/personal/aboutUs/aboutUs",
+            "style" : {}
+        }
+    ],
 	"tabBar": {
 		"color": "#7a7e83",
 		"selectedColor": "#17D8A9",

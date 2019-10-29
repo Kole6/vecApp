@@ -5,7 +5,7 @@
 			<view slot="left" class="address_select">
 				<image src="/static/logo-img.png" mode="aspectFill"></image>
 			</view>
-			<view slot="right" class="search_box" @tap="confirm()">
+			<view slot="right" class="search_box" @touchstart="confirm()">
 				<text class="icon_search"></text>
 				<text class="prompt"> 学校 / 人名 / 专业 </text>
 			</view>
