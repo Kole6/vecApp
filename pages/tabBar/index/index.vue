@@ -5,7 +5,7 @@
 			<view slot="left" class="address_select">
 				<image src="/static/logo-img.png" mode="aspectFill"></image>
 			</view>
-			<view slot="right" class="search_box">
+			<view slot="right" class="search_box" @tap="confirm()">
 				<text class="icon_search"></text>
 				<text class="prompt"> 学校 / 人名 / 专业 </text>
 			</view>
@@ -154,16 +154,10 @@
 		},
 		onLoad() {},
 		methods: {
-			search(res) {
-				uni.showModal({
-					content: '搜索：' + res.value,
-					showCancel: false
-				})
-			},
 			confirm() {
-				uni.showToast({
-					title: '搜索'
-				})
+				uni.navigateTo({
+					url: '/pages/indexIcon/indexSearch/indexSearch'
+				});
 			},
 			toSwiper(swiper) {
 				console.log(swiper.sid);

@@ -91,6 +91,12 @@
 			"style": {
 				"navigationBarTitleText": "中等职业学校"
 			}
+		},
+		{
+			"path": "pages/indexIcon/indexSearch/indexSearch",
+			"style": {
+				"navigationBarTitleText": "搜索"
+			}
 		}
 	],
 	"tabBar": {
@@ -101,20 +107,20 @@
 		"list": [{
 				"pagePath": "pages/tabBar/index/index",
 				"text": "首页",
-				"iconPath": "static/img/home.png",
-				"selectedIconPath": "static/hoHL.png"
+				"iconPath": "static/img/tab1.png",
+				"selectedIconPath": "static/img/tab1HL.png"
 			},
 			{
 				"pagePath": "pages/list/list",
 				"text": "资讯",
-				"iconPath": "static/template.png",
-				"selectedIconPath": "static/teHL.png"
+				"iconPath": "static/img/tab2.png",
+				"selectedIconPath": "static/img/tab2HL.png"
 			},
 			{
 				"pagePath": "pages/tabBar/me/me",
 				"text": "我的",
-				"iconPath": "static/img/user.png",
-				"selectedIconPath": "static/meHL.png"
+				"iconPath": "static/img/tab3.png",
+				"selectedIconPath": "static/img/tab3HL.png"
 			}
 		]
 	},
