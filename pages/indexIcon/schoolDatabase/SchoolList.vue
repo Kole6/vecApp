@@ -40,9 +40,7 @@
 <style scoped lang="scss">
 	.list-item{
 		padding: 30upx;
-		// display: flex;
-		// align-items: center;
-		border-bottom: solid 1px #797979;
+		border-bottom: solid 1px $uni-border-color;
 		.left{
 			display: inline-flex;
 			width:120upx;

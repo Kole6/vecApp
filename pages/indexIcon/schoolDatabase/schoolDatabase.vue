@@ -1,7 +1,8 @@
 <!-- 院校库 -->
 <template>
 	<view>
-		<view class="search"><uni-search-bar radius="100" clearButton="auto" @confirm="search" /></view>
+		<view class="search">
+			<uni-search-bar radius="100" clearButton="auto" @confirm="search" /></view>
 		<view class="nav">
 			<navigator url="/pages/indexIcon/schoolDatabase/BenkePage"><view class="nav-item">本科层次职业教育</view></navigator>
 			<navigator url="/pages/indexIcon/schoolDatabase/GaozhiPage"><view class="nav-item">高职高专院校</view></navigator>
@@ -64,8 +65,8 @@ export default {
 	padding: 10upx;
 	margin-top: 30upx;
 	background: #eaeaea;
-	border-bottom: solid 1px #797979;
-	border-top: solid 1px #797979;
+	border-bottom: solid 1px $uni-border-color;
+	border-top: solid 1px $uni-border-color;
 	image {
 		width: 60upx;
 		height: 60upx;
