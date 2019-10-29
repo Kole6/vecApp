@@ -2,7 +2,7 @@
 	<view class="center">
 		<view class="center_box">
 			<view class="box_left">
-				<text @touchstart="toLogin()">登录 / 注册</text> 
+				<text @tap="toLogin()">登录 / 注册</text> 
 			</view>
 			<view class="box_right">
 				<image src="/static/p106.png" mode="aspectFill"></image>
@@ -10,29 +10,29 @@
 		</view>
 		<view class="center_box_bg">
 			<view class="center_menu">
-				<view class="menu_item" @touchstart="toVip()">
-					<image src="/static/p105.png" mode="aspectFill"></image>
+				<view class="menu_item" @tap="toVip()">
+					<text class="iconfont icon-menu iconhuiyuan2"></text>
 					<text>普通用户</text>
 					<text class="menu_r">开通会员</text>
 				</view>
-				<view class="menu_item" @touchstart="toAccount()">
-					<image src="/static/p105.png" mode="aspectFill"></image>
+				<view class="menu_item" @tap="toAccount()">
+					<text class="iconfont icon-menu iconzhanghushezhi4"></text>
 					<text>账户设置</text>
 				</view>
-				<view class="menu_item" @touchstart="toFollow()">
-					<image src="/static/p105.png" mode="aspectFill"></image>
+				<view class="menu_item" @tap="toFollow()">
+					<text class="iconfont icon-menu iconguanzhu"></text>
 					<text>我的关注</text>
 				</view>
-				<view class="menu_item" @touchstart="toFeedback()">
-					<image src="/static/p105.png" mode="aspectFill"></image>
+				<view class="menu_item" @tap="toFeedback()">
+					<text class="iconfont icon-menu iconyijianfankui1"></text>
 					<text>意见反馈</text>
 				</view>
-				<view class="menu_item" @touchstart="toRecommend()">
-					<image src="/static/p105.png" mode="aspectFill"></image>
+				<view class="menu_item" @tap="toRecommend()">
+					<text class="iconfont icon-menu icontuijian1"></text>
 					<text>推荐给朋友</text>
 				</view>
-				<view class="menu_item" @touchstart="toAbountUs()">
-					<image src="/static/p105.png" mode="aspectFill"></image>
+				<view class="menu_item" @tap="toAbountUs()">
+					<text class="iconfont icon-menu iconguanyuwomen"></text>
 					<text>关于我们</text>
 				</view>
 			</view>

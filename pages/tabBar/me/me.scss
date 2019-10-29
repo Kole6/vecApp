@@ -23,6 +23,7 @@
 			display: inline-block;
 			.menu_item {
 				font-size: 28upx;
+				line-height: 36upx;
 				letter-spacing: 1px;
 				padding: 14px 5%;
 				background: #FEFEFE;
@@ -44,7 +45,7 @@
 					background: url('/static/right.png') no-repeat;
 					background-size: 100%;
 				}
-				text:nth-of-type(1) {
+				text:nth-of-type(2) {
 					margin-left: 10px;
 				}
 				.menu_r{
@@ -57,6 +58,11 @@
 					width: 40upx;
 					height: 40upx;
 				}
+				.icon-menu{
+					font-size: 36upx;
+					color: #15d9a8;
+				}
+				
 				// &:nth-of-type(4) {
 				// 	margin-top: 10px;
 				// }
