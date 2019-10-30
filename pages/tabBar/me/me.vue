@@ -9,30 +9,30 @@
 			</view>
 		</view>
 		<view class="center_box_bg">
-			<view class="center_menu">
-				<view class="menu_item" @touchstart="toVip()">
-					<text class="iconfont icon-menu iconhuiyuan2"></text>
+			<view class="center_menu" hover-class="center_menu--hover">
+				<view class="menu_item" @tap="toVip()">
+					<text class="vecfont icon-menu iconhuiyuan2"></text>
 					<text>普通用户</text>
 					<text class="menu_r">开通会员</text>
 				</view>
-				<view class="menu_item" @touchstart="toAccount()">
-					<text class="iconfont icon-menu iconzhanghushezhi4"></text>
+				<view class="menu_item" @tap="toAccount()">
+					<text class="vecfont icon-menu iconzhanghushezhi4"></text>
 					<text>账户设置</text>
 				</view>
-				<view class="menu_item" @touchstart="toFollow()">
-					<text class="iconfont icon-menu iconguanzhu"></text>
+				<view class="menu_item" @tap="toFollow()">
+					<text class="vecfont icon-menu iconguanzhu"></text>
 					<text>我的关注</text>
 				</view>
-				<view class="menu_item" @touchstart="toFeedback()">
-					<text class="iconfont icon-menu iconyijianfankui1"></text>
+				<view class="menu_item" @tap="toFeedback()">
+					<text class="vecfont icon-menu iconyijianfankui1"></text>
 					<text>意见反馈</text>
 				</view>
-				<view class="menu_item" @touchstart="toRecommend()">
-					<text class="iconfont icon-menu icontuijian1"></text>
+				<view class="menu_item" @tap="toRecommend()">
+					<text class="vecfont icon-menu icontuijian1"></text>
 					<text>推荐给朋友</text>
 				</view>
-				<view class="menu_item" @touchstart="toAbountUs()">
-					<text class="iconfont icon-menu iconguanyuwomen"></text>
+				<view class="menu_item" @tap="toAbountUs()">
+					<text class="vecfont icon-menu iconguanyuwomen"></text>
 					<text>关于我们</text>
 				</view>
 			</view>

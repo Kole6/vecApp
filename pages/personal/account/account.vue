@@ -1,27 +1,31 @@
 <template>
 	<view>
-		<view class="center_menu">
+		<view class="center_menu" hover-class="center_menu--hover">
 			<view class="menu_item">
-				<text>头像</text>
+				<text class="menu_l">头像</text>
 				<view class="menu_r">
-					<image src="/static/p106.png" mode="aspectFill" class="menu_png"></image>
+					<image src="/static/p106.png" class="menu_r_png" mode="aspectFill" ></image>
 				</view>
 			</view>
-			<view class="menu_item" @touchstart="toPhone()">
-				<text>手机</text>
-				<text class="menu_r">修改手机号</text>
+		    <view class="menu_item" @tap="toPhone()">
+				<text class="menu_l">手机</text>
+				<view class="menu_r">
+					<text class="menu_r_text">修改手机号</text>
+				</view>
 			</view>
-			<view class="menu_item" @touchstart="toPwd()">
-				<text>密码</text>
-				<text class="menu_r">修改密码</text>
+			<view class="menu_item" @tap="toPwd()">
+				<text class="menu_l">密码</text>
+				<text class="menu_r"><text class="menu_r_text">修改密码</text></text>
 			</view>
-			<view class="menu_item" @touchstart="toNi()">
-				<text>昵称</text>
-				<text class="menu_r">王老师</text>
+			<view class="menu_item" @tap="toNi()">
+				<text class="menu_l">昵称</text>
+				<view class="menu_r">
+					<text class="menu_r_text">王老师</text>
+				</view>
 			</view>
-			<view class="menu_item" @touchstart="clickYao()">
-				<text>我的邀请码</text>
-				<text class="menu_r">9967</text>
+			<view class="menu_item" @tap="clickYao()">
+				<text class="menu_l">我的邀请码</text>
+				<text class="menu_r"><text class="menu_r_text">9967</text></text>
 			</view>
 		</view>
 	</view>
@@ -97,61 +101,52 @@
 
 		.menu_item {
 			font-size: 28upx;
-			line-height: 45upx;
+			height: 80upx;
 			letter-spacing: 1px;
-			padding: 14px 5%;
+			padding: 0 5%;
 			background: #fff;
 			overflow: hidden;
-			box-sizing: border-box;
-			display: flex;
-			align-items: center;
-			position: relative;
+			display: inline-block;
+			width: 100%;
 			border-bottom: 1px solid #EFEFEF;
-
-			&:hover {
-				background: #F6F6F6 !important;
-			}
-
 			&::after {
 				content: '';
 				width: 30upx;
 				height: 30upx;
 				position: absolute;
 				right: 5%;
-				background: url('/static/right.png') no-repeat;
+				background: url('../../../static/right.png') no-repeat;
 				background-size: 100%;
+				margin-top: 25upx;
 			}
-
-			/* text:nth-of-type(2) {
-				margin-left: 10px;
-			} */
-
-			.menu_r {
+			.center_menu--hover {
+				background-color: #f1f1f1
+			}
+			.menu_l{
+				width: 300upx;
+				position: absolute;
+				line-height: 80upx;
+			}
+			.menu_r{
 				position: absolute;
 				color: #808080;
-				width: 630upx;
+				right:10%;
+				width: 350upx;
 				text-align: right;
 			}
-
-			image {
-				width: 40upx;
-				height: 40upx;
-			}
-
-			.menu_png {
-				width: 65upx;
-				height: 65upx;
+			.menu_r_png {
+				width: 60upx;
+				height: 60upx;
 				margin-top: 10upx;
+			}
+			.menu_r_text{
+				line-height: 80upx;
 			}
 
 			.icon-menu {
 				font-size: 36upx;
 				color: #15d9a8;
 			}
-
-			/* &:nth-of-type(4) {
-				 	margin-top: 10px;
-				 } */
 		}
 
 	}

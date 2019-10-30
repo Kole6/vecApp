@@ -6,8 +6,9 @@
 			color: #fff;
 			.box_left{
 				position: absolute;
-				font-size: 40upx;
-				margin: 120upx 0 0 50upx;
+				font-size: 44upx;
+				font-weight: 700;
+				margin: 125upx 0 0 50upx;
 			}
 			.box_right{
 				float: right;
@@ -15,7 +16,7 @@
 					width: 120upx;
 					height: 120upx;
 				}
-				margin: 90upx 60upx 0 0;
+				margin: 100upx 70upx 0 0;
 			}
 		}
 		.center_menu {
@@ -33,8 +34,8 @@
 				align-items: center;
 				position: relative;
 				border-bottom: 1px solid #EFEFEF;
-				&:hover {
-					background: #F6F6F6 !important;
+				.center_menu--hover {
+					background-color: #f1f1f1
 				}
 				&::after {
 					content: '';
@@ -42,7 +43,7 @@
 					height: 30upx;
 					position: absolute;
 					right: 5%;
-					background: url('/static/right.png') no-repeat;
+					background: url('../../../static/right.png') no-repeat;
 					background-size: 100%;
 				}
 				text:nth-of-type(2) {
@@ -51,7 +52,8 @@
 				.menu_r{
 					position: absolute;
 					color: #808080;
-					width: 630upx;
+					right:10%;
+					width: 350upx;
 					text-align: right;
 				}
 				image {
