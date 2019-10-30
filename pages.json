@@ -63,7 +63,16 @@
 		}, {
 			"path": "pages/indexIcon/majorDatabase/majorDatabase",
 			"style": {
-				"navigationBarTitleText": "专业库"
+				"navigationBarTitleText": "专业库",
+				"app-plus": {
+				    "titleNView": {
+				        "searchInput": {
+				            "backgroundColor": "#fff",
+				            "borderRadius": "6px",
+				            "placeholder": "搜索"
+				        }
+				    }
+				}
 			}
 		}, {
 			"path": "pages/indexIcon/materialDatabase/materialDatabase",

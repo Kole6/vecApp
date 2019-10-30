@@ -96,6 +96,7 @@
 				let obj = {}
 				for (let i = 0; i < this.menuList.length; i++) {
 					let item = this.menuList[i];
+					// 没有关联性并且含有默认选择项
 					if (!this.independence && item.defaultSelectedIndex != null && item.defaultSelectedIndex.toString().length > 0) { // 处理并列菜单默认值
 
 						if (item.isMutiple) {
@@ -205,6 +206,8 @@
 			resetMenuList(val) {
 				this.menuList = val;
 				this.$emit('update:menuList', val)
+				// 重新进行一次进行获取选中值
+				this.getSelectedObj();
 			},
 			menuTabClick(index) {
 				this.menuIndex = index;
@@ -301,12 +304,12 @@
 					}
 				} else {
 					// 目前只有这一部分起作用
-					if (index == 0) {
+					// if (index == 0) {
 						this.resetSelected(list, key)
-						if (!this.independence) {
-							this.selectedTitleObj[key] = list[index].title;
-						}
-					} else {
+					// 	if (!this.independence) {
+					// 		this.selectedTitleObj[key] = list[index].title;
+					// 	}
+					// } else {
 						list[0].isSelected = false
 						if (this.independence) {
 							this.independenceObj[this.selectedKey] = list[index].value;
@@ -324,7 +327,7 @@
 								list[i].isSelected = false
 							}
 						}
-					}
+					// }
 				}
 				// 修改 在外部可以监听内部所有情况的点击
 				this.$emit('conditionTap',{key,list,index})

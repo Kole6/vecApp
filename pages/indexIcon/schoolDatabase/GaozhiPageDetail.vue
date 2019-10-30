@@ -180,10 +180,12 @@ export default {
 			data[0].detailList = provinceArr;
 			data[1].detailList = cityArr;
 			if(provinceName){
+				data[0].title = provinceName
 				data[0].defaultSelectedIndex = index
 				data[1].detailList = cityData[index].children
 				if(cityData[index].children.length === 1){
 					data[1].defaultSelectedIndex = 0
+					data[1].title = cityData[index].children[0].title
 				}
 			}
 			this.$nextTick(() => {
@@ -191,10 +193,11 @@ export default {
 			});
 		},
 		handleSearch(result) {
+			console.log(result,'result')
 			if(!result.key_2){
 				uni.showToast({
 				    title: '请选择具体城市',
-				    duration: 2000,
+				    duration: 1000,
 					icon:'none'
 				})
 			}
@@ -230,7 +233,7 @@ export default {
 			margin-left: 20upx;
 			.tag{
 				display: inline-block;
-				font-size: 20upx;
+				font-size: 28upx;
 				padding: 0 10upx;
 				border-right: solid 1px $uni-border-color;
 			}

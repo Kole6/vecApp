@@ -19,7 +19,7 @@
 				showCategory:true,
 				categoryArr:[
 					{
-						name:'北京市',
+						name:'天津市',
 						desc:'45所高职',
 						IPC:'IPC'
 					},{

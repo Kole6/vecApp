@@ -2,7 +2,7 @@
 	<view class="content">
 		<view :style="{height: tabHeight + 1 +'px'}">
 			<scroll-view scroll-y="true" >
-				<view :class="topFixed?'select-tab-fixed-top':'select-tab'" :style="{height: tabHeight+'px'}">
+				<view :class="topFixed?'select-tab-fixed-top':'select-tab'" :style="{height: tabHeight+'px'}" v-if="refresh">
 					<view class="select-tab-item" :style="{width: itemWidth}" v-for="(item,index) in titleList" :key="index" @tap="showMenuClick(index)">
 						<text :style="{color:color,'white-space':!!item.nowrap?'nowrap':'inherit'}">{{item.title}}</text>
 						<text class="arrows sl-font" :class="statusList[index].isActive?up:down"></text>
@@ -13,7 +13,7 @@
 		<popup-layer ref="popupRef" :direction="'bottom'" @close="close" :isTransNav="isTransNav" :navHeight="navHeight"
 		 :tabHeight="tabHeight">
 			<sl-filter-view :ref="'slFilterView'" :independence="independence" :themeColor="themeColor" :menuListArr.sync="menuListTemp"
-			 ref="slFilterView" @confirm="filterResult" @conditionTap="handleConditionTap"></sl-filter-view>
+			  @confirm="filterResult" @conditionTap="handleConditionTap"></sl-filter-view>
 		</popup-layer>
 	</view>
 
@@ -146,6 +146,7 @@
 		// #endif
 		data() {
 			return {
+				refresh:true,
 				menuList:JSON.parse(JSON.stringify(this.menuListArr)),
 				down: 'sl-down',
 				up: 'sl-up',
@@ -157,6 +158,35 @@
 			};
 		},
 		methods: {
+			handleInitData(){
+					let arr = [];
+					let titleArr = [];
+					let r = {};
+					for (let i = 0; i < this.menuList.length; i++) {
+						arr.push({
+							'isActive': false
+						});
+						r[this.menuList[i].key] = this.menuList[i].title;
+				
+						if (this.menuList[i].reflexTitle && this.menuList[i].defaultSelectedIndex > -1) {
+							titleArr.push({
+								'title': this.menuList[i].detailList[this.menuList[i].defaultSelectedIndex].title,
+								'key': this.menuList[i].key,
+								'nowrap':this.menuList[i].nowrap
+							})
+						} else {
+							titleArr.push({
+								'title': this.menuList[i].title,
+								'key': this.menuList[i].key,
+								'nowrap':this.menuList[i].nowrap
+							})
+						}
+				
+					}
+					this.statusList = arr;
+					this.titleList = titleArr;
+					this.tempTitleObj = r;
+			},
 			handleConditionTap(value){
 				this.$emit('conditionTap',value)
 			},
@@ -192,6 +222,9 @@
 				this.$emit('update:menuList', val)
 				this.$refs.slFilterView.resetMenuList(val)
 				this.$forceUpdate();
+				this.$nextTick(()=>{
+					this.handleInitData();
+				})
 			},
 			showMenuClick(index) {
 				this.selectedIndex = index;
