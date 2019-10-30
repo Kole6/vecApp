@@ -56,10 +56,12 @@ export default {
 	text-align: center;
 	box-sizing: border-box;
 	padding: 10upx;
-	background: rgba(0, 0, 0, 0.1);
+	background: #17D8A9;
+	color: #fff;
 	border-radius: 20upx;
 	font-size: 36upx;
 	height: 110upx;
+	box-shadow: 5upx 10upx 10upx rgba($color: #000000, $alpha: 0.1);
 }
 .list-title {
 	padding: 10upx;

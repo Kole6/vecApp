@@ -2,7 +2,7 @@
 <template>
 	<view>
 		<view class="category">
-		<uni-segmented-control :current="current" :values="items" @clickItem="handleTopClick" style-type="button" active-color="#007aff"></uni-segmented-control>
+		<uni-segmented-control :current="current" :values="items" @clickItem="handleTopClick" style-type="button" active-color="#17D8A9"></uni-segmented-control>
 		</view>
 		<view class="content">
 			<view class="page-body">
@@ -323,7 +323,7 @@ export default {
 }
 
 .active {
-	color: #007aff;
+	color: $main-base-color;
 }
 .right-show-all{
 	display: flex;
@@ -336,15 +336,15 @@ export default {
 	z-index: 100;
 	background: #fff;
 	.scroll-title{
-		color:#007AFF;
+		color:$main-base-color;
 		font-size: $uni-font-size-lg + 3upx;
 	}
 	.scroll-btn{
-		border: solid 1px #007AFF;
+		border: solid 1px $main-base-color;
 		border-radius: 10upx;
 		padding: 5upx 10upx;
 		color: #FFFFFF;
-		background: #007AFF;
+		background: $main-base-color;
 	}
 }
 .category-item{
