@@ -120,7 +120,9 @@
         }
         ,{
             "path" : "pages/personal/account/account",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "账户设置"
+			}
         }
         ,{
             "path" : "pages/personal/follow/follow",
@@ -139,7 +141,19 @@
             "style" : {
 				"navigationBarTitleText": "关于我们"
 			}
-        }
+        },
+		{
+		    "path" : "pages/personal/modifyPhone/modifyPhone",
+		    "style" : {
+				"navigationBarTitleText": "修改手机号"
+			}
+		},
+		{
+		    "path" : "pages/personal/modifyPwd/modifyPwd",
+		    "style" : {
+				"navigationBarTitleText": "修改密码"
+			}
+		}
     ],
 	"tabBar": {
 		"color": "#7a7e83",
