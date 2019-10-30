@@ -324,9 +324,9 @@
 </script>
 
 <style>
-	page {
+	/* page {
 		min-height: 100%;
-	}
+	} */
 	/* #ifndef APP-PLUS */
 	page {
 		width: 100%;

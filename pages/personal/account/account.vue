@@ -1,25 +1,25 @@
 <template>
 	<view>
-		<view class="center_menu">
+		<view class="center_menu" hover-class="center_menu--hover">
 			<view class="menu_item">
 				<text>头像</text>
 				<view class="menu_r">
 					<image src="/static/p106.png" mode="aspectFill" class="menu_png"></image>
 				</view>
 			</view>
-			<view class="menu_item" @touchstart="toPhone()">
+			<view class="menu_item" @tap="toPhone()">
 				<text>手机</text>
 				<text class="menu_r">修改手机号</text>
 			</view>
-			<view class="menu_item" @touchstart="toPwd()">
+			<view class="menu_item" @tap="toPwd()">
 				<text>密码</text>
 				<text class="menu_r">修改密码</text>
 			</view>
-			<view class="menu_item" @touchstart="toNi()">
+			<view class="menu_item" @tap="toNi()">
 				<text>昵称</text>
 				<text class="menu_r">王老师</text>
 			</view>
-			<view class="menu_item" @touchstart="clickYao()">
+			<view class="menu_item" @tap="clickYao()">
 				<text>我的邀请码</text>
 				<text class="menu_r">9967</text>
 			</view>
@@ -107,19 +107,17 @@
 			align-items: center;
 			position: relative;
 			border-bottom: 1px solid #EFEFEF;
-
-			&:hover {
-				background: #F6F6F6 !important;
-			}
-
 			&::after {
 				content: '';
 				width: 30upx;
 				height: 30upx;
 				position: absolute;
 				right: 5%;
-				background: url('/static/right.png') no-repeat;
+				background: url('../../../static/right.png') no-repeat;
 				background-size: 100%;
+			}
+			.center_menu--hover {
+				background-color: #f1f1f1
 			}
 
 			/* text:nth-of-type(2) {
