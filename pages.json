@@ -26,13 +26,13 @@
 		{
 			"path": "pages/list/list",
 			"style": {
-				"navigationBarTitleText": "zixun"
+				"navigationBarTitleText": "资讯"
 			}
 		},
 		{
 			"path": "pages/detail/detail",
 			"style": {
-				"navigationBarTitleText": "zixun"
+				"navigationBarTitleText": "资讯"
 			}
 		}, {
 			"path": "pages/special/doubleHigh/doubleHigh",
@@ -181,9 +181,9 @@
 		]
 	},
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
+		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "职教圈",
-		"navigationBarBackgroundColor": "#F8F8F8",
+		"navigationBarBackgroundColor": "#17d8a9",
 		"backgroundColor": "#F8F8F8"
 	}
 }
