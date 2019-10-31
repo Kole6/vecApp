@@ -2,7 +2,7 @@
 	text-align: center;
 }
 .sign-logo{
-	padding: 40px 0 25px 0;
+	padding: 40px 0 15px 0;
 	image{
 		width: 150upx;
 		height: 150upx;
@@ -10,23 +10,105 @@
 }
 
 .sign-in{
-	margin-top: 50px;
+	margin-top: 40px;
 	text-align: center;
 	button{
 		width: 500upx;
 		background-color: #17d8a9;
 	}
 }
+.wangji{
+	margin-top: 20upx;
+	padding-right: 70upx;
+	text-align: right;
+	font-size: 28upx;
+	color: $main-base-color;
+	text-decoration: underline;
+}
 .sign-qie{
+	margin-top: 40upx;
+	padding: 0 70upx;
+	font-size: 28upx;
+	color: $main-base-color;
+	text-decoration: underline;
+	display:flex;
+	justify-content:space-between
+}
+.order-img{
+	display: flex;
+	margin-top: 40upx;
+	padding: 0 200upx;
+	justify-content: space-between;
 	image{
-		width: 150upx;
-		height: 150upx;
+		width: 100upx;
+		height: 100upx;
+	}
+}
+.order{
+   margin-top: 90upx;
+   padding: 0upx 70upx;
+   font-size: 28upx;
+   display:flex;
+	.line {
+		flex: 1;
+		border-top:1px solid rgba($color: #999999, $alpha: 0.4);
+		position: relative;
+		top:18upx;
+	}
+	.txt {
+	   color: #686868;
+	   padding: 0 10upx;
+	   vertical-align: middle;
 	}
 }
 .sign-xieyi{
-	margin-top: 15px;
+	margin-top: 90upx;
 	font-size: 26upx;
 	.xieyi{
 		color: #17d8a9;
 	}
 }
+
+.sign-list {
+	display: flex;
+	flex-direction: column;
+	padding-top: 50upx;
+	padding-left: 70upx;
+	padding-right: 70upx;
+	.list-call{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		height: 100upx;
+		color: #333333;
+		border-bottom: 1upx solid rgba(230,230,230,1);
+	}
+	.list-call .img{
+		width: 40upx;
+		height: 40upx;
+	}
+	.list-call .biaoti{
+		flex: 1;
+		text-align: left;
+		font-size: 32upx;
+		line-height: 100upx;
+		margin-left: 16upx;
+	}
+	.yzm {
+		color: #FF7D13;
+		font-size: 24upx;
+		line-height: 64upx;
+		padding-left: 10upx;
+		padding-right: 10upx;
+		width:auto;
+		height:64upx;
+		border:1upx solid #FFA800;
+		border-radius: 50upx;
+	}
+	.yzms {
+		color: #999999 !important;
+		border:1upx solid #999999;
+	}
+}
+	
