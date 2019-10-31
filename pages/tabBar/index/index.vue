@@ -71,12 +71,12 @@
 			<span>职教资讯</span>
 		</view>
 		<view class="example-body">
-			<uni-grid :column="3" :highlight="true" @change="change">
+			<!-- <uni-grid :column="3" :highlight="true" @change="change">
 				<uni-grid-item v-for="(item, index) in list2" :key="index">
 					<image :src="item.url" class="image" mode="aspectFill" />
 					<text class="text">{{ item.text }}</text>
 				</uni-grid-item>
-			</uni-grid>
+			</uni-grid> -->
 		</view>
 	</view>
 </template>
@@ -125,30 +125,7 @@
 						page: '/pages/indexIcon/vip/vip'
 					}
 				],
-				list2: [{
-						url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-2.png',
-						text: '院校库'
-					},
-					{
-						url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/gird-1.png',
-						text: '专业库'
-					},
-					{
-						url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-8.png',
-						text: '资料库'
-					},
-					{
-						url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-5.png',
-						text: '院校库'
-					},
-					{
-						url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/gird-3.png',
-						text: '专业库'
-					},
-					{
-						url: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-6.png',
-						text: '资料库'
-					}
+				list2: [
 				]
 			}
 		},

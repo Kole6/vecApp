@@ -26,12 +26,12 @@
 			</view>
 		</view>
 		<view class="wangji">
-			<navigator url="/pages/login/forget/forget" hover-class="navigator-hover">
+			<navigator url="/pages/login/forget/forget" hover-class="none">
 				忘记密码?
 			</navigator>
 		</view>
 		<view class="sign-in">
-			<button type="primary">登 录</button>
+			<button type="primary" @tap="toLogin()">登 录</button>
 		</view>
 		<view class="sign-qie">
 			<view @tap="changePhone()" class="text1">{{isPhoneSign?"账号密码登录":"手机验证码登录"}}</view>
@@ -39,7 +39,7 @@
 		</view>
 		<view class="order">
 			<text class="line"></text>
-			<text class="txt"> 其他快捷方式登录 </text>
+			<text class="txt"> 其他快捷方式登录</text>
 			<text class="line"></text>
 		</view>
 		<view class="order-img">
@@ -102,6 +102,11 @@
 			toUserAgree() {
 				uni.navigateTo({
 					url: "../userAgreement/userAgreement"
+				})
+			},
+			toLogin(){
+				uni.switchTab({
+					url: "../../tabBar/index/index"
 				})
 			},
 			toReg() {

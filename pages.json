@@ -102,7 +102,13 @@
 		{
 			"path": "pages/indexIcon/vip/vip",
 			"style": {
-				"navigationBarTitleText": "VIP"
+				"navigationBarTitleText": "VIP会员"
+			}
+		},
+		{
+			"path": "pages/indexIcon/vip/recharge",
+			"style": {
+				"navigationBarTitleText": "VIP充值"
 			}
 		},
 		{

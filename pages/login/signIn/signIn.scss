@@ -34,16 +34,7 @@
 	display:flex;
 	justify-content:space-between
 }
-.order-img{
-	display: flex;
-	margin-top: 40upx;
-	padding: 0 200upx;
-	justify-content: space-between;
-	image{
-		width: 100upx;
-		height: 100upx;
-	}
-}
+
 .order{
    margin-top: 90upx;
    padding: 0upx 70upx;
@@ -51,14 +42,24 @@
    display:flex;
 	.line {
 		flex: 1;
-		border-top:1px solid rgba($color: #999999, $alpha: 0.4);
+		border-top:1px solid rgba($color: #999999, $alpha: 0.2);
 		position: relative;
 		top:18upx;
 	}
 	.txt {
-	   color: #686868;
+	   color: #999999;
 	   padding: 0 10upx;
 	   vertical-align: middle;
+	}
+}
+.order-img{
+	display: flex;
+	margin-top: 40upx;
+	padding: 0 240upx;
+	justify-content: space-between;
+	image{
+		width: 80upx;
+		height: 80upx;
 	}
 }
 .sign-xieyi{
