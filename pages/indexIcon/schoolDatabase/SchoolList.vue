@@ -50,16 +50,18 @@
 			vertical-align: middle;
 			align-items: center;
 			justify-content: center;
-			font-size: 50upx;
+			font-size: 45upx;
+			color: #fff;
 		}
 		.right{
 			display: inline-block;
 			width: 550upx;
 			vertical-align: middle;
 			margin-left: 20upx;
+			font-size: $uni-font-size-lg;
 			.tag{
 				display: inline-block;
-				font-size: 20upx;
+				font-size: $uni-font-size-base;
 				padding: 5upx 10upx;
 				border-radius: 10upx;
 				border: solid 1px #797979;

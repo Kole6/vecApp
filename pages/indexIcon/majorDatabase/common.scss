@@ -1,0 +1,121 @@
+.top {
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #fff;
+	display: flex;
+	justify-content: space-around;
+	padding: 20upx 100upx;
+	font-size: $uni-font-size-lg + 5;
+	border-bottom: solid 1upx $uni-border-color;
+	.top-btn {
+		border-radius: 10upx;
+		padding: 10upx 18upx;
+		background: $uni-border-color;
+		color: #ffffff;
+	}
+	.active {
+		background: $main-base-color;
+		color: #fff;
+	}
+}
+.m-base{
+	position: relative;
+	padding: 10upx 20upx;
+	.title{
+		font-size: $uni-font-size-lg;
+		font-weight: bold;
+		padding: 15upx 0;
+	}
+	.item{
+		padding: 10upx 0 10upx 25upx;
+		font-size: $uni-font-size-base;
+		.value{
+			color:#666666;
+			padding-left: 20upx;
+		}
+	}
+	.f-base{
+		box-sizing: border-box;
+		position: absolute;
+		right: 50upx;
+		top: 50%;
+		transform: translateY(-50%);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 140upx;
+		height: 140upx;
+		border-radius: 70upx;
+		border: solid 1px $uni-border-color;
+		padding: 20upx;
+		text-align: center;
+		font-size: $uni-font-size-lg;
+		color: #FFFFFF;
+		background: $main-base-color;
+	}
+	.f-base.yes{
+		background: #FFFFFF;
+		color: $main-base-color;
+	}
+}
+.m-pro{
+	padding: 10upx 20upx;
+	border-top: solid 1upx $uni-border-color;
+	.title{
+		font-size: $uni-font-size-lg;
+		font-weight: bold;
+		padding: 15upx 0;
+	}
+	.item{
+		padding: 20upx 0 10upx 25upx;
+		font-size: $uni-font-size-base;
+		.name{
+			font-size: $uni-font-size-base + 2;
+			margin-bottom: 10upx;
+		}
+		.link{
+			color: #007AFF;
+			padding-left: 20upx;
+		}
+	}
+}
+.m-simi{
+	margin-bottom: 100upx;
+	.title{
+		background: #EAEAEA;
+		font-size: $uni-font-size-lg;
+		padding: 10upx 20upx;
+		border-top: solid 1upx $uni-border-color;
+		border-bottom: solid 1upx $uni-border-color;
+	}
+}
+.m-bottom{
+	position: fixed;
+	bottom: 0;
+	font-size: $uni-font-size-lg + 5;
+	display: flex;
+	box-sizing: border-box;
+	width: 100vw;
+	.left{
+		width: 70%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding:20upx 0;
+		background: #FFFFFF;
+		.text{
+			padding-left: 20upx;
+		}
+	}
+	.right{
+		width: 30%;
+		text-align: center;
+		background: #199ED8;
+		padding:20upx 0;
+		color: #FFFFFF;
+	}
+	.saved{
+		color: $main-base-color;
+	}
+}

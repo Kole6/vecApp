@@ -22,19 +22,18 @@
 							 @scroll="scroll"
 							 :style="'height:' + height + 'px'" 
 							 scroll-with-animation>
-						
 						<uni-collapse >
 							<view class="right-show-all">
-								<text class="scroll-title">{{this.categoryList[this.categoryActive].name}}</text>
+								<text class="scroll-title">{{categoryList[categoryActive].name}}</text>
 								<text class="scroll-btn" @tap="showAll">{{isShowAll?'关闭全部':'全部展开'}}</text>
 							</view>
 						    <uni-collapse-item v-for="(list,index) in subCategoryList" 
-												:key="index+list.id"
+												:key="list.id"
 												:title="list.name" 
 												:show-animation="true"
 												:open="list.open">
 								<view class="category-item" v-for="(item,i) in list.detailList" 
-												:key="i+item.id"
+												:key="item.id"
 												@tap="handleItemTap(item,i,list,index)">
 									{{item.name}}
 								</view>
@@ -70,7 +69,7 @@ export default {
 	onLoad: function() {
 		this.getCategory();
 		// 设置分类栏高度，保持在一屏内
-		this.height = uni.getSystemInfoSync().windowHeight - 60;
+		this.height = uni.getSystemInfoSync().windowHeight - 65;
 	},
 	methods: {
 		handleTopClick(index){
@@ -138,7 +137,7 @@ export default {
 						},{
 							name:'农业类',
 							open:false,
-							id:'00'+index,
+							id:'01'+index,
 							detailList:[
 								{
 									name:'农业种植',
@@ -157,7 +156,7 @@ export default {
 						},{
 							name:'农业类',
 							open:false,
-							id:'00'+index,
+							id:'02'+index,
 							detailList:[
 								{
 									name:'农业种植',
@@ -176,7 +175,7 @@ export default {
 						},{
 							name:'农业类',
 							open:false,
-							id:'00'+index,
+							id:'03'+index,
 							detailList:[
 								{
 									name:'农业种植',
@@ -195,7 +194,7 @@ export default {
 						},{
 							name:'农业类',
 							open:false,
-							id:'00'+index,
+							id:'04'+index,
 							detailList:[
 								{
 									name:'农业种植',
@@ -214,7 +213,7 @@ export default {
 						},{
 							name:'农业类',
 							open:false,
-							id:'00'+index,
+							id:'05'+index,
 							detailList:[
 								{
 									name:'农业种植',
@@ -233,7 +232,7 @@ export default {
 						},{
 							name:'农业类',
 							open:false,
-							id:'00'+index,
+							id:'06'+index,
 							detailList:[
 								{
 									name:'农业种植',
@@ -252,7 +251,7 @@ export default {
 						},{
 							name:'农业类',
 							open:false,
-							id:'00'+index,
+							id:'07'+index,
 							detailList:[
 								{
 									name:'农业种植',
@@ -271,7 +270,7 @@ export default {
 						},{
 							name:'农业类',
 							open:false,
-							id:'00'+index,
+							id:'08'+index,
 							detailList:[
 								{
 									name:'农业种植',
@@ -290,7 +289,7 @@ export default {
 						},{
 							name:'农业类',
 							open:false,
-							id:'00'+index,
+							id:'09'+index,
 							detailList:[
 								{
 									name:'农业种植',
@@ -309,7 +308,7 @@ export default {
 						},{
 							name:'农业类',
 							open:false,
-							id:'00'+index,
+							id:'10'+index,
 							detailList:[
 								{
 									name:'农业种植',
@@ -328,7 +327,7 @@ export default {
 						},{
 							name:'农业类',
 							open:false,
-							id:'00'+index,
+							id:'11'+index,
 							detailList:[
 								{
 									name:'农业种植',
@@ -347,7 +346,7 @@ export default {
 						},{
 							name:'农业类',
 							open:false,
-							id:'00'+index,
+							id:'12'+index,
 							detailList:[
 								{
 									name:'农业种植',
@@ -370,7 +369,12 @@ export default {
 			this.subCategoryList = this.categoryList[0].subCategoryList;
 		},
 		handleItemTap(target,targetIndex,list,listIndex){
-			
+			console.log(target,targetIndex,list,listIndex)
+			uni.navigateTo({
+				url:'./ProfessionDesc?id='+target.id+'&name='+target.name,
+				animationType: 'pop-in',
+				animationDuration: 200
+			})
 		}
 	}
 };

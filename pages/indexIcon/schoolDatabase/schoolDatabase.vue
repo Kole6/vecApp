@@ -4,9 +4,9 @@
 		<view class="search">
 			<uni-search-bar radius="100" clearButton="auto" @confirm="search" /></view>
 		<view class="nav">
-			<navigator url="/pages/indexIcon/schoolDatabase/BenkePage"><view class="nav-item">本科层次职业教育</view></navigator>
-			<navigator url="/pages/indexIcon/schoolDatabase/GaozhiPage"><view class="nav-item">高职高专院校</view></navigator>
-			<navigator url="/pages/indexIcon/schoolDatabase/ZhongzhiPage"><view class="nav-item">中等职业学校</view></navigator>
+			<navigator url="/pages/indexIcon/schoolDatabase/BenkePage"><view class="nav-item"><text>本科层次职业教育</text></view></navigator>
+			<navigator url="/pages/indexIcon/schoolDatabase/GaozhiPage"><view class="nav-item"><text>高职高专院校</text></view></navigator>
+			<navigator url="/pages/indexIcon/schoolDatabase/ZhongzhiPage"><view class="nav-item"><text>中等职业学校</text></view></navigator>
 		</view>
 		<view class="list-title">
 			<image src="/static/home_icon1.png" mode="aspectFit"></image>
@@ -52,6 +52,9 @@ export default {
 	justify-content: space-around;
 }
 .nav-item {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: 220upx;
 	text-align: center;
 	box-sizing: border-box;
@@ -59,7 +62,7 @@ export default {
 	background: #17D8A9;
 	color: #fff;
 	border-radius: 20upx;
-	font-size: 36upx;
+	font-size: $uni-font-size-lg;
 	height: 110upx;
 	box-shadow: 5upx 10upx 10upx rgba($color: #000000, $alpha: 0.1);
 }
