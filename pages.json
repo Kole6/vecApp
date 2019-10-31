@@ -74,7 +74,22 @@
 				    }
 				}
 			}
-		}, {
+		}, 
+		// 专业介绍
+		{
+			"path": "pages/indexIcon/majorDatabase/ProfessionDesc",
+			"style": {
+				"navigationBarTitleText": "专业信息"
+			}
+		},
+		// 开设学校
+		{
+			"path": "pages/indexIcon/majorDatabase/ProfessionSchool",
+			"style": {
+				"navigationBarTitleText": "专业信息"
+			}
+		},
+		{
 			"path": "pages/indexIcon/materialDatabase/materialDatabase",
 			"style": {
 				"navigationBarTitleText": "资料库"
