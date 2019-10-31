@@ -80,6 +80,19 @@
 				"navigationBarTitleText": "专业信息"
 			}
 		},
+		// 专业对比
+		{
+			"path": "pages/indexIcon/majorDatabase/ProfessionPK",
+			"style": {
+				"navigationBarTitleText": "专业信息"
+			}
+		},
+		{
+			"path": "pages/indexIcon/majorDatabase/ProfessionPKDetail",
+			"style": {
+				"navigationBarTitleText": "专业信息"
+			}
+		},
 		{
 			"path": "pages/indexIcon/materialDatabase/materialDatabase",
 			"style": {
