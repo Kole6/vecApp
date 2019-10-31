@@ -1,0 +1,32 @@
+.sign{
+	text-align: center;
+}
+.sign-logo{
+	padding: 40px 0 25px 0;
+	image{
+		width: 150upx;
+		height: 150upx;
+	}
+}
+
+.sign-in{
+	margin-top: 50px;
+	text-align: center;
+	button{
+		width: 500upx;
+		background-color: #17d8a9;
+	}
+}
+.sign-qie{
+	image{
+		width: 150upx;
+		height: 150upx;
+	}
+}
+.sign-xieyi{
+	margin-top: 15px;
+	font-size: 26upx;
+	.xieyi{
+		color: #17d8a9;
+	}
+}

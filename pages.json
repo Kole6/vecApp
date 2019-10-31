@@ -63,16 +63,7 @@
 		}, {
 			"path": "pages/indexIcon/majorDatabase/majorDatabase",
 			"style": {
-				"navigationBarTitleText": "专业库",
-				"app-plus": {
-				    "titleNView": {
-				        "searchInput": {
-				            "backgroundColor": "#fff",
-				            "borderRadius": "6px",
-				            "placeholder": "搜索"
-				        }
-				    }
-				}
+				"navigationBarTitleText": "专业库"
 			}
 		}, {
 			"path": "pages/indexIcon/materialDatabase/materialDatabase",
@@ -116,54 +107,65 @@
 				"navigationBarTitleText": "中等职业学校"
 			}
 		},
-		
+
 		{
 			"path": "pages/indexIcon/indexSearch/indexSearch",
 			"style": {
 				"navigationBarTitleText": "搜索"
 			}
-		}
-	    ,{
-            "path" : "pages/login/signIn/signIn",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/personal/account/account",
-            "style" : {
+		}, {
+			"path": "pages/login/signIn/signIn",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		}, {
+			"path": "pages/personal/account/account",
+			"style": {
 				"navigationBarTitleText": "账户设置"
 			}
-        }
-        ,{
-            "path" : "pages/personal/follow/follow",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/personal/feedback/feedback",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/personal/recommend/recommend",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/personal/aboutUs/aboutUs",
-            "style" : {
+		}, {
+			"path": "pages/personal/follow/follow",
+			"style": {}
+		}, {
+			"path": "pages/personal/feedback/feedback",
+			"style": {}
+		}, {
+			"path": "pages/personal/recommend/recommend",
+			"style": {}
+		}, {
+			"path": "pages/personal/aboutUs/aboutUs",
+			"style": {
 				"navigationBarTitleText": "关于我们"
 			}
-        },
+		},
 		{
-		    "path" : "pages/personal/modifyPhone/modifyPhone",
-		    "style" : {
+			"path": "pages/personal/modifyPhone/modifyPhone",
+			"style": {
 				"navigationBarTitleText": "修改手机号"
 			}
 		},
 		{
-		    "path" : "pages/personal/modifyPwd/modifyPwd",
-		    "style" : {
-				"navigationBarTitleText": "修改密码"
+			"path": "pages/personal/modifyPwd/modifyPwd",
+			"style": {
+				"navigationBarTitleText": "重置密码"
+			}
+		}, {
+			"path": "pages/login/userAgreement/userAgreement",
+			"style": {
+				"navigationBarTitleText": "用户服务协议"
+			}
+		}, {
+			"path": "pages/login/register/register",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
+		}, {
+			"path": "pages/login/forget/forget",
+			"style": {
+				"navigationBarTitleText": "忘记密码"
 			}
 		}
-    ],
+	],
 	"tabBar": {
 		"color": "#7a7e83",
 		"selectedColor": "#17D8A9",

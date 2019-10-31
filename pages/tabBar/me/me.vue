@@ -5,7 +5,7 @@
 				<text @touchstart="toLogin()">登录 / 注册</text> 
 			</view>
 			<view class="box_right">
-				<image src="/static/p106.png" mode="aspectFill"></image>
+				<image src="/static/p106.png" mode="aspectFill" @touchstart="toLogin()"></image>
 			</view>
 		</view>
 		<view class="center_box_bg">
