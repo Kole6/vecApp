@@ -59,7 +59,7 @@ export default {
 	text-align: center;
 	box-sizing: border-box;
 	padding: 10upx;
-	background: #17D8A9;
+	background: $main-base-color;
 	color: #fff;
 	border-radius: 20upx;
 	font-size: $uni-font-size-lg;

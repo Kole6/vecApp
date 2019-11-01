@@ -7,13 +7,18 @@
 				{{item.title.substr(0,1)}}
 			</view>
 			<view class="right">
-				<view class="">
+				<view class="title">
 					{{item.title}}
 				</view>
 				<scroll-view  scroll-y="true" >
-					<view class="tag"
+					<view :class="['tag',isText?'tag-text':'']"
 					v-for="(tag,i) in item.tags" :key="i">
-						{{tag.name}}
+						<block v-if="isText">
+							{{ tag.name + ':' + tag.value }}
+						</block>
+						<block v-else>
+							{{tag.name}}
+						</block>
 					</view>
 				</scroll-view>
 			</view>
@@ -27,6 +32,10 @@
 			listArr:{
 				type:Array,
 				required:true,
+			},
+			isText:{
+				type:Boolean,
+				default:false,
 			}
 		},
 		data(){
@@ -59,6 +68,9 @@
 			vertical-align: middle;
 			margin-left: 20upx;
 			font-size: $uni-font-size-lg;
+			.title{
+				
+			}
 			.tag{
 				display: inline-block;
 				font-size: $uni-font-size-base;
@@ -66,6 +78,18 @@
 				border-radius: 10upx;
 				border: solid 1px #797979;
 				margin: 10upx  10upx 0 10upx;
+			}
+			.tag.tag-text {
+				display: inline-block;
+				font-size: $uni-font-size-base;
+				padding: 0 10upx;
+				margin: 0;
+				border-radius: 0;
+				border: none;
+				border-right: solid 1px $uni-border-color;
+			}
+			.tag.tag-text:last-child {
+				border: none;
 			}
 		}
 	}

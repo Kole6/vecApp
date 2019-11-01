@@ -81,7 +81,6 @@
 	}
 }
 .m-simi{
-	margin-bottom: 100upx;
 	.title{
 		background: #EAEAEA;
 		font-size: $uni-font-size-lg;
@@ -90,10 +89,13 @@
 		border-bottom: solid 1upx $uni-border-color;
 	}
 }
+.m-fill{
+	height: 101upx;
+}
 .m-bottom{
 	position: fixed;
 	bottom: 0;
-	font-size: $uni-font-size-lg + 5;
+	font-size: $uni-font-size-lg + 8;
 	display: flex;
 	box-sizing: border-box;
 	width: 100vw;
@@ -102,7 +104,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		padding:20upx 0;
+		padding:25upx 0;
 		background: #FFFFFF;
 		.text{
 			padding-left: 20upx;
@@ -112,10 +114,13 @@
 		width: 30%;
 		text-align: center;
 		background: #199ED8;
-		padding:20upx 0;
+		padding:25upx 0;
 		color: #FFFFFF;
 	}
 	.saved{
+		color: $main-base-color;
+	}
+	.saved+.text{
 		color: $main-base-color;
 	}
 }

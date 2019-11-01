@@ -52,17 +52,18 @@
 		<!-- 相近专业 -->
 		<view class="m-simi">
 			<view class="title">相近专业</view>
-			<school-list :listArr="dataArr"></school-list>
+			<school-list :listArr="dataArr" :isText="true"></school-list>
 		</view>
+		<view class="m-fill"></view>
 		<!-- 底部按钮 -->
 		<view class="m-bottom">
 			<view class="left" @tap="handleSave">
 				<text class="vecfont icon-menu iconguanzhu" :class="{'saved':hasSaved}"></text>
 				<text class="text">
-					{{hasSaved?'取消收藏':'收藏'}}
+					{{hasSaved?'取消关注':'关注'}}
 				</text>
 			</view>
-			<view class="right">
+			<view class="right" @tap="handlePK">
 				<text>专业对比</text>
 			</view>
 		</view>
@@ -94,25 +95,64 @@ export default {
 			dataArr: [
 				{
 					title: '上海市滨海职业大学',
-					tags: [{ name: '民办', color: '' }, { name: '本科层次职业教育', color: '' }]
+					tags: [{ name: '党委书记', value: '姜建国' }, { name: '校长', value: '姜建国' }, { name: '性质', value: '综合' }]
 				},
 				{
-					title: '河北市滨海职业大学',
-					tags: [{ name: '民办', color: '' }, { name: '本科层次职业教育', color: '' }]
-				}
+					title: '上海市滨海职业大学',
+					tags: [{ name: '党委书记', value: '姜建国' }, { name: '校长', value: '姜建国' }, { name: '性质', value: '综合' }]
+				},
 			]
 		};
 	},
 	onLoad(Option) {
 		this.$set(this.styleObj,'height',uni.getSystemInfoSync().windowHeight + 'px' )
+		uni.setStorageSync('freeChance',1)
 	},
 	methods: {
+		handlePK(){
+			// 进行用户验证/VIP验证
+			const value = uni.getStorageSync('freeChance');
+			if(value){
+				uni.showModal({
+					content:'您有一次免费专业对比机会哦~',
+					confirmText:'去对比',
+					success:(value)=>{
+						console.log(JSON.stringify(value))
+						uni.setStorageSync('freeChance',0)
+					},
+					complete:()=>{
+					}
+				})				
+			}else{
+				uni.showModal({
+					content:'您还没有开通VIP会员哦~',
+					confirmText:'去开通',
+					success:(value)=>{
+						console.log(JSON.stringify(value))
+					},
+					complete:()=>{
+						
+					}
+				})
+			}
+		},
 		handleSave(){
-			this.hasSaved = !this.hasSaved
+			// TODO 进行vip验证/用户验证
+			uni.showModal({
+				content:'您还没有开通VIP会员哦~',
+				confirmText:'去开通',
+				success:(value)=>{
+					console.log(JSON.stringify(value))
+				},
+				complete:()=>{
+					this.hasSaved = !this.hasSaved
+				}
+			})
+			
 		},
 		handleDownload(){
 			const downloadTask = uni.downloadFile({
-				url:'https://github.com/wonderfulthing/myPlugins/raw/master/pdf/TypeScript.pdf',
+				url:'https://code.jquery.com/jquery-3.4.1.min.js',
 				success(res){
 					if(res.statusCode == 200){
 						// 打开下载文件

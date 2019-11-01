@@ -1,6 +1,6 @@
 <template>
 	<view class="">
-		<view class=""><sl-filter ref="filter" @conditionTap="handleConditionTap" :menuListArr="menuList" :topFixed="true" @result="handleSearch"></sl-filter></view>
+		<view class=""><my-filter ref="myfilter" :handleConditionTap="handleConditionTap" :menuList="menuList" :handleSearch="handleSearch"></my-filter></view>
 		<view class="list">
 			<view class="list-item" v-for="(item, index) in listArr" :key="index">
 				<view class="left">{{ item.title.substr(0, 1) }}</view>
@@ -14,11 +14,10 @@
 </template>
 
 <script>
-import slFilter from '@/components/sl-filter/sl-filter.vue';
-import cityData from './ProvinceCity.js';
 import schoolList from './SchoolList.vue';
+import myFilter from '@/pages/indexIcon/majorDatabase/filter.vue';
 export default {
-	components: { slFilter,schoolList },
+	components: { myFilter,schoolList },
 	data() {
 		return {
 			listArr:[{
@@ -154,44 +153,15 @@ export default {
 		// this.initSearch();
 	},
 	onLoad(Option) {
-		if (Option.province) {
-			this.setSearch(Option.province);
-		}else{
-			this.setSearch()
-		}
+		this.$nextTick(()=>{
+			if (Option.province) {
+				this.$refs.myfilter.setSearch(Option.province);
+			}else{
+				this.$refs.myfilter.setSearch()
+			}
+		})
 	},
 	methods: {
-		setSearch(provinceName) {
-			// 初始省份
-			let  index = 0,
-				provinceArr = cityData.map((item,idx)=> {
-					if(provinceName === item.title){
-						index = idx
-					}
-					return {
-						title: item.title,
-						value: item.value
-					};
-				}),
-				// 初始第一个省份下的城市
-				cityArr = cityData[0].children,
-				data = JSON.parse(JSON.stringify(this.menuList));
-
-			data[0].detailList = provinceArr;
-			data[1].detailList = cityArr;
-			if(provinceName){
-				data[0].title = provinceName
-				data[0].defaultSelectedIndex = index
-				data[1].detailList = cityData[index].children
-				if(cityData[index].children.length === 1){
-					data[1].defaultSelectedIndex = 0
-					data[1].title = cityData[index].children[0].title
-				}
-			}
-			this.$nextTick(() => {
-				this.$refs.filter.resetMenuList(data);
-			});
-		},
 		handleSearch(result) {
 			console.log(result,'result')
 			if(!result.key_2){
@@ -205,7 +175,7 @@ export default {
 		handleConditionTap({ key, list, index }) {
 			// 选择省份的时候进行城市赋值
 			if (key == 'key_1') {
-				this.setSearch(list[index].title)
+				this.$refs.myfilter.setSearch(list[index].title)
 			}
 		}
 	}

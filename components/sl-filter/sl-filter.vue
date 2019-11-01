@@ -2,7 +2,7 @@
 	<view class="content">
 		<view :style="{height: tabHeight + 1 +'px'}">
 			<scroll-view scroll-y="true" >
-				<view :class="topFixed?'select-tab-fixed-top':'select-tab'" :style="{height: tabHeight+'px'}" v-if="refresh">
+				<view :class="topFixed?'select-tab-fixed-top':'select-tab'" :style="{height: tabHeight+'px',top:topFixed?topFixedHeight:'auto'}" v-if="refresh">
 					<view class="select-tab-item" :style="{width: itemWidth}" v-for="(item,index) in titleList" :key="index" @tap="showMenuClick(index)">
 						<text :style="{color:color,'white-space':!!item.nowrap?'nowrap':'inherit'}">{{item.title}}</text>
 						<text class="arrows sl-font" :class="statusList[index].isActive?up:down"></text>
@@ -10,7 +10,7 @@
 				</view>
 			</scroll-view>
 		</view>
-		<popup-layer ref="popupRef" :direction="'bottom'" @close="close" :isTransNav="isTransNav" :navHeight="navHeight"
+		<popup-layer :scrollHeight="scrollHeight" ref="popupRef" :direction="'bottom'" @close="close" :isTransNav="isTransNav" :navHeight="navHeight"
 		 :tabHeight="tabHeight">
 			<sl-filter-view :ref="'slFilterView'" :independence="independence" :themeColor="themeColor" :menuListArr.sync="menuListTemp"
 			  @confirm="filterResult" @conditionTap="handleConditionTap"></sl-filter-view>
@@ -61,6 +61,14 @@
 			topFixed: {
 				type: Boolean,
 				default: false
+			},
+			topFixedHeight:{
+				type:String,
+				default:'44px'
+			},
+			scrollHeight:{
+				type:String,
+				default:'calc(100% - 50px)'
 			}
 		},
 
@@ -313,12 +321,8 @@
 		display: flex;
 		width: 100%;
 		position: fixed;
-		/* #ifdef H5 */
-		top: 44px;
-		/* #endif */
-		/* #ifndef H5 */
-		top: 0;
-		/* #endif */
+		background: #fff;
+		z-index: 20;
 	}
 
 	.arrows {

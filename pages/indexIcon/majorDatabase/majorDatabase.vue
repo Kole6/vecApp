@@ -2,7 +2,7 @@
 <template>
 	<view>
 		<view class="category">
-		<uni-segmented-control :current="current" :values="items" @clickItem="handleTopClick" style-type="button" active-color="#17D8A9"></uni-segmented-control>
+		<uni-segmented-control :current="current" :values="items" @clickItem="handleTopClick" style-type="button" active-color="#6451FC"></uni-segmented-control>
 		</view>
 		<view class="content">
 			<view class="page-body">

@@ -1,5 +1,5 @@
 <template>
-	<scroll-view scroll-y v-show="ifshow" @tap="ableClose" @touchmove.stop.prevent class="popup-layer">
+	<scroll-view scroll-y v-show="ifshow" @tap="ableClose" @touchmove.stop.prevent class="popup-layer" :style="{height:scrollHeight}">
 		<view ref="popRef" class="popup-content" @tap.stop="stopEvent" :style="_location">
 			<slot></slot>
 		</view>
@@ -25,7 +25,8 @@
 			navHeight: {
 				type: Number,
 				default: 0
-			}
+			},
+			scrollHeight:String,
 		},
 		data() {
 			return {
@@ -107,7 +108,6 @@
 		position: absolute;
 		z-index: 999999;
 		background: rgba(0, 0, 0, .3);
-		height: calc(100% - 50px);
 		width: 100%;
 		left: 0px;
 		overflow: hidden;
