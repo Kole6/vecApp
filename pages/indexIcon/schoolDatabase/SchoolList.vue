@@ -10,7 +10,7 @@
 				<view class="title">
 					{{item.title}}
 				</view>
-				<scroll-view  scroll-y="true" >
+				<scroll-view  scroll-x="true" >
 					<view :class="['tag',isText?'tag-text':'']"
 					v-for="(tag,i) in item.tags" :key="i">
 						<block v-if="isText">
@@ -55,7 +55,7 @@
 			width:120upx;
 			height:120upx;
 			border-radius: 60upx;
-			background: #4CD964;
+			background: $main-base-color;
 			vertical-align: middle;
 			align-items: center;
 			justify-content: center;

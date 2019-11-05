@@ -22,9 +22,9 @@
 						</text>
 					</view>
 					<view class="filter-content-footer">
-						<view class="filter-content-footer-item" style="color: #777777; background-color: #FFFFFF;" @tap="resetClick(selectDetailList,item.key)">
+						<!-- <view class="filter-content-footer-item" style="color: #777777; background-color: #FFFFFF;" @tap="resetClick(selectDetailList,item.key)">
 							<text>重置</text>
-						</view>
+						</view> -->
 						<view class="filter-content-footer-item" :style="{'color': '#FFFFFF', 'background-color': themeColor}" @tap="sureClick">
 							<text>确定</text>
 						</view>
@@ -441,8 +441,8 @@
 	}
 
 	.filter-content-footer-item {
-		width: 50%;
 		display: flex;
+		width:100%;
 		justify-content: center;
 		align-items: center;
 		font-size: 16px;

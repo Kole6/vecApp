@@ -68,7 +68,7 @@
 			},
 			scrollHeight:{
 				type:String,
-				default:'calc(100% - 50px)'
+				default:'calc(100% - 100px)'
 			}
 		},
 

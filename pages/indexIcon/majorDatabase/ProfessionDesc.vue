@@ -119,6 +119,9 @@ export default {
 					success:(value)=>{
 						console.log(JSON.stringify(value))
 						uni.setStorageSync('freeChance',0)
+						uni.navigateTo({
+							url:'./ProfessionPK'
+						})
 					},
 					complete:()=>{
 					}

@@ -124,6 +124,7 @@
 		border-style: solid;
 		border-color: #c8c7cc;
 		border-radius: 5px;
+		background-color: $main-search-bg-color;
 	}
 
 	.uni-searchbar__box-icon-search {

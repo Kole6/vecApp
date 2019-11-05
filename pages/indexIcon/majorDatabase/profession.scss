@@ -1,0 +1,90 @@
+.m-btn-group{
+	text-align: center;
+	padding: 15upx 0;
+	.f-btn{
+		display: inline-block;
+		width: 300upx;
+		padding: 10upx 50upx;
+		background: $main-base-color;
+		color: #FFFFFF;
+		border-radius: 10upx;
+	}
+}
+.m-bottom {
+	position: fixed;
+	bottom: 0;
+	font-size: $uni-font-size-lg + 5;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20upx 0;
+	background: $main-base-color;
+	color: #ffffff;
+	width: 100%;
+	z-index: 10;
+}
+.m-card {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 10upx 20upx;
+	display: flex;
+	font-size: $uni-font-size-lg;
+	.card-item {
+		padding: 10upx;
+	}
+	.card-item:last-child {
+		margin-left: 20upx;
+	}
+	.card-item.active {
+		color: $main-base-color;
+		border-bottom: solid 3upx $main-base-color;
+	}
+}
+.list-item{
+	margin-bottom:20upx;
+}
+.list-content {
+	display: inline-block;
+	.left {
+		display: inline-flex;
+		width: 120upx;
+		height: 120upx;
+		border-radius: 60upx;
+		background: $main-base-color;
+		vertical-align: middle;
+		align-items: center;
+		justify-content: center;
+		font-size: 45upx;
+		color: #fff;
+	}
+	.right {
+		display: inline-block;
+		width: 500upx;
+		vertical-align: middle;
+		margin-left: 20upx;
+		font-size: $uni-font-size-lg;
+		.tag {
+			display: inline-block;
+			font-size: $uni-font-size-base;
+			padding: 5upx 10upx;
+			border-radius: 10upx;
+			border: solid 1px #797979;
+			margin: 10upx 10upx 0 10upx;
+		}
+		.tag.tag-text {
+			display: inline-block;
+			font-size: $uni-font-size-base;
+			padding: 0 10upx;
+			margin: 0;
+			border-radius: 0;
+			border: none;
+			border-right: solid 1px $uni-border-color;
+		}
+		.tag.tag-text:last-child {
+			border: none;
+		}
+	}
+}
+.m-bottom-list{
+	padding-bottom: 100upx;
+}
