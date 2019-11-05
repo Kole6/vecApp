@@ -65,7 +65,7 @@
 			"style": {
 				"navigationBarTitleText": "专业库"
 			}
-		}, 
+		},
 		// 专业介绍
 		{
 			"path": "pages/indexIcon/majorDatabase/ProfessionDesc",
@@ -199,6 +199,41 @@
 			"path": "pages/login/forget/forget",
 			"style": {
 				"navigationBarTitleText": "忘记密码"
+			}
+		}, {
+			"path": "pages/schoolDetails/ourFaculty/ourFaculty",
+			"style": {
+				"navigationBarTitleText": "师资情况"
+			}
+		}, {
+			"path": "pages/schoolDetails/cooperation/cooperation",
+			"style": {
+				"navigationBarTitleText": "校企合作"
+			}
+		}, {
+			"path": "pages/schoolDetails/schoolHonors/schoolHonors",
+			"style": {
+				"navigationBarTitleText": "学校荣誉"
+			}
+		}, {
+			"path": "pages/schoolDetails/skillsCompetition/skillsCompetition",
+			"style": {
+				"navigationBarTitleText": "技能大赛"
+			}
+		}, {
+			"path": "pages/schoolDetails/assistanceScholarship/assistanceScholarship",
+			"style": {
+				"navigationBarTitleText": "助奖学金"
+			}
+		}, {
+			"path": "pages/schoolDetails/entrepreneurship/entrepreneurship",
+			"style": {
+				"navigationBarTitleText": "就业创业"
+			}
+		}, {
+			"path": "pages/schoolDetails/doubleHighPlan/doubleHighPlan",
+			"style": {
+				"navigationBarTitleText": "双高计划"
 			}
 		}
 	],
