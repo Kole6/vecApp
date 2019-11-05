@@ -159,7 +159,9 @@
 			}
 		}, {
 			"path": "pages/personal/follow/follow",
-			"style": {}
+			"style": {
+				"navigationBarTitleText": "我的关注"
+			}
 		}, {
 			"path": "pages/personal/feedback/feedback",
 			"style": {}
@@ -202,8 +204,8 @@
 	],
 	"tabBar": {
 		"color": "#7a7e83",
-		"selectedColor": "#17D8A9",
-		// "borderStyle": "white",
+		"selectedColor": "#6451FC",
+		"borderStyle": "white",
 		"backgroundColor": "#ffffff",
 		"list": [{
 				"pagePath": "pages/tabBar/index/index",
@@ -226,9 +228,8 @@
 		]
 	},
 	"globalStyle": {
-		"navigationBarTextStyle": "white",
+		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "职教圈",
-		"navigationBarBackgroundColor": "#17d8a9",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarBackgroundColor": "#fff"
 	}
 }
