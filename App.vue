@@ -16,5 +16,10 @@
 </script>
 
 <style>
-@import './common/vecfont.css';
+	@import './common/vecfont.css';
+
+	page {
+		background-color: #F6F8FE;
+		font-family: PingFangSC-Regular, PingFang SC;
+	}
 </style>

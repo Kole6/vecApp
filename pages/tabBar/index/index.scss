@@ -8,10 +8,10 @@
 			}
 		}
 		.search_box {
-			width: 340upx;
-			margin-right: 80upx;
+			width: 380upx;
+			margin-right: 40upx;
 			height: 60upx;
-			background-color: #f5f5f5;
+			background-color: $main-search-color;
 			border-radius: 32upx;
 			display: flex;
 			align-items: center;
@@ -27,7 +27,7 @@
 			}
 			.prompt {
 				font-size: 28upx;
-				color: #cccccc;
+				color: #AAAAAA;
 			}
 		}
 

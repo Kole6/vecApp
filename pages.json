@@ -65,7 +65,7 @@
 			"style": {
 				"navigationBarTitleText": "专业库"
 			}
-		}, 
+		},
 		// 专业介绍
 		{
 			"path": "pages/indexIcon/majorDatabase/ProfessionDesc",
@@ -159,7 +159,9 @@
 			}
 		}, {
 			"path": "pages/personal/follow/follow",
-			"style": {}
+			"style": {
+				"navigationBarTitleText": "我的关注"
+			}
 		}, {
 			"path": "pages/personal/feedback/feedback",
 			"style": {}
@@ -198,12 +200,47 @@
 			"style": {
 				"navigationBarTitleText": "忘记密码"
 			}
+		}, {
+			"path": "pages/schoolDetails/ourFaculty/ourFaculty",
+			"style": {
+				"navigationBarTitleText": "师资情况"
+			}
+		}, {
+			"path": "pages/schoolDetails/cooperation/cooperation",
+			"style": {
+				"navigationBarTitleText": "校企合作"
+			}
+		}, {
+			"path": "pages/schoolDetails/schoolHonors/schoolHonors",
+			"style": {
+				"navigationBarTitleText": "学校荣誉"
+			}
+		}, {
+			"path": "pages/schoolDetails/skillsCompetition/skillsCompetition",
+			"style": {
+				"navigationBarTitleText": "技能大赛"
+			}
+		}, {
+			"path": "pages/schoolDetails/assistanceScholarship/assistanceScholarship",
+			"style": {
+				"navigationBarTitleText": "助奖学金"
+			}
+		}, {
+			"path": "pages/schoolDetails/entrepreneurship/entrepreneurship",
+			"style": {
+				"navigationBarTitleText": "就业创业"
+			}
+		}, {
+			"path": "pages/schoolDetails/doubleHighPlan/doubleHighPlan",
+			"style": {
+				"navigationBarTitleText": "双高计划"
+			}
 		}
 	],
 	"tabBar": {
 		"color": "#7a7e83",
-		"selectedColor": "#17D8A9",
-		// "borderStyle": "white",
+		"selectedColor": "#6451FC",
+		"borderStyle": "white",
 		"backgroundColor": "#ffffff",
 		"list": [{
 				"pagePath": "pages/tabBar/index/index",
@@ -226,9 +263,8 @@
 		]
 	},
 	"globalStyle": {
-		"navigationBarTextStyle": "white",
+		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "职教圈",
-		"navigationBarBackgroundColor": "#17d8a9",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarBackgroundColor": "#fff"
 	}
 }
