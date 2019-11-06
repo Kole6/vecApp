@@ -24,17 +24,12 @@
 			}
 		},
 		{
-			"path": "pages/list/list",
+			"path": "pages/tabBar/info/infoDetail",
 			"style": {
-				"navigationBarTitleText": "资讯"
+				"navigationBarTitleText": "资讯详情"
 			}
 		},
 		{
-			"path": "pages/detail/detail",
-			"style": {
-				"navigationBarTitleText": "资讯"
-			}
-		}, {
 			"path": "pages/special/doubleHigh/doubleHigh",
 			"style": {
 				"navigationBarTitleText": "双高计划"

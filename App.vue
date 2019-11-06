@@ -22,6 +22,6 @@
 		font-family: PingFangSC-Regular, PingFang SC;
 	}
 	.uni-searchbar__box{
-		background-color:#E7E9FA !important;
+		background-color:#fff !important;
 	}
 </style>

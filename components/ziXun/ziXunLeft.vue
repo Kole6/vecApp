@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="ziXun" v-for="(item,index) in infoListTest" :key="index">
+		<view class="ziXun" hover-class="uni-list-cell-hover" v-for="(item,index) in infoListTest" :key="index" @tap="openInfo()">
 			<view class="z-left">
 				<image mode="aspectFill" :src="item.img" class="image1"></image>
 			</view>
@@ -87,8 +87,33 @@
 						time: '2019-03-02',
 						source: "校园网"
 					}
-				]
+				],
+				news:[]
 			};
+		},
+		onLoad:function(){
+			uni.showLoading({
+				title:"加载中...."
+			})
+			uni.request({
+				url: 'https://unidemo.dcloud.net.cn/api/news',
+				method: 'GET',
+				data: {},
+				success: res => {
+					this.news = res.data;
+					uni.hideLoading();
+				},
+				fail: () => {},
+				complete: () => {}
+			});
+		},
+		methods: {
+			openInfo(e) {
+				var newsid = '115';
+				uni.navigateTo({
+					url: "/pages/tabBar/info/infoDetail?newsid="+newsid
+				});
+			}
 		}
 	}
 </script>
