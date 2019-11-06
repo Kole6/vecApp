@@ -21,12 +21,6 @@
 						img: "https://pic.36krcnd.com/201911/06052619/cd2viy851dbu5tsr!heading",
 						time: '2019-03-02',
 						source: "校园网"
-					},
-					{
-						title: "恭喜我校“六音”吉他社，荣获上海市第三届音乐会三等奖，我校月…",
-						img: "https://pic.36krcnd.com/201911/06034718/5tdyeebs8wgckl8q!heading",
-						time: '2019-03-02',
-						source: "校园网"
 					}, {
 						title: "恭喜我校“六音”吉他社，荣获上海市第三届音乐会三等奖，我校月…",
 						img: "https://pic.36krcnd.com/201910/31113337/dblb8niihg3y9pgb!heading",

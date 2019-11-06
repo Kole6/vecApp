@@ -17,9 +17,11 @@
 
 <style>
 	@import './common/vecfont.css';
-
 	page {
 		background-color: #F6F8FE;
 		font-family: PingFangSC-Regular, PingFang SC;
+	}
+	.uni-searchbar__box{
+		background-color:#E7E9FA !important;
 	}
 </style>

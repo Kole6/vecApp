@@ -289,7 +289,7 @@
 				"selectedIconPath": "static/img/tab1HL.png"
 			},
 			{
-				"pagePath": "pages/list/list",
+				"pagePath": "pages/tabBar/info/info",
 				"text": "资讯",
 				"iconPath": "static/img/tab2.png",
 				"selectedIconPath": "static/img/tab2HL.png"

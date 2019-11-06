@@ -158,7 +158,7 @@
 			},
 			toInfo() {
 				uni.switchTab({
-					url: "../../list/list"
+					url: "../info/info"
 				});
 			},
 		}

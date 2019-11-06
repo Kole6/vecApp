@@ -27,13 +27,13 @@
 					<text class="vecfont icon-menu iconyijianfankui1"></text>
 					<text>意见反馈</text>
 				</view>
-				<view class="menu_item" @tap="toRecommend()">
-					<text class="vecfont icon-menu icontuijian1"></text>
-					<text>推荐给朋友</text>
-				</view>
 				<view class="menu_item" @tap="toAbountUs()">
 					<text class="vecfont icon-menu iconguanyuwomen"></text>
 					<text>关于我们</text>
+				</view>
+				<view class="menu_item" @tap="toRecommend()">
+					<text class="vecfont icon-menu icontuijian1"></text>
+					<text>推荐给朋友</text>
 				</view>
 			</view>
 		</view>
