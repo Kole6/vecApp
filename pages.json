@@ -99,6 +99,42 @@
 				"navigationBarTitleText": "资料库"
 			}
 		},
+		// 职教文件
+		{
+			"path": "pages/indexIcon/materialDatabase/ZJFile",
+			"style": {
+				"navigationBarTitleText": "职教文件"
+			}
+		},
+		// 教学标准
+		{
+			"path": "pages/indexIcon/materialDatabase/JXBZFile",
+			"style": {
+				"navigationBarTitleText": "教学标准"
+			}
+		},
+		// 质量年报
+		{
+			"path": "pages/indexIcon/materialDatabase/ZLFile",
+			"style": {
+				"navigationBarTitleText": "质量年报"
+			}
+		},
+		// 教学大纲
+		{
+			"path": "pages/indexIcon/materialDatabase/JXDGFile",
+			"style": {
+				"navigationBarTitleText": "教学大纲"
+			}
+		},
+		// 文件详情
+		{
+			"path": "pages/indexIcon/materialDatabase/FileDetail",
+			"style": {
+				"navigationBarTitleText": "详情"
+			}
+		},
+		
 		{
 			"path": "pages/indexIcon/vip/vip",
 			"style": {
