@@ -2,13 +2,7 @@
 	<view class="">
 		<view class=""><sl-filter ref="filter" @conditionTap="handleConditionTap" :menuListArr="menuList" :topFixedHeight="topFixedHeight" :topFixed="true" @result="handleSearch"></sl-filter></view>
 		<view class="list">
-			<view class="list-item" v-for="(item, index) in listArr" :key="index">
-				<view class="left">{{ item.title.substr(0, 1) }}</view>
-				<view class="right">
-					<view class="">{{ item.title }}</view>
-					<view class="tag" v-for="(tag, i) in item.tags" :key="i">{{ tag.name+':'+tag.value }}</view>
-				</view>
-			</view>
+			<school-list :listArr="listArr" showType="4"></school-list>
 		</view>
 	</view>
 </template>
@@ -22,37 +16,42 @@ export default {
 	data() {
 		return {
 			topFixedHeight:'44px',
-			listArr:[{
-					title: '上海市滨海职业大学',
-					tags: [{ name: '党委书记', value: '姜建国' }, { name: '校长', value: '姜建国' },{name:'性质',value:'综合'}]
+			listArr:[
+				{
+					title: '北京电子科技职业技术学院',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
 				},
 				{
-					title: '上海市滨海职业大学',
-					tags: [{ name: '党委书记', value: '姜建国' }, { name: '校长', value: '姜建国' },{name:'性质',value:'综合'}]
-				},
-				{
-					title: '上海市滨海职业大学',
-					tags: [{ name: '党委书记', value: '姜建国' }, { name: '校长', value: '姜建国' },{name:'性质',value:'综合'}]
-				},
-				{
-					title: '上海市滨海职业大学',
-					tags: [{ name: '党委书记', value: '姜建国' }, { name: '校长', value: '姜建国' },{name:'性质',value:'综合'}]
+					title: '北京电子科技职业技术学院',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
 				},{
-					title: '上海市滨海职业大学',
-					tags: [{ name: '党委书记', value: '姜建国' }, { name: '校长', value: '姜建国' },{name:'性质',value:'综合'}]
-				},
-				{
-					title: '上海市滨海职业大学',
-					tags: [{ name: '党委书记', value: '姜建国' }, { name: '校长', value: '姜建国' },{name:'性质',value:'综合'}]
-				},
-				{
-					title: '上海市滨海职业大学',
-					tags: [{ name: '党委书记', value: '姜建国' }, { name: '校长', value: '姜建国' },{name:'性质',value:'综合'}]
-				},
-				{
-					title: '上海市滨海职业大学',
-					tags: [{ name: '党委书记', value: '姜建国' }, { name: '校长', value: '姜建国' },{name:'性质',value:'综合'}]
-				}],
+					title: '北京电子科技职业技术学院',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
+				},{
+					title: '北京电子科技职业技术学院',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
+				},{
+					title: '北京电子科技职业技术学院',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
+				},{
+					title: '北京电子科技职业技术学院',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
+				},{
+					title: '北京电子科技职业技术学院',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
+				},{
+					title: '北京电子科技职业技术学院',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
+				}
+			],
 			menuList: [
 				{
 					title: '省份',
@@ -215,34 +214,4 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-	.list-item{
-		padding: 30upx;
-		border-bottom: solid 1px $uni-border-color;
-		.left{
-			display: inline-flex;
-			width:120upx;
-			height:120upx;
-			border-radius: 60upx;
-			background: #4CD964;
-			vertical-align: middle;
-			align-items: center;
-			justify-content: center;
-			font-size: 50upx;
-		}
-		.right{
-			display: inline-block;
-			width: 550upx;
-			vertical-align: middle;
-			margin-left: 20upx;
-			.tag{
-				display: inline-block;
-				font-size: 28upx;
-				padding: 0 10upx;
-				border-right: solid 1px $uni-border-color;
-			}
-			.tag:last-child{
-				border: none;
-			}
-		}
-	}
 </style>

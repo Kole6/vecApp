@@ -1,7 +1,6 @@
 <template>
 	<view class="">
-		<view class="search"><uni-search-bar radius="100" clearButton="auto" @confirm="search" /></view>
-		<view class="list"><school-list :listArr="dataArr"></school-list></view>
+		<view class="list"><school-list showType="4" :listArr="dataArr"></school-list></view>
 	</view>
 </template>
 
@@ -14,13 +13,23 @@ export default {
 		return {
 			dataArr: [
 				{
-					title: '上海市滨海职业大学',
-					tags: [{ name: '民办', color: '' }, { name: '本科层次职业教育', color: '' }]
+					title: '北京电子科技职业技术学院',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
 				},
 				{
-					title: '河北市滨海职业大学',
-					tags: [{ name: '民办', color: '' }, { name: '本科层次职业教育', color: '' }]
-				}
+					title: '北京电子科技职业技术学院',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
+				},{
+					title: '北京电子科技职业技术学院',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
+				},{
+					title: '北京电子科技职业技术学院',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
+				},
 			]
 		};
 	},

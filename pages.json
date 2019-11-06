@@ -58,7 +58,16 @@
 		{
 			"path": "pages/indexIcon/schoolDatabase/schoolDatabase",
 			"style": {
-				"navigationBarTitleText": "院校库"
+				"app-plus":{
+					"titleNView":{
+						"searchInput":{
+							"backgroundColor": "#F8FAFF",
+							"borderRadius":"15px",
+							"placeholder":"学校/人名/专业"
+						}
+					}
+					
+				}
 			}
 		}, {
 			"path": "pages/indexIcon/majorDatabase/majorDatabase",
