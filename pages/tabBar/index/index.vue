@@ -30,7 +30,7 @@
 		</view>
 		<!-- 热门专题 -->
 		<view class="example-title">
-			<image mode="aspectFill" src="/static/p103.png"></image>
+			<!-- <image ?mode="aspectFill" src="/static/p103.png"></image> -->
 			<span>热门专题</span>
 		</view>
 		<view class="zhuan-ti">
@@ -67,16 +67,11 @@
 		</view>
 		<!-- todo2019/11/01 资讯 -->
 		<view class="example-title">
-			<image mode="aspectFill" src="/static/p104.png"></image>
 			<span>职教资讯</span>
+			<span class="ex-right" @tap="toInfo()">更多 > </span>
 		</view>
 		<view class="example-body">
-			<!-- <uni-grid :column="3" :highlight="true" @change="change">
-				<uni-grid-item v-for="(item, index) in list2" :key="index">
-					<image :src="item.url" class="image" mode="aspectFill" />
-					<text class="text">{{ item.text }}</text>
-				</uni-grid-item>
-			</uni-grid> -->
+			<textarea  placeholder="" />
 		</view>
 	</view>
 </template>
@@ -105,22 +100,22 @@
 					}
 				],
 				iconList: [{
-						url: '/static/home_icon1.png',
+						url: '/static/home_icon5.png',
 						text: '院校库',
 						page: '/pages/indexIcon/schoolDatabase/schoolDatabase'
 					},
 					{
-						url: '/static/home_icon2.png',
+						url: '/static/home_icon6.png',
 						text: '专业库',
 						page: '/pages/indexIcon/majorDatabase/majorDatabase'
 					},
 					{
-						url: '/static/home_icon3.png',
+						url: '/static/home_icon7.png',
 						text: '资料库',
 						page: '/pages/indexIcon/materialDatabase/materialDatabase'
 					},
 					{
-						url: '/static/home_icon4.png',
+						url: '/static/home_icon8.png',
 						text: 'VIP',
 						page: '/pages/indexIcon/vip/vip'
 					}
@@ -142,6 +137,11 @@
 			toIndexicon(e) {
 				uni.navigateTo({
 					url: this.iconList[e.detail.index].page
+				});
+			},
+			toInfo() {
+				uni.switchTab({
+					url: "../../list/list"
 				});
 			},
 		}
