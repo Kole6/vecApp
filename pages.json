@@ -272,7 +272,11 @@
 				"navigationBarTitleText": "双高计划"
 			}
 		}
-	],
+	    ,{
+            "path" : "components/ziXun/ziXun",
+            "style" : {}
+        }
+    ],
 	"tabBar": {
 		"color": "#7a7e83",
 		"selectedColor": "#6451FC",

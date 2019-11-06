@@ -80,13 +80,13 @@
 				</navigator>
 			</view>
 		</view>
-		<!-- todo2019/11/01 资讯 -->
+		<!-- 资讯 -->
 		<view class="example-title">
 			<span>职教资讯</span>
 			<span class="ex-right" @tap="toInfo()">更多 > </span>
 		</view>
-		<view class="example-body">
-			<textarea  placeholder="" />
+		<view class="xun">
+			<zi-xun></zi-xun>
 		</view>
 	</view>
 </template>
@@ -95,11 +95,13 @@
 	import uniGrid from '@/components/uni-grid/uni-grid.vue'
 	import uniGridItem from '@/components/uni-grid-item/uni-grid-item.vue'
 	import navBar from "@/components/zhouWei-navBar";
+	import ziXun from "@/components/ziXun/ziXun.vue"
 	export default {
 		components: {
 			uniGrid,
 			uniGridItem,
-			navBar
+			navBar,
+			ziXun
 		},
 		data() {
 			return {
