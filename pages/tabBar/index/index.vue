@@ -30,37 +30,52 @@
 		</view>
 		<!-- 热门专题 -->
 		<view class="example-title">
-			<!-- <image ?mode="aspectFill" src="/static/p103.png"></image> -->
 			<span>热门专题</span>
 		</view>
 		<view class="zhuan-ti">
 			<view class="nav-list">
 				<navigator url="/pages/special/doubleHigh/doubleHigh" hover-class="navigator-hover">
-					<view class="zhuan-btn  zhuan-btn1">
-						<image mode="aspectFill" src="/static/p202.png" class="image1"></image>
-						<image mode="aspectFill" src="/static/p202.png" class="image2"></image>
-						<p>双高计划</p>
+					<view class="zhuan-btn">
+						<view class="z-left">
+							<p class="left-title">双高计划</p> 
+							<p class="left-text">Double high plan</p> 
+						</view>
+						<view class="z-right">
+							<image mode="aspectFill" src="/static/p303.png" class="image1"></image>
+						</view>
 					</view>
 				</navigator>
-				<navigator url="/pages/special/international/international" hover-class="other-navigator-hover">
-					<view class="zhuan-btn  zhuan-btn2">
-						<image mode="aspectFill" src="/static/p203.png" class="image1"></image>
-						<image mode="aspectFill" src="/static/p203.png" class="image2"></image>
-						<p>国际合作交流</p>
+				<navigator url="/pages/special/international/international" hover-class="navigator-hover">
+					<view class="zhuan-btn">
+						<view class="z-left">
+							<p class="left-title">合作办学</p> 
+							<p class="left-text">Cooperation in running schools</p> 
+						</view>
+						<view class="z-right">
+							<image mode="aspectFill" src="/static/p301.png" class="image1"></image>
+						</view>
 					</view>
 				</navigator>
-				<navigator url="/pages/special/educationList/educationList" hover-class="other-navigator-hover">
-					<view class="zhuan-btn  zhuan-btn3">
-						<image mode="aspectFill" src="/static/p201.png" class="image1"></image>
-						<image mode="aspectFill" src="/static/p201.png" class="image2"></image>
-						<p>职教榜单</p>
+				<navigator url="/pages/special/educationList/educationList" hover-class="navigator-hover">
+					<view class="zhuan-btn">
+						<view class="z-left">
+							<p class="left-title">职教榜单</p> 
+							<p class="left-text">Vocational Education list</p> 
+						</view>
+						<view class="z-right">
+							<image mode="aspectFill" src="/static/p304.png" class="image1"></image>
+						</view>
 					</view>
 				</navigator>
-				<navigator url="/pages/special/serviceCentre/serviceCentre" hover-class="other-navigator-hover">
-					<view class="zhuan-btn  zhuan-btn4">
-						<image mode="aspectFill" src="/static/p204.png" class="image1"></image>
-						<image mode="aspectFill" src="/static/p204.png" class="image2"></image>
-						<p>服务中心</p>
+				<navigator url="/pages/special/serviceCentre/serviceCentre" hover-class="navigator-hover">
+					<view class="zhuan-btn">
+						<view class="z-left">
+							<p class="left-title">服务中心</p> 
+							<p class="left-text">Service Centre</p> 
+						</view>
+						<view class="z-right">
+							<image mode="aspectFill" src="/static/p302.png" class="image1"></image>
+						</view>
 					</view>
 				</navigator>
 			</view>
