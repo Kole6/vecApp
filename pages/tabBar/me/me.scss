@@ -1,22 +1,24 @@
 .center {
 		.center_box{
-			width: 100%;
-			height: 280upx;
-			background-color: #17d8a9;
+			width: 750upx;
+			height: 390upx;
+			background: url('../../../static/login_bg.png') no-repeat;
+			background-size: 100%;
 			color: #fff;
+			padding-bottom: 15upx;
 			.box_left{
 				position: absolute;
-				font-size: 44upx;
+				font-size: 48upx;
 				font-weight: 700;
-				margin: 125upx 0 0 50upx;
+				margin: 125upx 0 0 40upx;
 			}
 			.box_right{
 				float: right;
 				image{
-					width: 120upx;
-					height: 120upx;
+					width: 170upx;
+					height: 170upx;
 				}
-				margin: 100upx 70upx 0 0;
+				margin: 130upx 70upx 0 0;
 			}
 		}
 		.center_menu {

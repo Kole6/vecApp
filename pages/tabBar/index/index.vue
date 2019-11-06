@@ -30,53 +30,63 @@
 		</view>
 		<!-- 热门专题 -->
 		<view class="example-title">
-			<image mode="aspectFill" src="/static/p103.png"></image>
 			<span>热门专题</span>
 		</view>
 		<view class="zhuan-ti">
 			<view class="nav-list">
 				<navigator url="/pages/special/doubleHigh/doubleHigh" hover-class="navigator-hover">
-					<view class="zhuan-btn  zhuan-btn1">
-						<image mode="aspectFill" src="/static/p202.png" class="image1"></image>
-						<image mode="aspectFill" src="/static/p202.png" class="image2"></image>
-						<p>双高计划</p>
+					<view class="zhuan-btn">
+						<view class="z-left">
+							<p class="left-title">双高计划</p> 
+							<p class="left-text">Double high plan</p> 
+						</view>
+						<view class="z-right">
+							<image mode="aspectFill" src="/static/p303.png" class="image1"></image>
+						</view>
 					</view>
 				</navigator>
-				<navigator url="/pages/special/international/international" hover-class="other-navigator-hover">
-					<view class="zhuan-btn  zhuan-btn2">
-						<image mode="aspectFill" src="/static/p203.png" class="image1"></image>
-						<image mode="aspectFill" src="/static/p203.png" class="image2"></image>
-						<p>国际合作交流</p>
+				<navigator url="/pages/special/international/international" hover-class="navigator-hover">
+					<view class="zhuan-btn">
+						<view class="z-left">
+							<p class="left-title">合作办学</p> 
+							<p class="left-text">Cooperation in running schools</p> 
+						</view>
+						<view class="z-right">
+							<image mode="aspectFill" src="/static/p301.png" class="image1"></image>
+						</view>
 					</view>
 				</navigator>
-				<navigator url="/pages/special/educationList/educationList" hover-class="other-navigator-hover">
-					<view class="zhuan-btn  zhuan-btn3">
-						<image mode="aspectFill" src="/static/p201.png" class="image1"></image>
-						<image mode="aspectFill" src="/static/p201.png" class="image2"></image>
-						<p>职教榜单</p>
+				<navigator url="/pages/special/educationList/educationList" hover-class="navigator-hover">
+					<view class="zhuan-btn">
+						<view class="z-left">
+							<p class="left-title">职教榜单</p> 
+							<p class="left-text">Vocational Education list</p> 
+						</view>
+						<view class="z-right">
+							<image mode="aspectFill" src="/static/p304.png" class="image1"></image>
+						</view>
 					</view>
 				</navigator>
-				<navigator url="/pages/special/serviceCentre/serviceCentre" hover-class="other-navigator-hover">
-					<view class="zhuan-btn  zhuan-btn4">
-						<image mode="aspectFill" src="/static/p204.png" class="image1"></image>
-						<image mode="aspectFill" src="/static/p204.png" class="image2"></image>
-						<p>服务中心</p>
+				<navigator url="/pages/special/serviceCentre/serviceCentre" hover-class="navigator-hover">
+					<view class="zhuan-btn">
+						<view class="z-left">
+							<p class="left-title">服务中心</p> 
+							<p class="left-text">Service Centre</p> 
+						</view>
+						<view class="z-right">
+							<image mode="aspectFill" src="/static/p302.png" class="image1"></image>
+						</view>
 					</view>
 				</navigator>
 			</view>
 		</view>
-		<!-- todo2019/11/01 资讯 -->
+		<!-- 资讯 -->
 		<view class="example-title">
-			<image mode="aspectFill" src="/static/p104.png"></image>
 			<span>职教资讯</span>
+			<span class="ex-right" @tap="toInfo()">更多 > </span>
 		</view>
-		<view class="example-body">
-			<!-- <uni-grid :column="3" :highlight="true" @change="change">
-				<uni-grid-item v-for="(item, index) in list2" :key="index">
-					<image :src="item.url" class="image" mode="aspectFill" />
-					<text class="text">{{ item.text }}</text>
-				</uni-grid-item>
-			</uni-grid> -->
+		<view class="xun">
+			<zi-xun></zi-xun>
 		</view>
 	</view>
 </template>
@@ -85,11 +95,13 @@
 	import uniGrid from '@/components/uni-grid/uni-grid.vue'
 	import uniGridItem from '@/components/uni-grid-item/uni-grid-item.vue'
 	import navBar from "@/components/zhouWei-navBar";
+	import ziXun from "@/components/ziXun/ziXun.vue"
 	export default {
 		components: {
 			uniGrid,
 			uniGridItem,
-			navBar
+			navBar,
+			ziXun
 		},
 		data() {
 			return {
@@ -105,22 +117,22 @@
 					}
 				],
 				iconList: [{
-						url: '/static/home_icon1.png',
+						url: '/static/home_icon5.png',
 						text: '院校库',
 						page: '/pages/indexIcon/schoolDatabase/schoolDatabase'
 					},
 					{
-						url: '/static/home_icon2.png',
+						url: '/static/home_icon6.png',
 						text: '专业库',
 						page: '/pages/indexIcon/majorDatabase/majorDatabase'
 					},
 					{
-						url: '/static/home_icon3.png',
+						url: '/static/home_icon7.png',
 						text: '资料库',
 						page: '/pages/indexIcon/materialDatabase/materialDatabase'
 					},
 					{
-						url: '/static/home_icon4.png',
+						url: '/static/home_icon8.png',
 						text: 'VIP',
 						page: '/pages/indexIcon/vip/vip'
 					}
@@ -142,6 +154,11 @@
 			toIndexicon(e) {
 				uni.navigateTo({
 					url: this.iconList[e.detail.index].page
+				});
+			},
+			toInfo() {
+				uni.switchTab({
+					url: "../info/info"
 				});
 			},
 		}

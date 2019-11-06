@@ -1,29 +1,33 @@
 <template>
 	<view class="content">
-		<!-- <view class="title">{{title}}...</view>
-		 -->
-		 15646
-		 <news-list></news-list>
+		<view class="search">
+			<uni-search-bar radius="100" clearButton="left" @confirm="search" />
+		</view>
+		<zi-xun />
 	</view>
 </template>
 
 <script>
-	import newsList from '@/pages/list/list.nvue';
+	import ziXun from '@/components/ziXun/ziXunLeft.vue';
+	import uniSearchBar from "@/components/uni-search-bar/uni-search-bar.vue"
 	export default {
 		components: {
-			newsList
+			ziXun,
+			uniSearchBar
 		},
-		data() {
-			return {
-				title: '资讯',
-				strings : ''
-			}
+		methods: {
+			search(res) {
+				uni.showModal({
+					content: '搜索：' + res.value,
+					showCancel: false
+				})
+			},
 		},
-		onLoad:function(e){
-			
-		}
 	}
 </script>
 
-<style>
+<style scoped lang="scss">
+	.search{
+		padding: 0 32upx;
+	}
 </style>

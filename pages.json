@@ -24,17 +24,12 @@
 			}
 		},
 		{
-			"path": "pages/list/list",
+			"path": "pages/tabBar/info/infoDetail",
 			"style": {
-				"navigationBarTitleText": "资讯"
+				"navigationBarTitleText": "资讯详情"
 			}
 		},
 		{
-			"path": "pages/detail/detail",
-			"style": {
-				"navigationBarTitleText": "资讯"
-			}
-		}, {
 			"path": "pages/special/doubleHigh/doubleHigh",
 			"style": {
 				"navigationBarTitleText": "双高计划"
@@ -281,7 +276,11 @@
 				"navigationBarTitleText": "双高计划"
 			}
 		}
-	],
+	    ,{
+            "path" : "components/ziXun/ziXun",
+            "style" : {}
+        }
+    ],
 	"tabBar": {
 		"color": "#7a7e83",
 		"selectedColor": "#6451FC",
@@ -294,7 +293,7 @@
 				"selectedIconPath": "static/img/tab1HL.png"
 			},
 			{
-				"pagePath": "pages/list/list",
+				"pagePath": "pages/tabBar/info/info",
 				"text": "资讯",
 				"iconPath": "static/img/tab2.png",
 				"selectedIconPath": "static/img/tab2HL.png"
