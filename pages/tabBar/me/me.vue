@@ -86,5 +86,6 @@
 </script>
 
 <style scoped lang="scss">
+	@import "./base64.scss";
 	@import "./me.scss"
 </style>
