@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="ziXun" hover-class="uni-list-cell-hover" v-for="(item,index) in infoListTest" :key="index" @tap="openInfo()">
+		<view class="ziXun" hover-class="navigator-hover" v-for="(item,index) in infoListTest" :key="index" @tap="openInfo()">
 			<view class="z-left">
 				<p class="left-title">{{item.title}}</p> 
 				<p class="left-text">{{`时间：2019-03-02 来源：校园网`}}</p> 
