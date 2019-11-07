@@ -2,7 +2,7 @@
 		.center_box{
 			width: 750upx;
 			height: 390upx;
-			background: url('../../../static/login_bg.png') no-repeat;
+			background: $login-bg;
 			background-size: 100%;
 			color: #fff;
 			padding-bottom: 15upx;
