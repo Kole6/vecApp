@@ -161,7 +161,7 @@ export default {
 		this.topFixedHeight='44px',
 		// #endif
 		// #ifdef H5
-		this.topFixedHeight='89px',
+		this.topFixedHeight='99px',
 		// #endif
 		this.$set(this.styleObj,'height',uni.getSystemInfoSync().windowHeight + 'px' )
 		this.$nextTick(()=>{
@@ -258,6 +258,9 @@ export default {
 			border: none;
 		}
 	}
+}
+.m-result{
+	margin-top: 1px;
 }
 
 </style>

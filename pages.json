@@ -32,7 +32,18 @@
 		{
 			"path": "pages/special/doubleHigh/doubleHigh",
 			"style": {
-				"navigationBarTitleText": "双高计划"
+				"navigationBarTitleText": "双高计划",
+				"app-plus":{
+					"titleNView":{
+						"buttons":[
+							{
+								"type":"none",
+								"text":"筛选",
+								"fontSize":"14px"
+							}
+						]
+					}
+				}
 			}
 		}, {
 			"path": "pages/special/international/international",

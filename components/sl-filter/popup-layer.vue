@@ -1,5 +1,5 @@
 <template>
-	<scroll-view scroll-y v-show="ifshow" @tap="ableClose" @touchmove.stop.prevent class="popup-layer" :style="{height:scrollHeight}">
+	<scroll-view scroll-y v-show="ifshow" @tap="ableClose" @touchmove.stop.prevent class="popup-layer" :style="{height:wrapperHeight}">
 		<view ref="popRef" class="popup-content" @tap.stop="stopEvent" :style="_location">
 			<slot></slot>
 		</view>
@@ -34,7 +34,22 @@
 				translateValue: -100, // 位移距离
 				timer: null,
 				iftoggle: false,
+				wrapperHeight:'100%',
+				systemInfo:uni.getSystemInfoSync(),
 			};
+		},
+		watch:{
+			// 监听是否显示，将候选框高度进行动态设置
+			ifshow(val){
+				if(val){
+					this.$nextTick(()=>{
+						const query = uni.createSelectorQuery().in(this);
+						query.select('.popup-layer').boundingClientRect(data => {
+						  this.wrapperHeight = this.systemInfo.screenHeight - data.top + 'px'
+						}).exec();
+					})
+				}
+			}
 		},
 		computed: {
 			_translate() {
@@ -105,7 +120,7 @@
 
 <style>
 	.popup-layer {
-		position: absolute;
+		position: fixed;
 		z-index: 999999;
 		background: rgba(0, 0, 0, .3);
 		width: 100%;
