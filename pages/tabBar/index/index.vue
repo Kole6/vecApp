@@ -34,7 +34,7 @@
 		</view>
 		<view class="zhuan-ti">
 			<view class="nav-list">
-				<navigator url="/pages/special/doubleHigh/doubleHigh" >
+				<navigator url="/pages/special/doubleHigh/doubleHigh" hover-class="none">
 					<view class="zhuan-btn">
 						<view class="z-left">
 							<p class="left-title">双高计划</p> 
@@ -45,7 +45,7 @@
 						</view>
 					</view>
 				</navigator>
-				<navigator url="/pages/special/international/international" >
+				<navigator url="/pages/special/international/international" hover-class="none">
 					<view class="zhuan-btn">
 						<view class="z-left">
 							<p class="left-title">合作办学</p> 
@@ -56,7 +56,7 @@
 						</view>
 					</view>
 				</navigator>
-				<navigator url="/pages/special/educationList/educationList" >
+				<navigator url="/pages/special/educationList/educationList" hover-class="none">
 					<view class="zhuan-btn">
 						<view class="z-left">
 							<p class="left-title">职教榜单</p> 
@@ -67,7 +67,7 @@
 						</view>
 					</view>
 				</navigator>
-				<navigator url="/pages/special/serviceCentre/serviceCentre" >
+				<navigator url="/pages/special/serviceCentre/serviceCentre" hover-class="none">
 					<view class="zhuan-btn">
 						<view class="z-left">
 							<p class="left-title">服务中心</p> 

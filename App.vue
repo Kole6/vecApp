@@ -24,4 +24,14 @@
 	.uni-searchbar__box{
 		background-color:#fff !important;
 	}
+	.btn{
+		color: #fff;
+		width:600upx;
+		height:88upx;
+		font-size:34upx;
+		background:linear-gradient(360deg,rgba(106,67,254,1) 0%,rgba(71,149,249,1) 100%);
+		box-shadow:0upx 10upx 20upx 0upx rgba(71,149,249,0.3);
+		border-radius:44upx;
+		font-weight: 600;
+	}
 </style>

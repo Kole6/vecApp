@@ -3,7 +3,13 @@
 	<view class="vip">
 		<view class="vip-content">
 			<view class="vip-card">
-				<!-- 卡片 -->
+				<view class="vip-l">
+					<image src="../../../static/p106.png" mode="aspectFill"></image>
+				</view>
+				<view class="vip-r">
+					<p>昵称</p>
+					<p>会员时间：2019-09-01</p>
+				</view>
 			</view>
 		</view>
 		<view class="vip-means">
@@ -16,9 +22,7 @@
 				<p>5、可以下载资料库职教文件</p>
 			</view>
 		</view>
-		<view class="vip-open">
-			<button type="primary" @tap="toRecharge()">立即开通</button>
-		</view>
+		<button  class="btn vip-open" type="primary" @tap="toRecharge()">立即开通</button>
 	</view>
 </template>
 
@@ -45,10 +49,36 @@
 	padding: 20upx 0;
 }
 .vip-card{
-	margin: 0upx 30upx;
-	background-color: #FFE259;
-	height: 280upx;
+	margin: 0upx 35upx;
+	background: url(../../../static/vip.png) no-repeat;
+	background-size: 100%;
+	width: 680upx;
+	height: 300upx;
 	border-radius: 20upx;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	.vip-l{
+		padding-left: 26upx;
+		image{
+			width:160upx ;
+			height:160upx ;
+		}
+	}
+	.vip-r{
+		padding-left: 26upx;
+		color: #fff;
+		p:nth-child(1){
+			font-size:40upx;
+			font-weight:600;
+			line-height:62upx;
+		}
+		p:nth-child(2){
+			font-size:26upx;
+			font-weight:400;
+			line-height:37upx;
+		}
+	}
 }	
 .vip-means{
 	margin: 30upx 30upx;
@@ -60,19 +90,12 @@
 	}
 	.meas-xiang{
 		padding-top: 20upx;
-		color: #999999;
 		font-size:26upx ;
 		line-height: 50upx;
+		color:rgba(153,153,153,1);
 	}
 }
 .vip-open{
 	margin-top: 60px;
-	text-align: center;
-	button{
-		color: #686865;
-		font-weight: 700;
-		width: 600upx;
-		background-color: #FFE549;
-	}
 }
 </style>

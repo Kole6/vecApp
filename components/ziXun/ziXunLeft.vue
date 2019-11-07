@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="ziXun" hover-class="uni-list-cell-hover" v-for="(item,index) in infoListTest" :key="index" @tap="openInfo()">
+		<view class="ziXun" hover-class="navigator-hover" v-for="(item,index) in infoListTest" :key="index" @tap="openInfo()">
 			<view class="z-left">
 				<image mode="aspectFill" :src="item.img" class="image1"></image>
 			</view>
