@@ -42,8 +42,8 @@
 			</view>
 		</view>
 		<view class="m-btn-group">
-			<view class="btn down">下载文件</view>
-			<view class="btn share" @tap="handleShare">分享给好友</view>
+			<view class="u-btn down">下载文件</view>
+			<view class="u-btn share" @tap="handleShare">分享给好友</view>
 		</view>
 		<uni-popup ref="share" :type="type" :custom="true" @change="change">
 			<view class="uni-share">
@@ -198,7 +198,7 @@
 		box-sizing: border-box;
 		position: fixed;
 		bottom: 0;
-		.btn{
+		.u-btn{
 			box-sizing: border-box;
 			width: 50%;
 			display: inline-flex;

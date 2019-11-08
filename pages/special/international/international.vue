@@ -1,20 +1,125 @@
-<!--国际交流合作-->
-<template>
-	<view>
-		国际交流合作
-	</view>
-</template>
+	<!--国际交流合作-->
+	<template>
+		<view>
+			<view class="m-search"><uni-search-bar :radius="100" @confirm="search" /></view>
+			<view class="nav">
+				<navigator url="./USASchool">
+					<view class="nav-item nav-item-1"><text>中美合作学校</text></view>
+				</navigator>
+				<navigator url="./PlusSchool">
+					<view class="nav-item nav-item-2"><text>中加合作学校</text></view>
+				</navigator>
+			</view>
+			<view class="list-title">
+				<image class="hot-img" src="/static/indexIcon/hot.png" mode="aspectFit"></image>
+				<view class="hot">热门专业</view>
+			</view>
+			<view class="school-list" :style="{height:wrapperHeight}"><school-list :isText="true" :showType="1" :listArr="dataArr"></school-list></view>
+			
+		</view>
+	</template>
 
-<script>
+	<script>
+	import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue';
+	import schoolList from '@/pages/indexIcon/schoolDatabase/SchoolList.vue';
 	export default {
+		components: { uniSearchBar ,schoolList},
 		data() {
 			return {
-				
+				systemInfo:uni.getSystemInfoSync(),
+				wrapperHeight:'auto',
+				dataArr:[{
+					title:'上海市江电职业学校'
+				},{
+					title:'上海市江电职业学校'
+				},{
+					title:'上海市江电职业学校'
+				},{
+					title:'上海市江电职业学校'
+				},{
+					title:'上海市江电职业学校'
+				},{
+					title:'上海市江电职业学校'
+				},{
+					title:'上海市江电职业学校'
+				},{
+					title:'上海市江电职业学校'
+				},{
+					title:'上海市江电职业学校'
+				},{
+					title:'上海市江电职业学校'
+				}]
 			};
-		}
+		},
+		mounted(){
+			// 限制列表高度
+			let query = uni.createSelectorQuery().in(this)
+			query.select('.school-list').boundingClientRect(data=>{
+			this.wrapperHeight = this.systemInfo.screenHeight - data.top - 45 + 'px'
+		}).exec()
 	}
+};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.m-search {
+	padding: 0 40upx;
+}
+.nav {
+	display: flex;
+	justify-content: space-around;
+	padding: 35upx 0;
+	background: #ffffff;
+}
+.nav-item {
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
+	width: 220upx;
+	text-align: center;
+	box-sizing: border-box;
+	padding: 20upx 40upx;
+	color: #fff;
+	border-radius: 20upx;
+	font-size: $uni-font-size-lg;
+	background: $main-base-color;
+	height: 180upx;
+	box-shadow: 5upx 10upx 10upx rgba($color: #000000, $alpha: 0.1);
+}
+@for $i from 1 through 3 {
+	.nav-item-#{$i} {
+		background: url('../../../static/indexIcon/bg'+$i+'.png');
+		background-size: 100% 100%;
+	}
+}
+.list-title {
+	padding: 10upx;
+	margin-top: 20upx;
+	background: #eaeaea;
+	background: #FFFFFF;
+	image {
+		width: 60upx;
+		height: 60upx;
+		vertical-align: middle;
+	}
+	.hot {
+		font-size: $uni-font-size-lg;
+		display: inline-block;
+		margin-left: 20upx;
+		font-weight: bold;
+		color: #333333;
+	}
+	.hot-img {
+		width: 28upx;
+		height: 28upx;
+		vertical-align: middle;
+	}
+}
+.school-list{
+	box-sizing: border-box;
+	overflow: auto;
+	padding-bottom: 50upx;
+}
 </style>
