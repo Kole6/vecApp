@@ -50,15 +50,41 @@
 			"style": {
 				"navigationBarTitleText": "国际交流合作"
 			}
-		}, {
+		}, 
+		{
+			"path": "pages/special/international/USASchool",
+			"style": {
+				"navigationBarTitleText": "中美合作交流"
+			}
+		}, 
+		{
+			"path": "pages/special/international/PlusSchool",
+			"style": {
+				"navigationBarTitleText": "中加合作学校"
+			}
+		}, 
+		{
 			"path": "pages/special/educationList/educationList",
 			"style": {
 				"navigationBarTitleText": "职教榜单"
 			}
-		}, {
+		}, 
+		{
+			"path": "pages/special/educationList/AList",
+			"style": {
+				"navigationBarTitleText": "A榜单"
+			}
+		}, 
+		{
+			"path": "pages/special/educationList/LikeList",
+			"style": {
+				"navigationBarTitleText": "点赞榜"
+			}
+		}, 
+		{
 			"path": "pages/special/serviceCentre/serviceCentre",
 			"style": {
-				"navigationBarTitleText": "职教中心"
+				"navigationBarTitleText": "服务中心"
 			}
 		},
 		{

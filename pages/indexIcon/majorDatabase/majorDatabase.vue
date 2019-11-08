@@ -381,10 +381,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.uni-collapse-cell__title-text{
+	color: #333333;
+}
 /* category */
 .category{
 	padding: 15px 0;
-	border-bottom: solid 1px $uni-border-color;
+	border-bottom: solid 1px $main-dividing-line1;
 }
 /* 分类 */
 .page-body {
@@ -402,14 +405,15 @@ export default {
 
 .nav-left-item {
 	height: 100upx;
-	border-right: solid 1px #e0e0e0;
-	border-bottom: solid 1px #e0e0e0;
+	border-right: solid 1px $main-dividing-line1;
+	border-bottom: solid 1px $main-dividing-line1;
 	padding: 5upx 20upx;
 	font-size: $uni-font-size-lg + 3upx;
 	text-align: center;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	color: #333;
 }
 
 .nav-right {
@@ -429,7 +433,7 @@ export default {
 	justify-content: space-between;
 	padding: 5px 10px;
 	font-size: $uni-font-size-lg;
-	border-bottom: solid 1px $uni-border-color;
+	border-bottom: solid 1px $main-dividing-line1;
 	position: sticky;
 	top: 0;
 	z-index: 100;
@@ -449,8 +453,8 @@ export default {
 .category-item{
 	padding: 15upx 30upx;
 	font-size: $uni-font-size-lg + 3upx;
-	color: #323233;//#3395ff
+	color: #333333;//#3395ff
 	text-align: center;
-	border-top: solid 1px $uni-border-color;
+	border-top: solid 1px $main-dividing-line1;
 }
 </style>

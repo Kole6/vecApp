@@ -126,7 +126,12 @@ export default {
 }
 
 $collapse-title-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
-
+.uni-collapse-cell--open{
+	background: #F8FAFF;
+}
+.uni-collapse-cell__title-text{
+	color: #333333;
+}
 .uni-collapse-cell {
 	position: relative;
 	&--hover {
@@ -155,7 +160,7 @@ $collapse-title-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 		content: '';
 		-webkit-transform: scaleY(0.5);
 		transform: scaleY(0.5);
-		background-color: $uni-border-color;
+		background-color: $main-dividing-line1;
 	}
 
 	&__title {
