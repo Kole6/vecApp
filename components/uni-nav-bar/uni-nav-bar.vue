@@ -2,7 +2,7 @@
 
   <view class="uni-navbar">
     <view
-      :class="{'uni-navbar--fixed': fixed,'uni-navbar--shadow':border,'uni-navbar--border':border}"
+      :class="{'uni-navbar--fixed': fixed,'uni-navbar--shadow':shadow,'uni-navbar--border':border}"
       :style="{'background-color':backgroundColor}"
       class="uni-navbar__content">
       <uni-status-bar v-if="statusBar"/>
@@ -18,7 +18,7 @@
             <uni-icons
               :type="leftIcon"
               :color="color"
-              size="24"/>
+              size="27"/>
           </view>
           <view
             v-if="leftText.length"
@@ -144,17 +144,21 @@ export default {
 				// line-height: $nav-height;
 				display: flex;
 				align-items: center;
+				padding-left: 2px;
+				padding-bottom: 3px;
 			}
 		}
 
 		&__header {
+			box-sizing: border-box;
+			padding: 7px 3px;
 			display: flex;
 			flex-direction: row;
 			width: 100%;
 			height: $nav-height;
 			line-height: $nav-height;
 			font-size: 16px;
-
+			
 			&-btns {
 				display: inline-flex;
 				flex-wrap: nowrap;
@@ -172,8 +176,6 @@ export default {
 
         &-right:last-child{
           width: 120rpx;
-          text-align: right;
-          flex-direction: row-reverse;
         }
 			}
 

@@ -2,10 +2,12 @@
 	<view>
 		<!-- 搜索栏 -->
 		<view class="search">
-			<uni-search-bar radius="100" clearButton="auto" @confirm="search" />
+			<uni-search-bar radius="100" clearButton="auto" @confirm="search" placeholder="资料名称"/>
 		</view>
 		<!-- 文件列表区 -->
+		<view class="school-list" :style="{height:wrapperHeight,'overflow':'auto'}">
 		<file-list :listArr="fileListArr"></file-list>
+		</view>
 		
 	</view>
 </template>
@@ -17,30 +19,66 @@
 		components:{uniSearchBar,fileList},
 		data() {
 			return {
+				systemInfo:uni.getSystemInfoSync(),
+				wrapperHeight:'auto',
 				fileListArr:[
 					{
 						name:'2018-2019中国大学排名800强完整榜单(校友会最新版)',
 						hasDownloaded:'263',
 						fileSize:'582.5KB',
-						other:'-50'
+						other:'-50',
+						src:'/static/indexIcon/p1.png'
 					},{
 						name:'2018-2019中国大学排名800强完整榜单(校友会最新版)',
 						hasDownloaded:'263',
 						fileSize:'582.5KB',
-						other:'-50'
-					},{
+						other:'-50',
+						src:'/static/indexIcon/p1.png'
+					},
+					{
 						name:'2018-2019中国大学排名800强完整榜单(校友会最新版)',
 						hasDownloaded:'263',
 						fileSize:'582.5KB',
-						other:'-50'
-					},{
+						other:'-50',
+						src:'/static/indexIcon/p1.png'
+					},
+					{
 						name:'2018-2019中国大学排名800强完整榜单(校友会最新版)',
 						hasDownloaded:'263',
 						fileSize:'582.5KB',
-						other:'-50'
+						other:'-50',
+						src:'/static/indexIcon/p1.png'
+					},
+					{
+						name:'2018-2019中国大学排名800强完整榜单(校友会最新版)',
+						hasDownloaded:'263',
+						fileSize:'582.5KB',
+						other:'-50',
+						src:'/static/indexIcon/p1.png'
+					},
+					{
+						name:'2018-2019中国大学排名800强完整榜单(校友会最新版)',
+						hasDownloaded:'263',
+						fileSize:'582.5KB',
+						other:'-50',
+						src:'/static/indexIcon/p1.png'
+					},
+					{
+						name:'2018-2019中国大学排名800强完整榜单(校友会最新版)',
+						hasDownloaded:'263',
+						fileSize:'582.5KB',
+						other:'-50',
+						src:'/static/indexIcon/p1.png'
 					}
 				]
 			}
+		},
+		mounted(){
+				// 限制列表高度
+				let query = uni.createSelectorQuery().in(this)
+				query.select('.school-list').boundingClientRect(data=>{
+				this.wrapperHeight = this.systemInfo.screenHeight - data.top - 55 + 'px'
+			}).exec()
 		},
 		methods: {
 			search(){

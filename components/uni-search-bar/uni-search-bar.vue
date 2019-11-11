@@ -39,6 +39,10 @@
 			clearButton: {
 				type: String,
 				default: "auto"
+			},
+			isDisabled:{
+				type:Boolean,
+				default:false,
 			}
 		},
 		data() {
@@ -57,6 +61,10 @@
 		},
 		methods: {
 			searchClick() {
+				this.$emit('searchClick')
+				if(this.isDisabled){
+					return;
+				}
 				this.searchVal = ""
 				this.show = true;
 				this.$nextTick(()=>{

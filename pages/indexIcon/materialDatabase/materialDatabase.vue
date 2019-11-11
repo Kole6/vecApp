@@ -2,15 +2,22 @@
 <template>
 	<view>
 		<!-- 搜索栏 -->
-		<view class="search">
+		<!-- <view class="search">
 			<uni-search-bar radius="100" clearButton="auto" @confirm="search" />
-		</view>
+		</view> -->
 		<!-- 分类栏 -->
+		<view class="" style="height:20upx"></view>
 		<view class="m-category">
-			<view class="item" v-for="(item,index) in categoryList" :key="index" @tap="handleRoute(item,false)">{{item.name}}</view>
+			<view class="item" v-for="(item,index) in categoryList" :key="index" @tap="handleRoute(item,false)">
+			<view class="title">{{item.name}}</view>
+			<view class="desc">{{item.desc}}</view>
+			</view>
 		</view>
+		<view class="" style="height:20upx"></view>
 		<!-- 文件列表区 -->
+		<view class="school-list" :style="{height:wrapperHeight,'overflow':'auto'}">
 		<file-list :listArr="fileListArr"></file-list>
+		</view>
 		
 	</view>
 </template>
@@ -22,19 +29,25 @@
 		components:{uniSearchBar,fileList},
 		data() {
 			return {
+				systemInfo:uni.getSystemInfoSync(),
+				wrapperHeight:'auto',
 				categoryList:[
 					{
 						name:'职教文件',
 						url:'./ZJFile',
+						desc:'Vocational education documents'
 					},{
 						name:'教学标准',
 						url:'./JXBZFile',
+						desc:'Teaching standard'
 					},{
 						name:'质量年报',
 						url:'./ZLFile',
+						desc:'Quality Annual Report'
 					},{
 						name:'教学大纲',
 						url:'./JXDGFile',
+						desc:'Basics Course syllabus'
 					},
 				],
 				fileListArr:[
@@ -42,15 +55,64 @@
 						name:'2018-2019中国大学排名800强完整榜单(校友会最新版)',
 						hasDownloaded:'263',
 						fileSize:'582.5KB',
-						other:'-50'
+						other:'-50',
+						src:'/static/indexIcon/p1.png'
 					},{
 						name:'2018-2019中国大学排名800强完整榜单(校友会最新版)',
 						hasDownloaded:'263',
 						fileSize:'582.5KB',
-						other:'-50'
+						other:'-50',
+						src:'/static/indexIcon/p1.png'
+					},
+					{
+						name:'2018-2019中国大学排名800强完整榜单(校友会最新版)',
+						hasDownloaded:'263',
+						fileSize:'582.5KB',
+						other:'-50',
+						src:'/static/indexIcon/p1.png'
+					},
+					{
+						name:'2018-2019中国大学排名800强完整榜单(校友会最新版)',
+						hasDownloaded:'263',
+						fileSize:'582.5KB',
+						other:'-50',
+						src:'/static/indexIcon/p1.png'
+					},
+					{
+						name:'2018-2019中国大学排名800强完整榜单(校友会最新版)',
+						hasDownloaded:'263',
+						fileSize:'582.5KB',
+						other:'-50',
+						src:'/static/indexIcon/p1.png'
+					},
+					{
+						name:'2018-2019中国大学排名800强完整榜单(校友会最新版)',
+						hasDownloaded:'263',
+						fileSize:'582.5KB',
+						other:'-50',
+						src:'/static/indexIcon/p1.png'
+					},
+					{
+						name:'2018-2019中国大学排名800强完整榜单(校友会最新版)',
+						hasDownloaded:'263',
+						fileSize:'582.5KB',
+						other:'-50',
+						src:'/static/indexIcon/p1.png'
 					}
 				]
 			}
+		},
+		mounted(){
+				// 限制列表高度
+				let query = uni.createSelectorQuery().in(this)
+				query.select('.school-list').boundingClientRect(data=>{
+				this.wrapperHeight = this.systemInfo.screenHeight - data.top - 45 + 'px'
+			}).exec()
+		},
+		onNavigationBarButtonTap(option) {
+			uni.navigateTo({
+				url:"./SearchFile"
+			})
 		},
 		methods: {
 			search(){
@@ -78,16 +140,33 @@
 	justify-content: space-between;
 	flex-wrap: wrap;
 	align-items: center;
-	padding: 20upx 50upx;
+	padding: 20upx;
+	background: #FFFFFF;
 	.item{
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: calc(50% - 30upx);
-		height: 160upx;
+		width: 328upx;
+		height: 180upx;
 		background: #eee;
 		margin-top: 20upx;
+		box-sizing: border-box;
+		padding-top: 35upx;
+		padding-left: 15upx;
+		.title{
+			color: $main-text-color;
+			font-size: $uni-font-size-lg;
+		}
+		.desc{
+			margin-top: 10upx;
+			color: #999999;
+			font-size: $uni-font-size-sm;
+			width: 60%;
+		}
 		
+	}
+	@for $i from 1 through 4 {
+		.item:nth-of-type(#{$i} ){
+			background: url('../../../static/indexIcon/p'+$i+'.png');
+			background-size: 100% 100%;
+		}
 	}
 }
 </style>

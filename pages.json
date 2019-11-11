@@ -91,17 +91,21 @@
 			"path": "pages/indexIcon/schoolDatabase/schoolDatabase",
 			"style": {
 				"app-plus":{
-					"titleNView":{
-						"searchInput":{
-							"backgroundColor": "#F8FAFF",
-							"borderRadius":"15px",
-							"placeholder":"学校/人名/专业"
-						}
-					}
+					"titleNView":false
 					
 				}
 			}
-		}, {
+		}, 
+		{
+			"path": "pages/indexIcon/schoolDatabase/SearchResult",
+			"style": {
+				"app-plus":{
+					"titleNView":false
+					
+				}
+			}
+		},
+		{
 			"path": "pages/indexIcon/majorDatabase/majorDatabase",
 			"style": {
 				"navigationBarTitleText": "专业库"
@@ -137,42 +141,62 @@
 		{
 			"path": "pages/indexIcon/materialDatabase/materialDatabase",
 			"style": {
-				"navigationBarTitleText": "资料库"
+				"navigationBarTitleText": "资料库",
+				"app-plus":{
+					"titleNView":{
+						"buttons":[{
+							"fontSrc":"/static/iconFont/iconfont.ttf",
+							"text":"\ue654",
+							"fontSize":"32px"
+						}]
+					}
+				}
 			}
 		},
-		// 职教文件
+		{
+			"path": "pages/indexIcon/materialDatabase/SearchFile",
+			"style": {
+				"navigationBarTitleText": "资料库名称"
+			}
+			
+		},
 		{
 			"path": "pages/indexIcon/materialDatabase/ZJFile",
 			"style": {
 				"navigationBarTitleText": "职教文件"
 			}
 		},
-		// 教学标准
 		{
 			"path": "pages/indexIcon/materialDatabase/JXBZFile",
 			"style": {
 				"navigationBarTitleText": "教学标准"
 			}
 		},
-		// 质量年报
 		{
 			"path": "pages/indexIcon/materialDatabase/ZLFile",
 			"style": {
 				"navigationBarTitleText": "质量年报"
 			}
 		},
-		// 教学大纲
 		{
 			"path": "pages/indexIcon/materialDatabase/JXDGFile",
 			"style": {
 				"navigationBarTitleText": "教学大纲"
 			}
 		},
-		// 文件详情
 		{
 			"path": "pages/indexIcon/materialDatabase/FileDetail",
 			"style": {
-				"navigationBarTitleText": "详情"
+				"navigationBarTitleText": "详情",
+				"app-plus":{
+					"titleNView":{
+						"buttons":[{
+							"fontSrc":"/static/iconFont/iconfont.ttf",
+							"text":"\ue654",
+							"fontSize":"32px"
+						}]
+					}
+				}
 			}
 		},
 		
@@ -316,7 +340,17 @@
 	    ,{
             "path" : "components/ziXun/ziXun",
             "style" : {}
-        }
+        },
+		// 学校详情
+		{
+			"path": "pages/schoolDetails/SchoolDetail",
+			"style": {
+				"app-plus":{
+					"titleNView":false
+					
+				}
+			}
+		}
     ],
 	"tabBar": {
 		"color": "#7a7e83",

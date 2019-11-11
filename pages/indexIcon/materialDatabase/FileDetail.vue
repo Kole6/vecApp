@@ -42,8 +42,8 @@
 			</view>
 		</view>
 		<view class="m-btn-group">
-			<view class="u-btn down">下载文件</view>
-			<view class="u-btn share" @tap="handleShare">分享给好友</view>
+			<view class="u-btn down"><image class="img" src="/static/indexIcon/down.png" mode="aspectFit"></image>  下载文件</view>
+			<view class="u-btn share" @tap="handleShare"><image class="img" src="/static/indexIcon/share.png" mode="aspectFit" ></image>分享给好友</view>
 		</view>
 		<uni-popup ref="share" :type="type" :custom="true" @change="change">
 			<view class="uni-share">
@@ -109,6 +109,11 @@
 		},
 		mounted(){
 		},
+		onNavigationBarButtonTap() {
+			uni.navigateTo({
+				url:'./SearchFile'
+			})
+		},
 		methods:{
 			change(e){
 				console.log(e)
@@ -124,6 +129,14 @@
 </script>
 
 <style scoped lang="scss">
+	.img{
+		height: 40upx;
+		width: 40upx;
+		margin-right: 20upx;
+	}
+	.title,.uni-share{
+		color:$main-text-color
+	}
 	/* 页面整体样式 */
 	.m-top{
 		padding: 25upx;
@@ -135,9 +148,7 @@
 		.desc{
 			margin-top: 15upx;
 			font-size: $uni-font-size-base;
-			.special{
-				color: #007AFF;
-			}
+			color: #999999;
 		}
 	}
 	.m-desc{
@@ -156,19 +167,19 @@
 			justify-content: space-between;
 			align-items: center;
 			flex-wrap: wrap;
-			background: #D7F3F6;
+			background: #F3F4FC;
 			padding: 15upx;
 			.item{
 				font-size: $uni-font-size-base;
 				line-height: 1.6;
-				color: #A8B6BC;
+				color: #999999;
 				width: calc(50% - 4upx);
 			}
 		}
 		.bottom{
 			margin-top: 15upx;
 			font-size: $uni-font-size-base;
-			color: #A8B6BC;
+			color: #666666;
 		}
 	}
 	.m-desc-bottom{
