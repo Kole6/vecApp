@@ -196,9 +196,10 @@
 			margin: 20upx 0;
 		}
 		.content{
+			// padding-bottom: 120upx;
 			.image{
 				width: 100%;
-				min-height: 400upx;
+				min-height: 800upx;
 				background-color: $main-base-color;
 				padding-bottom: 20upx;
 			}

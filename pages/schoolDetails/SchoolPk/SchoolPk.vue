@@ -90,7 +90,7 @@ export default {
 				{
 					value: '111',
 					checked: true,
-					title: '汽车运用于维护',
+					title: '北京电子科技职业技术学院',
 					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
 					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
 				}
@@ -98,31 +98,31 @@ export default {
 			listArr: [
 				{
 					value: '001',
-					title: '汽车运用于维护',
+					title: '北京电子科技职业技术学院',
 					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
 					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
 				},
 				{
 					value: '002',
-					title: '汽车运用于维护',
+					title: '北京电子科技职业技术学院',
 					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
 					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
 				},
 				{
 					value: '003',
-					title: '汽车运用于维护',
+					title: '北京电子科技职业技术学院',
 					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
 					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
 				},
 				{
 					value: '004',
-					title: '汽车运用于维护',
+					title: '北京电子科技职业技术学院',
 					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
 					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
 				},
 				{
 					value: '005',
-					title: '汽车运用于维护',
+					title: '北京电子科技职业技术学院',
 					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
 					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
 				}
@@ -166,5 +166,68 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import  './profession.scss';
+.m-btn-group {
+	text-align: center;
+	padding: 15upx 0;
+	.f-btn {
+		display: inline-block;
+		width: 300upx;
+		padding: 10upx 50upx;
+		background: $main-base-color;
+		color: #ffffff;
+		border-radius: 10upx;
+	}
+}
+.m-bottom {
+	position: fixed;
+	bottom: 0;
+	font-size: $uni-font-size-lg + 5;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20upx 0;
+	background: $main-base-color;
+	color: #ffffff;
+	width: 100%;
+	z-index: 10;
+}
+.m-card {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 10upx 20upx;
+	display: flex;
+	font-size: $uni-font-size-lg;
+	.card-item {
+		padding: 10upx;
+	}
+	.card-item:last-child {
+		margin-left: 20upx;
+	}
+	.card-item.active {
+		color: $main-base-color;
+		border-bottom: solid 3upx $main-base-color;
+	}
+}
+.list-item {
+	margin-bottom: 20upx;
+}
+.list-content {
+	display: inline-block;
+	width: calc(100% - 120upx);
+	.left {
+		display: inline-flex;
+		width: 120upx;
+		height: 120upx;
+		border-radius: 60upx;
+		background: $main-base-color;
+		vertical-align: middle;
+		align-items: center;
+		justify-content: center;
+		font-size: 45upx;
+		color: #fff;
+	}
+}
+.m-bottom-list {
+	padding-bottom: 100upx;
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-	<view class="list-content" :class="{'has':showBorder}">
+	<view class="list-content" :class="{'has':showBorder}" @tap="handleTap">
 		<view class="left">
 			{{item.title.substr(0,1)}}
 		</view>
@@ -40,6 +40,18 @@
 			showBorder:{
 				type:Boolean,
 				default:true,
+			},
+			url:String,
+		},
+		methods:{
+			handleTap(){
+				if(this.url){
+					
+				}else{
+					uni.navigateTo({
+						url:'../../schoolDetails/SchoolDetail'
+					})
+				}
 			}
 		}
 	}

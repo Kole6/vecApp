@@ -1,68 +1,89 @@
-	<!--国际交流合作-->
-	<template>
-		<view>
-			<view class="m-search"><uni-search-bar :radius="100" @confirm="search" /></view>
-			<view class="nav">
-				<navigator url="./AList">
-					<view class="nav-item nav-item-1"><text>A榜单</text></view>
-				</navigator>
-				<navigator url="./LikeList">
-					<view class="nav-item nav-item-2"><text>点赞榜</text></view>
-				</navigator>
-			</view>
-			<view class="list-title">
-				<image class="hot-img" src="/static/indexIcon/hot.png" mode="aspectFit"></image>
-				<view class="hot">热门专业</view>
-			</view>
-			<view class="school-list" :style="{height:wrapperHeight}">
-				<view class="list-item" v-for="(item,index) in dataArr" :key="index">
-					<view :class="['rank','rank'+(index+1)]">{{index+1}}</view>
-					<school-list-item :showBorder="false" class="content" showType="1" :item="item" />
-				</view>
-			</view>
-			
+<!--国际交流合作-->
+<template>
+	<view>
+		<view class="m-search"><uni-search-bar :radius="100" @confirm="search" /></view>
+		<view class="nav">
+			<navigator url="./AList">
+				<view class="nav-item nav-item-1"><text>A榜单</text></view>
+			</navigator>
+			<navigator url="./LikeList">
+				<view class="nav-item nav-item-2"><text>点赞榜</text></view>
+			</navigator>
 		</view>
-	</template>
+		<view class="list-title">
+			<image class="hot-img" src="/static/indexIcon/hot.png" mode="aspectFit"></image>
+			<view class="hot">热门专业</view>
+		</view>
+		<view class="school-list" :style="{ height: wrapperHeight }">
+			<view class="list-item" v-for="(item, index) in dataArr" :key="index">
+				<view :class="['rank', 'rank' + (index + 1)]">{{ index + 1 }}</view>
+				<school-list-item :showBorder="false" class="content" showType="1" :item="item" />
+			</view>
+		</view>
+	</view>
+</template>
 
-	<script>
-	import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue';
-	import schoolListItem from '@/pages/indexIcon/schoolDatabase/SchoolListItem.vue';
-	export default {
-		components: { uniSearchBar ,schoolListItem},
-		data() {
-			return {
-				systemInfo:uni.getSystemInfoSync(),
-				wrapperHeight:'auto',
-				dataArr:[{
-					title:'上海市江电职业学校'
-				},{
-					title:'上海市江电职业学校'
-				},{
-					title:'上海市江电职业学校'
-				},{
-					title:'上海市江电职业学校'
-				},{
-					title:'上海市江电职业学校'
-				},{
-					title:'上海市江电职业学校'
-				},{
-					title:'上海市江电职业学校'
-				},{
-					title:'上海市江电职业学校'
-				},{
-					title:'上海市江电职业学校'
-				},{
-					title:'上海市江电职业学校'
-				}]
-			};
-		},
-		mounted(){
-			// 限制列表高度
-			let query = uni.createSelectorQuery().in(this)
-			query.select('.school-list').boundingClientRect(data=>{
-			this.wrapperHeight = this.systemInfo.screenHeight - data.top - 45 + 'px'
-			console.log(this.wrapperHeight,'height')
-		}).exec()
+<script>
+import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue';
+import schoolListItem from '@/pages/indexIcon/schoolDatabase/SchoolListItem.vue';
+export default {
+	components: { uniSearchBar, schoolListItem },
+	data() {
+		return {
+			systemInfo: uni.getSystemInfoSync(),
+			wrapperHeight: 'auto',
+			dataArr: [
+				{
+					title: '上海市江电职业学校'
+				},
+				{
+					title: '上海市江电职业学校'
+				},
+				{
+					title: '上海市江电职业学校'
+				},
+				{
+					title: '上海市江电职业学校'
+				},
+				{
+					title: '上海市江电职业学校'
+				},
+				{
+					title: '上海市江电职业学校'
+				},
+				{
+					title: '上海市江电职业学校'
+				},
+				{
+					title: '上海市江电职业学校'
+				},
+				{
+					title: '上海市江电职业学校'
+				},
+				{
+					title: '上海市江电职业学校'
+				}
+			]
+		};
+	},
+	mounted() {
+		// 限制列表高度
+		let query = uni.createSelectorQuery().in(this);
+		query
+			.select('.school-list')
+			.boundingClientRect(data => {
+				let height = '';
+				// #ifdef APP-PLUS
+				height = this.systemInfo.screenHeight - data.top - 94 + 'px';
+				// #endif
+				// #ifdef H5
+				height = this.systemInfo.screenHeight - data.top - 50 + 'px';
+				// #endif
+				if (height) {
+					this.wrapperHeight = height;
+				}
+			})
+			.exec();
 	}
 };
 </script>
@@ -104,7 +125,7 @@
 	padding: 10upx;
 	margin-top: 20upx;
 	background: #eaeaea;
-	background: #FFFFFF;
+	background: #ffffff;
 	image {
 		width: 60upx;
 		height: 60upx;
@@ -123,21 +144,20 @@
 		vertical-align: middle;
 	}
 }
-.school-list{
+.school-list {
 	box-sizing: border-box;
 	overflow: auto;
 	padding-bottom: 50upx;
 }
-.list-item{
+.list-item {
 	display: flex;
 	align-items: center;
 	padding: 0 30upx;
 	border-bottom: solid 1px $main-dividing-line1;
-	&:first-child{
+	&:first-child {
 		border-top: solid 1px $main-dividing-line1;
-		
 	}
-	.rank{
+	.rank {
 		box-sizing: border-box;
 		width: 60upx;
 		height: 60upx;
@@ -146,21 +166,20 @@
 		align-items: center;
 		border: solid 1upx $main-dividing-line1;
 		background: $main-base-color;
-		color: #FFFFFF;
+		color: #ffffff;
 	}
-	.rank1{
-		background: #FF0000;
+	.rank1 {
+		background: #ff0000;
 	}
-	.rank2{
-		background: #FFFF00;
+	.rank2 {
+		background: #ffff00;
 	}
-	.rank3{
-		background: #0000FF;
+	.rank3 {
+		background: #0000ff;
 	}
-	.content{
+	.content {
 		box-sizing: border-box;
-		width: calc(100%  - 100upx);
+		width: calc(100% - 100upx);
 	}
-	
 }
 </style>

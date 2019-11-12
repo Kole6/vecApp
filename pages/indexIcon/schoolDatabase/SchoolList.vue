@@ -1,7 +1,7 @@
 <template>
 	<view class="list">
 		<block v-for="(item,index) in listArr" :key="index">
-			<school-list-item class="list-item" :showType="showType" :item="item" />
+			<school-list-item :url="url" class="list-item" :showType="showType" :item="item" />
 		</block>
 	</view>
 </template>
@@ -23,7 +23,8 @@
 			showType:{
 				type:[Number,String],
 				default:'1',
-			}
+			},
+			url:String,
 		},
 		data(){
 			return{

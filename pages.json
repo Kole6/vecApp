@@ -301,6 +301,11 @@
 			"style": {
 				"navigationBarTitleText": "忘记密码"
 			}
+		},{
+			"path": "pages/schoolDetails/SchoolPk/SchoolPk",
+			"style": {
+				"navigationBarTitleText": "学校对比"
+			}
 		}, {
 			"path": "pages/schoolDetails/ourFaculty/ourFaculty",
 			"style": {

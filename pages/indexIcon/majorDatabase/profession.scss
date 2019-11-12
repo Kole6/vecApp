@@ -45,6 +45,7 @@
 }
 .list-content {
 	display: inline-block;
+	width: calc(100% - 120upx);
 	.left {
 		display: inline-flex;
 		width: 120upx;
@@ -56,33 +57,6 @@
 		justify-content: center;
 		font-size: 45upx;
 		color: #fff;
-	}
-	.right {
-		display: inline-block;
-		width: 500upx;
-		vertical-align: middle;
-		margin-left: 20upx;
-		font-size: $uni-font-size-lg;
-		.tag {
-			display: inline-block;
-			font-size: $uni-font-size-base;
-			padding: 5upx 10upx;
-			border-radius: 10upx;
-			border: solid 1px #797979;
-			margin: 10upx 10upx 0 10upx;
-		}
-		.tag.tag-text {
-			display: inline-block;
-			font-size: $uni-font-size-base;
-			padding: 0 10upx;
-			margin: 0;
-			border-radius: 0;
-			border: none;
-			border-right: solid 1px $uni-border-color;
-		}
-		.tag.tag-text:last-child {
-			border: none;
-		}
 	}
 }
 .m-bottom-list{
