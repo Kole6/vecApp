@@ -265,7 +265,11 @@
 			}
 		}, {
 			"path": "pages/personal/feedback/feedback",
-			"style": {}
+			"style": {
+				"navigationBarTitleText": "意见反馈",
+				"backgroundColorBottom":"#FF0000",
+				"backgroundColor":"#007AFF"
+			}
 		}, {
 			"path": "pages/personal/recommend/recommend",
 			"style": {}

@@ -44,13 +44,14 @@
 </script>
 
 <style scoped lang="scss">
+@import "./base64.scss";
 .vip-content{
 	background-color: #F7F7F7;
 	padding: 20upx 0;
 }
 .vip-card{
 	margin: 0upx 35upx;
-	background: url(../../../static/vip.png) no-repeat;
+	background: $vip_bg no-repeat;
 	background-size: 100%;
 	width: 680upx;
 	height: 300upx;
