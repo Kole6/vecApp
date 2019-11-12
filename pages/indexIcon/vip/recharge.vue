@@ -1,78 +1,188 @@
-<!--VIP-->
+<!--VIP续费充值页面-->
 <template>
-	<view class="vip">
-		<view class="vip-content">
-			<view class="vip-card">
-				<!-- 卡片 -->
+	<view>
+		<view class="kong"></view>
+		<view class="vip-pay">
+			<view v-for="(item,index) in selList" :key="index">
+				<vec-select :class="['sc',index==selIndex?'sc-tap':'']" :sel="index==selIndex" @reStyle="reStyle(index)">
+					<p slot="tip" class="k1">{{item.k1}}</p>
+					<p slot="tip" class="k2">{{item.k2}}</p>
+					<p slot="tip" class="k1">{{item.k3}}</p>
+				</vec-select>
 			</view>
 		</view>
-		<view class="vip-means">
-			<text class="me-title">开通VIP会员您可以拥有以下权限：</text>
-			<view class="meas-xiang">
-				<p>1、可以查看有双高计划标签的学校</p>
-				<p>2、可以查看本专业全国开设情况</p>
-				<p>3、可以在软件后台编辑本校信息内容</p>
-				<p>4、可以进行学校和专业pk对比</p>
-				<p>5、可以下载资料库职教文件</p>
+		<view class="kong"></view>
+		<view class="vip-mode">
+			<view class="mode-title">
+				<span>选择支付方式：</span>
 			</view>
-		</view>
-		<view class="vip-open">
-			<button type="primary" @tap="toRecharge()">立即支付</button>
+			<view class="mode-pay" v-for="(item,index) in payList" :key="index" @tap="raTap(index)">
+				<text :class="['vecfont','icon-menu',item.icon=='&#xe681;'?'icon-menu2':'']" v-html="item.icon"></text>
+				<text class="icon-text">{{item.name}}</text>
+				<radio :checked="index==payIndex" color="#6451FC" />
+			</view>
+			<button class="btn vip-open" type="primary" @tap="toSubmission()">立即支付</button>
 		</view>
 	</view>
 </template>
 
 <script>
+	import vecSelect from "../../../components/vec-select/vec-select.vue"
 	export default {
+		components: {
+			vecSelect
+		},
 		data() {
 			return {
-				
+				selIndex: 0,
+				selList: [{
+					k1: "1个月",
+					k2: '¥25',
+					k3: '25元/月'
+				}, {
+					k1: "3个月",
+					k2: '¥68',
+					k3: '22.6元/月'
+				}, {
+					k1: "年费",
+					k2: '¥233',
+					k3: '19.4元/月'
+				}],
+				payIndex: 0,
+				payList: [{
+						icon: '&#xe681;',
+						name: '微信支付',
+						code: '1001'
+					},
+					{
+						icon: '&#xe673;',
+						name: '支付宝支付',
+						code: '1002'
+					}
+				]
 			};
 		},
 		methods: {
-			toRecharge() {
-				uni.navigateTo({
-					url:"recharge"
+			toSubmission() {
+				uni.showToast({
+					icon: 'none',
+					title: '暂未开通',
+					position: 'bottom'
+
 				})
+			},
+			reStyle(i) {
+				this.selIndex = i
+			},
+			raTap(i) {
+				this.payIndex = i
 			}
 		},
 	}
 </script>
 
 <style scoped lang="scss">
-.vip-content{
-	background-color: #F7F7F7;
-	padding: 20upx 0;
-}
-.vip-card{
-	margin: 0upx 30upx;
-	background-color: #FFE259;
-	height: 280upx;
-	border-radius: 20upx;
-}	
-.vip-means{
-	margin: 30upx 30upx;
-	.me-title{
-		color: #333333;
-		line-height:42upx;
-		font-size:30upx;
-		font-weight: bold;
+	page {
+		background-color: #fff;
 	}
-	.meas-xiang{
-		padding-top: 20upx;
-		color: #999999;
-		font-size:26upx ;
-		line-height: 50upx;
+
+	.kong {
+		width: 750upx;
+		height: 20upx;
+		background-color: #F6F8FE;
 	}
-}
-.vip-open{
-	margin-top: 60px;
-	text-align: center;
-	button{
-		color: #686865;
-		font-weight: 700;
-		width: 600upx;
-		background-color: #FFE549;
+
+	.vip-pay {
+		width: 750upx;
+		height: 262upx;
+		background-color: #fff;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.sc {
+			margin: 0upx 10upx;
+
+			p {
+				width: 210upx;
+				// margin: 0upx 5upx;
+			}
+
+			.k1 {
+				font-size: 22upx;
+				color: rgba(153, 153, 153, 1);
+				line-height: 30upx;
+			}
+
+			.k2 {
+				font-size: 44upx;
+				font-weight: 600;
+				color: rgba(153, 153, 153, 1);
+				line-height: 62upx;
+			}
+		}
+
+		.sc-tap {
+			.k1 {
+				font-size: 22upx;
+				color: rgba(51, 51, 51, 1);
+				line-height: 30upx;
+			}
+
+			.k2 {
+				font-size: 44upx;
+				font-weight: 600;
+				color: rgba(255, 0, 0, 1);
+				line-height: 62upx;
+			}
+		}
 	}
-}
+
+	.vip-mode {
+		background-color: #fff;
+		width: 750upx;
+
+		.mode-title {
+			height: 98upx;
+			border-bottom: 1px solid #eee;
+			font-size: 30upx;
+			font-weight: 600;
+			color: rgba(51, 51, 51, 1);
+			line-height: 98upx;
+			padding-left: 30upx;
+		}
+
+		.mode-pay {
+			padding-left: 30upx;
+			border-bottom: 1px solid #eee;
+			line-height: 98upx;
+			height: 98upx;
+			color: rgba(51, 51, 51, 1);
+			font-size: 28upx;
+
+			.icon-menu {
+				color: rgb(8, 161, 248);
+				font-size: 30upx;
+			}
+
+			.icon-menu2 {
+				color: rgb(36, 175, 65);
+			}
+
+			.icon-text {
+				padding-left: 10upx;
+			}
+
+			radio {
+				transform: scale(0.7);
+				position: absolute;
+				right: 10upx;
+			}
+		}
+
+	}
+
+	.vip-open {
+		margin-top: 60px;
+	}
 </style>
