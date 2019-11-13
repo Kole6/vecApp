@@ -41,10 +41,15 @@
 				type:Boolean,
 				default:true,
 			},
+			handleTaped:Function,
 			url:String,
 		},
 		methods:{
 			handleTap(){
+				if(this.handleTaped){
+					this.handleTaped(this.item)
+					return;
+				}
 				if(this.url){
 					
 				}else{

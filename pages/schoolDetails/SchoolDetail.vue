@@ -39,14 +39,17 @@
 		<view class="m-img" style="font-size: 14px;">
 			<!-- <image src="../../static/indexIcon/bg1.png" mode="aspectFit"></image> -->
 		</view>
-		<view class="m-school_list">
+		<view class="m-school_list" >
 			<text>附近学校</text>
 			<uni-icons
 			  type="arrowright"
 			  size="24"/>
 		</view>
-		<!-- 拓扑图 -->
-		<view class="m-mind">
+		<view class="m-school_list" @tap="handleRouter('./jsmind')">
+			<text>拓扑图</text>
+			<uni-icons
+			  type="arrowright"
+			  size="24"/>
 		</view>
 		<view class="m-info">
 			<view class="title">
@@ -76,7 +79,6 @@
 				  size="24"/>
 			</view>
 			<zi-xun></zi-xun>
-			<view class="" style="height: 55px;"></view>
 		</view>
 		</view>
 		<!-- 底部按钮 -->
@@ -91,9 +93,7 @@
 				<text>学校对比</text>
 			</view>
 		</view>
-		<view class="frame-wrapper">
-			<!-- <web-view src="/hybrid/html/jsmind.html" :style="styleObj" class="iframe" style="width:100%;height: 150px;border:none"></web-view> -->
-		</view>
+		
 	</view>
 </template>
 
@@ -129,30 +129,33 @@ export default {
 				url:'',
 			},{
 				name:'学校荣誉',
-				url:'',
+				url:'./schoolHonors/schoolHonors',
 			},{
 				name:'奖助学金',
-				url:'',
+				url:'./assistanceScholarship/assistanceScholarship',
 			}],
 			schoolInfo2:[
 				{
 					name:'师资情况',
-					url:'',
+					url:'./ourFaculty/ourFaculty',
 				},{
 					name:'校企合作',
-					url:'',
+					url:'./cooperation/cooperation',
 				},{
 					name:'专业情况',
 					url:'',
 				},{
 					name:'技能大赛',
-					url:'',
+					url:'./skillsCompetition/skillsCompetition',
 				},{
 					name:'就业创业',
-					url:'',
+					url:'./entrepreneurship/entrepreneurship',
 				}
 			]
 		};
+	},
+	created(){
+		
 	},
 	mounted() {
 		// 限制列表高度
@@ -174,6 +177,11 @@ export default {
 			.exec();
 	},
 	methods: {
+		handleRouter(url){
+			uni.navigateTo({
+				url:url
+			})
+		},
 		handleBack() {
 			uni.navigateBack();
 		},
@@ -183,7 +191,11 @@ export default {
 			})
 		},
 		handleTap(item,index){
-			
+			if(item.url){
+				uni.navigateTo({
+					url:item.url
+				})
+			}
 		}
 	}
 };

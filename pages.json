@@ -310,6 +310,11 @@
 			"style": {
 				"navigationBarTitleText": "学校对比"
 			}
+		},{
+			"path": "pages/schoolDetails/SchoolPk/SchoolPkDetail",
+			"style": {
+				"navigationBarTitleText": "学校对比详情"
+			}
 		}, {
 			"path": "pages/schoolDetails/ourFaculty/ourFaculty",
 			"style": {
@@ -356,9 +361,10 @@
 			"style": {
 				"app-plus":{
 					"titleNView":false
-					
 				}
 			}
+		},{
+			"path": "pages/schoolDetails/jsmind"
 		}
     ],
 	"tabBar": {
