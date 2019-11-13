@@ -7,7 +7,7 @@
 			<checkbox-group @change="checkboxChange">
 				<view class="uni-list-cell uni-list-cell-pd list-item" v-for="(item, index) in CheckedListArr" :key="index">
 					<checkbox :value="item.value" :checked="item.checked" />
-					<school-list-item :showBorder="false" class="content" showType="4" :item="item" />
+					<school-list-item :showBorder="false" class="list-content" showType="4" :item="item" :handleTaped="handleTaped" />
 				</view>
 			</checkbox-group>
 		</view>
@@ -21,7 +21,7 @@
 				<checkbox-group @change="checkboxChange">
 					<view class="uni-list-cell uni-list-cell-pd list-item" v-for="(item, index) in listArr" :key="index">
 						<checkbox :value="item.value" :checked="item.checked" />
-						<school-list-item :showBorder="false" class="content" showType="4" :item="item" />
+						<school-list-item :handleTaped="handleTaped" :showBorder="false" class="list-content" showType="4" :item="item" />
 					</view>
 				</checkbox-group>
 			</view>
@@ -149,17 +149,19 @@ export default {
 			.exec();
 	},
 	methods: {
-		checkboxChange() {
-			console.log(arguments, 'arg');
+		handleTaped(arg){
+			console.log(arg,'arg')
+		},
+		checkboxChange(event) {
 		},
 		handleSwipeChange() {},
 		handleChecked(item, index) {
 			this.$set(item, 'checked', !item.checked);
 		},
 		handleRouter() {
-			// uni.navigateTo({
-			// 	url:'./'
-			// })
+			uni.navigateTo({
+				url:'./SchoolPkDetail'
+			})
 		}
 	}
 };
@@ -209,23 +211,12 @@ export default {
 	}
 }
 .list-item {
-	margin-bottom: 20upx;
+	margin-bottom: 10upx;
+	padding-left: 25upx;
 }
 .list-content {
 	display: inline-block;
 	width: calc(100% - 120upx);
-	.left {
-		display: inline-flex;
-		width: 120upx;
-		height: 120upx;
-		border-radius: 60upx;
-		background: $main-base-color;
-		vertical-align: middle;
-		align-items: center;
-		justify-content: center;
-		font-size: 45upx;
-		color: #fff;
-	}
 }
 .m-bottom-list {
 	padding-bottom: 100upx;
