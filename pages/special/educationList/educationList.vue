@@ -1,23 +1,24 @@
 <!--国际交流合作-->
 <template>
 	<view>
-		<view class="m-search"><uni-search-bar :radius="100" @confirm="search" /></view>
+		<!-- <view class="m-search"><uni-search-bar :radius="100" @confirm="search" /></view> -->
+		<view class="" style="height: 20upx;"></view>
 		<view class="nav">
 			<navigator url="./AList">
 				<view class="nav-item nav-item-1"><text>A榜单</text></view>
 			</navigator>
 			<navigator url="./LikeList">
-				<view class="nav-item nav-item-2"><text>点赞榜</text></view>
+				<view class="nav-item nav-item-2"><text>人气榜</text></view>
 			</navigator>
 		</view>
 		<view class="list-title">
-			<image class="hot-img" src="/static/indexIcon/hot.png" mode="aspectFit"></image>
 			<view class="hot">热门专业</view>
+			<image class="hot-img" src="/static/indexIcon/hot.png" mode="aspectFit"></image>
 		</view>
 		<view class="school-list" :style="{ height: wrapperHeight }">
 			<view class="list-item" v-for="(item, index) in dataArr" :key="index">
 				<view :class="['rank', 'rank' + (index + 1)]">{{ index + 1 }}</view>
-				<school-list-item :showBorder="false" class="content" showType="1" :item="item" />
+				<school-list-item :showBorder="false" class="content" showType="4" :item="item" />
 			</view>
 		</view>
 	</view>
@@ -34,35 +35,36 @@ export default {
 			wrapperHeight: 'auto',
 			dataArr: [
 				{
-					title: '上海市江电职业学校'
+					title: '上海市江电职业学校',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
 				},
 				{
-					title: '上海市江电职业学校'
+					title: '上海市江电职业学校',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
 				},
 				{
-					title: '上海市江电职业学校'
+					title: '上海市江电职业学校',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
+				},{
+					title: '上海市江电职业学校',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
+				},{
+					title: '上海市江电职业学校',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
+				},{
+					title: '上海市江电职业学校',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
+				},{
+					title: '上海市江电职业学校',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
 				},
-				{
-					title: '上海市江电职业学校'
-				},
-				{
-					title: '上海市江电职业学校'
-				},
-				{
-					title: '上海市江电职业学校'
-				},
-				{
-					title: '上海市江电职业学校'
-				},
-				{
-					title: '上海市江电职业学校'
-				},
-				{
-					title: '上海市江电职业学校'
-				},
-				{
-					title: '上海市江电职业学校'
-				}
 			]
 		};
 	},
@@ -115,9 +117,9 @@ export default {
 	height: 180upx;
 	box-shadow: 5upx 10upx 10upx rgba($color: #000000, $alpha: 0.1);
 }
-@for $i from 1 through 3 {
+@for $i from 1 through 2 {
 	.nav-item-#{$i} {
-		background: url('../../../static/indexIcon/bg'+$i+'.png');
+		background: url('../../../static/indexIcon/bd-bg'+$i+'.png');
 		background-size: 100% 100%;
 	}
 }
@@ -142,15 +144,18 @@ export default {
 		width: 28upx;
 		height: 28upx;
 		vertical-align: middle;
+		margin-left: 10upx;
 	}
 }
 .school-list {
 	box-sizing: border-box;
 	overflow: auto;
 	padding-bottom: 50upx;
+	background: #FFFFFF;
 }
 .list-item {
 	display: flex;
+	position: relative;
 	align-items: center;
 	padding: 0 30upx;
 	border-bottom: solid 1px $main-dividing-line1;
@@ -158,24 +163,31 @@ export default {
 		border-top: solid 1px $main-dividing-line1;
 	}
 	.rank {
+		position: absolute;
+		top: 34upx;
+		left:145upx;
 		box-sizing: border-box;
-		width: 60upx;
-		height: 60upx;
+		width: 36upx;
+		height: 36upx;
+		padding: 2upx;
+		font-size: $uni-font-size-base;
 		display: inline-flex;
 		justify-content: center;
 		align-items: center;
 		border: solid 1upx $main-dividing-line1;
-		background: $main-base-color;
+		// background: $main-base-color;
+		background: url(../../../static/indexIcon/rank.png) no-repeat;
+		background-size: 100% 100%;
 		color: #ffffff;
 	}
 	.rank1 {
-		background: #ff0000;
+		// background: #ff0000;
 	}
 	.rank2 {
-		background: #ffff00;
+		// background: #ffff00;
 	}
 	.rank3 {
-		background: #0000ff;
+		// background: #0000ff;
 	}
 	.content {
 		box-sizing: border-box;

@@ -8,35 +8,18 @@
 			<sl-filter ref="filter" @conditionTap="handleConditionTap" :menuListArr="menuList" :topFixed="true" :topFixedHeight="topFixedHeight" @result="handleSearch"></sl-filter>
 		</view>
 		<view class="list"><school-list :listArr="listArr" showType="4"></school-list></view>
-		<uni-drawer :visible="showDrawer" mode="right" @close="handleClose">
-			<view class="m-title">筛选标签</view>
-			<!-- 筛选项 -->
-			<view class="m-drawer-content">
-				<view class="item-list" v-for="(item, index) in tagList" :key="index">
-					<view class="item-title">
-						<text :class="{ item: true, selected: tag.selected }" v-for="(tag, i) in item.titleList" :key="i" @tap="tag.selected = !tag.selected">{{ tag.name }}</text>
-					</view>
-					<view class="item-wrapper">
-						<text v-for="(tag, i) in item.list" :key="i" :class="{ item: true, selected: tag.selected }" @tap="tag.selected = !tag.selected">{{ tag.name }}</text>
-					</view>
-				</view>
-			</view>
-			<view class="m-btn-group">
-				<view class="left-btn" @tap="handleReset">重置</view>
-				<view class="right-btn" @tap="handleConfirm">确定</view>
-			</view>
-		</uni-drawer>
+		<drawer-filter :tagList="tagList" :isShow="showDrawer"  @close="showDrawer = false"></drawer-filter>
 	</view>
 </template>
 
 <script>
-import uniDrawer from '@/components/uni-drawer/uni-drawer.vue';
 import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue';
 import slFilter from '@/components/sl-filter/sl-filter.vue';
 import cityData from '@/pages/indexIcon/schoolDatabase/ProvinceCity.js';
 import schoolList from '@/pages/indexIcon/schoolDatabase/SchoolList.vue';
+import drawerFilter from './DrawerFilter.vue'
 export default {
-	components: { uniDrawer, slFilter, schoolList ,uniSearchBar },
+	components: {drawerFilter, slFilter, schoolList ,uniSearchBar },
 	onNavigationBarButtonTap(option) {
 		this.showDrawer = true;
 	},
@@ -45,12 +28,10 @@ export default {
 			showDrawer: false,
 			tagList: [
 				{
-					titleList: [
-						{
+					title:{
 							name: '国家级教育试学试点',
-							selected: false
-						}
-					],
+							isShow: true
+					},
 					list: [
 						{
 							name: '现代学徒制',
@@ -71,12 +52,10 @@ export default {
 					]
 				},
 				{
-					titleList: [
-						{
+					title: {
 							name: '国家级教育试学试点',
-							selected: false
-						}
-					],
+							isShow: true
+					},
 					list: [
 						{
 							name: '现代学徒制',
@@ -97,12 +76,10 @@ export default {
 					]
 				},
 				{
-					titleList: [
-						{
+					title:{
 							name: '国家级教育试学试点',
-							selected: false
-						}
-					],
+							isShow: true
+					},
 					list: [
 						{
 							name: '现代学徒制',
@@ -213,9 +190,6 @@ export default {
 		this.setSearch();
 	},
 	methods: {
-		handleClose() {
-			this.showDrawer = false;
-		},
 		handleReset() {
 			this.tagList.forEach(item => {
 				item.titleList.forEach(tag => {
@@ -295,75 +269,5 @@ export default {
 }
 .list{
 	// padding-top: 23px;
-}
-.m-title {
-	position: absolute;
-	top: 0;
-	width: 100%;
-	z-index: 10;
-	padding: 30upx 0;
-	text-align: center;
-	font-size: $uni-font-size-lg + 5;
-	font-weight: bold;
-	background: #ffffff;
-}
-.m-drawer-content {
-	height: 100vh;
-	overflow: auto;
-	box-sizing: border-box;
-	padding-top: 80upx + $uni-font-size-lg;
-	padding-bottom: 50upx + $uni-font-size-lg;
-	background: #ffffff;
-	.item-list {
-		box-sizing: border-box;
-		border-top: solid 1upx #cccccc;
-		font-size: $uni-font-size-base;
-		padding-bottom: 20upx;
-		.item-title {
-			padding-left: 30upx;
-		}
-		.item-wrapper {
-			padding-left: 90upx;
-		}
-		.item {
-			display: inline-block;
-			padding: 10upx 20upx;
-			margin-right: 20upx;
-			margin-top: 20upx;
-			background: #fff;
-			color: #333;
-			border: solid 1upx $main-border-light-color;
-			border-radius: 10upx;
-		}
-		.item.selected {
-			color: #ffffff;
-			background: $main-base-color;
-		}
-	}
-}
-.m-btn-group {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	background: #ffffff;
-	z-index: 10;
-	.left-btn,
-	.right-btn {
-		box-sizing: border-box;
-		display: inline-flex;
-		justify-content: center;
-		align-items: center;
-		font-size: $uni-font-size-lg;
-		width: 50%;
-		padding: 25upx 0;
-		border-top: solid 1upx #ccc;
-	}
-	.left-btn {
-		border-right: solid 1upx #ccc;
-	}
-	.right-btn {
-		background: #4cd964;
-		color: #ffffff;
-	}
 }
 </style>

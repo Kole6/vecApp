@@ -1,7 +1,8 @@
 <!--国际交流合作-->
 <template>
 	<view>
-		<view class="m-search"><uni-search-bar :radius="100" @confirm="search" /></view>
+		<!-- <view class="m-search"><uni-search-bar :radius="100" @confirm="search" /></view> -->
+		<view class="" style="height: 20upx;"></view>
 		<view class="nav">
 			<navigator url="./USASchool">
 				<view class="nav-item nav-item-1"><text>中美合作学校</text></view>
@@ -11,10 +12,10 @@
 			</navigator>
 		</view>
 		<view class="list-title">
+			<view class="hot">热门学校</view>
 			<image class="hot-img" src="/static/indexIcon/hot.png" mode="aspectFit"></image>
-			<view class="hot">热门专业</view>
 		</view>
-		<view class="school-list" :style="{ height: wrapperHeight }"><school-list :isText="true" :showType="1" :listArr="dataArr"></school-list></view>
+		<view class="school-list" :style="{ height: wrapperHeight }"><school-list :isText="true" :showType="4" :listArr="dataArr"></school-list></view>
 	</view>
 </template>
 
@@ -29,35 +30,36 @@ export default {
 			wrapperHeight: 'auto',
 			dataArr: [
 				{
-					title: '上海市江电职业学校'
+					title: '上海市江电职业学校',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
 				},
 				{
-					title: '上海市江电职业学校'
+					title: '上海市江电职业学校',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
 				},
 				{
-					title: '上海市江电职业学校'
+					title: '上海市江电职业学校',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
+				},{
+					title: '上海市江电职业学校',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
+				},{
+					title: '上海市江电职业学校',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
+				},{
+					title: '上海市江电职业学校',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
+				},{
+					title: '上海市江电职业学校',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
 				},
-				{
-					title: '上海市江电职业学校'
-				},
-				{
-					title: '上海市江电职业学校'
-				},
-				{
-					title: '上海市江电职业学校'
-				},
-				{
-					title: '上海市江电职业学校'
-				},
-				{
-					title: '上海市江电职业学校'
-				},
-				{
-					title: '上海市江电职业学校'
-				},
-				{
-					title: '上海市江电职业学校'
-				}
 			]
 		};
 	},
@@ -110,9 +112,9 @@ export default {
 	height: 180upx;
 	box-shadow: 5upx 10upx 10upx rgba($color: #000000, $alpha: 0.1);
 }
-@for $i from 1 through 3 {
+@for $i from 1 through 2 {
 	.nav-item-#{$i} {
-		background: url('../../../static/indexIcon/bg'+$i+'.png');
+		background: url('../../../static/indexIcon/hzbx-bg'+$i+'.png') no-repeat;
 		background-size: 100% 100%;
 	}
 }
@@ -132,16 +134,19 @@ export default {
 		margin-left: 20upx;
 		font-weight: bold;
 		color: #333333;
+		line-height: 1.2;
 	}
 	.hot-img {
 		width: 28upx;
 		height: 28upx;
 		vertical-align: middle;
+		margin-left: 10upx;
 	}
 }
 .school-list {
 	box-sizing: border-box;
 	overflow: auto;
 	padding-bottom: 50upx;
+	background: #FFFFFF;
 }
 </style>
