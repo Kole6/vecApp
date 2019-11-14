@@ -12,7 +12,7 @@
 		<view class="sc-area">
 			<textarea value="" placeholder="不能愉快的使用现有功能？上传相关页面内容方便我们快速解决问题哦～" />
 			</view>
-		<button  class="btn vip-open" type="primary" @tap="toSubmission()">提交</button>
+		<button  class="vec-btn vip-open" type="primary" @tap="toSubmission()">提交</button>
 	</view>
 
 </template>

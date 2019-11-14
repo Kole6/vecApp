@@ -28,7 +28,7 @@
 		background-color: #fff !important;
 	}
 
-	.btn {
+	.vec-btn {
 		color: #fff;
 		width: 600upx;
 		height: 88upx;

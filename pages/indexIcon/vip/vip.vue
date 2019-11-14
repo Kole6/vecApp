@@ -22,7 +22,7 @@
 				<p>5、可以下载资料库职教文件</p>
 			</view>
 		</view>
-		<button  class="btn vip-open" type="primary" @tap="toRecharge()">立即开通</button>
+		<button  class="vec-btn vip-open" type="primary" @tap="toRecharge()">立即开通</button>
 	</view>
 </template>
 

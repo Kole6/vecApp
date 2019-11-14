@@ -33,15 +33,13 @@
 			"path": "pages/special/doubleHigh/doubleHigh",
 			"style": {
 				"navigationBarTitleText": "双高计划",
-				"app-plus":{
-					"titleNView":{
-						"buttons":[
-							{
-								"type":"none",
-								"text":"筛选",
-								"fontSize":"14px"
-							}
-						]
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"type": "none",
+							"text": "筛选",
+							"fontSize": "14px"
+						}]
 					}
 				}
 			}
@@ -50,37 +48,37 @@
 			"style": {
 				"navigationBarTitleText": "国际交流合作"
 			}
-		}, 
+		},
 		{
 			"path": "pages/special/international/USASchool",
 			"style": {
 				"navigationBarTitleText": "中美合作交流"
 			}
-		}, 
+		},
 		{
 			"path": "pages/special/international/PlusSchool",
 			"style": {
 				"navigationBarTitleText": "中加合作学校"
 			}
-		}, 
+		},
 		{
 			"path": "pages/special/educationList/educationList",
 			"style": {
 				"navigationBarTitleText": "职教榜单"
 			}
-		}, 
+		},
 		{
 			"path": "pages/special/educationList/AList",
 			"style": {
 				"navigationBarTitleText": "A榜单"
 			}
-		}, 
+		},
 		{
 			"path": "pages/special/educationList/LikeList",
 			"style": {
 				"navigationBarTitleText": "点赞榜"
 			}
-		}, 
+		},
 		{
 			"path": "pages/special/serviceCentre/serviceCentre",
 			"style": {
@@ -90,18 +88,18 @@
 		{
 			"path": "pages/indexIcon/schoolDatabase/schoolDatabase",
 			"style": {
-				"app-plus":{
-					"titleNView":false
-					
+				"app-plus": {
+					"titleNView": false
+
 				}
 			}
-		}, 
+		},
 		{
 			"path": "pages/indexIcon/schoolDatabase/SearchResult",
 			"style": {
-				"app-plus":{
-					"titleNView":false
-					
+				"app-plus": {
+					"titleNView": false
+
 				}
 			}
 		},
@@ -142,12 +140,12 @@
 			"path": "pages/indexIcon/materialDatabase/materialDatabase",
 			"style": {
 				"navigationBarTitleText": "资料库",
-				"app-plus":{
-					"titleNView":{
-						"buttons":[{
-							"fontSrc":"/static/iconFont/iconfont.ttf",
-							"text":"\ue654",
-							"fontSize":"32px"
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"fontSrc": "/static/iconFont/iconfont.ttf",
+							"text": "\ue654",
+							"fontSize": "32px"
 						}]
 					}
 				}
@@ -158,7 +156,7 @@
 			"style": {
 				"navigationBarTitleText": "资料库名称"
 			}
-			
+
 		},
 		{
 			"path": "pages/indexIcon/materialDatabase/ZJFile",
@@ -188,18 +186,18 @@
 			"path": "pages/indexIcon/materialDatabase/FileDetail",
 			"style": {
 				"navigationBarTitleText": "详情",
-				"app-plus":{
-					"titleNView":{
-						"buttons":[{
-							"fontSrc":"/static/iconFont/iconfont.ttf",
-							"text":"\ue654",
-							"fontSize":"32px"
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"fontSrc": "/static/iconFont/iconfont.ttf",
+							"text": "\ue654",
+							"fontSize": "32px"
 						}]
 					}
 				}
 			}
 		},
-		
+
 		{
 			"path": "pages/indexIcon/vip/vip",
 			"style": {
@@ -267,8 +265,8 @@
 			"path": "pages/personal/feedback/feedback",
 			"style": {
 				"navigationBarTitleText": "意见反馈",
-				"backgroundColorBottom":"#FF0000",
-				"backgroundColor":"#007AFF"
+				"backgroundColorBottom": "#FF0000",
+				"backgroundColor": "#007AFF"
 			}
 		}, {
 			"path": "pages/personal/recommend/recommend",
@@ -305,12 +303,12 @@
 			"style": {
 				"navigationBarTitleText": "忘记密码"
 			}
-		},{
+		}, {
 			"path": "pages/schoolDetails/SchoolPk/SchoolPk",
 			"style": {
 				"navigationBarTitleText": "学校对比"
 			}
-		},{
+		}, {
 			"path": "pages/schoolDetails/SchoolPk/SchoolPkDetail",
 			"style": {
 				"navigationBarTitleText": "学校对比详情"
@@ -350,23 +348,27 @@
 			"style": {
 				"navigationBarTitleText": "双高计划"
 			}
-		}
-	    ,{
-            "path" : "components/ziXun/ziXun",
-            "style" : {}
-        },
+		}, {
+			"path": "components/ziXun/ziXun",
+			"style": {}
+		},
 		// 学校详情
 		{
 			"path": "pages/schoolDetails/SchoolDetail",
 			"style": {
-				"app-plus":{
-					"titleNView":false
+				"app-plus": {
+					"titleNView": false
 				}
 			}
-		},{
+		}, {
 			"path": "pages/schoolDetails/jsmind"
+		}, {
+			"path": "pages/personal/aboutUs/introduce",
+			"style": {
+				"navigationBarTitleText": "介绍"
+			}
 		}
-    ],
+	],
 	"tabBar": {
 		"color": "#7a7e83",
 		"selectedColor": "#6451FC",
