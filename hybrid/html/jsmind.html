@@ -30,6 +30,7 @@
 	<body>
 		<div id="jsmind_container"></div>
 		<script src="./js/jsmind.js"></script>
+		<script src="./js/jsmind.draggable.js"></script>
 		<script src="./js/ajax.js"></script>
 		<script>
 			function getQuery(name) {
@@ -60,6 +61,55 @@
 						parentid: 'root',
 						topic: 'sub1',
 						'background-color': '#0000ff'
+					},
+					{
+						id: 'sub4',
+						parentid: 'root',
+						topic: 'sub4',
+						'background-color': '#0000ff',
+						direction:"left"
+					},
+					{
+						id: 'sub5',
+						parentid: 'root',
+						topic: 'sub5',
+						'background-color': '#0000ff',
+						direction:"left"
+					},
+					{
+						id: 'sub6',
+						parentid: 'root',
+						topic: 'sub6',
+						'background-color': '#0000ff',
+						direction:"left"
+					},
+					{
+						id: 'sub7',
+						parentid: 'root',
+						topic: 'sub7',
+						'background-color': '#0000ff',
+						direction:"left"
+					},
+					{
+						id: 'sub8',
+						parentid: 'root',
+						topic: 'sub8',
+						'background-color': '#0000ff',
+						direction:"left"
+					},
+					{
+						id: 'sub9',
+						parentid: 'root',
+						topic: 'sub9',
+						'background-color': '#0000ff',
+						direction:"left"
+					},
+					{
+						id: 'sub10',
+						parentid: 'root',
+						topic: 'sub10',
+						'background-color': '#0000ff',
+						direction:"left"
 					},
 					{
 						id: 'sub11',
@@ -106,7 +156,7 @@
 				editable: true,
 				theme: 'primary'
 			};
-			var jm = jsMind.show(options, mind);
+			window.jm = jsMind.show(options, mind);
 
 			jm.add_node('sub2', 'sub23', 'new node', {
 				'background-color': 'red'

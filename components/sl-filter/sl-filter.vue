@@ -37,7 +37,7 @@
 			themeColor: {
 				type: String,
 				default () {
-					return '#000000'
+					return '#6451FC'
 				}
 			},
 			color: {

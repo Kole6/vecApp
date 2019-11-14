@@ -1,460 +1,169 @@
-<!-- 专业库 -->
+<!-- 院校库 -->
 <template>
 	<view>
-		<view class="category">
-		<uni-segmented-control :current="current" :values="items" @clickItem="handleTopClick" style-type="button" active-color="#6451FC"></uni-segmented-control>
+		<!-- #ifdef APP-PLUS -->
+		<view class="" style="height: 35px;background: #FFFFFF;"></view>
+		<!-- #endif -->
+		<!-- <uni-nav-bar @click-left="handleBack" left-icon="arrowleft" :shadow="false" :border="false">
+			<uni-search-bar style="width: 100%;" :radius="100" @confirm="search" :isDisabled="true" clearButton="always" @searchClick="handleSearchTap" />
+		</uni-nav-bar> -->
+		<view class="nav">
+			<navigator url="/pages/indexIcon/majorDatabase/BKCCSchool">
+				<view class="nav-item nav-item-1"><text>本科层次职业教育</text></view>
+			</navigator>
+			<navigator url="/pages/indexIcon/majorDatabase/GZGZSchool">
+				<view class="nav-item nav-item-2"><text>高职高专院校</text></view>
+			</navigator>
+			<navigator url="/pages/indexIcon/majorDatabase/ZDZYSchool">
+				<view class="nav-item nav-item-3"><text>中等职业学校</text></view>
+			</navigator>
 		</view>
-		<view class="content">
-			<view class="page-body">
-				<scroll-view class="nav-left" scroll-y :style="'height:' + height + 'px'">
-					<view
-						class="nav-left-item"
-						@click="categoryClickMain(item, index)"
-						:key="index"
-						:class="index == categoryActive ? 'active' : ''"
-						v-for="(item, index) in categoryList"
-					>
-						{{ item.name }}
-					</view>
-				</scroll-view>
-				<scroll-view class="nav-right" scroll-y 
-							 :scroll-top="scrollTop"
-							 @scroll="scroll"
-							 :style="'height:' + height + 'px'" 
-							 scroll-with-animation>
-						<uni-collapse >
-							<view class="right-show-all">
-								<text class="scroll-title">{{categoryList[categoryActive].name}}</text>
-								<text class="scroll-btn" @tap="showAll">{{isShowAll?'关闭全部':'全部展开'}}</text>
-							</view>
-						    <uni-collapse-item v-for="(list,index) in subCategoryList" 
-												:key="list.id"
-												:title="list.name" 
-												:show-animation="true"
-												:open="list.open">
-								<view class="category-item" v-for="(item,i) in list.detailList" 
-												:key="item.id"
-												@tap="handleItemTap(item,i,list,index)">
-									{{item.name}}
-								</view>
-						    </uni-collapse-item>
-						</uni-collapse>
-					
-				</scroll-view>
-			</view>
+		<view class="list-title">
+			<view class="hot">热门专业</view>
+			<image class="hot-img" src="/static/indexIcon/hot.png" mode="aspectFit"></image>
 		</view>
+		<view class="school-list" :style="{ height: wrapperHeight }"><school-list :isText="true" :showType="4" :is-special="true" :listArr="dataArr" :handleTaped="handleListTaped"></school-list></view>
 	</view>
 </template>
 
 <script>
-import uniSegmentedControl from "@/components/uni-segmented-control/uni-segmented-control.vue"
-import uniCollapse from "@/components/uni-collapse/uni-collapse.vue"
-import uniCollapseItem from "@/components/uni-collapse-item/uni-collapse-item.vue"
+import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue';
+import schoolList from '../schoolDatabase/SchoolList.vue';
+import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 export default {
-	components: {uniSegmentedControl,uniCollapse,uniCollapseItem},
+	components: { uniSearchBar, schoolList, uniNavBar },
 	data() {
 		return {
-			items:['高职院校专业','中职院校专业','技工院校专业'],
-			current:0,//顶部大分类选中值
-			categoryList: [],
-			subCategoryList: [],
-			height: 0,
-			categoryActive: 0,//当前分类选中index值
-			//滚动视图
-			scrollTop: 0,
-			scrollHeight: 0,
-			isShowAll:false,//全部展开控制量
-		};
-	},
-	onLoad: function() {
-		this.getCategory();
-		// 设置分类栏高度，保持在一屏内
-		this.height = uni.getSystemInfoSync().windowHeight - 65;
-	},
-	methods: {
-		handleTopClick(index){
-			this.current = index;
-		},
-		showAll(){
-			this.subCategoryList.forEach(item=>{
-				item.open = !this.isShowAll;
-			})
-			this.isShowAll = !this.isShowAll;
-		},
-		// 监听scrollview的滚动事件，在切换时置顶
-		scroll(e) {
-			this.scrollHeight = e.detail.scrollHeight;
-		},
-		categoryClickMain(categroy, index) {
-			this.isShowAll = false;
-			this.categoryActive = index;
-			this.subCategoryList = categroy.subCategoryList;
-			this.scrollTop = -this.scrollHeight * index;
-		},
-		getCategory() {
-			let data = [
+			systemInfo: uni.getSystemInfoSync(),
+			wrapperHeight: 'auto',
+			dataArr: [
 				{
-					name:'农林牧渔'
+					title: '汽车运用与维护',
+					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
+					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
 				},{
-					name:'资源环境与安全'
+					title: '汽车运用与维护',
+					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
+					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
 				},{
-					name:'土木工程'
+					title: '汽车运用与维护',
+					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
+					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
 				},{
-					name:'资源环境与安全'
+					title: '汽车运用与维护',
+					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
+					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
 				},{
-					name:'装备制造'
+					title: '汽车运用与维护',
+					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
+					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
 				},{
-					name:'生物与化工'
+					title: '汽车运用与维护',
+					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
+					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
 				},{
-					name:'轻工纺织'
-				},{
-					name:'食品药品与粮食'
-				},{
-					name:'交通运输'
+					title: '汽车运用与维护',
+					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
+					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
 				}
 			]
-			data.forEach((item,index)=>{
-				item.subCategoryList=[
-						{
-							name:'农业类',
-							open:false,
-							id:'00'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'01'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'02'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'03'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'04'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'05'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'06'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'07'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'08'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'09'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'10'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'11'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'12'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						}
-					]
+		};
+	},
+	onNavigationBarSearchInputClicked() {
+		console.log(arguments, 'arg');
+	},
+	mounted() {
+		// 限制列表高度
+		let query = uni.createSelectorQuery().in(this);
+		query
+			.select('.school-list')
+			.boundingClientRect(data => {
+				// #ifdef APP-PLUS
+				
+				// #endif
+				// #ifdef H5
+				
+				// #endif
+				this.wrapperHeight = this.systemInfo.screenHeight - data.top - 44 + 'px';
 			})
-			this.categoryList = data
-			this.subCategoryList = this.categoryList[0].subCategoryList;
+			.exec();
+	},
+	methods: {
+		handleListTaped(item){
 		},
-		handleItemTap(target,targetIndex,list,listIndex){
-			console.log(target,targetIndex,list,listIndex)
+		search({ value }) {
+			console.log(value, 'value');
+		},
+		handleBack() {
+			uni.navigateBack();
+		},
+		handleSearchTap() {
 			uni.navigateTo({
-				url:'./ProfessionDesc?id='+target.id+'&name='+target.name,
-				animationType: 'pop-in',
-				animationDuration: 200
-			})
+				url: './SearchResult'
+			});
 		}
 	}
 };
 </script>
 
 <style scoped lang="scss">
-.uni-collapse-cell__title-text{
-	color: #333333;
+.search {
+	padding: 10upx 50upx;
 }
-/* category */
-.category{
-	padding: 15px 0;
-	border-bottom: solid 1px $main-dividing-line1;
-}
-/* 分类 */
-.page-body {
-	display: flex;
-}
-
 .nav {
 	display: flex;
-	width: 100%;
+	justify-content: space-around;
+	padding: 35upx 0;
+	background: #ffffff;
 }
-
-.nav-left {
-	width: 30%;
-}
-
-.nav-left-item {
-	height: 100upx;
-	border-right: solid 1px $main-dividing-line1;
-	border-bottom: solid 1px $main-dividing-line1;
-	padding: 5upx 20upx;
-	font-size: $uni-font-size-lg + 3upx;
-	text-align: center;
+.nav-item {
+	box-sizing: border-box;
 	display: flex;
-	align-items: center;
 	justify-content: center;
-	color: #333;
-}
+	align-items: center;
 
-.nav-right {
-	width: 70%;
-}
-
-.nav-right-item image {
-	width: 100upx;
-	height: 100upx;
-}
-
-.active {
-	color: $main-base-color;
-}
-.right-show-all{
-	display: flex;
-	justify-content: space-between;
-	padding: 5px 10px;
-	font-size: $uni-font-size-lg;
-	border-bottom: solid 1px $main-dividing-line1;
-	position: sticky;
-	top: 0;
-	z-index: 100;
-	background: #fff;
-	.scroll-title{
-		color:$main-base-color;
-		font-size: $uni-font-size-lg + 3upx;
-	}
-	.scroll-btn{
-		border: solid 1px $main-base-color;
-		border-radius: 10upx;
-		padding: 5upx 10upx;
-		color: #FFFFFF;
-		background: $main-base-color;
-	}
-}
-.category-item{
-	padding: 15upx 30upx;
-	font-size: $uni-font-size-lg + 3upx;
-	color: #333333;//#3395ff
+	width: 220upx;
 	text-align: center;
-	border-top: solid 1px $main-dividing-line1;
+	box-sizing: border-box;
+	padding: 20upx 40upx;
+	color: #fff;
+	border-radius: 20upx;
+	font-size: $uni-font-size-lg;
+	background: $main-base-color;
+	height: 180upx;
+	box-shadow: 5upx 10upx 10upx rgba($color: #000000, $alpha: 0.1);
+}
+@for $i from 1 through 3 {
+	.nav-item-#{$i} {
+		background: url('../../../static/indexIcon/bg'+$i+'.png');
+		background-size: 100% 100%;
+	}
+}
+.list-title {
+	padding: 10upx;
+	margin-top: 20upx;
+	background: #ffffff;
+	border-bottom: solid 1upx $main-dividing-line1;
+	image {
+		width: 60upx;
+		height: 60upx;
+		vertical-align: middle;
+	}
+	.hot {
+		font-size: $uni-font-size-lg;
+		display: inline-block;
+		margin-left: 20upx;
+		font-weight: bold;
+		color: #333333;
+	}
+	.hot-img {
+		width: 28upx;
+		height: 28upx;
+		vertical-align: middle;
+	}
+}
+.school-list {
+	background: #ffffff;
+	overflow: auto;
 }
 </style>

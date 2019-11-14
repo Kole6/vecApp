@@ -1,7 +1,7 @@
 <template>
 	<view class="list">
 		<block v-for="(item,index) in listArr" :key="index">
-			<school-list-item :url="url" class="list-item" :showType="showType" :item="item" />
+			<school-list-item :is-special="isSpecial" :url="url" class="list-item" :showType="showType" v-bind="$attrs" :item="item" />
 		</block>
 	</view>
 </template>
@@ -25,6 +25,10 @@
 				default:'1',
 			},
 			url:String,
+			isSpecial:{
+				type:Boolean,
+				default:false,
+			},
 		},
 		data(){
 			return{
@@ -36,6 +40,6 @@
 
 <style scoped lang="scss">
 	.list-item:first-child{
-		border-top: solid 1px #CCCCCC;
+		border-top: solid 1px $main-dividing-line1;
 	}
 </style>

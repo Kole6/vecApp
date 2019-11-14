@@ -39,7 +39,7 @@
 		<view class="m-img" style="font-size: 14px;">
 			<!-- <image src="../../static/indexIcon/bg1.png" mode="aspectFit"></image> -->
 		</view>
-		<view class="m-school_list" >
+		<view class="m-school_list" @tap="handleRouter('./NearbySchool/NearbySchoolList')">
 			<text>附近学校</text>
 			<uni-icons
 			  type="arrowright"
@@ -126,7 +126,7 @@ export default {
 				url:'',
 			},{
 				name:'校领导',
-				url:'',
+				url:'./SchoolLeader/SchoolLeader',
 			},{
 				name:'学校荣誉',
 				url:'./schoolHonors/schoolHonors',

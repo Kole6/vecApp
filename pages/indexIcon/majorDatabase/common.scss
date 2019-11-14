@@ -19,17 +19,39 @@
 		color: #fff;
 	}
 }
+.line{
+	background: #F6F8FE;
+	height: 20upx;
+}
+.content-wrapper{
+	overflow: auto;
+	background: #FFFFFF;
+}
+.f-sc{
+	padding-left: 30upx;
+}
+.title{
+	font-size: $uni-font-size-lg;
+	font-weight: bold;
+	padding: 20upx 31upx;
+	color: $main-text-color;
+}
 .m-base{
 	position: relative;
-	padding: 10upx 20upx;
-	.title{
-		font-size: $uni-font-size-lg;
-		font-weight: bold;
-		padding: 15upx 0;
-	}
+	border-top: solid 1upx $main-dividing-line1;
+	padding-bottom: 10upx;
+
 	.item{
-		padding: 10upx 0 10upx 25upx;
+		padding: 20upx 32upx;
 		font-size: $uni-font-size-base;
+		.name{
+			font-size: $uni-font-size-sm;
+			box-sizing: border-box;
+			padding: 6upx 21upx;
+			border: solid 1upx #7B6BFD;
+			border-radius: 5upx;
+			color: #7B6BFD;
+		}
 		.value{
 			color:#666666;
 			padding-left: 20upx;
@@ -39,88 +61,105 @@
 		box-sizing: border-box;
 		position: absolute;
 		right: 50upx;
-		top: 50%;
-		transform: translateY(-50%);
+		top: 60upx;
 		display: flex;
-		justify-content: center;
 		align-items: center;
-		width: 140upx;
-		height: 140upx;
-		border-radius: 70upx;
-		border: solid 1px $uni-border-color;
-		padding: 20upx;
-		text-align: center;
-		font-size: $uni-font-size-lg;
-		color: #FFFFFF;
-		background: $main-base-color;
-	}
-	.f-base.yes{
-		background: #FFFFFF;
-		color: $main-base-color;
-	}
-}
-.m-pro{
-	padding: 10upx 20upx;
-	border-top: solid 1upx $uni-border-color;
-	.title{
-		font-size: $uni-font-size-lg;
-		font-weight: bold;
-		padding: 15upx 0;
-	}
-	.item{
-		padding: 20upx 0 10upx 25upx;
-		font-size: $uni-font-size-base;
-		.name{
-			font-size: $uni-font-size-base + 2;
-			margin-bottom: 10upx;
-		}
-		.link{
-			color: #007AFF;
-			padding-left: 20upx;
+		text{
+			font-size: $uni-font-size-base;
+			color: #999999;
+			padding-left: 10upx;
 		}
 	}
 }
-.m-simi{
-	.title{
-		background: #EAEAEA;
-		font-size: $uni-font-size-lg;
-		padding: 10upx 20upx;
-		border-top: solid 1upx $uni-border-color;
-		border-bottom: solid 1upx $uni-border-color;
-	}
+.m-tip{
+	padding: 26upx 36upx;
+	font-size: $uni-font-size-base;
+	color: $main-text-color;
+	font-weight: bold;
+	border-top: solid 1upx $main-dividing-line1;
 }
-.m-fill{
-	height: 101upx;
-}
-.m-bottom{
-	position: fixed;
-	bottom: 0;
-	font-size: $uni-font-size-lg + 8;
-	display: flex;
+.m-pk{
 	box-sizing: border-box;
-	width: 100vw;
+	display: flex;
+	position: relative;
+	height: 100upx;
+	padding: 20upx 35upx;
+	justify-content: space-between;
+	align-items: center;
+	border-top: solid 1upx $main-dividing-line1;
 	.left{
-		width: 70%;
-		display: flex;
-		justify-content: center;
+		display: inline-flex;
 		align-items: center;
-		padding:25upx 0;
-		background: #FFFFFF;
-		.text{
-			padding-left: 20upx;
+		font-size: $uni-font-size-base;
+		color: #999999;
+		text{
+			padding-left: 10upx;
 		}
 	}
 	.right{
-		width: 30%;
-		text-align: center;
-		background: #199ED8;
-		padding:25upx 0;
+		z-index: 3;
 		color: #FFFFFF;
 	}
-	.saved{
-		color: $main-base-color;
+	.bg1{
+		position: absolute;
+		top: -2upx;
+		right: 0;
+		z-index: 1;
 	}
-	.saved+.text{
-		color: $main-base-color;
+	.bg2{
+		position: absolute;
+		top: 14upx;
+		right: 128upx;
+		z-index: 2;
+	}
+}
+.m-pro{
+	border-top: solid 1upx $main-dividing-line1;
+	border-bottom: solid 1upx $main-dividing-line1;
+	.list{
+		padding:10upx 0 10upx 31upx;
+		.list-title{
+			font-size: $uni-font-size-lg;
+			color: #999999;
+			padding: 10upx 0;
+		}
+		.item{
+			font-size: $uni-font-size-base;
+			padding: 10upx 0;
+			color: $main-text-color;
+		}
+	}
+	.list1{
+		border-bottom: solid 1upx $main-dividing-line1;
+	}
+}
+.m-down{
+	border-bottom: solid 1upx $main-dividing-line1;
+	padding-bottom: 30upx;
+	.content{
+		padding:10upx 0 0 31upx;
+		font-size: $uni-font-size-base;
+		.link{
+			color: #6451FC;
+			padding-left: 10upx;
+		}
+	}
+}
+.m-school{
+	padding: 20upx 31upx;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-top: solid 1upx $main-dividing-line1;
+	border-bottom: solid 1upx $main-dividing-line1;
+	.title{
+		padding: 0;
+	}
+}
+.m-simi{
+	padding-bottom: 30upx;
+	.title{
+		font-size: $uni-font-size-lg;
+		border-top: solid 1upx $main-dividing-line1;
 	}
 }

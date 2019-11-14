@@ -4,22 +4,24 @@
     :hover-class="disabled ? '' : 'uni-collapse-cell--hover'">
     <view
       class="uni-collapse-cell__title header"
+	  :class="{'uni-active': isOpen}"
       @click="onClick">
       <view
         v-if="thumb"
-        class="uni-collapse-cell__title-extra"><image
+        class="uni-collapse-cell__title-extra" ><image
           :src="thumb"
           class="uni-collapse-cell__title-img" /></view>
-      <view class="uni-collapse-cell__title-inner">
+      <view class="uni-collapse-cell__title-inner" >
         <view class="uni-collapse-cell__title-text">{{ title }}</view>
       </view>
       <view
         :class="{ 'uni-active': isOpen, 'uni-collapse-cell--animation': showAnimation === true }"
         class="uni-collapse-cell__title-arrow">
-        <uni-icons
-          color="#bbb"
+		<image :src="isOpen?'/static/indexIcon/uparrow.png':'/static/indexIcon/downarrow.png'" mode="aspectFit" style="height: 12px;width: 12px;"></image>
+        <!-- <uni-icons
+          :color="isOpen?'#fff':'#bbb'"
           size="20"
-          type="arrowdown" />
+          type="arrowdown" /> -->
       </view>
     </view>
     <view
@@ -129,6 +131,10 @@ $collapse-title-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 .uni-collapse-cell--open{
 	background: #F8FAFF;
 }
+.uni-collapse-cell__title.uni-active{
+	background: $main-base-color;
+	color: #FFFFFF;
+}
 .uni-collapse-cell__title-text{
 	color: #333333;
 }
@@ -192,7 +198,9 @@ $collapse-title-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 			height: 20px;
 			transform: rotate(0deg);
 			transform-origin: center center;
-
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
 			&.uni-active {
 				transform: rotate(180deg);
 			}

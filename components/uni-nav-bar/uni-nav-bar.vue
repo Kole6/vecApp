@@ -221,4 +221,7 @@ export default {
 			background-color: $uni-border-color;
 		}
 	}
+.uni-navbar__header-container-inner{
+	font-weight: bold;
+}
 </style>

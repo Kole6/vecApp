@@ -16,7 +16,7 @@
 				</view>
 			</scroll-view>
 			<scroll-view v-if="showType == 4 || showType == 3" scroll-x="true" style="white-space: nowrap;">
-					<view  class="card" v-for="(card,index) in item.cards" :key="index">
+					<view  :class="[isSpecial?'tag':'card','tag-text']" v-for="(card,index) in item.cards" :key="index">
 							{{card.name}}
 					</view>
 			</scroll-view>
@@ -43,6 +43,11 @@
 			},
 			handleTaped:Function,
 			url:String,
+			// 是否特殊显示cards
+			isSpecial:{
+				type:Boolean,
+				default:false
+			}
 		},
 		methods:{
 			handleTap(){
@@ -66,7 +71,7 @@
 	.list-content{
 		padding: 30upx;
 		&.has{
-			border-bottom: solid 1px #CCCCCC;	
+			border-bottom: solid 1px $main-dividing-line1;	
 		}
 		.left{
 			box-sizing: border-box;

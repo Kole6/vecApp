@@ -111,11 +111,32 @@
 				"navigationBarTitleText": "专业库"
 			}
 		},
+		{
+			"path": "pages/indexIcon/majorDatabase/BKCCSchool",
+			"style": {
+				"navigationBarTitleText": "本科层次职业教育"
+			}
+		},
+		{
+			"path": "pages/indexIcon/majorDatabase/GZGZSchool",
+			"style": {
+				"navigationBarTitleText": "高职高专院校"
+			}
+		},
+		{
+			"path": "pages/indexIcon/majorDatabase/ZDZYSchool",
+			"style": {
+				"navigationBarTitleText": "中等职业学校"
+			}
+		},
 		// 专业介绍
 		{
 			"path": "pages/indexIcon/majorDatabase/ProfessionDesc",
 			"style": {
-				"navigationBarTitleText": "专业信息"
+				"app-plus":{
+					"titleNView":false
+					
+				}
 			}
 		},
 		// 开设学校
@@ -364,7 +385,20 @@
 				}
 			}
 		},{
-			"path": "pages/schoolDetails/jsmind"
+			"path": "pages/schoolDetails/jsmind",
+			"style": {
+				"navigationBarTitleText":"拓扑图"
+			}
+		},{
+			"path": "pages/schoolDetails/NearbySchool/NearbySchoolList",
+			"style": {
+				"navigationBarTitleText":"附近学校"
+			}
+		},{
+			"path": "pages/schoolDetails/SchoolLeader/SchoolLeader",
+			"style": {
+				"navigationBarTitleText":"校领导"
+			}
 		}
     ],
 	"tabBar": {
