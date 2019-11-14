@@ -153,7 +153,7 @@
 		   display:flex;
 			.line {
 				flex: 1;
-				border-top:2px solid rgba($color: #ccc, $alpha: 0.8);
+				border-top:1px solid rgba($color: #ccc, $alpha: 0.8);
 				position: relative;
 				top:18upx;
 			}

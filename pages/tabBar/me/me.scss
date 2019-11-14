@@ -39,6 +39,11 @@
 				.center_menu--hover {
 					background-color: #f1f1f1
 				}
+				image{
+					width: 36upx;
+					height: 36upx;
+					padding-right: 16upx;
+				}
 				&::after {
 					content: '';
 					width: 30upx;
@@ -53,7 +58,7 @@
 				}
 				.menu_r{
 					position: absolute;
-					color: #808080;
+					color: $main-base-color;
 					right:10%;
 					width: 350upx;
 					text-align: right;

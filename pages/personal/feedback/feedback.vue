@@ -4,9 +4,11 @@
 		<text class="top-title">意见反馈类型</text>
 		<view class="vip">
 			<view v-for="(item,index) in selList" :key="index">
-				<vec-select class="sc" :sel="index==selIndex" @reStyle="reStyle(index)">
-					<p slot="tip">{{item.name}}</p>
-				</vec-select>
+				<view class="sc">
+					<vec-select :sel="index==selIndex" @reStyle="reStyle(index)">
+						<p slot="tip">{{item.name}}</p>
+					</vec-select>
+				</view>
 			</view>
 		</view>
 		<view class="sc-area">
@@ -46,11 +48,12 @@
 		},
 	}
 </script>
-
-<style scoped lang="scss">
+<style>
 	page{
 		background-color: #fff;
 	}
+</style>
+<style scoped lang="scss">
 	.top-title{
 		font-size:30upx;
 		font-family:PingFangSC-Medium,PingFang SC;

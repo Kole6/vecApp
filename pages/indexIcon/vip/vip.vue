@@ -42,7 +42,11 @@
 		},
 	}
 </script>
-
+<style>
+	page{
+		background-color: #fff;
+	}
+</style>
 <style scoped lang="scss">
 @import "./base64.scss";
 .vip-content{
