@@ -17,7 +17,7 @@
 </script>
 
 <style>
-	@import './common/vecfont.css';
+	/* @import './common/vecfont.css'; */
 
 	page {
 		background-color: #F6F8FE;
@@ -28,7 +28,7 @@
 		background-color: #fff !important;
 	}
 
-	.btn {
+	.vec-btn {
 		color: #fff;
 		width: 600upx;
 		height: 88upx;

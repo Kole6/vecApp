@@ -19,13 +19,17 @@
 				<text class="menu_l">昵称</text>
 				<view class="menu_r"><text class="menu_r_text">{{nickname}}</text></view>
 			</view>
+			<view class="menu_item" @tap="toNi()">
+				<text class="menu_l">邮箱</text>
+				<view class="menu_r"><text class="menu_r_text">未绑定</text></view>
+			</view>
 			<view class="menu_item" @tap="clickYao()">
 				<text class="menu_l">我的邀请码</text>
 				<text class="menu_r"><text class="menu_r_text">9967</text></text>
 			</view>
 		</view>
 		<view class="outSign">
-			<button type="primary">退出登录</button>
+			<button  class="vec-btn" type="primary" @tap="toRecharge()">退出登录</button>
 		</view>
 		<view class="content">
 			<chunLei-modal v-model="value" :mData="inputData" :type="type" @onConfirm="onConfirm" @onCancel="onCancel" navMask></chunLei-modal>
@@ -135,7 +139,6 @@
 			font-size: 28upx;
 			height: 80upx;
 			letter-spacing: 1px;
-			// padding: 0 5%;
 			background: #fff;
 			overflow: hidden;
 			display: inline-block;
@@ -192,11 +195,6 @@
 
 	}
 	.outSign{
-		margin-top: 50px;
-		text-align: center;
-		button{
-			width: 500upx;
-			background-color: #17d8a9;
-		}
+		margin-top: 60px;
 	}
 </style>

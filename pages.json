@@ -399,6 +399,11 @@
 			"style": {
 				"navigationBarTitleText":"校领导"
 			}
+		}, {
+			"path": "pages/personal/aboutUs/introduce",
+			"style": {
+				"navigationBarTitleText": "介绍"
+			}
 		}
     ],
 	"tabBar": {

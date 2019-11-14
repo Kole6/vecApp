@@ -4,15 +4,17 @@
 		<text class="top-title">意见反馈类型</text>
 		<view class="vip">
 			<view v-for="(item,index) in selList" :key="index">
-				<vec-select class="sc" :sel="index==selIndex" @reStyle="reStyle(index)">
-					<p slot="tip">{{item.name}}</p>
-				</vec-select>
+				<view class="sc">
+					<vec-select :sel="index==selIndex" @reStyle="reStyle(index)">
+						<p slot="tip">{{item.name}}</p>
+					</vec-select>
+				</view>
 			</view>
 		</view>
 		<view class="sc-area">
 			<textarea value="" placeholder="不能愉快的使用现有功能？上传相关页面内容方便我们快速解决问题哦～" />
 			</view>
-		<button  class="btn vip-open" type="primary" @tap="toSubmission()">提交</button>
+		<button  class="vec-btn vip-open" type="primary" @tap="toSubmission()">提交</button>
 	</view>
 
 </template>
@@ -46,11 +48,12 @@
 		},
 	}
 </script>
-
-<style scoped lang="scss">
+<style>
 	page{
 		background-color: #fff;
 	}
+</style>
+<style scoped lang="scss">
 	.top-title{
 		font-size:30upx;
 		font-family:PingFangSC-Medium,PingFang SC;

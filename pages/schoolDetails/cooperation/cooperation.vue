@@ -39,6 +39,7 @@
 	border: 1px solid #aaa;
 	border-radius: 10upx;
 	background-color: #fff;
+	box-shadow:0px 0px 10px 0px rgba(0,0,0,0.1);
 	.title{
 		border-bottom: 1px solid #aaa;
 		font-size: 30upx;

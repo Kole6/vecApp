@@ -4,11 +4,13 @@
 		<view class="kong"></view>
 		<view class="vip-pay">
 			<view v-for="(item,index) in selList" :key="index">
-				<vec-select :class="['sc',index==selIndex?'sc-tap':'']" :sel="index==selIndex" @reStyle="reStyle(index)">
-					<p slot="tip" class="k1">{{item.k1}}</p>
-					<p slot="tip" class="k2">{{item.k2}}</p>
-					<p slot="tip" class="k1">{{item.k3}}</p>
-				</vec-select>
+				<view class="sc">
+					<vec-select :class="[index==selIndex?'sc-tap':'']" :sel="index==selIndex" @reStyle="reStyle(index)">
+						<p slot="tip" class="k1">{{item.k1}}</p>
+						<p slot="tip" class="k2">{{item.k2}}</p>
+						<p slot="tip" class="k1">{{item.k3}}</p>
+					</vec-select>
+				</view>
 			</view>
 		</view>
 		<view class="kong"></view>
@@ -17,11 +19,11 @@
 				<span>选择支付方式：</span>
 			</view>
 			<view class="mode-pay" v-for="(item,index) in payList" :key="index" @tap="raTap(index)">
-				<text :class="['vecfont','icon-menu',item.icon=='&#xe681;'?'icon-menu2':'']" v-html="item.icon"></text>
+				<image :src="item.icon" mode="aspectFill"></image>
 				<text class="icon-text">{{item.name}}</text>
 				<radio :checked="index==payIndex" color="#6451FC" />
 			</view>
-			<button class="btn vip-open" type="primary" @tap="toSubmission()">立即支付</button>
+			<button class="vec-btn vip-open" type="primary" @tap="toSubmission()">立即支付</button>
 		</view>
 	</view>
 </template>
@@ -50,12 +52,12 @@
 				}],
 				payIndex: 0,
 				payList: [{
-						icon: '&#xe681;',
+						icon: '/static/p507.png',
 						name: '微信支付',
 						code: '1001'
 					},
 					{
-						icon: '&#xe673;',
+						icon: '/static/p508.png',
 						name: '支付宝支付',
 						code: '1002'
 					}
@@ -80,12 +82,12 @@
 		},
 	}
 </script>
-
-<style scoped lang="scss">
-	page {
+<style>
+	page{
 		background-color: #fff;
 	}
-
+</style>
+<style scoped lang="scss">
 	.kong {
 		width: 750upx;
 		height: 20upx;
@@ -102,7 +104,6 @@
 
 		.sc {
 			margin: 0upx 10upx;
-
 			p {
 				width: 210upx;
 				// margin: 0upx 5upx;
@@ -155,11 +156,16 @@
 		.mode-pay {
 			padding-left: 30upx;
 			border-bottom: 1px solid #eee;
-			line-height: 98upx;
 			height: 98upx;
 			color: rgba(51, 51, 51, 1);
 			font-size: 28upx;
-
+			display: flex;
+			align-items: center;
+			position: relative;
+			image{
+				width: 36upx;
+				height: 36upx;
+			}
 			.icon-menu {
 				color: rgb(8, 161, 248);
 				font-size: 30upx;
@@ -177,12 +183,11 @@
 				transform: scale(0.7);
 				position: absolute;
 				right: 10upx;
+				line-height: 98upx;
 			}
 		}
-
-	}
-
-	.vip-open {
-		margin-top: 60px;
+		.vip-open{
+			margin-top: 100upx;
+		}
 	}
 </style>
