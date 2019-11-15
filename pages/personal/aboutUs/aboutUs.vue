@@ -3,7 +3,7 @@
 		<view class="logo">
 			<p><image src="/static/1024.png" mode="aspectFill"></image></p>
 			<p>真实的职教，精准的圈子</p>
-			<p>v1.0.0 (当前版本)</p>
+			<p>v1.0.1 (当前版本)</p>
 		</view>
 		<view class="center_menu">
 			<view class="menu_item" @tap="toIntroduce()" hover-class="navigator-hover">
