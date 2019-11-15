@@ -1,7 +1,7 @@
 <template>
 	<view class="list">
 		<block v-for="(item,index) in listArr" :key="index">
-			<school-list-item :is-special="isSpecial" :url="url" class="list-item" :showType="showType" v-bind="$attrs" :item="item" />
+			<school-list-item :is-special="isSpecial" :url="url" class="list-item" :showType="showType" @taped="handleItemTaped(item,index)" :handleTaped="handleTaped" :item="item" />
 		</block>
 	</view>
 </template>
@@ -29,10 +29,19 @@
 				type:Boolean,
 				default:false,
 			},
+			handleTaped:{
+				type:Boolean,
+				default:true,
+			},
 		},
 		data(){
 			return{
 				
+			}
+		},
+		methods:{
+			handleItemTaped(item,index){
+				this.$emit('taped',{item,index})
 			}
 		}
 	}

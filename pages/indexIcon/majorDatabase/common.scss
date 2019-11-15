@@ -157,7 +157,9 @@
 	}
 }
 .m-simi{
-	padding-bottom: 30upx;
+	&.u-pb{
+		padding-bottom: 30upx;
+	}
 	.title{
 		font-size: $uni-font-size-lg;
 		border-top: solid 1upx $main-dividing-line1;

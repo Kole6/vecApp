@@ -388,6 +388,7 @@ export default {
 
 .nav-left {
 	width: 30%;
+	background: #999999;
 }
 
 .nav-left-item {
@@ -411,6 +412,7 @@ export default {
 
 .nav-right {
 	width: 70%;
+	background: #FFFFFF;
 }
 
 .nav-right-item image {

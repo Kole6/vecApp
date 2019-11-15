@@ -80,15 +80,15 @@
 			</view>
 			<view class="line"></view>
 			<!-- 开设学校 -->
-			<view class="m-school">
+			<view class="m-school" @tap="handleToSchool">
 				<text class="title">开设学校</text>
 				<image src="/static/indexIcon/more.png" mode="aspectFit" style="height: 40upx; width: 40upx;"></image>
 			</view>
 			<view class="line"></view>
 			<!-- 相近专业 -->
-			<view class="m-simi">
+			<view class="m-simi u-pb">
 				<view class="title">相近专业</view>
-				<school-list :isText="true" :showType="4" :is-special="true" :listArr="dataArr" :handleTaped="handleListTaped"></school-list>
+				<school-list :isText="true" :showType="4" :is-special="true" :listArr="dataArr" :handleTaped="false" @taped="handleListTaped"></school-list>
 			</view>
 			<view class="m-fill"></view>
 		</view>
@@ -165,6 +165,11 @@ export default {
 		uni.setStorageSync('freeChance',1)
 	},
 	methods: {
+		handleToSchool(){
+			uni.navigateTo({
+				url:'./ProfessionSchool'
+			})
+		},
 		handleListTaped(item){
 			
 		},

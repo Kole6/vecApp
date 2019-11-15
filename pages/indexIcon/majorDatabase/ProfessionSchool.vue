@@ -1,23 +1,19 @@
 <template>
 	<view :style="styleObj">
 		<!-- 专业信息-专业介绍 -->
-		<view class="top">
-			<view class="top-btn" @tap="handleRouter({ url: './ProfessionDesc' }, true)">专业介绍</view>
-			<view class="top-btn active">开设学校</view>
-		</view>
 		<view class="f-filter">	
 			<!-- <my-filter  ref="myfilter" ></my-filter> -->
 			<sl-filter ref="filter" @conditionTap="handleConditionTap" :menuListArr="menuList" :topFixed="true" :topFixedHeight="topFixedHeight" @result="handleSearch"></sl-filter>
 		</view>
 		<view class="m-result">
-			<school-list :listArr="dataArr" ref="aaa">
-			</school-list>
+			<school-list :isText="true" :showType="4" :listArr="dataArr"></school-list>
 		</view>
+		<view class="line"></view>
 		<view class="m-simi">
 			<view class="title">相近专业</view>
 		</view>
 		<view class="list">
-			<school-list :listArr="listArr" :isText="true" />
+			<school-list :isText="true" :showType="4" :is-special="true" :listArr="listArr" :handleTaped="handleListTaped"></school-list>
 		</view>
 		
 	</view>
@@ -36,17 +32,25 @@ export default {
 		return {
 			topFixedHeight:'44px',
 			styleObj:{
-				'overflow':'auto'
+				'overflow':'auto',
+				'background-color':'#fff'
 			},
 			dataArr: [
 				{
-					title: '上海市滨海职业大学',
-					tags: [{ name: '民办', color: '' }, { name: '本科层次职业教育', color: '' }]
+					title: '北京电子科技职业技术学院',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
 				},
 				{
-					title: '河北市滨海职业大学',
-					tags: [{ name: '民办', color: '' }, { name: '本科层次职业教育', color: '' }]
-				}
+					title: '北京电子科技职业技术学院',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
+				},
+				{
+					title: '北京电子科技职业技术学院',
+					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
+					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
+				},
 			],
 			menuList: [
 				{
@@ -65,8 +69,35 @@ export default {
 					}]
 				},
 				{
+					title:'性质类别',
+					key:'key_3',
+					isMutiple: false,
+					detailList:[
+						{
+							title:'全部',
+							value:'0'
+						},
+						{
+							title: '中专',
+							value: '1'
+						},
+						{
+							title: '技校',
+							value: '2'
+						},
+						{
+							title: '职高',
+							value: '3'
+						},
+						{
+							title: '成人中专',
+							value: '4'
+						},
+					]
+				},
+				{
 					title: '学校属性',
-					key: 'key_3',
+					key: 'key_4',
 					isMutiple: false,
 					detailList: [
 						{
@@ -122,46 +153,32 @@ export default {
 			],
 			listArr: [
 				{
-					title: '上海市滨海职业大学',
-					tags: [{ name: '党委书记', value: '姜建国' }, { name: '校长', value: '姜建国' }, { name: '性质', value: '综合' }]
+					title: '汽车运用与维护',
+					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
+					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
 				},
 				{
-					title: '上海市滨海职业大学',
-					tags: [{ name: '党委书记', value: '姜建国' }, { name: '校长', value: '姜建国' }, { name: '性质', value: '综合' }]
-				},
-				{
-					title: '上海市滨海职业大学',
-					tags: [{ name: '党委书记', value: '姜建国' }, { name: '校长', value: '姜建国' }, { name: '性质', value: '综合' }]
-				},
-				{
-					title: '上海市滨海职业大学',
-					tags: [{ name: '党委书记', value: '姜建国' }, { name: '校长', value: '姜建国' }, { name: '性质', value: '综合' }]
-				},
-				{
-					title: '上海市滨海职业大学',
-					tags: [{ name: '党委书记', value: '姜建国' }, { name: '校长', value: '姜建国' }, { name: '性质', value: '综合' }]
-				},
-				{
-					title: '上海市滨海职业大学',
-					tags: [{ name: '党委书记', value: '姜建国' }, { name: '校长', value: '姜建国' }, { name: '性质', value: '综合' }]
-				},
-				{
-					title: '上海市滨海职业大学',
-					tags: [{ name: '党委书记', value: '姜建国' }, { name: '校长', value: '姜建国' }, { name: '性质', value: '综合' }]
-				},
-				{
-					title: '上海市滨海职业大学',
-					tags: [{ name: '党委书记', value: '姜建国' }, { name: '校长', value: '姜建国' }, { name: '性质', value: '综合' }]
+					title: '汽车运用与维护',
+					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
+					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
+				},{
+					title: '汽车运用与维护',
+					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
+					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
 				}
 			]
 		};
 	},
 	onLoad(Option) {
+		// 改变导航栏标题名称
+		uni.setNavigationBarTitle({
+			title:'农业种植'
+		});
 		// #ifdef APP-PLUS
 		this.topFixedHeight='44px',
 		// #endif
 		// #ifdef H5
-		this.topFixedHeight='99px',
+		this.topFixedHeight='44px',
 		// #endif
 		this.$set(this.styleObj,'height',uni.getSystemInfoSync().windowHeight + 'px' )
 		this.$nextTick(()=>{
@@ -169,6 +186,9 @@ export default {
 		})
 	},
 	methods: {
+		handleListTaped(item){
+			
+		},
 		handleRouter({ url }, isRedirect = false) {
 			if (isRedirect) {
 				uni.redirectTo({
@@ -226,39 +246,14 @@ export default {
 	}
 };
 </script>
-
+<style>
+/* .f-filter >>> .select-tab-fixed-top{
+	border-top: solid 1upx #EEEEEE;
+} */
+</style>
 <style scoped lang="scss">
 @import './common.scss';
-.list-item {
-	padding: 30upx;
-	border-bottom: solid 1px $uni-border-color;
-	.left {
-		display: inline-flex;
-		width: 120upx;
-		height: 120upx;
-		border-radius: 60upx;
-		background: #4cd964;
-		vertical-align: middle;
-		align-items: center;
-		justify-content: center;
-		font-size: 50upx;
-	}
-	.right {
-		display: inline-block;
-		width: 550upx;
-		vertical-align: middle;
-		margin-left: 20upx;
-		.tag {
-			display: inline-block;
-			font-size: 28upx;
-			padding: 0 10upx;
-			border-right: solid 1px $uni-border-color;
-		}
-		.tag:last-child {
-			border: none;
-		}
-	}
-}
+
 .m-result{
 	margin-top: 1px;
 }

@@ -388,6 +388,7 @@ export default {
 
 .nav-left {
 	width: 30%;
+	background: #999999;
 }
 
 .nav-left-item {
@@ -402,7 +403,6 @@ export default {
 	font-size: $uni-font-size-lg ;
 	text-align: center;
 	color: #333;
-	background: #999999;
 	&.active {
 		border-left: solid 10upx $main-base-color;
 		background: #FFFFFF;
@@ -411,6 +411,7 @@ export default {
 
 .nav-right {
 	width: 70%;
+	background: #FFFFFF;
 }
 
 .nav-right-item image {

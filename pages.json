@@ -154,9 +154,17 @@
 			}
 		},
 		{
+			"path": "pages/indexIcon/majorDatabase/ProfessionPKAdd",
+			"style": {
+				"navigationBarTitleText": "添加专业"
+			}
+		},
+		{
 			"path": "pages/indexIcon/majorDatabase/ProfessionPKDetail",
 			"style": {
-				"navigationBarTitleText": "专业信息"
+				"navigationBarTitleText": "专业信息",
+				"navigationBarTextStyle":"white",
+				"transparentTitle":"always"
 			}
 		},
 		{

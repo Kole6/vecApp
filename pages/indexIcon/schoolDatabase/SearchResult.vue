@@ -4,7 +4,7 @@
 		<view class="" style="height: 35px;background: #FFFFFF;"></view>
 		<!-- #endif -->
 		<uni-nav-bar @click-left="handleBack" left-icon="arrowleft" :shadow="false" :border="false">
-			<uni-search-bar style="width: 100%;" :radius="100" @confirm="search" :isDisabled="true" clearButton="always" @searchClick="handleSearchTap" />
+			<uni-search-bar style="width: 100%;" radius="100" clearButton="auto" @confirm="search" />
 		</uni-nav-bar>
 	</view>
 </template>

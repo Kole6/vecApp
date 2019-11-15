@@ -22,7 +22,7 @@
 			<view class="hot">热门专业</view>
 			<image class="hot-img" src="/static/indexIcon/hot.png" mode="aspectFit"></image>
 		</view>
-		<view class="school-list" :style="{ height: wrapperHeight }"><school-list :isText="true" :showType="4" :is-special="true" :listArr="dataArr" :handleTaped="handleListTaped"></school-list></view>
+		<view class="school-list" :style="{ height: wrapperHeight }"><school-list :isText="true" :showType="4" :is-special="true" :listArr="dataArr" :handleTaped="false" @taped="handleListTaped"></school-list></view>
 	</view>
 </template>
 
@@ -89,7 +89,7 @@ export default {
 			.exec();
 	},
 	methods: {
-		handleListTaped(item){
+		handleListTaped({item,index}){
 		},
 		search({ value }) {
 			console.log(value, 'value');

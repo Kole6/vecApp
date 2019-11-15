@@ -142,7 +142,7 @@ export default {
 					name:'校企合作',
 					url:'./cooperation/cooperation',
 				},{
-					name:'专业情况',
+					name:'专业设置',
 					url:'',
 				},{
 					name:'技能大赛',

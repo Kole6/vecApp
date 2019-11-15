@@ -1,154 +1,84 @@
 <template>
-	<view>
+	<view >
 		<!-- 专业对比 -->
-		<!-- 已选中的对比专业 -->
-		<view class="m-btn-group"><view class="f-btn">添加学校</view></view>
-		<view class="">
-			<checkbox-group @change="checkboxChange">
-				<view class="uni-list-cell uni-list-cell-pd list-item" v-for="(item, index) in CheckedListArr" :key="index">
-					<checkbox :value="item.value" :checked="item.checked" />
-					<school-list-item :showBorder="false" class="content" showType="4" :item="item" />
+		<view class=""><message-info :message="searchResultMessage" :isShow.sync="isShowMessage" @close="handleMessageClose"></message-info></view>
+		<view class="wrapper" :style="{height:wrapperHeight,overflow:'auto'}">
+			<view class="list-item" v-for="(item,index) in listArr" :key="index">
+				<view class="flag">
+					<block v-if="item.hasSelected">
+						<view class="selecting"></view>
+					</block>
+					<block v-else>
+						<image src="/static/indexIcon/selected.png" mode="aspectFit" style="height: 36upx; width:36upx"></image>
+					</block>
 				</view>
-			</checkbox-group>
-		</view>
-		<!-- 可以选择的对比列表 -->
-		<view class="m-card">
-			<view :class="['card-item', activeIndex == 1 ? 'active' : '']" @click="activeIndex = 1">热门专业</view>
-			<view :class="['card-item', activeIndex == 2 ? 'active' : '']" @click="activeIndex = 2">我的关注</view>
-		</view>
-		<view class="">
-			<view class="uni-list m-bottom-list" :style="{ height: wrapperHeight, overflow: 'auto' }">
-				<checkbox-group @change="checkboxChange">
-					<view class="uni-list-cell uni-list-cell-pd list-item" v-for="(item, index) in listArr" :key="index">
-						<checkbox :value="item.value" :checked="item.checked" />
-						<school-list-item :showBorder="false" class="content" showType="4" :item="item" />
-					</view>
-				</checkbox-group>
+				<school-list-item :item="item" :showType="4" :is-special="true" :handleTaped="false" @taped="handleListTaped(item)"></school-list-item>
+			</view>
+			<view class="line"></view>
+			<view class="m-tips" @tap="toAdd">
+				<image src="/static/indexIcon/add.png" mode="aspectFit" style="width: 40upx; height: 40upx;"></image>
+				<text>继续添加对比专业,最多添加四个</text>
 			</view>
 		</view>
 		<!-- 底部按钮 -->
-		<view class="m-bottom" @tap="handleRouter"><text>开始对比</text></view>
+		<view class="m-bottom" >
+			<view class="left">退出</view>
+			<view class="right" @tap="handleRouter">开始对比</view>
+		</view>
 	</view>
 </template>
 
 <script>
+import messageInfo from '@/pages/indexIcon/schoolDatabase/messageInfo.vue';
 import uniSwipeAction from '@/components/uni-swipe-action/uni-swipe-action.vue';
 import schoolListItem from '@/pages/indexIcon/schoolDatabase/SchoolListItem.vue';
 export default {
 	components: {
 		uniSwipeAction,
-		schoolListItem
+		schoolListItem,
+		messageInfo
 	},
 	data() {
 		return {
+			searchResultMessage:'已添加3个专业到对比库',
+			isShowMessage:true,
 			wrapperHeight: 'auto',
 			systemInfo: uni.getSystemInfoSync(),
-			activeIndex: 1,
-			options: [
-				{
-					text: '取消',
-					style: {
-						backgroundColor: '#007aff'
-					}
-				},
-				{
-					text: '确认',
-					style: {
-						backgroundColor: '#dd524d'
-					}
-				}
-			],
-			title: 'checkbox 复选框',
-			items: [
-				{
-					value: 'USA',
-					name: '美国'
-				},
-				{
-					value: 'CHN',
-					name: '中国',
-					checked: 'true'
-				},
-				{
-					value: 'BRA',
-					name: '巴西'
-				},
-				{
-					value: 'JPN',
-					name: '日本'
-				},
-				{
-					value: 'ENG',
-					name: '英国'
-				},
-				{
-					value: 'FRA',
-					name: '法国'
-				}
-			],
-			CheckedListArr: [
-				{
-					value: '111',
-					checked: true,
-					title: '汽车运用于维护',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				}
-			],
 			listArr: [
 				{
-					value: '001',
-					title: '汽车运用于维护',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					value: '002',
-					title: '汽车运用于维护',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					value: '003',
-					title: '汽车运用于维护',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					value: '004',
-					title: '汽车运用于维护',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					value: '005',
-					title: '汽车运用于维护',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
+					hasSelected:true,
+					title: '汽车运用与维护',
+					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
+					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
+				},{
+					hasSelected:true,
+					title: '汽车运用与维护',
+					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
+					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
+				},{
+					hasSelected:false,
+					title: '汽车运用与维护',
+					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
+					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
 				}
 			]
 		};
 	},
 	mounted() {
-		// 限制列表高度
-		let query = uni.createSelectorQuery().in(this);
-		query
-			.select('.m-bottom-list')
-			.boundingClientRect(data => {
-				let height = '';
-				// #ifdef APP-PLUS
-				height = this.systemInfo.screenHeight - data.top - 154 + 'px';
-				// #endif
-				// #ifdef H5
-				height = this.systemInfo.screenHeight - data.top - 110 + 'px';
-				// #endif
-				if (height) {
-					this.wrapperHeight = height;
-				}
-			})
-			.exec();
+		
 	},
 	methods: {
+		toAdd(){
+			uni.navigateTo({
+				url:'./ProfessionPKAdd',
+			})
+		},
+		handleListTaped(item){
+			item.hasSelected = !item.hasSelected
+		},
+		handleMessageClose(){
+			this.isShowMessage = false;
+		},
 		checkboxChange() {
 			console.log(arguments, 'arg');
 		},
@@ -157,14 +87,81 @@ export default {
 			this.$set(item, 'checked', !item.checked);
 		},
 		handleRouter() {
-			// uni.navigateTo({
-			// 	url:'./'
-			// })
+			uni.navigateTo({
+				url:'./ProfessionPKDetail'
+			})
 		}
 	}
 };
 </script>
 
 <style scoped lang="scss">
-@import  './profession.scss';
+// @import  './profession.scss';
+
+.list-item{
+	background: #FFFFFF;
+	position: relative;
+	&:first-child{
+		border-top: solid 1upx $main-dividing-line1;
+	}
+	.flag{
+		position: absolute;
+		z-index: 2;
+		top: 26upx;
+		right: 29upx;
+		width: 36upx;
+		height: 36upx;
+		.selecting{
+			box-sizing: border-box;
+			width: 100%;
+			height: 100%;
+			border-radius: 50%;
+			border: solid 1upx $main-dividing-line1;
+			background: #FFFFFF;
+		}
+	}
+}
+.m-bottom {
+	box-sizing: border-box;
+	position: fixed;
+	bottom: 0;
+	font-size: $uni-font-size-lg + 5;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	// padding: 20upx 0;
+	// background: $main-base-color;
+	// color: #ffffff;
+	width: 100%;
+	z-index: 10;
+	border-top: solid 1upx $main-dividing-line1;
+	.left{
+		width: 324upx;
+		text-align: center;
+		padding: 25upx 0;
+		color: #666666;
+		background: #FFFFFF;
+	}
+	.right{
+		width: 426upx;
+		text-align: center;
+		background: $main-base-color;
+		padding: 25upx 0;
+		color: #FFFFFF;
+	}
+}
+.line{
+	height: 20upx;
+}
+.m-tips{
+	display: flex;
+	align-items: center;
+	padding: 70upx 30upx;
+	background: #FFFFFF;
+	color:#999999;
+	font-size: $uni-font-size-lg;
+	text{
+		padding-left: 20upx;
+	}
+}
 </style>
