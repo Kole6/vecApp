@@ -2,7 +2,6 @@
 	<view :style="styleObj">
 		<!-- 专业信息-专业介绍 -->
 		<view class="f-filter">	
-			<!-- <my-filter  ref="myfilter" ></my-filter> -->
 			<sl-filter ref="filter" @conditionTap="handleConditionTap" :menuListArr="menuList" :topFixed="true" :topFixedHeight="topFixedHeight" @result="handleSearch"></sl-filter>
 		</view>
 		<view class="m-result">
