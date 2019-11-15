@@ -143,7 +143,7 @@ export default {
 					url:'./cooperation/cooperation',
 				},{
 					name:'专业设置',
-					url:'',
+					url:'./ProfessionSetting/ProfessionSetting',
 				},{
 					name:'技能大赛',
 					url:'./skillsCompetition/skillsCompetition',

@@ -407,6 +407,11 @@
 			"style": {
 				"navigationBarTitleText":"校领导"
 			}
+		},{
+			"path": "pages/schoolDetails/ProfessionSetting/ProfessionSetting",
+			"style": {
+				"navigationBarTitleText":"专业设置"
+			}
 		}, {
 			"path": "pages/personal/aboutUs/introduce",
 			"style": {
