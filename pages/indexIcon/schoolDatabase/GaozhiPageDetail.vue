@@ -214,4 +214,7 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+	.list{
+		background: #FFFFFF;
+	}
 </style>

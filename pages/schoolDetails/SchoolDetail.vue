@@ -4,41 +4,84 @@
 		<view class="" style="height: 35px;background: #FFFFFF;"></view>
 		<!-- #endif -->
 		<uni-nav-bar @click-left="handleBack" left-icon="arrowleft" :shadow="false" :border="false" title="学校详情">
-			<block slot="right">
-				<view class="f-site"><text class="site">官网</text></view>
-			</block>
+			<view class="f-sc" slot="right" @tap="hasSC = !hasSC">
+				<image :src="hasSC?assets.sc2:assets.sc1" mode="aspectFit" style="height: 40upx; width: 40upx;"></image>
+			</view>
 		</uni-nav-bar>
 		<view class="m-wrapper" :style="{height:wrapperHeight,overflow:'auto'}">
 		<view class="m-top">
-			<view class="content">
-				<view class="title">滨海职业技术学院</view>
-				<view class="tags">
-					<view class="item">理工</view>
-					<view class="item">国家重点</view>
-					<view class="item">国家示范校</view>
+			<view class="base">
+				<view class="left">
+					<text>北</text>
 				</view>
-				<view class="card">
-					<text class="item">北京市</text>
-					<text class="item">1999年</text>
-					<text class="item">公办</text>
+				<view class="right">
+					<view class="title">北京市滨海职业大学</view>
+					<view class="info">
+						<text>北京市</text>
+						<text>北京市</text>
+						<text>北京市</text>
+					</view>
+					<view class="num">
+						<text>学校标示码:1234567890</text>
+					</view>
 				</view>
-				<view class="item">
-					<text class="name">地点：</text>
-					<text class="value">{{ baseInfo.address }}</text>
-				</view>
-				<view class="item">
-					<text class="name">学校标识码：</text>
-					<text class="value">{{ baseInfo.xxdm }}</text>
-				</view>
-				<view :class="['f-base', hasCompare ? 'yes' : 'no']" @tap="hasCompare = !hasCompare">{{ hasCompare ? '取消对比' : '加入对比' }}</view>
-				<view class="f-like">
-					<text>点赞</text>
+				<view class="f-site">官网</view>
+				<view class="f-dz" @tap="hasDZ=!hasDZ">
+					<image :src="hasDZ?'/static/indexIcon/dz.png':'/static/indexIcon/dz.png'" mode="aspectFit" style="width: 40upx; height: 40upx;"></image>
+					<text >{{dzNumber}}</text>
 				</view>
 			</view>
+			<view class="image">
+				学校标签画像
+			</view>
+			<view class="tags">
+				<view class="item">理工</view>
+				<view class="item">国家重点</view>
+				<view class="item">国家示范校</view>
+			</view>
+			<view class="address">
+				<text>地址：</text>
+				<text>北京市五道口职业技术学院</text>
+			</view>
 		</view>
-		<view class="m-img" style="font-size: 14px;">
-			<!-- <image src="../../static/indexIcon/bg1.png" mode="aspectFit"></image> -->
+		<view class="line"></view>
+		<!-- 对比列表 -->
+		<view class="m-tip">
+			{{tipMessage}}
 		</view>
+		<view class="m-pk" @tap="handlePK">
+			<view class="left">
+				<image src="/static/indexIcon/add.png" mode="aspectFit" style="width: 40upx;height: 40upx;"></image>
+				<text>添加本专业到对比列表</text>
+			</view>
+			<view class="right">
+				<text>对比</text>
+			</view>
+			<image class="bg1" src="/static/indexIcon/colorGroup.png" mode="aspectFit" style="width: 300upx;height: 100upx;"></image>
+			<image class="bg2" src="/static/indexIcon/vszong.png" mode="aspectFit" style="width: 70upx;height: 70upx;"></image>
+		</view>
+		
+		<view class="m-info">
+			<view class="u-title">
+				<text>基本信息</text>
+			</view>
+			<view class="tags">
+				<block v-for="(item,index) in schoolInfo" :key="index">
+					<view class="item"><text @tap="handleTap(item,index)">{{item.name}}</text></view>
+				</block>
+			</view>
+		</view>
+		<view class="m-info">
+			<view class="u-title">
+				<text>学校实力</text>
+			</view>
+			<view class="tags">
+				<block v-for="(item,index) in schoolInfo2" :key="index">
+					<view class="item"><text @tap="handleTap(item,index)">{{item.name}}</text></view>
+				</block>
+			</view>
+		</view>
+		
 		<view class="m-school_list" @tap="handleRouter('./NearbySchool/NearbySchoolList')">
 			<text>附近学校</text>
 			<uni-icons
@@ -51,26 +94,7 @@
 			  type="arrowright"
 			  size="24"/>
 		</view>
-		<view class="m-info">
-			<view class="title">
-				<text>基本信息</text>
-			</view>
-			<view class="tags">
-				<block v-for="(item,index) in schoolInfo" :key="index">
-					<view class="item"><text @tap="handleTap(item,index)">{{item.name}}</text></view>
-				</block>
-			</view>
-		</view>
-		<view class="m-info">
-			<view class="title">
-				<text>学校实力</text>
-			</view>
-			<view class="tags">
-				<block v-for="(item,index) in schoolInfo2" :key="index">
-					<view class="item"><text @tap="handleTap(item,index)">{{item.name}}</text></view>
-				</block>
-			</view>
-		</view>
+		
 		<view class="m-info">
 			<view class="title f-link">
 				<text>学校资讯</text>
@@ -82,7 +106,7 @@
 		</view>
 		</view>
 		<!-- 底部按钮 -->
-		<view class="m-bottom">
+		<!-- <view class="m-bottom">
 			<view class="left" @tap="handleSave">
 				<text class="vecfont icon-menu iconguanzhu" :class="{'saved':hasSaved}"></text>
 				<text class="text">
@@ -92,7 +116,7 @@
 			<view class="right" @tap="handlePK">
 				<text>学校对比</text>
 			</view>
-		</view>
+		</view> -->
 		
 	</view>
 </template>
@@ -101,10 +125,21 @@
 import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 import uniIcons from '@/components/uni-icons/uni-icons';
 import ziXun from "@/components/ziXun/ziXun.vue"
+// 防止在点击的时候因为图片加载出现闪烁
+import sc1 from '@/static/indexIcon/sc1.png'
+import sc2 from '@/static/indexIcon/sc2.png'
 export default {
 	components: { uniNavBar ,uniIcons ,ziXun},
 	data() {
 		return {
+			tipMessage:'您还可以进行专业对比哦!您已经添加0个专业',
+			dzNumber:'1w+',
+			hasDZ:false,//是否点赞
+			hasSC:false,
+			assets:{
+				sc1,
+				sc2
+			},
 			wrapperHeight:'auto',
 			systemInfo: uni.getSystemInfoSync(),
 			styleObj:{
@@ -186,9 +221,9 @@ export default {
 			uni.navigateBack();
 		},
 		handlePK(){
-			uni.navigateTo({
-				url:'./SchoolPk/SchoolPk'
-			})
+			// uni.navigateTo({
+			// 	url:'./SchoolPk/SchoolPk'
+			// })
 		},
 		handleTap(item,index){
 			if(item.url){
@@ -203,163 +238,196 @@ export default {
 
 <style scoped lang="scss">
 // 官网
-.f-site {
-	display: inline-flex;
-	box-sizing: border-box;
-	.site {
-		display: inline-flex;
-		width: 60upx;
-		height: 40upx;
-		font-size: $uni-font-size-base;
-		border: solid 1upx $main-dividing-line1;
-		justify-content: center;
-		align-items: center;
-		padding: 5upx 10upx;
-		border-radius: 10upx;
-		color: $main-text-color;
-	}
-}
-.m-top {
-	.content {
-		position: relative;
-		padding: 10upx 20upx;
-		background: #ffffff;
-		color: $main-text-color;
-		border-top: solid 1upx $main-dividing-line1;
-		.title {
-			font-size: $uni-font-size-lg;
-			font-weight: bold;
-			padding: 15upx 0;
-		}
-		.tags {
-			.item {
-				display: inline-block;
-				box-sizing: border-box;
-				font-size: $uni-font-size-base;
-				padding: 5upx 10upx;
-				border: solid 1upx $main-dividing-line1;
-				margin-right: 20upx;
-			}
-		}
-		.card {
-			margin-top: 10upx;
-			.item {
-				font-size: $uni-font-size-base;
-				padding: 0 10upx;
-				border-right: solid 1upx $main-dividing-line1;
-				&:last-child {
-					border: none;
-				}
-			}
-		}
-		.item {
-			padding: 10upx 0 10upx 10upx;
-			font-size: $uni-font-size-base;
-			.value {
-				color: #666666;
-				padding-left: 20upx;
-			}
-		}
-		.f-like{
-			position: absolute;
-			right: 100upx;
-			top: 20upx;
-			color: #1111FF;
-			font-size: $uni-font-size-base;
-		}
-		.f-base {
-			box-sizing: border-box;
-			position: absolute;
-			right: 50upx;
-			top: 50%;
-			transform: translateY(-50%);
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			width: 140upx;
-			height: 140upx;
-			border-radius: 70upx;
-			border: solid 1px $uni-border-color;
-			padding: 20upx;
-			text-align: center;
-			font-size: $uni-font-size-lg;
-			color: #ffffff;
-			background: $main-base-color;
-		}
-		.f-base.yes {
-			background: #ffffff;
-			color: $main-base-color;
-		}
-	}
-}
-.m-img{
-	background: #FFFFFF;
-	border-bottom: solid 1upx $main-dividing-line1;
-	text-align: center;
-}
-.m-school_list{
+@mixin  flexstyle ($jusp,$alip){
 	display: flex;
-	padding: 20upx 25upx;
-	justify-content: space-between;
-	align-items: center;
+	justify-content: $jusp;
+	align-items: $alip;
+}
+.f-sc{
+	padding-left: 30upx;
+}
+.line{
+	height: 20upx;
+}
+.u-title{
 	font-size: $uni-font-size-lg;
 	color: $main-text-color;
+	font-weight: bold;
+	padding: 29upx 31upx;
 	background: #FFFFFF;
 	border-bottom: solid 1upx $main-dividing-line1;
 }
-.m-mind{
-	height: 300upx;
-	background: #F4F4F4;
-}
-.m-bottom{
-	position: fixed;
-	bottom: 0;
-	font-size: $uni-font-size-lg + 8;
-	display: flex;
-	box-sizing: border-box;
-	width: 100vw;
-	.left{
-		width: 70%;
+.m-top {
+	background: #FFFFFF;
+	border-top: solid 1upx $main-dividing-line1;
+	.base{
 		display: flex;
-		justify-content: center;
-		align-items: center;
-		padding:25upx 0;
-		background: #FFFFFF;
-		.text{
+		padding-top: 30upx;
+		padding-left: 50upx;
+		position: relative;
+		.left{
+			@include flexstyle(center,center)
+			margin: 15upx 0;
+			width: 120upx;
+			height: 120upx;
+			border: solid 1upx $main-base-color;
+			color: $main-base-color;
+			border-radius: 60upx;
+			font-size: 48upx;
+		}
+		.right{
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			font-size: $uni-font-size-base;
+			color: #666666;
 			padding-left: 20upx;
+			.title{
+				font-size: $uni-font-size-lg;
+				color: $main-text-color;
+				font-weight: bold;
+			}
+		}
+		.f-site{
+			@include flexstyle(center,center)
+			box-sizing:border-box;
+			position: absolute;
+			top: 30upx;
+			right: 61upx;
+			width: 90upx;
+			height: 45upx;
+			font-size: $uni-font-size-base;
+			color: $main-base-color;
+			border-radius: 5upx;
+			border: solid 1upx $main-base-color;
+		}
+		.f-dz{
+			@include  flexstyle(flex-start,center)
+			position: absolute;
+			top: 96upx;
+			right: 61upx;
+			font-size:$uni-font-size-base;
+			color:#999999;
+		}
+	}
+	.image{
+		padding: 20upx 32upx;
+		image{
+			width: 100%;
+		}
+	}
+	.tags {
+		padding-left: 32upx;
+		.item {
+			display: inline-block;
+			box-sizing: border-box;
+			font-size: $uni-font-size-base;
+			padding: 5upx 10upx;
+			border: solid 1upx #FF750F;
+			color: #FF750F;
+			border-radius: 5upx;
+			margin-right: 20upx;
+		}
+	}
+	.address{
+		padding:20upx 0 20upx 32upx;
+		font-size: $uni-font-size-base;
+		color: #999999;
+	}
+}
+.m-tip{
+	padding: 26upx 36upx;
+	font-size: $uni-font-size-base;
+	color: $main-text-color;
+	font-weight: bold;
+	background: #FFFFFF;
+}
+.m-pk{
+	background: #FFFFFF;
+	box-sizing: border-box;
+	@include flexstyle(space-between,center)
+	position: relative;
+	height: 100upx;
+	padding: 20upx 35upx;
+	margin-bottom:20upx;
+	.left{
+		display: inline-flex;
+		align-items: center;
+		font-size: $uni-font-size-base;
+		color: #999999;
+		text{
+			padding-left: 10upx;
 		}
 	}
 	.right{
-		width: 30%;
-		text-align: center;
-		background: #199ED8;
-		padding:25upx 0;
+		z-index: 3;
 		color: #FFFFFF;
 	}
-	.saved{
-		color: $main-base-color;
+	.bg1{
+		position: absolute;
+		top: -2upx;
+		right: 0;
+		z-index: 1;
 	}
-	.saved+.text{
-		color: $main-base-color;
+	.bg2{
+		position: absolute;
+		top: 14upx;
+		right: 128upx;
+		z-index: 2;
 	}
 }
+.m-school_list{
+	@include  flexstyle(space-between,center)
+	padding: 28upx 31upx;
+	font-size: $uni-font-size-lg;
+	color: $main-text-color;
+	font-weight:bold;
+	background: #FFFFFF;
+	border-bottom: solid 1upx $main-dividing-line1;
+	margin-bottom:20upx;
+}
+// .m-bottom{
+// 	position: fixed;
+// 	bottom: 0;
+// 	font-size: $uni-font-size-lg + 8;
+// 	display: flex;
+// 	box-sizing: border-box;
+// 	width: 100vw;
+// 	.left{
+// 		width: 70%;
+// 		display: flex;
+// 		justify-content: center;
+// 		align-items: center;
+// 		padding:25upx 0;
+// 		background: #FFFFFF;
+// 		.text{
+// 			padding-left: 20upx;
+// 		}
+// 	}
+// 	.right{
+// 		width: 30%;
+// 		text-align: center;
+// 		background: #199ED8;
+// 		padding:25upx 0;
+// 		color: #FFFFFF;
+// 	}
+// 	.saved{
+// 		color: $main-base-color;
+// 	}
+// 	.saved+.text{
+// 		color: $main-base-color;
+// 	}
+// }
 .m-info{
 	border-bottom: solid 1upx $main-dividing-line1;
 	background: #FFFFFF;
-	&:first-child{
-		border-top: solid 1upx $main-dividing-line1;
-	}
-	.title{
-		font-size: $uni-font-size-lg;
-		color: $main-text-color;
-		font-weight: bold;
-		padding: 15upx 20upx;
-		background: #CCCCCC;
-	}
+	margin-bottom: 20upx;
 	.title.f-link{
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
+		@include  flexstyle(space-between,center)
+		padding:28upx 31upx;
+		font-weight: bold;
+		font-size: $uni-font-size-lg;
+		border-bottom: solid 1upx $main-dividing-line1;
 	}
 	.tags{
 		display: flex;
@@ -374,10 +442,17 @@ export default {
 			text-align: center;
 			padding: 10upx;
 			text{
-				display: inline-block;
-				padding: 10upx 40upx;
+				display: inline-flex;
+				justify-content: center;
+				align-items: center;
+				color: $main-text-color;
+				background: #F5F5FB;
+				width: 200upx;
+				height: 54upx;
+				box-sizing: border-box;
+				padding: 10upx 0;
 				border: solid 1upx $main-dividing-line1;
-				border-radius: 15upx;
+				border-radius: 54upx;
 			}
 		}
 	}

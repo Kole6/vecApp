@@ -78,7 +78,7 @@
 		{
 			"path": "pages/special/educationList/LikeList",
 			"style": {
-				"navigationBarTitleText": "点赞榜"
+				"navigationBarTitleText": "人气榜"
 			}
 		}, 
 		{

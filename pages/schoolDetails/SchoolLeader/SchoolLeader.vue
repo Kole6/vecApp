@@ -47,6 +47,9 @@
 		background: #FFFFFF;
 		border-bottom: solid 1upx $main-dividing-line1;
 		font-size: $uni-font-size-lg;
+		&:first-child{
+			border-top: solid 1upx $main-dividing-line1;
+		}
 		.avatar{
 			box-sizing: border-box;
 			display: inline-flex;
@@ -63,6 +66,8 @@
 		}
 		.name{
 			margin-left: 20upx;
+			font-size: $uni-font-size-lg;
+			color: $main-text-color;
 		}
 		.position{
 			text{
@@ -71,11 +76,11 @@
 				display: inline-flex;
 				align-items: center;
 				justify-content: center;
-				padding: 2upx 10upx;
+				padding: 2upx 11upx;
 				border-radius: 5upx;
-				background: #fff;
-				color: $main-base-color;
-				border: solid 1upx $main-base-color;
+				background: #6451FC;
+				color: #FFFFFF;
+				// border: solid 1upx $main-base-color;
 				font-size: $uni-font-size-base;				
 			}
 		}

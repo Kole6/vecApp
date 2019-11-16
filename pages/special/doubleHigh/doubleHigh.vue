@@ -269,5 +269,6 @@ export default {
 }
 .list{
 	// padding-top: 23px;
+	background: #FFFFFF;
 }
 </style>

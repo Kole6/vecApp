@@ -20,7 +20,7 @@ export default {
 	components:{myFollow,professionStudent},
 	data() {
 		return {
-			activeIndex:1,
+			activeIndex:2,
 			
 		};
 	},

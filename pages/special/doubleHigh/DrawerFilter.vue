@@ -114,7 +114,7 @@ export default {
 			border-right: solid 1upx #ccc;
 		}
 		.right-btn {
-			background: #4cd964;
+			background: $main-base-color;
 			color: #ffffff;
 		}
 	}

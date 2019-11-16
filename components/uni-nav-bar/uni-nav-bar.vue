@@ -223,5 +223,6 @@ export default {
 	}
 .uni-navbar__header-container-inner{
 	font-weight: bold;
+	font-size: 16px;
 }
 </style>

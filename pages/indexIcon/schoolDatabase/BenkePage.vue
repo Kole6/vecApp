@@ -67,4 +67,7 @@ export default {
 	padding: 5upx 30upx;
 	border-bottom: solid 1px $uni-border-color;
 }
+.list{
+	background: #FFFFFF;
+}
 </style>

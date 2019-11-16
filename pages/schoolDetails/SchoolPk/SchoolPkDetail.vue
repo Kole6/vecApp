@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import uCharts from '../../../components/u-charts/u-charts.js';
+import uCharts from '@/components/u-charts/u-charts.js';
 export default {
 	data() {
 		return {
@@ -179,7 +179,6 @@ export default {
 			this.showRadar("canvasRadar", Radar);
 		},
 		showRadar(canvasId, chartData) {
-			console.log(JSON.stringify(chartData) ,'chartData')
 			this.radar = new uCharts({
 				$this: this,
 				canvasId: canvasId,

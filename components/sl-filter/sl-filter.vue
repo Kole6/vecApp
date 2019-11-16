@@ -316,6 +316,7 @@
 	}
 
 	.select-tab-fixed-top {
+		border-top: solid 1upx #eee;
 		border-bottom: #F7F7F7 1px solid;
 		background-color: #FFFFFF;
 		display: flex;
