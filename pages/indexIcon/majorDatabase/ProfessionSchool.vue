@@ -12,7 +12,7 @@
 			<view class="title">相近专业</view>
 		</view>
 		<view class="list">
-			<school-list :isText="true" :showType="4" :is-special="true" :listArr="listArr" :handleTaped="handleListTaped"></school-list>
+			<school-list :isText="true" :showType="4" :is-special="true" :listArr="listArr" :handleTaped="false"></school-list>
 		</view>
 		
 	</view>

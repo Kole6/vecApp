@@ -18,8 +18,8 @@
 					<view class="title">北京市滨海职业大学</view>
 					<view class="info">
 						<text>北京市</text>
-						<text>北京市</text>
-						<text>北京市</text>
+						<text>1999年</text>
+						<text>公办</text>
 					</view>
 					<view class="num">
 						<text>学校标示码:1234567890</text>
@@ -32,7 +32,7 @@
 				</view>
 			</view>
 			<view class="image">
-				学校标签画像
+				<image src="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=d1b03b49334e251fe2f7e3fe9fbdae2a/08f790529822720e9c777b8978cb0a46f21fab0c.jpg" mode="aspectFit"></image>
 			</view>
 			<view class="tags">
 				<view class="item">理工</view>
@@ -52,7 +52,7 @@
 		<view class="m-pk" @tap="handlePK">
 			<view class="left">
 				<image src="/static/indexIcon/add.png" mode="aspectFit" style="width: 40upx;height: 40upx;"></image>
-				<text>添加本专业到对比列表</text>
+				<text>添加本学校到对比列表</text>
 			</view>
 			<view class="right">
 				<text>对比</text>
@@ -132,7 +132,7 @@ export default {
 	components: { uniNavBar ,uniIcons ,ziXun},
 	data() {
 		return {
-			tipMessage:'您还可以进行专业对比哦!您已经添加0个专业',
+			tipMessage:'您还可以进行学校对比哦!您已经添加0个学校',
 			dzNumber:'1w+',
 			hasDZ:false,//是否点赞
 			hasSC:false,
@@ -287,6 +287,16 @@ export default {
 				color: $main-text-color;
 				font-weight: bold;
 			}
+			.info{
+				text{
+					padding: 0 15upx;
+					border-left: solid 1upx #666666;
+				}
+				text:first-child{
+					padding-left: 0;
+					border-left: none;
+				}
+			}
 		}
 		.f-site{
 			@include flexstyle(center,center)
@@ -311,7 +321,7 @@ export default {
 		}
 	}
 	.image{
-		padding: 20upx 32upx;
+		padding: 0 32upx;
 		image{
 			width: 100%;
 		}

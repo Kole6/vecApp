@@ -1,33 +1,57 @@
 <template>
 	<view class="">
-		<view class="m-card">
-			<view :class="['card-item', activeIndex == 1 ? 'active' : '']" @tap="handleTab(1)">我的关注</view>
-			<view :class="['card-item', activeIndex == 2 ? 'active' : '']" @tap="handleTab(2)">专业学生分布</view>
-		</view>
-		<block v-if="activeIndex === 1">
-			<my-follow></my-follow>
-		</block>
-		<block v-if="activeIndex === 2">
-			<profession-student></profession-student>
-		</block>
+		<QSTabs ref="tabs" :current="current" :tabs="tabs" width="375" swiperWidth="750" activeColor="#6451FC"
+		 backgroundColor="#fff" @change="change($event)" />
+		<swiper :style="{height:`${scrollH-85}upx`,borderTop: '1upx solid rgba(238, 238, 238, 0.3)'}" :current="current"
+			 @change="swiperChange" @transition="transition" @animationfinish="animationfinish">
+			<swiper-item>
+				<my-follow />
+			</swiper-item>
+			<swiper-item>
+				<profession-student />
+			</swiper-item>
+		</swiper>
 	</view>
 </template>
 
 <script>
 import myFollow from './MyFollow.vue'
 import professionStudent from './Part2.vue'
+import QSTabs from '@/components/QS-tabs/QS-tabs.vue';
 export default {
-	components:{myFollow,professionStudent},
+	components:{myFollow,professionStudent,QSTabs},
 	data() {
 		return {
 			activeIndex:2,
-			
+			tabs: ["学校", "专业"],
+			current:0,
 		};
+	},
+	computed: {
+		scrollH() {
+			let sys = uni.getSystemInfoSync();
+			let winWidth = sys.windowWidth;
+			let winrate = 750 / winWidth;
+			let winHeight = parseInt(sys.windowHeight * winrate)
+			return winHeight
+		}
 	},
 	methods:{
 		handleTab(tabIndex){
 			this.activeIndex = tabIndex
-		}
+		},
+		change(index){
+			this.current = index;
+		},
+		swiperChange({detail: { current }}) {
+			this.current = current;
+		},
+		transition({detail: { dx }}) {
+			this.$refs.tabs.setDx(dx);
+		},
+		animationfinish({detail: { current }}) {
+			this.$refs.tabs.setFinishCurrent(current);
+		},
 	}
 };
 </script>
