@@ -4,9 +4,6 @@
 		<!-- #ifdef APP-PLUS -->
 		<view class="" style="height: 35px;background: #FFFFFF;"></view>
 		<!-- #endif -->
-		<!-- <uni-nav-bar @click-left="handleBack" left-icon="arrowleft" :shadow="false" :border="false">
-			<uni-search-bar style="width: 100%;" :radius="100" @confirm="search" :isDisabled="true" clearButton="always" @searchClick="handleSearchTap" />
-		</uni-nav-bar> -->
 		<view class="nav">
 			<navigator url="/pages/indexIcon/majorDatabase/BKCCSchool">
 				<view class="nav-item nav-item-1"><text>本科层次职业教育</text></view>
@@ -22,7 +19,16 @@
 			<view class="hot">热门专业</view>
 			<image class="hot-img" src="/static/indexIcon/hot.png" mode="aspectFit"></image>
 		</view>
-		<view class="school-list" :style="{ height: wrapperHeight }"><school-list :isText="true" :showType="4" :is-special="true" :listArr="dataArr" :handleTaped="false" @taped="handleListTaped"></school-list></view>
+		<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height: wrapperHeight}" :loadStatus="loadStatus">
+		<view class="school-list" >
+			<school-list :showType="4" 
+						:is-special="true" 
+						:listArr="dataArr" 
+						:handleTaped="false" 
+						@taped="handleListTaped" />
+		</view>
+		</load-more>
+
 	</view>
 </template>
 
@@ -30,43 +36,16 @@
 import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue';
 import schoolList from '../schoolDatabase/SchoolList.vue';
 import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
+import {professionData} from '../mockData.js'
+import loadMore from '@/components/loadMore/you-scroll.vue'
 export default {
-	components: { uniSearchBar, schoolList, uniNavBar },
+	components: { uniSearchBar, schoolList, uniNavBar,loadMore },
 	data() {
 		return {
 			systemInfo: uni.getSystemInfoSync(),
 			wrapperHeight: 'auto',
-			dataArr: [
-				{
-					title: '汽车运用与维护',
-					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
-				},{
-					title: '汽车运用与维护',
-					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
-				},{
-					title: '汽车运用与维护',
-					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
-				},{
-					title: '汽车运用与维护',
-					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
-				},{
-					title: '汽车运用与维护',
-					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
-				},{
-					title: '汽车运用与维护',
-					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
-				},{
-					title: '汽车运用与维护',
-					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
-				}
-			]
+			loadStatus:'more',
+			dataArr: professionData
 		};
 	},
 	onNavigationBarSearchInputClicked() {
@@ -78,17 +57,58 @@ export default {
 		query
 			.select('.school-list')
 			.boundingClientRect(data => {
-				// #ifdef APP-PLUS
-				
-				// #endif
+				this.wrapperHeight = this.systemInfo.screenHeight - data.top - 74 + 'px';
 				// #ifdef H5
-				
-				// #endif
 				this.wrapperHeight = this.systemInfo.screenHeight - data.top - 44 + 'px';
+				// #endif
+				
 			})
 			.exec();
 	},
 	methods: {
+		onPullDown(done){
+			setTimeout(()=>{
+				this.dataArr = professionData
+				done();
+			},2000)
+		},
+		onScroll(){
+		},
+		onLoadMore(){
+			this.loadStatus = 'loading'
+			// this.getData().then(()=>{
+			// })
+			setTimeout(() =>{
+				this.dataArr=[...this.dataArr,...professionData]
+					this.loadStatus = 'more'
+			}, 1000);
+		},
+		getData(){
+			return new Promise((resolve,reject)=>{
+				uni.request({
+					url:'http://47.103.69.156:18089/zjq/College/GetSchoolMajorHighLightSearchList',
+					header:{
+						'content-type':'application/x-www-form-urlencoded'
+					},
+					data:{
+						token:'d05902562e544db29bbe777954d43bb0',
+						pageIndex:'1',
+						pageSize:'10',
+						key:'浙江'
+					},
+					method:'POST',
+					success:({data}) => {
+						if(data.code == 0){
+							
+						}
+						console.log(data,'res')
+					},
+					complete() {
+						resolve();
+					}
+				})
+			})
+		},
 		handleListTaped({item,index}){
 		},
 		search({ value }) {

@@ -22,7 +22,6 @@ export default {
 	components:{myFollow,professionStudent,QSTabs},
 	data() {
 		return {
-			activeIndex:2,
 			tabs: ["学校", "专业"],
 			current:0,
 		};
@@ -37,9 +36,6 @@ export default {
 		}
 	},
 	methods:{
-		handleTab(tabIndex){
-			this.activeIndex = tabIndex
-		},
 		change(index){
 			this.current = index;
 		},

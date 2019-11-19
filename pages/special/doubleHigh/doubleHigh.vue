@@ -7,8 +7,11 @@
 		<view class="">
 			<sl-filter ref="filter" @conditionTap="handleConditionTap" :menuListArr="menuList" :topFixed="true" :topFixedHeight="topFixedHeight" @result="handleSearch"></sl-filter>
 		</view>
+		<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height: wrapperHeight}" :loadStatus="loadStatus">
 		<view class="list"><school-list :listArr="listArr" showType="4"></school-list></view>
-		<drawer-filter :tagList="tagList" :isShow="showDrawer"  @close="showDrawer = false"></drawer-filter>
+		</load-more>
+		
+		<drawer-filter :tagList="tagList" :isShow="showDrawer"  @close="showDrawer = false" @CClick="handleCClick" @IClick="handleIClick"></drawer-filter>
 	</view>
 </template>
 
@@ -18,14 +21,18 @@ import slFilter from '@/components/sl-filter/sl-filter.vue';
 import cityData from '@/pages/indexIcon/schoolDatabase/ProvinceCity.js';
 import schoolList from '@/pages/indexIcon/schoolDatabase/SchoolList.vue';
 import drawerFilter from './DrawerFilter.vue'
+import loadMore from '@/components/loadMore/you-scroll.vue'
 export default {
-	components: {drawerFilter, slFilter, schoolList ,uniSearchBar },
+	components: {drawerFilter, slFilter, schoolList ,uniSearchBar ,loadMore},
 	onNavigationBarButtonTap(option) {
 		this.showDrawer = true;
 	},
 	data() {
 		return {
+			loadStatus:'more',
+			systemInfo: uni.getSystemInfoSync(),
 			showDrawer: false,
+			wrapperHeight:'auto',
 			tagList: [
 				{
 					title:{
@@ -189,7 +196,71 @@ export default {
 		// #endif
 		this.setSearch();
 	},
+	mounted() {
+		let query = uni.createSelectorQuery().in(this);
+		query
+			.select('.list')
+			.boundingClientRect(data => {
+				let  height = ''
+				// #ifdef APP-PLUS
+				height = this.systemInfo.screenHeight - data.top - 84 ;
+				// #endif
+				// #ifdef H5
+				height = this.systemInfo.screenHeight - data.top - 50 ;
+				// #endif
+				this.wrapperHeight = height + 'px'
+
+			})
+			.exec();
+	},
 	methods: {
+		handleIClick({item,itemIndex,tag,tagIndex}){
+			this.tagList[itemIndex].list[tagIndex].selected = !this.tagList[itemIndex].list[tagIndex].selected
+		},
+		handleCClick({item,index}){
+			this.tagList[index].title.isShow = !this.tagList[index].title.isShow
+		},
+		onPullDown(done){
+			setTimeout(()=>{
+				done();
+			},2000)
+		},
+		onScroll(){
+		},
+		onLoadMore(){
+			this.loadStatus = 'loading'
+			// this.getData().then(()=>{
+			// })
+			setTimeout(() =>{
+				this.loadStatus = 'noMore'
+			}, 1000);
+		},
+		getData(){
+			return new Promise((resolve,reject)=>{
+				uni.request({
+					url:'http://47.103.69.156:18089/zjq/College/GetSchoolMajorHighLightSearchList',
+					header:{
+						'content-type':'application/x-www-form-urlencoded'
+					},
+					data:{
+						token:'d05902562e544db29bbe777954d43bb0',
+						pageIndex:'1',
+						pageSize:'10',
+						key:'浙江'
+					},
+					method:'POST',
+					success:({data}) => {
+						if(data.code == 0){
+							
+						}
+						console.log(data,'res')
+					},
+					complete() {
+						resolve();
+					}
+				})
+			})
+		},
 		handleReset() {
 			this.tagList.forEach(item => {
 				item.titleList.forEach(tag => {

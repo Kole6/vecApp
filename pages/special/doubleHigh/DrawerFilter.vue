@@ -4,13 +4,13 @@
 		<!-- 筛选项 -->
 		<view class="m-drawer-content">
 			<view class="item-list" v-for="(item, index) in tagList" :key="index">
-				<view class="item-title" @tap="item.title.isShow = !item.title.isShow">
+				<view class="item-title" @click="handleClick(item,index)">
 					<text >{{ item.title? item.title.name:'暂无标题' }}</text>
 					<uni-icons
 					  :type="item.title.isShow?'arrowup':'arrowdown'"/>
 				</view>
 				<view class="item-wrapper" v-show="item.title.isShow">
-					<text v-for="(tag, i) in item.list" :key="i" :class="{ item: true, selected: tag.selected }" @tap="tag.selected = !tag.selected">{{ tag.name }}</text>
+					<text v-for="(tag, i) in item.list" :key="i" :class="{ item: true, selected: tag.selected }" @tap="handleItemTap(item,index,tag,i)">{{ tag.name }}</text>
 				</view>
 			</view>
 		</view>
@@ -37,8 +37,14 @@ export default {
 		return {};
 	},
 	methods:{
+		//app 内无法直接操作对象，只能通过传出事件在外部进行解决
+		handleItemTap(item,itemIndex,tag,tagIndex){
+			this.$emit('IClick',{item,itemIndex,tag,tagIndex})
+		},
+		handleClick(item,index){
+			this.$emit('CClick',{item,index})
+		},
 		handleClose() {
-			// this.showDrawer = false;
 			this.$emit('close')
 		},
 		handleReset(){

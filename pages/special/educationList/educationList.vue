@@ -15,22 +15,26 @@
 			<view class="hot">热门专业</view>
 			<image class="hot-img" src="/static/indexIcon/hot.png" mode="aspectFit"></image>
 		</view>
-		<view class="school-list" :style="{ height: wrapperHeight }">
+		<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height:wrapperHeight}" :loadStatus="loadStatus">
+		<view class="school-list" >
 			<view class="list-item" v-for="(item, index) in dataArr" :key="index">
 				<view :class="['rank', 'rank' + (index + 1)]">{{ index + 1 }}</view>
 				<school-list-item :showBorder="false" class="content" showType="4" :item="item" />
 			</view>
 		</view>
+		</load-more>
 	</view>
 </template>
 
 <script>
 import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue';
 import schoolListItem from '@/pages/indexIcon/schoolDatabase/SchoolListItem.vue';
+import loadMore from '@/components/loadMore/you-scroll.vue'
 export default {
-	components: { uniSearchBar, schoolListItem },
+	components: { uniSearchBar, schoolListItem ,loadMore},
 	data() {
 		return {
+			loadStatus:'more',
 			systemInfo: uni.getSystemInfoSync(),
 			wrapperHeight: 'auto',
 			dataArr: [
@@ -76,7 +80,7 @@ export default {
 			.boundingClientRect(data => {
 				let height = '';
 				// #ifdef APP-PLUS
-				height = this.systemInfo.screenHeight - data.top - 94 + 'px';
+				height = this.systemInfo.screenHeight - data.top - 84 + 'px';
 				// #endif
 				// #ifdef H5
 				height = this.systemInfo.screenHeight - data.top - 50 + 'px';
@@ -86,6 +90,49 @@ export default {
 				}
 			})
 			.exec();
+	},
+	methods:{
+		onPullDown(done){
+			setTimeout(()=>{
+				done();
+			},2000)
+		},
+		onScroll(){
+		},
+		onLoadMore(){
+			this.loadStatus = 'loading'
+			// this.getData().then(()=>{
+			// })
+			setTimeout(() =>{
+				this.loadStatus = 'more'
+			}, 1000);
+		},
+		getData(){
+			return new Promise((resolve,reject)=>{
+				uni.request({
+					url:'http://47.103.69.156:18089/zjq/College/GetSchoolMajorHighLightSearchList',
+					header:{
+						'content-type':'application/x-www-form-urlencoded'
+					},
+					data:{
+						token:'d05902562e544db29bbe777954d43bb0',
+						pageIndex:'1',
+						pageSize:'10',
+						key:'浙江'
+					},
+					method:'POST',
+					success:({data}) => {
+						if(data.code == 0){
+							
+						}
+						console.log(data,'res')
+					},
+					complete() {
+						resolve();
+					}
+				})
+			})
+		},
 	}
 };
 </script>
@@ -149,8 +196,6 @@ export default {
 }
 .school-list {
 	box-sizing: border-box;
-	overflow: auto;
-	padding-bottom: 50upx;
 	background: #FFFFFF;
 }
 .list-item {

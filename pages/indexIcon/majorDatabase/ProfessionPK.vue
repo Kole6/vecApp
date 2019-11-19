@@ -2,7 +2,8 @@
 	<view >
 		<!-- 专业对比 -->
 		<view class=""><message-info :message="searchResultMessage" :isShow.sync="isShowMessage" @close="handleMessageClose"></message-info></view>
-		<view class="wrapper" :style="{height:wrapperHeight,overflow:'auto'}">
+		<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height: '400px'}" :loadStatus="loadStatus">
+			<view class="wrapper">
 			<view class="list-item" v-for="(item,index) in listArr" :key="index">
 				<view class="flag">
 					<block v-if="item.hasSelected">
@@ -14,11 +15,12 @@
 				</view>
 				<school-list-item :item="item" :showType="4" :is-special="true" :handleTaped="false" @taped="handleListTaped(item)"></school-list-item>
 			</view>
-			<view class="line"></view>
-			<view class="m-tips" @tap="toAdd">
-				<image src="/static/indexIcon/add.png" mode="aspectFit" style="width: 40upx; height: 40upx;"></image>
-				<text>继续添加对比专业,最多添加四个</text>
-			</view>
+		</view>
+		</load-more>
+		<view class="line"></view>
+		<view class="m-tips" @tap="toAdd">
+			<image src="/static/indexIcon/add.png" mode="aspectFit" style="width: 40upx; height: 40upx;"></image>
+			<text>继续添加对比专业,最多添加四个</text>
 		</view>
 		<!-- 底部按钮 -->
 		<view class="m-bottom" >
@@ -32,14 +34,18 @@
 import messageInfo from '@/pages/indexIcon/schoolDatabase/messageInfo.vue';
 import uniSwipeAction from '@/components/uni-swipe-action/uni-swipe-action.vue';
 import schoolListItem from '@/pages/indexIcon/schoolDatabase/SchoolListItem.vue';
+import {professionData} from '../mockData.js'
+import loadMore from '@/components/loadMore/you-scroll.vue'
 export default {
 	components: {
 		uniSwipeAction,
 		schoolListItem,
-		messageInfo
+		messageInfo,
+		loadMore
 	},
 	data() {
 		return {
+			loadStatus:'more',
 			searchResultMessage:'已添加3个专业到对比库',
 			isShowMessage:true,
 			wrapperHeight: 'auto',
@@ -60,6 +66,21 @@ export default {
 					title: '汽车运用与维护',
 					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
 					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
+				},{
+					hasSelected:false,
+					title: '汽车运用与维护',
+					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
+					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
+				},{
+					hasSelected:false,
+					title: '汽车运用与维护',
+					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
+					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
+				},{
+					hasSelected:false,
+					title: '汽车运用与维护',
+					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
+					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
 				}
 			]
 		};
@@ -68,6 +89,70 @@ export default {
 		
 	},
 	methods: {
+		onPullDown(done){
+			setTimeout(()=>{
+				this.dataArr = [
+				{
+					hasSelected:true,
+					title: '汽车运用与维护',
+					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
+					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
+				},{
+					hasSelected:true,
+					title: '汽车运用与维护',
+					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
+					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
+				},{
+					hasSelected:false,
+					title: '汽车运用与维护',
+					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
+					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
+				},{
+					hasSelected:false,
+					title: '汽车运用与维护',
+					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
+					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
+				}
+			]
+				done();
+			},2000)
+		},
+		onScroll(){
+		},
+		onLoadMore(){
+			this.loadStatus = 'loading'
+			// this.getData().then(()=>{
+			// })
+			setTimeout(() =>{
+				this.loadStatus = 'more'
+			}, 1000);
+		},
+		getData(){
+			return new Promise((resolve,reject)=>{
+				uni.request({
+					url:'http://47.103.69.156:18089/zjq/College/GetSchoolMajorHighLightSearchList',
+					header:{
+						'content-type':'application/x-www-form-urlencoded'
+					},
+					data:{
+						token:'d05902562e544db29bbe777954d43bb0',
+						pageIndex:'1',
+						pageSize:'10',
+						key:'浙江'
+					},
+					method:'POST',
+					success:({data}) => {
+						if(data.code == 0){
+							
+						}
+						console.log(data,'res')
+					},
+					complete() {
+						resolve();
+					}
+				})
+			})
+		},
 		toAdd(){
 			uni.navigateTo({
 				url:'./ProfessionPKAdd',

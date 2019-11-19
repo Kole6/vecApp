@@ -15,10 +15,6 @@
 				type:Array,
 				required:true,
 			},
-			isText:{
-				type:Boolean,
-				default:false,
-			},
 			// 显示类型：1 仅显示 文字描述 2 : 仅显示name:value值 3: 仅显示tag标签 4: 全部显示
 			showType:{
 				type:[Number,String],

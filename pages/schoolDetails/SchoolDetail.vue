@@ -11,8 +11,8 @@
 		<view class="m-wrapper" :style="{height:wrapperHeight,overflow:'auto'}">
 		<view class="m-top">
 			<view class="base">
-				<view class="left">
-					<text>北</text>
+				<view class="left" @tap="handleLogoTaped">
+					<image src="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=d1b03b49334e251fe2f7e3fe9fbdae2a/08f790529822720e9c777b8978cb0a46f21fab0c.jpg" mode="aspectFill" style="width: 100%; height: 100%;"></image>
 				</view>
 				<view class="right">
 					<view class="title">北京市滨海职业大学</view>
@@ -31,9 +31,9 @@
 					<text >{{dzNumber}}</text>
 				</view>
 			</view>
-			<view class="image">
+			<!-- <view class="image">
 				<image src="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=d1b03b49334e251fe2f7e3fe9fbdae2a/08f790529822720e9c777b8978cb0a46f21fab0c.jpg" mode="aspectFit"></image>
-			</view>
+			</view> -->
 			<view class="tags">
 				<view class="item">理工</view>
 				<view class="item">国家重点</view>
@@ -117,7 +117,19 @@
 				<text>学校对比</text>
 			</view>
 		</view> -->
-		
+		<uni-popup :show="showModal" type="center" :custom="true" :mask-click="false" @change="modalChange">
+			<view class="uni-tip">
+				<view class="tip-list">
+					<view class="item">现代学徒制</view>
+					<view class="item">现代学徒制</view>
+					<view class="item">现代学徒制</view>
+					<view class="item">现代学徒制</view>
+				</view>
+				<view class="close">
+					<text @tap="showModal = false">x</text>
+				</view>
+			</view>
+		</uni-popup>
 	</view>
 </template>
 
@@ -125,13 +137,15 @@
 import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 import uniIcons from '@/components/uni-icons/uni-icons';
 import ziXun from "@/components/ziXun/ziXun.vue"
+import uniPopup from '@/components/uni-popup/uni-popup.vue'
 // 防止在点击的时候因为图片加载出现闪烁
 import sc1 from '@/static/indexIcon/sc1.png'
 import sc2 from '@/static/indexIcon/sc2.png'
 export default {
-	components: { uniNavBar ,uniIcons ,ziXun},
+	components: { uniNavBar ,uniIcons ,ziXun,uniPopup},
 	data() {
 		return {
+			showModal:false,//模态框显示
 			tipMessage:'您还可以进行学校对比哦!您已经添加0个学校',
 			dzNumber:'1w+',
 			hasDZ:false,//是否点赞
@@ -212,6 +226,12 @@ export default {
 			.exec();
 	},
 	methods: {
+		modalChange(){
+			
+		},
+		handleLogoTaped(){
+			this.showModal = true
+		},
 		handleRouter(url){
 			uni.navigateTo({
 				url:url
@@ -274,6 +294,7 @@ export default {
 			color: $main-base-color;
 			border-radius: 60upx;
 			font-size: 48upx;
+			overflow: hidden;
 		}
 		.right{
 			display: flex;
@@ -328,6 +349,7 @@ export default {
 	}
 	.tags {
 		padding-left: 32upx;
+		padding-top: 20upx;
 		.item {
 			display: inline-block;
 			box-sizing: border-box;
@@ -467,4 +489,33 @@ export default {
 		}
 	}
 }
+/* 提示窗口 */
+	.uni-tip {
+		padding: 15px;
+		width: 400upx;
+		background: #fff;
+		box-sizing: border-box;
+		border-radius: 10px;
+		.tip-list{
+			.item{
+				text-align: center;
+				padding: 40upx 0;
+				font-size: $uni-font-size-base;
+				color: $main-text-color;
+				
+			}
+		}
+		.close{
+			text-align: center;
+			text{
+				@include flexstyle(center,center);
+				display:inline-flex;
+				padding:0 10upx 5upx 10upx;
+				font-size: 34upx;
+				color: #FFFFFF;
+				background: $main-base-color;
+			}
+		}
+	}
+
 </style>

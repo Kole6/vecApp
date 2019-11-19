@@ -15,17 +15,25 @@
 			<view class="hot">热门学校</view>
 			<image class="hot-img" src="/static/indexIcon/hot.png" mode="aspectFit"></image>
 		</view>
-		<view class="school-list" :style="{ height: wrapperHeight }"><school-list :isText="true" :showType="4" :listArr="dataArr"></school-list></view>
+		<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height:wrapperHeight}" :loadStatus="loadStatus">
+		<view class="school-list" >
+			<school-list :isText="true" :showType="4" :listArr="dataArr"></school-list>
+		</view>
+		</load-more>
+
 	</view>
 </template>
 
 <script>
 import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue';
 import schoolList from '@/pages/indexIcon/schoolDatabase/SchoolList.vue';
+
+import loadMore from '@/components/loadMore/you-scroll.vue'
 export default {
-	components: { uniSearchBar, schoolList },
+	components: { uniSearchBar, schoolList ,loadMore},
 	data() {
 		return {
+			loadStatus:'more',
 			systemInfo: uni.getSystemInfoSync(),
 			wrapperHeight: 'auto',
 			dataArr: [
@@ -71,7 +79,7 @@ export default {
 			.boundingClientRect(data => {
 				let height = '';
 				// #ifdef APP-PLUS
-				height = this.systemInfo.screenHeight - data.top - 94 + 'px';
+				height = this.systemInfo.screenHeight - data.top - 84 + 'px';
 				// #endif
 				// #ifdef H5
 				height = this.systemInfo.screenHeight - data.top - 50 + 'px';
@@ -81,6 +89,49 @@ export default {
 				}
 			})
 			.exec();
+	},
+	methods:{
+		onPullDown(done){
+			setTimeout(()=>{
+				done();
+			},2000)
+		},
+		onScroll(){
+		},
+		onLoadMore(){
+			this.loadStatus = 'loading'
+			// this.getData().then(()=>{
+			// })
+			setTimeout(() =>{
+				this.loadStatus = 'more'
+			}, 1000);
+		},
+		getData(){
+			return new Promise((resolve,reject)=>{
+				uni.request({
+					url:'http://47.103.69.156:18089/zjq/College/GetSchoolMajorHighLightSearchList',
+					header:{
+						'content-type':'application/x-www-form-urlencoded'
+					},
+					data:{
+						token:'d05902562e544db29bbe777954d43bb0',
+						pageIndex:'1',
+						pageSize:'10',
+						key:'浙江'
+					},
+					method:'POST',
+					success:({data}) => {
+						if(data.code == 0){
+							
+						}
+						console.log(data,'res')
+					},
+					complete() {
+						resolve();
+					}
+				})
+			})
+		},
 	}
 };
 </script>
@@ -119,10 +170,12 @@ export default {
 	}
 }
 .list-title {
-	padding: 10upx;
+	padding: 20upx 10upx;
 	margin-top: 20upx;
+	border-bottom: solid 1upx $main-dividing-line1;
 	background: #eaeaea;
 	background: #ffffff;
+	font-size: $uni-font-size-lg;
 	image {
 		width: 60upx;
 		height: 60upx;

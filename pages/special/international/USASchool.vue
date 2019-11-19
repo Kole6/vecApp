@@ -1,18 +1,22 @@
 <!--国际交流合作-->
 <template>
 	<view>
-		<!-- <view class="m-search"><uni-search-bar :radius="100" @confirm="search" /></view> -->
-		<view class="school-list" :style="{ height: wrapperHeight }"><school-list :isText="true" :showType="4" :listArr="dataArr"></school-list></view>
+		<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height: wrapperHeight}" :loadStatus="loadStatus">
+		<view class="school-list" ><school-list :isText="true" :showType="4" :listArr="dataArr"></school-list></view>
+		</load-more>
+
 	</view>
 </template>
 
 <script>
-import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue';
+
 import schoolList from '@/pages/indexIcon/schoolDatabase/SchoolList.vue';
+import loadMore from '@/components/loadMore/you-scroll.vue'
 export default {
-	components: { uniSearchBar, schoolList },
+	components: { schoolList ,loadMore},
 	data() {
 		return {
+			loadStatus:'more',
 			systemInfo: uni.getSystemInfoSync(),
 			wrapperHeight: 'auto',
 			dataArr: [
@@ -51,36 +55,62 @@ export default {
 		};
 	},
 	mounted() {
-		// 限制列表高度
-		let query = uni.createSelectorQuery().in(this);
-		query
-			.select('.school-list')
-			.boundingClientRect(data => {
-				let height = '';
-				// #ifdef APP-PLUS
-				height = this.systemInfo.screenHeight - data.top - 44 + 'px';
-				// #endif
-				// #ifdef H5
-				height = this.systemInfo.screenHeight - data.top  + 'px';
-				// #endif
-				if (height) {
-					this.wrapperHeight = height;
-				}
+		this.wrapperHeight = this.systemInfo.screenHeight - 80 +'px'
+		// #ifdef H5
+		this.wrapperHeight = this.systemInfo.screenHeight - 10 + 'px'
+		// #endif
+	},
+	methods:{
+		onPullDown(done){
+			setTimeout(()=>{
+				done();
+			},2000)
+		},
+		onScroll(){
+		},
+		onLoadMore(){
+			this.loadStatus = 'loading'
+			// this.getData().then(()=>{
+			// })
+			setTimeout(() =>{
+				this.loadStatus = 'more'
+			}, 1000);
+		},
+		getData(){
+			return new Promise((resolve,reject)=>{
+				uni.request({
+					url:'http://47.103.69.156:18089/zjq/College/GetSchoolMajorHighLightSearchList',
+					header:{
+						'content-type':'application/x-www-form-urlencoded'
+					},
+					data:{
+						token:'d05902562e544db29bbe777954d43bb0',
+						pageIndex:'1',
+						pageSize:'10',
+						key:'浙江'
+					},
+					method:'POST',
+					success:({data}) => {
+						if(data.code == 0){
+							
+						}
+						console.log(data,'res')
+					},
+					complete() {
+						resolve();
+					}
+				})
 			})
-			.exec();
+		},
 	}
 };
 </script>
 
 <style lang="scss" scoped>
-.m-search {
-	padding: 0 40upx;
-	background: #ffffff;
-}
+
 .school-list {
+	margin-top: 5upx;
 	box-sizing: border-box;
-	overflow: auto;
-	padding-bottom: 50upx;
 	background: #FFFFFF;
 }
 </style>

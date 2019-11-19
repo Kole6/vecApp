@@ -9,7 +9,7 @@
 		<view class="" style="height: 35px;background: #FFFFFF;"></view>
 		<!-- #endif -->
 		<uni-nav-bar @click-left="handleBack" left-icon="arrowleft" :shadow="false" :border="false" title="专业信息">
-			<view class="f-sc" slot="right" @tap="hasSC = !hasSC">
+			<view class="f-sc" slot="right" @tap="handleSC">
 				<image :src="hasSC?assets.sc2:assets.sc1" mode="aspectFit" style="height: 40upx; width: 40upx;"></image>
 			</view>
 		</uni-nav-bar>
@@ -60,14 +60,11 @@
 				<view class="title">专业解读</view>
 				<view class="list list1">
 					<view class="list-title">主要对应职业类型</view>	
-					<view class="item">农业技术指导人员</view>
-					<view class="item">农作物生产人员</view>
-					<view class="item">农业生产服务人员</view>
+					<view class="item" v-for="(item,index) in list1" :key="index">{{item.name}}</view>
 				</view>
 				<view class="list list2">
 					<view class="list-title">衔接高职专业举例</view>	
-					<view class="item">农业技术指导人员</view>
-					<view class="item">农作物生产人员</view>
+					<view class="item" v-for="(item,index) in list2" :key="index">{{item.name}}</view>
 				</view>
 			</view>
 			<!-- 下载 -->
@@ -75,7 +72,7 @@
 				<view class="title">专业教学标准</view>
 				<view class="content">
 					<text class="tips">下载内容：</text>
-					<text class="link">点击进入下载页面</text>
+					<text class="link" @tap="handleDownload">点击进入下载页面</text>
 				</view>
 			</view>
 			<view class="line"></view>
@@ -140,6 +137,8 @@ export default {
 				xynx:'修业年限',
 				downloadName:'让新职教事业越来越红火',
 			},
+			list1:[{name:'农业技术指导人员'},{name:'农作物生产人员'},{name:'农业生产服务人员'}],
+			list2:[{name:'农业技术指导人员'},{name:'农作物生产人员'}],
 			dataArr: [
 				{
 					title: '汽车运用与维护',
@@ -165,6 +164,20 @@ export default {
 		uni.setStorageSync('freeChance',1)
 	},
 	methods: {
+		handleSC(){
+			this.hasSC = !this.hasSC
+			let title = ''
+			if(this.hasSC){
+				title = '收藏成功！'
+			}else{
+				title = '取消收藏！'
+			}
+			uni.showToast({
+				icon:'none',
+			    title,
+			    duration: 1000
+			});
+		},
 		handleToSchool(){
 			uni.navigateTo({
 				url:'./ProfessionSchool'
@@ -254,21 +267,6 @@ export default {
 };
 </script>
 
-<style>
-	.uni-modal__bd{
-		color: #333333!important;
-		min-height: 110px!important;
-		box-sizing: border-box!important;
-		display: flex!important;
-		align-items: center!important;
-		justify-content: center!important;
-		flex-wrap: wrap!important;
-	}
-	.uni-modal__btn.uni-modal__btn_primary{
-		color: #fff!important;
-		background: #6451FC!important;
-	}
-</style>
 <style scoped lang="scss">
 @import './common.scss';
 </style>

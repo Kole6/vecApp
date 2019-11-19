@@ -1,9 +1,11 @@
 <template>
 	<view class="">
 		<view class=""><sl-filter ref="filter" @conditionTap="handleConditionTap" :menuListArr="menuList" :topFixed="true" :topFixedHeight="topFixedHeight" @result="handleSearch"></sl-filter></view>
+		<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height: systemInfo.screenHeight - 100 +'px'}" :loadStatus="loadStatus">
 		<view class="list">
-			<school-list :listArr="listArr" showType="4"></school-list>
-		</view>
+			<school-list showType="4" :listArr="dataArr" />
+			</view>
+		</load-more>
 	</view>
 </template>
 
@@ -11,47 +13,16 @@
 import slFilter from '@/components/sl-filter/sl-filter.vue';
 import cityData from './ProvinceCity.js';
 import schoolList from './SchoolList.vue';
+import {schoolData} from '../mockData.js'
+import loadMore from '@/components/loadMore/you-scroll.vue'
 export default {
-	components: { slFilter,schoolList },
+	components: { slFilter,schoolList ,loadMore},
 	data() {
 		return {
 			topFixedHeight:'44px',
-			listArr:[
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				}
-			],
+			dataArr: schoolData,
+			loadStatus:'more',
+			systemInfo: uni.getSystemInfoSync(),
 			menuList: [
 				{
 					title: '省份',
@@ -124,6 +95,49 @@ export default {
 		}
 	},
 	methods: {
+		onPullDown(done){
+			setTimeout(()=>{
+				this.dataArr = schoolData
+				done();
+			},2000)
+		},
+		onScroll(){
+		},
+		onLoadMore(){
+			this.loadStatus = 'loading'
+			// this.getData().then(()=>{
+			// })
+			setTimeout(() =>{
+				this.dataArr=[...this.dataArr,...schoolData]
+					this.loadStatus = 'more'
+			}, 1000);
+		},
+		getData(){
+			return new Promise((resolve,reject)=>{
+				uni.request({
+					url:'http://47.103.69.156:18089/zjq/College/GetSchoolMajorHighLightSearchList',
+					header:{
+						'content-type':'application/x-www-form-urlencoded'
+					},
+					data:{
+						token:'d05902562e544db29bbe777954d43bb0',
+						pageIndex:'1',
+						pageSize:'10',
+						key:'浙江'
+					},
+					method:'POST',
+					success:({data}) => {
+						if(data.code == 0){
+							
+						}
+						console.log(data,'res')
+					},
+					complete() {
+						resolve();
+					}
+				})
+			})
+		},
 		setSearch(provinceName) {
 			// 初始省份
 			let  index = 0,

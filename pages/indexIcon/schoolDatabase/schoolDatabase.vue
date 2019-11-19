@@ -28,7 +28,6 @@
 				
 			</view>
 		</load-more>
-		<!-- <view class="school-list" :style="{ height: wrapperHeight }"></view> -->
 	</view>
 </template>
 
@@ -37,6 +36,7 @@ import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue';
 import schoolList from './SchoolList.vue';
 import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 import loadMore from '@/components/loadMore/you-scroll.vue'
+import {schoolData} from '../mockData.js'
 export default {
 	components: { uniSearchBar, schoolList, uniNavBar ,loadMore},
 	data() {
@@ -44,38 +44,7 @@ export default {
 			loadStatus:'noMore',
 			systemInfo: uni.getSystemInfoSync(),
 			wrapperHeight: 'auto',
-			dataArr: [
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				}
-			]
+			dataArr: schoolData
 		};
 	},
 	onNavigationBarSearchInputClicked() {
@@ -98,38 +67,7 @@ export default {
 		onPullDown(done){
 			console.log('pulldown')
 			setTimeout(()=>{
-				this.dataArr = [
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				}
-			]
+				this.dataArr = schoolData
 				done();
 			},2000)
 		},
@@ -141,36 +79,7 @@ export default {
 			this.getData().then(()=>{
 			})
 			setTimeout(() =>{
-				this.dataArr=[...this.dataArr,{
-						title: '北京电子科技职业技术学院',
-						tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-						cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-					},
-					{
-						title: '北京电子科技职业技术学院',
-						tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-						cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-					},
-					{
-						title: '北京电子科技职业技术学院',
-						tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-						cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-					},
-					{
-						title: '北京电子科技职业技术学院',
-						tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-						cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-					},
-					{
-						title: '北京电子科技职业技术学院',
-						tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-						cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-					},
-					{
-						title: '北京电子科技职业技术学院',
-						tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-						cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-					}]
+				this.dataArr=[...this.dataArr,...schoolData]
 					this.loadStatus = 'more'
 			}, 1000);
 		},

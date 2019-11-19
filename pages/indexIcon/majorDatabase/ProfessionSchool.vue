@@ -4,14 +4,17 @@
 		<view class="f-filter">	
 			<sl-filter ref="filter" @conditionTap="handleConditionTap" :menuListArr="menuList" :topFixed="true" :topFixedHeight="topFixedHeight" @result="handleSearch"></sl-filter>
 		</view>
+		<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height: '400px'}" :loadStatus="loadStatus">
 		<view class="m-result">
-			<school-list :isText="true" :showType="4" :listArr="dataArr"></school-list>
+			<school-list :isSpecial="true" :isText="true" :showType="4" :listArr="dataArr"></school-list>
 		</view>
+		</load-more>
+
 		<view class="line"></view>
 		<view class="m-simi">
 			<view class="title">相近专业</view>
 		</view>
-		<view class="list">
+		<view class="list-simi" :style="{height:wrapperHeight}">
 			<school-list :isText="true" :showType="4" :is-special="true" :listArr="listArr" :handleTaped="false"></school-list>
 		</view>
 		
@@ -25,32 +28,22 @@ import cityData from '@/pages/indexIcon/schoolDatabase/ProvinceCity.js';
 // import myFilter from '@/pages/indexIcon/majorDatabase/filter.vue';
 import testCom from '@/components/sl-filter/filter.vue';
 import schoolList from '@/pages/indexIcon/schoolDatabase/SchoolList.vue';
+
+import {professionData} from '../mockData.js'
+import loadMore from '@/components/loadMore/you-scroll.vue'
 export default {
-	components:{slFilter,schoolList},
+	components:{slFilter,schoolList,loadMore},
 	data() {
 		return {
+			loadStatus:'more',
+			systemInfo: uni.getSystemInfoSync(),
 			topFixedHeight:'44px',
+			wrapperHeight: 'auto',
 			styleObj:{
 				'overflow':'auto',
 				'background-color':'#fff'
 			},
-			dataArr: [
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-			],
+			dataArr: professionData,
 			menuList: [
 				{
 					title: '省份',
@@ -174,17 +167,73 @@ export default {
 			title:'农业种植'
 		});
 		// #ifdef APP-PLUS
-		this.topFixedHeight='44px',
+		this.topFixedHeight='0',
 		// #endif
 		// #ifdef H5
 		this.topFixedHeight='44px',
 		// #endif
-		this.$set(this.styleObj,'height',uni.getSystemInfoSync().windowHeight + 'px' )
+		// this.$set(this.styleObj,'height',uni.getSystemInfoSync().windowHeight + 'px' )
 		this.$nextTick(()=>{
 			this.setSearch()
 		})
 	},
+	mounted() {
+		let query = uni.createSelectorQuery().in(this);
+		query
+			.select('.list-simi')
+			.boundingClientRect(data => {
+				this.wrapperHeight = this.systemInfo.screenHeight - data.top - 75 + 'px';
+				console.log(this.wrapperHeight)
+				// #ifdef H5
+				this.wrapperHeight = this.systemInfo.screenHeight - data.top - 44 + 'px';
+				// #endif
+			})
+			.exec();
+	},
 	methods: {
+		onPullDown(done){
+			setTimeout(()=>{
+				this.dataArr = professionData
+				done();
+			},2000)
+		},
+		onScroll(){
+		},
+		onLoadMore(){
+			this.loadStatus = 'loading'
+			// this.getData().then(()=>{
+			// })
+			setTimeout(() =>{
+				this.dataArr=[...this.dataArr,...professionData]
+					this.loadStatus = 'more'
+			}, 1000);
+		},
+		getData(){
+			return new Promise((resolve,reject)=>{
+				uni.request({
+					url:'http://47.103.69.156:18089/zjq/College/GetSchoolMajorHighLightSearchList',
+					header:{
+						'content-type':'application/x-www-form-urlencoded'
+					},
+					data:{
+						token:'d05902562e544db29bbe777954d43bb0',
+						pageIndex:'1',
+						pageSize:'10',
+						key:'浙江'
+					},
+					method:'POST',
+					success:({data}) => {
+						if(data.code == 0){
+							
+						}
+						console.log(data,'res')
+					},
+					complete() {
+						resolve();
+					}
+				})
+			})
+		},
 		handleListTaped(item){
 			
 		},
@@ -254,7 +303,10 @@ export default {
 @import './common.scss';
 
 .m-result{
-	margin-top: 1px;
+	background: #FFFFFF;
 }
-
+.list-simi{
+	overflow: auto;
+	background: #FFFFFF;
+}
 </style>

@@ -6,23 +6,47 @@
 		<view class="m-search"><uni-search-bar radius="100" clearButton="auto" @confirm="search" /></view>
 
 		<!-- 可以选择的对比列表 -->
-		<view class="m-card">
-			<view :class="['card-item', activeIndex == 1 ? 'active' : '']" @tap="handleTab(1)">我的关注</view>
-			<view :class="['card-item', activeIndex == 2 ? 'active' : '']" @tap="handleTab(2)">热门专业</view>
-		</view>
-		<view class="wrapper" :style="{ height: wrapperHeight, overflow: 'auto' }">
-			<view class="list-item" v-for="(item, index) in listArr" :key="index">
-				<view class="flag">
-					<block v-if="item.hasSelected">
-						<view class="selecting"></view>
-					</block>
-					<block v-else>
-						<image src="/static/indexIcon/selected.png" mode="aspectFit" style="height: 36upx; width:36upx"></image>
-					</block>
+		<QSTabs ref="tabs" :current="current" :tabs="tabs" width="375" swiperWidth="750" activeColor="#6451FC"
+		 backgroundColor="#fff" @change="change($event)" />
+		 <swiper :style="{height:`${wrapperHeight}`,borderTop: '1upx solid rgba(238, 238, 238, 0.3)'}" :current="current"
+		 	 @change="swiperChange" @transition="transition" @animationfinish="animationfinish">
+		 	<swiper-item>
+				<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height: wrapperHeight}" :loadStatus="loadStatus">
+				<view class="wrapper">
+					<view class="list-item" v-for="(item, index) in listArr" :key="index">
+						<view class="flag" @click="handleListTaped(item)">
+							<block v-if="item.hasSelected">
+								<view class="selecting"></view>
+							</block>
+							<block v-else>
+								<image src="/static/indexIcon/selected.png" mode="aspectFit" style="height: 36upx; width:36upx" ></image>
+							</block>
+						</view>
+						<school-list-item :item="item" :showType="4" :is-special="true" :handleTaped="false" @taped="handleListTaped(item)"></school-list-item>
+					</view>
 				</view>
-				<school-list-item :item="item" :showType="4" :is-special="true" :handleTaped="false" @taped="handleListTaped(item)"></school-list-item>
-			</view>
-		</view>
+				</load-more>
+				
+		 	</swiper-item>
+		 	<swiper-item>
+				<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height: wrapperHeight}" :loadStatus="loadStatus">
+				<view class="wrapper">
+					<view class="list-item" v-for="(item, index) in listArr" :key="index">
+						<view class="flag" @click="handleListTaped(item)">
+							<block v-if="item.hasSelected">
+								<view class="selecting"></view>
+							</block>
+							<block v-else>
+								<image src="/static/indexIcon/selected.png" mode="aspectFit" style="height: 36upx; width:36upx" ></image>
+							</block>
+						</view>
+						<school-list-item :item="item" :showType="4" :is-special="true" :handleTaped="false" @taped="handleListTaped(item)"></school-list-item>
+					</view>
+				</view>
+				</load-more>
+		 	</swiper-item>
+		 </swiper>
+
 		<!-- 底部按钮 -->
 		<view class="m-bottom">
 			<view class="left">退出</view>
@@ -35,20 +59,27 @@
 import schoolListItem from '@/pages/indexIcon/schoolDatabase/SchoolListItem.vue';
 import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue';
 import messageInfo from '@/pages/indexIcon/schoolDatabase/messageInfo.vue';
+import QSTabs from '@/components/QS-tabs/QS-tabs.vue';
+import loadMore from '@/components/loadMore/you-scroll.vue'
 export default {
 	components: {
 		schoolListItem,
 		uniSearchBar,
-		messageInfo
+		messageInfo,
+		QSTabs,
+		loadMore
 	},
 	data() {
 		return {
+			loadStatus:'more',
 			searchResultMessage: '已添加3个专业到对比库',
 			isShowMessage: true,
 			wrapperHeight: 'auto',
 			systemInfo: uni.getSystemInfoSync(),
 			activeIndex: 1,
-
+			tabs: ["我的关注", "热门专业"],
+			current:0,
+			firstHeight:'0',
 			listArr: [
 				{
 					hasSelected: true,
@@ -89,22 +120,63 @@ export default {
 			]
 		};
 	},
+	computed: {
+		scrollH() {
+			let sys = uni.getSystemInfoSync();
+			let winWidth = sys.windowWidth;
+			let winrate = 750 / winWidth;
+			let winHeight = parseInt(sys.windowHeight * winrate)
+			return winHeight
+		}
+	},
 	mounted() {
-		this.calcScrollHeight()
+		this.calcScrollHeight(true)
 	},
 	methods: {
-		handleTab(tabIndex) {
-			this.activeIndex = tabIndex;
-			if (tabIndex == 1) {
-				this.listArr = [
-					{
-						hasSelected: true,
-						title: '汽车运用与维护',
-						tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-						cards: [{ name: '学历层次', value: '高职' }, { name: '专业年限', value: '3年' }]
+		onPullDown(done){
+			setTimeout(()=>{
+				done();
+			},2000)
+		},
+		onScroll(){
+		},
+		onLoadMore(){
+			this.loadStatus = 'loading'
+			// this.getData().then(()=>{
+			// })
+			setTimeout(() =>{
+				this.loadStatus = 'more'
+			}, 1000);
+		},
+		getData(){
+			return new Promise((resolve,reject)=>{
+				uni.request({
+					url:'http://47.103.69.156:18089/zjq/College/GetSchoolMajorHighLightSearchList',
+					header:{
+						'content-type':'application/x-www-form-urlencoded'
+					},
+					data:{
+						token:'d05902562e544db29bbe777954d43bb0',
+						pageIndex:'1',
+						pageSize:'10',
+						key:'浙江'
+					},
+					method:'POST',
+					success:({data}) => {
+						if(data.code == 0){
+							
+						}
+						console.log(data,'res')
+					},
+					complete() {
+						resolve();
 					}
-				];
-			} else if (tabIndex == 2) {
+				})
+			})
+		},
+		handleTab(tabIndex) {
+			if (tabIndex == 0) {
+			} else if (tabIndex == 1) {
 				this.listArr = [
 					{
 						hasSelected: false,
@@ -145,7 +217,20 @@ export default {
 				url:'./ProfessionPK'
 			})
 		},
-		calcScrollHeight() {
+		change(index){
+			this.current = index;
+		},
+		swiperChange({detail: { current }}) {
+			this.handleTab(current)
+			this.current = current;
+		},
+		transition({detail: { dx }}) {
+			this.$refs.tabs.setDx(dx);
+		},
+		animationfinish({detail: { current }}) {
+			this.$refs.tabs.setFinishCurrent(current);
+		},
+		calcScrollHeight(isFirst = false) {
 			setTimeout(() => {
 				// 限制列表高度
 				let query = uni.createSelectorQuery().in(this);
@@ -157,7 +242,16 @@ export default {
 						// #ifdef APP-PLUS
 							height = height - 30
 						// #endif
-						this.wrapperHeight = height + 'px'
+						if(isFirst){
+							this.firstHeight = height
+							this.wrapperHeight = height + 'px'
+						}else{
+							if(this.isShowMessage){
+								this.wrapperHeight = this.firstHeight + 'px'
+							}else{
+								this.wrapperHeight = this.firstHeight + 40 +'px'
+							}
+						}
 					})
 					.exec();
 			}, 300);
@@ -225,7 +319,7 @@ export default {
 	}
 	.flag {
 		position: absolute;
-		z-index: 2;
+		z-index: 5;
 		top: 26upx;
 		right: 29upx;
 		width: 36upx;
