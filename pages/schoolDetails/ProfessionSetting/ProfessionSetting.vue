@@ -8,7 +8,7 @@
 				<my-follow />
 			</swiper-item>
 			<swiper-item>
-				<profession-student />
+				<!-- <profession-student /> -->
 			</swiper-item>
 		</swiper>
 	</view>

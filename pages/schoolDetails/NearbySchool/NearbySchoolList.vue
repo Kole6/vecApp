@@ -58,7 +58,7 @@
 		},
 		onLoad(params){
 			this.page.sid = params.sid || '3633000526'
-			// this.getData()
+			this.getData()
 		},
 		methods:{
 			onPullDown(done){

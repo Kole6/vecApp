@@ -12,24 +12,16 @@
 			</view>
 		</view>
 		<view class="m-title"><text>学校对比信息</text></view>
-		<!-- <view class="m-radar">
+		<view class="m-radar">
 			<canvas canvas-id="canvasRadar" id="canvasRadar" class="charts" @touchstart="touchPie($event, 'canvasRadar')"></canvas>
-		</view> -->
+		</view>
 		<view class="m-table">
 			<!-- <view class="f-o">
 			<image src="../../../static/indexIcon/selected.png" mode="aspectFit" style="width: 40upx; height: 40upx;"></image>
 			<text>自动隐藏相同信息</text>
 		</view> -->
-			<view class="t-table" :style="{ height: tableHeight, width: tableWidth }">
-				<view class="t-row t-title">
-					<view class="t-th">学校名称</view>
-					<view class="t-th" v-for="(item,index) in dataObj.title.data" :key="index">{{item}}</view>
-				</view>
-				<view class="t-row" v-for="(row,index) in dataObj.dataArr" :key = "index">
-					<view class="t-td">{{row.name}}</view>
-					<view class="t-td" v-for="(item,i) in row.data" :key="i">{{item}}</view>
-				</view>
-			</view>
+		<table-show :tableHeight="tableHeight" :tableWidth="tableWidth" :dataObj="dataObj"></table-show>
+			
 		</view>
 
 		<view class="m-btn"><text>下载对比报告</text></view>
@@ -38,7 +30,10 @@
 
 <script>
 import uCharts from '@/components/u-charts/u-charts.js';
+import tableShow from './table-show.vue'
+var radar = null
 export default {
+	components:{tableShow},
 	data() {
 		return {
 			dataObj:{
@@ -141,19 +136,12 @@ export default {
 			chartsInfo: {
 				cWidth: '',
 				cHeight: '',
-				cWidth2: '', //横屏图表
-				cHeight2: '', //横屏图表
-				cWidth3: '', //圆弧进度图
-				cHeight3: '', //圆弧进度图
-				arcbarWidth: '', //圆弧进度图，进度条宽度,此设置可使各端宽度一致
-				gaugeWidth: '', //仪表盘宽度,此设置可使各端宽度一致
 				tips: '',
 				pixelRatio: 1,
 				serverData: '',
 				itemCount: 30, //x轴单屏数据密度
 				sliderMax: 50
-			},
-			radar: ''
+			}
 		};
 	},
 	onLoad() {
@@ -171,13 +159,7 @@ export default {
 		//#endif
 		this.chartsInfo.cWidth = uni.upx2px(750);
 		this.chartsInfo.cHeight = uni.upx2px(700);
-		this.chartsInfo.cWidth2 = uni.upx2px(700);
-		this.chartsInfo.cHeight2 = uni.upx2px(1100);
-		this.chartsInfo.cWidth3 = uni.upx2px(250);
-		this.chartsInfo.cHeight3 = uni.upx2px(250);
-		this.chartsInfo.arcbarWidth = uni.upx2px(24);
-		this.chartsInfo.gaugeWidth = uni.upx2px(30);
-		// this.getServerData();
+		this.getServerData();
 		this.tableHeight = uni.getSystemInfoSync().windowHeight - uni.upx2px(240) + 'px';
 	},
 	methods: {
@@ -185,23 +167,23 @@ export default {
 			this.serverData = data;
 			this.tips = data.tips;
 			this.sliderMax = data.Candle.categories.length;
-			let categories = ['双型教师占比', '本科以上专任教师占比', '高讲教师占比', '就业率', '兼职教师占专任教师比例'];
+			let categories = ['双型教师占比', '本科以上专,任教师占比', '高讲教师占比', '就业率', '兼职教师占,专任教师比例'];
 			let Radar = {
-				categories: ['双型教师占比', '本科以上', '高讲教师占比', '就业率', '兼职教师'],
+				categories: categories,
 				series: [
 					{
-						name: '上海信息学校',
-						data: [90, 110, 165, 195, 187]
+						"name": "上海信息学校",
+						"data": [90, 110, 165, 195, 187]
 					},
 					{
-						name: '天津第一商业学校',
-						data: [190, 210, 105, 35, 27]
+						"name": "天津第一商业学校",
+						"data": [190, 210, 105, 35, 27]
 					},{
-						name: '天津第一商业学校',
-						data: [50, 40, 55, 80, 33]
+						"name": "天津第一商业学校",
+						"data": [50, 40, 55, 80, 33]
 					},{
-						name: '天津第一商业学校',
-						data: [70, 100, 30, 150, 80]
+						"name": "天津第一商业学校",
+						"data": [70, 100, 30, 150, 80]
 					}
 				]
 			};
@@ -211,7 +193,7 @@ export default {
 			this.showRadar('canvasRadar', Radar);
 		},
 		showRadar(canvasId, chartData) {
-			this.radar = new uCharts({
+			radar = new uCharts({
 				$this: this,
 				canvasId: canvasId,
 				type: 'radar',
@@ -261,7 +243,7 @@ export default {
 			});
 		},
 		touchPie(e, id) {
-			this.radar.showToolTip(e, {
+			radar.showToolTip(e, {
 				format: function(item) {
 					return item.name + ':' + item.data;
 				}

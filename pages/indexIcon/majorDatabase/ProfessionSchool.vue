@@ -1,49 +1,43 @@
 <template>
 	<view :style="styleObj">
 		<!-- 专业信息-专业介绍 -->
-		<view class="f-filter">	
+		<view class="f-filter">
 			<sl-filter ref="filter" @conditionTap="handleConditionTap" :menuListArr="menuList" :topFixed="true" :topFixedHeight="topFixedHeight" @result="handleSearch"></sl-filter>
 		</view>
-		<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height: '400px'}" :loadStatus="loadStatus">
-		<view class="m-result">
-			<school-list :isSpecial="true" :isText="true" :showType="4" :listArr="dataArr"></school-list>
-		</view>
+		<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height: '400px' }" :loadStatus="loadStatus">
+			<view class="m-result"><school-list :isText="true" :showType="4" :listArr="dataArr"></school-list></view>
 		</load-more>
 
 		<view class="line"></view>
-		<view class="m-simi">
-			<view class="title">相近专业</view>
-		</view>
-		<view class="list-simi" :style="{height:wrapperHeight}">
+		<view class="m-simi"><view class="title">相近专业</view></view>
+		<view class="list-simi" :style="{ height: wrapperHeight }">
 			<school-list :isText="true" :showType="4" :is-special="true" :listArr="listArr" :handleTaped="false"></school-list>
 		</view>
-		
 	</view>
 </template>
 
 <script>
-	
 import slFilter from '@/components/sl-filter/sl-filter.vue';
 import cityData from '@/pages/indexIcon/schoolDatabase/ProvinceCity.js';
 // import myFilter from '@/pages/indexIcon/majorDatabase/filter.vue';
 import testCom from '@/components/sl-filter/filter.vue';
 import schoolList from '@/pages/indexIcon/schoolDatabase/SchoolList.vue';
 
-import {professionData} from '../mockData.js'
-import loadMore from '@/components/loadMore/you-scroll.vue'
+import { schoolData, professionData } from '../mockData.js';
+import loadMore from '@/components/loadMore/you-scroll.vue';
 export default {
-	components:{slFilter,schoolList,loadMore},
+	components: { slFilter, schoolList, loadMore },
 	data() {
 		return {
-			loadStatus:'more',
+			loadStatus: 'more',
 			systemInfo: uni.getSystemInfoSync(),
-			topFixedHeight:'44px',
+			topFixedHeight: '44px',
 			wrapperHeight: 'auto',
-			styleObj:{
-				'overflow':'auto',
-				'background-color':'#fff'
+			styleObj: {
+				overflow: 'auto',
+				'background-color': '#fff'
 			},
-			dataArr: professionData,
+			dataArr: schoolData,
 			menuList: [
 				{
 					title: '省份',
@@ -55,19 +49,21 @@ export default {
 					title: '城市',
 					key: 'key_2',
 					isMutiple: false,
-					detailList: [{
-						title:'全部',
-						value:''
-					}]
+					detailList: [
+						{
+							title: '全部',
+							value: ''
+						}
+					]
 				},
 				{
-					title:'性质类别',
-					key:'key_3',
+					title: '性质类别',
+					key: 'key_3',
 					isMutiple: false,
-					detailList:[
+					detailList: [
 						{
-							title:'全部',
-							value:'0'
+							title: '全部',
+							value: '0'
 						},
 						{
 							title: '中专',
@@ -84,7 +80,7 @@ export default {
 						{
 							title: '成人中专',
 							value: '4'
-						},
+						}
 					]
 				},
 				{
@@ -146,17 +142,49 @@ export default {
 			listArr: [
 				{
 					title: '汽车运用与维护',
-					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
+					tags: [
+						{
+							name: '专业大类',
+							value: '交通运输类'
+						},
+						{
+							name: '代码',
+							value: '0825001234'
+						}
+					],
+					cards: [
+						{
+							name: '学历层次',
+							value: '高职'
+						},
+						{
+							name: '专业年限',
+							value: '3年'
+						}
+					]
 				},
 				{
 					title: '汽车运用与维护',
-					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
-				},{
-					title: '汽车运用与维护',
-					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
+					tags: [
+						{
+							name: '专业大类',
+							value: '交通运输类'
+						},
+						{
+							name: '代码',
+							value: '0825001234'
+						}
+					],
+					cards: [
+						{
+							name: '学历层次',
+							value: '高职'
+						},
+						{
+							name: '专业年限',
+							value: '3年'
+						}
+					]
 				}
 			]
 		};
@@ -164,18 +192,18 @@ export default {
 	onLoad(Option) {
 		// 改变导航栏标题名称
 		uni.setNavigationBarTitle({
-			title:'农业种植'
+			title: '农业种植'
 		});
 		// #ifdef APP-PLUS
-		this.topFixedHeight='0',
-		// #endif
-		// #ifdef H5
-		this.topFixedHeight='44px',
-		// #endif
-		// this.$set(this.styleObj,'height',uni.getSystemInfoSync().windowHeight + 'px' )
-		this.$nextTick(()=>{
-			this.setSearch()
-		})
+		(this.topFixedHeight = '0'),
+			// #endif
+			// #ifdef H5
+			(this.topFixedHeight = '44px'),
+			// #endif
+			// this.$set(this.styleObj,'height',uni.getSystemInfoSync().windowHeight + 'px' )
+			this.$nextTick(() => {
+				this.setSearch();
+			});
 	},
 	mounted() {
 		let query = uni.createSelectorQuery().in(this);
@@ -183,7 +211,7 @@ export default {
 			.select('.list-simi')
 			.boundingClientRect(data => {
 				this.wrapperHeight = this.systemInfo.screenHeight - data.top - 75 + 'px';
-				console.log(this.wrapperHeight)
+				console.log(this.wrapperHeight);
 				// #ifdef H5
 				this.wrapperHeight = this.systemInfo.screenHeight - data.top - 44 + 'px';
 				// #endif
@@ -191,52 +219,48 @@ export default {
 			.exec();
 	},
 	methods: {
-		onPullDown(done){
-			setTimeout(()=>{
-				this.dataArr = professionData
+		onPullDown(done) {
+			setTimeout(() => {
+				this.dataArr = schoolData;
 				done();
-			},2000)
+			}, 2000);
 		},
-		onScroll(){
-		},
-		onLoadMore(){
-			this.loadStatus = 'loading'
+		onScroll() {},
+		onLoadMore() {
+			this.loadStatus = 'loading';
 			// this.getData().then(()=>{
 			// })
-			setTimeout(() =>{
-				this.dataArr=[...this.dataArr,...professionData]
-					this.loadStatus = 'more'
+			setTimeout(() => {
+				this.dataArr = [...this.dataArr, ...schoolData];
+				this.loadStatus = 'more';
 			}, 1000);
 		},
-		getData(){
-			return new Promise((resolve,reject)=>{
+		getData() {
+			return new Promise((resolve, reject) => {
 				uni.request({
-					url:'http://47.103.69.156:18089/zjq/College/GetSchoolMajorHighLightSearchList',
-					header:{
-						'content-type':'application/x-www-form-urlencoded'
+					url: 'http://47.103.69.156:18089/zjq/College/GetSchoolMajorHighLightSearchList',
+					header: {
+						'content-type': 'application/x-www-form-urlencoded'
 					},
-					data:{
-						token:'d05902562e544db29bbe777954d43bb0',
-						pageIndex:'1',
-						pageSize:'10',
-						key:'浙江'
+					data: {
+						token: 'd05902562e544db29bbe777954d43bb0',
+						pageIndex: '1',
+						pageSize: '10',
+						key: '浙江'
 					},
-					method:'POST',
-					success:({data}) => {
-						if(data.code == 0){
-							
+					method: 'POST',
+					success: ({ data }) => {
+						if (data.code == 0) {
 						}
-						console.log(data,'res')
+						console.log(data, 'res');
 					},
 					complete() {
 						resolve();
 					}
-				})
-			})
+				});
+			});
 		},
-		handleListTaped(item){
-			
-		},
+		handleListTaped(item) {},
 		handleRouter({ url }, isRedirect = false) {
 			if (isRedirect) {
 				uni.redirectTo({
@@ -246,18 +270,18 @@ export default {
 			}
 		},
 		handleSearch(result) {
-			if(!result.key_2){
+			if (!result.key_2) {
 				uni.showToast({
-				    title: '请选择具体城市',
-				    duration: 1000,
-					icon:'none'
-				})
+					title: '请选择具体城市',
+					duration: 1000,
+					icon: 'none'
+				});
 			}
 		},
 		handleConditionTap({ key, list, index }) {
 			// 选择省份的时候进行城市赋值
 			if (key == 'key_1') {
-				this.setSearch(list[index].title)
+				this.setSearch(list[index].title);
 			}
 		},
 		setSearch(provinceName) {
@@ -275,7 +299,7 @@ export default {
 				// 初始第一个省份下的城市
 				cityArr = cityData[0].children,
 				data = JSON.parse(JSON.stringify(this.menuList));
-		
+
 			data[0].detailList = provinceArr;
 			data[1].detailList = cityArr;
 			if (provinceName) {
@@ -290,7 +314,7 @@ export default {
 			this.$nextTick(() => {
 				this.$refs.filter.resetMenuList(data);
 			});
-		},
+		}
 	}
 };
 </script>
@@ -302,11 +326,11 @@ export default {
 <style scoped lang="scss">
 @import './common.scss';
 
-.m-result{
-	background: #FFFFFF;
+.m-result {
+	background: #ffffff;
 }
-.list-simi{
+.list-simi {
 	overflow: auto;
-	background: #FFFFFF;
+	background: #ffffff;
 }
 </style>

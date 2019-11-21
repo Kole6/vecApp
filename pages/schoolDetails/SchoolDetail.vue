@@ -214,7 +214,7 @@ export default {
 			.boundingClientRect(data => {
 				let height = '';
 				// #ifdef APP-PLUS
-				height = this.systemInfo.screenHeight - data.top - 44 + 'px';
+				height = this.systemInfo.screenHeight - data.top - 0 + 'px';
 				// #endif
 				// #ifdef H5
 				height = this.systemInfo.screenHeight - data.top  + 'px';

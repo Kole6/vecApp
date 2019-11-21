@@ -25,7 +25,7 @@
 												:title="list.name" 
 												:show-animation="true"
 												:open="list.open">
-								<view class="category-item" v-for="(item,i) in list.detailList" 
+								<view hover-class="category-item-active" class="category-item" v-for="(item,i) in list.detailList" 
 												:key="item.id"
 												@tap="handleItemTap(item,i,list,index)">
 									{{item.name}}
@@ -448,5 +448,9 @@ export default {
 	font-size: $uni-font-size-base;
 	color: #999999;
 	border-top: solid 1px #F7F7F7;
+}
+.category-item-active{
+	background: $main-base-color;
+	color: #FFFFFF;
 }
 </style>

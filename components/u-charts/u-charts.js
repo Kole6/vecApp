@@ -376,7 +376,12 @@ function getDataRange(minData, maxData) {
 function measureText(text) {
   var fontSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : config.fontSize;
   text = String(text);
-  var text = text.split('');
+  let textarr = text.split(',')
+  var text = textarr[0];
+  // 对字符串判断进行修改,适应换行
+  if(textarr[1]){
+	  text = textarr[0].length > textarr[1].length ? textarr[0] : textarr[1]
+  }
   var width = 0;
   for (let i = 0; i < text.length; i++) {
     let item = text[i];
@@ -1620,7 +1625,13 @@ function drawRadarLabel(angleList, radius, centerPosition, opts, config, context
     context.beginPath();
     context.setFontSize(config.fontSize);
     context.setFillStyle(radarOption.labelColor || '#666666');
-    context.fillText(opts.categories[index] || '', startX, startY + config.fontSize / 2);
+	let nameArr = opts.categories[index].split(',')
+    context.fillText(nameArr[0] || '', startX, startY + config.fontSize / 2);
+	console.log(startX,startY,config.fontSize)
+	// 雷达图进行换行
+	if(nameArr[1]){
+    context.fillText(nameArr[1] || '', startX, startY + config.fontSize / 2 + config.fontSize) ;
+	}
     context.closePath();
     context.stroke();
   });
@@ -3474,7 +3485,6 @@ function drawRadarDataPoints(series, opts, config, context) {
   }
 
   var radarDataPoints = getRadarDataPoints(coordinateAngle, centerPosition, radius, series, opts, process);
-
   radarDataPoints.forEach(function(eachSeries, seriesIndex) {
     // 绘制区域数据
     context.beginPath();
