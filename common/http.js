@@ -1,11 +1,14 @@
+import {
+	baseURL
+} from '../config'
 const http = (options) => {
 	return new Promise((resolve, reject) => {
 		uni.showLoading({
 			title: '加载中...',
-			mask: options.load //是否出现透明层
+			mask: options.load ? true : false //是否出现透明层
 		});
 		uni.request({
-			url: options.url,
+			url: (options.baseURL ? options.baseURL : baseURL) + options.url,
 			method: options.method,
 			data: options.data,
 			header: {
