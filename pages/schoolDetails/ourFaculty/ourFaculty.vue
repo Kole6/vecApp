@@ -37,9 +37,15 @@
 				</swiper-item>
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;">
-						<label>
-							时建国
-						</label>
+						<view class="m-list" v-for="(item,index) in dataArr" :key="index">
+							<view class="avatar">{{item.teachername.substr(0,1)}}</view>	
+							<view class="name">{{item.teachername}}</view>
+							<view class="position">
+								<text v-for="(tag,i) in item.tags" :key="i">
+									{{tag}}
+								</text>
+							</view>
+						</view>
 					</scroll-view>
 				</swiper-item>
 			</swiper>
@@ -67,7 +73,21 @@
 				cWidth: '',
 				cHeight: '',
 				pixelRatio: 1,
-				serverData: ''
+				serverData: '',
+				dataArr:[
+					{
+						teachername:'时志福',
+						tags:['国家级名师']
+					},
+					{
+						teachername:'潘宏义',
+						tags:['国家级名师']
+					},
+					{
+						teachername:'杨道德',
+						tags:['副校长','国家级名师']
+					}
+				]
 			}
 		},
 		onLoad() {
@@ -356,5 +376,51 @@
 		width: 750upx;
 		height: 500upx;
 		background-color: #FFFFFF;
+	}
+	.m-list{
+		padding: 10upx 30upx;
+		display: flex;
+		align-items: center;
+		background: #FFFFFF;
+		border-bottom: solid 1upx $main-dividing-line1;
+		font-size: $uni-font-size-lg;
+		&:first-child{
+			border-top: solid 1upx $main-dividing-line1;
+		}
+		.avatar{
+			box-sizing: border-box;
+			display: inline-flex;
+			width:120upx;
+			height:120upx;
+			border-radius: 60upx;
+			background: #FFFFFF;
+			border: solid 1px #68BCF5;
+			vertical-align: middle;
+			align-items: center;
+			justify-content: center;
+			font-size: 45upx;
+			color: #fff;
+			background-color: #68BCF5;
+		}
+		.name{
+			margin-left: 20upx;
+			font-size: $uni-font-size-lg;
+			color: $main-text-color;
+		}
+		.position{
+			text{
+				margin-left: 20upx;
+				box-sizing: border-box;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 2upx 11upx;
+				border-radius: 5upx;
+				background: #6451FC;
+				color: #FFFFFF;
+				// border: solid 1upx $main-base-color;
+				font-size: $uni-font-size-base;				
+			}
+		}
 	}
 </style>

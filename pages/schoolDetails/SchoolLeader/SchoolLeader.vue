@@ -11,7 +11,6 @@
 				</view>
 			</view>
 		</load-more>
-
 	</view>
 </template>
 
@@ -95,7 +94,7 @@
 
 <style scoped lang="scss">
 	.m-list{
-		padding: 10upx 20upx;
+		padding: 10upx 30upx;
 		display: flex;
 		align-items: center;
 		background: #FFFFFF;
@@ -111,12 +110,13 @@
 			height:120upx;
 			border-radius: 60upx;
 			background: #FFFFFF;
-			border: solid 1px $main-base-color;
+			border: solid 1px #68BCF5;
 			vertical-align: middle;
 			align-items: center;
 			justify-content: center;
 			font-size: 45upx;
-			color: $main-base-color;
+			color: #fff;
+			background-color: #68BCF5;
 		}
 		.name{
 			margin-left: 20upx;
