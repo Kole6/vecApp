@@ -340,9 +340,16 @@
 				"navigationBarTitleText": "学校对比"
 			}
 		},{
+			"path": "pages/schoolDetails/SchoolPk/SchoolPkAdd",
+			"style": {
+				"navigationBarTitleText": "添加学校"
+			}
+		},{
 			"path": "pages/schoolDetails/SchoolPk/SchoolPkDetail",
 			"style": {
-				"navigationBarTitleText": "学校对比详情"
+				"navigationBarTitleText": "学校对比详情",
+				"navigationBarTextStyle":"white",
+				"transparentTitle":"always"
 			}
 		}, {
 			"path": "pages/schoolDetails/ourFaculty/ourFaculty",

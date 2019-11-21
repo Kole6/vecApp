@@ -241,9 +241,9 @@ export default {
 			uni.navigateBack();
 		},
 		handlePK(){
-			// uni.navigateTo({
-			// 	url:'./SchoolPk/SchoolPk'
-			// })
+			uni.navigateTo({
+				url:'./SchoolPk/SchoolPk'
+			})
 		},
 		handleTap(item,index){
 			if(item.url){
@@ -290,7 +290,7 @@ export default {
 			margin: 15upx 0;
 			width: 120upx;
 			height: 120upx;
-			border: solid 1upx $main-base-color;
+			// border: solid 1upx $main-base-color;
 			color: $main-base-color;
 			border-radius: 60upx;
 			font-size: 48upx;

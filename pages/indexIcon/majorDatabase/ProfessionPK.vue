@@ -5,7 +5,7 @@
 		<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height: '400px'}" :loadStatus="loadStatus">
 			<view class="wrapper">
 			<view class="list-item" v-for="(item,index) in listArr" :key="index">
-				<view class="flag">
+				<view class="flag"  @click="handleListTaped(item)">
 					<block v-if="item.hasSelected">
 						<view class="selecting"></view>
 					</block>
