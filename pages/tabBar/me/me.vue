@@ -2,7 +2,7 @@
 	<view class="center">
 		<view class="center_box">
 			<view class="box_left">
-				<text @touchstart="toLogin()">登录 / 注册</text> 
+				<text @touchstart="toLogin()">登录 / 注册</text>
 			</view>
 			<view class="box_right">
 				<image src="/static/p106.png" mode="aspectFill" @touchstart="toLogin()"></image>
@@ -51,34 +51,34 @@
 					url: "/pages/login/signIn/signIn"
 				});
 			},
-			toVip(){
+			toVip() {
 				uni.navigateTo({
-					url:"/pages/indexIcon/vip/vip"
+					url: "/pages/indexIcon/vip/vip"
 				})
 			},
-			toAccount(){
+			toAccount() {
 				uni.navigateTo({
-					url:"/pages/personal/account/account"
+					url: "/pages/personal/account/account"
 				})
 			},
-			toFollow(){
+			toFollow() {
 				uni.navigateTo({
-					url:"../../personal/follow/follow"
+					url: "../../personal/follow/follow"
 				})
 			},
-			toFeedback(){
+			toFeedback() {
 				uni.navigateTo({
-					url:"../../personal/feedback/feedback"
+					url: "../../personal/feedback/feedback"
 				})
 			},
-			toRecommend(){
+			toRecommend() {
 				uni.navigateTo({
-					url:"../../personal/recommend/recommend"
+					url: "../../personal/recommend/recommend"
 				})
 			},
-			toAbountUs(){
+			toAbountUs() {
 				uni.navigateTo({
-					url:"../../personal/aboutUs/aboutUs"
+					url: "../../personal/aboutUs/aboutUs"
 				})
 			}
 		},
