@@ -27,7 +27,7 @@
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;">
 						<view class="school-list">
-							<school-list :isText="true" :showType="4" :listArr="dataArr"></school-list>
+							<school-list :isText="true" :showType="4" :is-special="true" :listArr="dataArr2" :handleTaped="handleListTaped"></school-list>
 						</view>
 					</scroll-view>
 				</swiper-item>

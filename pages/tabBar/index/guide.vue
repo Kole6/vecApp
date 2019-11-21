@@ -28,7 +28,7 @@
 		},
 		methods: {
 			formSubmit: function(e) {
-				var formdata = e.detail.value;
+				let formdata = e.detail.value;
 				console.log(formdata);
 				this.$HTTP({
 					url: '/zjq/User/QuickRegister?phone=' + formdata.phone + '&userName=' + formdata
