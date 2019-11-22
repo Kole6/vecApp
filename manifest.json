@@ -2,15 +2,15 @@
     "name" : "职教圈",
     "appid" : "__UNI__90F3DA1",
     "description" : "",
-    "versionName" : "1.0.3",
-    "versionCode" : 101,
+    "versionName" : "1.0.4",
+    "versionCode" : 104,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {
         "usingComponents" : true,
         "nvueCompiler" : "uni-app",
         "splashscreen" : {
-            "alwaysShowBeforeRender" : true,
+            "alwaysShowBeforeRender" : false,
             "waiting" : false,
             "autoclose" : true,
             "delay" : 0
@@ -52,9 +52,9 @@
             "sdkConfigs" : {},
             "splashscreen" : {
                 "android" : {
-                    "hdpi" : "static/u11.png",
-                    "xhdpi" : "static/u11.png",
-                    "xxhdpi" : "static/u11.png"
+                    "hdpi" : "static/z480x762.png",
+                    "xhdpi" : "static/z720x1242.png",
+                    "xxhdpi" : "static/z1080x1882.png"
                 }
             },
             "icons" : {

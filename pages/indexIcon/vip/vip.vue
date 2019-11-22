@@ -7,8 +7,8 @@
 					<image src="../../../static/p106.png" mode="aspectFill"></image>
 				</view>
 				<view class="vip-r">
-					<p>昵称</p>
-					<p>会员时间：2019-09-01</p>
+					<p>{{userInfo?userInfo.name:'昵称'}}</p>
+					<!-- <p>会员时间：2019-09-01</p> -->
 				</view>
 			</view>
 		</view>
@@ -30,7 +30,7 @@
 	export default {
 		data() {
 			return {
-				
+				userInfo:uni.getStorageSync('userInfo')
 			};
 		},
 		methods: {

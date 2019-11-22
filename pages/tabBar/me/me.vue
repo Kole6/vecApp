@@ -1,6 +1,14 @@
 <template>
 	<view class="center">
-		<view class="center_box">
+		<view class="center_box" v-if="userInfo">
+			<view class="box_left">
+				<text @touchstart="toAccount()">{{userInfo.name}}</text>
+			</view>
+			<view class="box_right">
+				<image src="/static/p106.png" mode="aspectFill" @touchstart="toAccount()"></image>
+			</view>
+		</view>
+		<view class="center_box" v-else>
 			<view class="box_left">
 				<text @touchstart="toLogin()">登录 / 注册</text>
 			</view>
@@ -43,7 +51,9 @@
 <script>
 	export default {
 		data() {
-			return {};
+			return {
+				userInfo:uni.getStorageSync('userInfo')
+			};
 		},
 		methods: {
 			toLogin() {
