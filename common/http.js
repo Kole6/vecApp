@@ -2,6 +2,12 @@ import {
 	baseURL
 } from '../config'
 const http = (options) => {
+	let header = {}
+	if(typeof options.header === 'object'){
+		header = {
+			...options.header
+		}
+	}
 	return new Promise((resolve, reject) => {
 		uni.showLoading({
 			title: '加载中...',
@@ -9,10 +15,13 @@ const http = (options) => {
 		});
 		uni.request({
 			url: (options.baseURL ? options.baseURL : baseURL) + options.url,
-			method: options.method,
+			// 默认为POST请求
+			method: options.method || 'POST',
 			data: options.data,
 			header: {
-				'v-token': '333333'
+				'v-token': '333333',
+				...header
+				
 			},
 			success: res => {
 				resolve(res.data)
@@ -39,9 +48,12 @@ export default http
 //调用例子
 /*
 this.$HTTP({
-  methods: 'get',
+  method: 'GET',
   url: 'https://unidemo.dcloud.net.cn/api/news',
   data: {},
+  header:{
+	  'content-type':'application/x-www-form-urlencoded'
+  },
   load:true
 }).then((data) =>{
   console.log(data)
