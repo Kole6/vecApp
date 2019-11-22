@@ -72,7 +72,6 @@ export default {
 			},2000)
 		},
 		onScroll(){
-			console.log('scroll')
 		},
 		onLoadMore(){
 			this.loadStatus = 'loading'

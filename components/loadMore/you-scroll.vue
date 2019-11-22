@@ -3,7 +3,7 @@
 		<view class="pullDown" :style="{ transform: 'translateY('+translateY+'px)', transition: isDown ? '0s' : '0.3s' }">
 			<slot name="pullDown">
 				<view class="pulldown-tips">
-					<view class="uni-load-more__img">
+					<view class="uni-load-more__img" v-if="pullDownStatus == 2">
 						<view class="load1 load">
 							<view :style="{ background: color }" class="uni-load-view_wrapper" />
 							<view :style="{ background: color }" class="uni-load-view_wrapper" />
