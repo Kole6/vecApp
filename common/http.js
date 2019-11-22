@@ -2,12 +2,6 @@ import {
 	baseURL
 } from '../config'
 const http = (options) => {
-	let header = {}
-	if(typeof options.header === 'object'){
-		header = {
-			...options.header
-		}
-	}
 	return new Promise((resolve, reject) => {
 		uni.showLoading({
 			title: '加载中...',
@@ -20,8 +14,7 @@ const http = (options) => {
 			data: options.data,
 			header: {
 				'v-token': '333333',
-				...header
-				
+				'Content-Type': options.header == 'form' ? 'application/x-www-form-urlencoded' : 'application/json'
 			},
 			success: res => {
 				resolve(res.data)
@@ -51,9 +44,7 @@ this.$HTTP({
   method: 'GET',
   url: 'https://unidemo.dcloud.net.cn/api/news',
   data: {},
-  header:{
-	  'content-type':'application/x-www-form-urlencoded'
-  },
+  header:'form',
   load:true
 }).then((data) =>{
   console.log(data)
