@@ -9,6 +9,7 @@
 
 <script>
 import uCharts from '@/components/u-charts/u-charts.js';
+var column = null;
 export default {
 	data() {
 		return {
@@ -100,7 +101,7 @@ export default {
 			this.showColumn('canvasColumn', Column);
 		},
 		showColumn(canvasId, chartData) {
-			this.column = new uCharts({
+			column = new uCharts({
 				$this: this,
 				canvasId: canvasId,
 				type: 'column',
@@ -135,10 +136,10 @@ export default {
 			});
 		},
 		touchIt(e, id) {
-			this.column.touchLegend(e, {
-				animation: false
+			column.touchLegend(e, {
+				animation: true
 			});
-			this.column.showToolTip(e, {
+			column.showToolTip(e, {
 				format: function(item, category) {
 					return category+':'+item.data.value+'%'
 					// if (typeof item.data === 'object') {

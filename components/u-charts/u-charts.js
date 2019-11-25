@@ -1627,7 +1627,6 @@ function drawRadarLabel(angleList, radius, centerPosition, opts, config, context
     context.setFillStyle(radarOption.labelColor || '#666666');
 	let nameArr = opts.categories[index].split(',')
     context.fillText(nameArr[0] || '', startX, startY + config.fontSize / 2);
-	console.log(startX,startY,config.fontSize)
 	// 雷达图进行换行
 	if(nameArr[1]){
     context.fillText(nameArr[1] || '', startX, startY + config.fontSize / 2 + config.fontSize) ;

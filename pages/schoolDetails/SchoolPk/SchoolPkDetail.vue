@@ -20,7 +20,17 @@
 			<image src="../../../static/indexIcon/selected.png" mode="aspectFit" style="width: 40upx; height: 40upx;"></image>
 			<text>自动隐藏相同信息</text>
 		</view> -->
-		<table-show :tableHeight="tableHeight" :tableWidth="tableWidth" :dataObj="dataObj"></table-show>
+		<QSTabs ref="tabs" :current="current" :tabs="tabs" width="375" swiperWidth="750" activeColor="#6451FC"
+		 backgroundColor="#fff" @change="change($event)" />
+		<swiper :style="{height:`${scrollH-400}upx`,borderTop: '1upx solid rgba(238, 238, 238, 0.3)'}" :current="current"
+			 @change="swiperChange" @transition="transition" @animationfinish="animationfinish">
+			<swiper-item>
+				<table-show showType='1' :tableHeight="tableHeight" :tableWidth="tableWidth" :dataObj="dataObj"></table-show>
+			</swiper-item>
+			<swiper-item>
+				<table-show showType="2" :tableHeight="tableHeight" :tableWidth="tableWidth"></table-show>
+			</swiper-item>
+		</swiper>
 			
 		</view>
 
@@ -31,11 +41,14 @@
 <script>
 import uCharts from '@/components/u-charts/u-charts.js';
 import tableShow from './table-show.vue'
+import QSTabs from '@/components/QS-tabs/QS-tabs.vue';
 var radar = null
 export default {
-	components:{tableShow},
+	components:{tableShow,QSTabs},
 	data() {
 		return {
+			current:0,
+			tabs: ["信息对比", "画像对比"],
 			dataObj:{
 				title:{
 					name:'学校名称',
@@ -144,6 +157,15 @@ export default {
 			}
 		};
 	},
+	computed: {
+		scrollH() {
+			let sys = uni.getSystemInfoSync();
+			let winWidth = sys.windowWidth;
+			let winrate = 750 / winWidth;
+			let winHeight = parseInt(sys.windowHeight * winrate)
+			return winHeight
+		}
+	},
 	onLoad() {
 		// this.tableHeight = uni.getSystemInfoSync().windowHeight - uni.upx2px(360) + 'px';
 		//#ifdef MP-ALIPAY
@@ -163,6 +185,18 @@ export default {
 		this.tableHeight = uni.getSystemInfoSync().windowHeight - uni.upx2px(240) + 'px';
 	},
 	methods: {
+		change(index){
+			this.current = index;
+		},
+		swiperChange({detail: { current }}) {
+			this.current = current;
+		},
+		transition({detail: { dx }}) {
+			this.$refs.tabs.setDx(dx);
+		},
+		animationfinish({detail: { current }}) {
+			this.$refs.tabs.setFinishCurrent(current);
+		},
 		fillData(data) {
 			this.serverData = data;
 			this.tips = data.tips;
@@ -384,7 +418,7 @@ export default {
 }
 .m-radar,.charts {
 	width: 750upx;
-	height: 700upx;
+	height: 550upx;
 	background-color: #FFFFFF;
 }
 </style>
