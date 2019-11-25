@@ -172,7 +172,7 @@ export default {
 			hasCompare: false,
 			schoolInfo:[{
 				name:'学校简介',
-				url:'',
+				url:'./schoolProfile',
 			},{
 				name:'校领导',
 				url:'./SchoolLeader/SchoolLeader',

@@ -436,6 +436,11 @@
 			"style": {
 				"navigationBarTitleText": "介绍"
 			}
+		}, {
+			"path": "pages/schoolDetails/schoolProfile",
+			"style": {
+				"navigationBarTitleText": "学校简介"
+			}
 		}
 	],
 	"tabBar": {
