@@ -293,8 +293,13 @@
 		}, {
 			"path": "pages/login/signIn/signIn",
 			"style": {
-				"navigationBarTitleText": "登录"
+				"navigationBarTitleText": ""
 			}
+			// "style": {
+			// 	"app-plus": {
+			// 		"titleNView": false
+			// 	}
+			// }
 		}, {
 			"path": "pages/personal/account/account",
 			"style": {

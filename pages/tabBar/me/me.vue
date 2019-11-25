@@ -52,8 +52,11 @@
 	export default {
 		data() {
 			return {
-				userInfo:uni.getStorageSync('userInfo')
+				userInfo:''
 			};
+		},
+		onShow() {
+			this.userInfo = uni.getStorageSync('userInfo')
 		},
 		methods: {
 			toLogin() {

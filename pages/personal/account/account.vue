@@ -108,9 +108,11 @@
 				uni.removeStorage({
 				    key: 'userInfo',
 				    success: function (res) {
+						let date = new Date().getTime()
 				        uni.switchTab({
 				        	url:'../../tabBar/me/me'
 				        })
+						
 				    }
 				});
 			},

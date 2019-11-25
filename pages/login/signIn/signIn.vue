@@ -1,7 +1,7 @@
 <template>
 	<view class="sign">
 		<view class="sign-logo">
-			<image src="/static/p106.png" mode="aspectFill"></image>
+			<image src="/static/logo-img.png" mode="aspectFill"></image>
 		</view>
 		<view class="sign-list" v-if="!isPhoneSign">
 			<view class="list-call">
@@ -31,15 +31,15 @@
 			</navigator>
 		</view>
 		<view class="sign-in">
-			<button type="primary" @tap="toLogin()">登 录</button>
+			<button class="vec-btn vip-open" type="primary" @tap="toLogin()">登 录</button>
 		</view>
 		<view class="sign-qie">
 			<view @tap="changePhone()" class="text1">{{isPhoneSign?"账号密码登录":"手机验证码登录"}}</view>
-			<view @tap="toReg()" class="text2">立即注册</view>
+			<view @tap="toReg()" class="text2">新用户注册</view>
 		</view>
 		<view class="order">
 			<text class="line"></text>
-			<text class="txt"> 其他快捷方式登录</text>
+			<text class="txt"> 其他登录方式 </text>
 			<text class="line"></text>
 		</view>
 		<view class="order-img">
@@ -145,7 +145,11 @@
 		}
 	}
 </script>
-
+<style>
+	page{
+		background-color: #fff;
+	}
+</style>
 <style scoped lang="scss">
 	@import "./signIn.scss";
 </style>
