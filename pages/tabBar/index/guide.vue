@@ -95,8 +95,6 @@
 		width: 100%;
 		height: 216upx;
 		width: 750upx;
-		margin-left: auto;
-		margin-right: auto;
 	}
 
 	.text-area {

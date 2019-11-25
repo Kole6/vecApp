@@ -34,26 +34,36 @@
 
 <style lang="scss" scoped>
 .box{
+	width:686upx;
+	height:308upx;
+	background:rgba(255,255,255,1);
+	box-shadow:0px 0px 10px 0px rgba(100,81,252,0.1);
+	border-radius:31upx;
 	margin: 20upx auto;
-	width: 650upx;
-	border: 1px solid #aaa;
-	border-radius: 10upx;
-	background-color: #fff;
-	box-shadow:0px 0px 10px 0px rgba(0,0,0,0.1);
 	.title{
-		border-bottom: 1px solid #aaa;
-		font-size: 30upx;
-		padding: 20upx;
+		border-bottom: 1px solid #eee;
+		font-size:34upx;
+		font-weight:600;
+		color:rgba(51,51,51,1);
+		line-height:48upx;
+		padding: 27upx 35upx;
 	}
 	.txt{
 		font-size: 28upx;
-		font-weight: 700;
+		font-weight: 500;
 		display: flex;
 		line-height: 45upx;
+		color: #666;
 		.txt-box{
 			text-align: center;
 			flex: 1;
-			margin: 50upx 20upx;
+			p:nth-child(2){
+				color: #333;
+				font-weight: 700;
+				font-size: 36upx;
+				padding-top:25upx ;
+			}
+			margin: 46upx 0;
 		}
 	}
 }

@@ -8,89 +8,93 @@
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;">
 						<view class="wy-table">
-							<table>
-								<tr>
-									<th>项目名称</th>
-									<th>级别</th>
-									<th>表彰日期</th>
-								</tr>
-								<tr>
-									<td>第十一届全国中等职业学校“文化风采”竞赛获优秀组织奖</td>
-									<td>一等奖</td>
-									<td>2019</td>
-								</tr>
-								<tr>
-									<td>第十一届全国中等职业学校“文化风采”竞赛获优秀组织奖</td>
-									<td>一等奖</td>
-									<td>2019</td>
-								</tr>
-								<tr>
-									<td>第十一届全国中等职业学校“文化风采”竞赛获优秀组织奖</td>
-									<td>一等奖</td>
-									<td>2019</td>
-								</tr>
-							</table>
+							<view class="table-th">
+								<view class="td">项目名称</view>
+								<view class="td">级别</view>
+								<view class="td">表彰日期</view>
+							</view>
+							<view class="table-tr">
+								<view class="td">第十三届全国中等职业学校“文化风采”优秀组织大赛</view>
+								<view class="td">一等奖</view>
+								<view class="td">2019</view>
+							</view>
+							<view class="table-tr">
+								<view class="td">第十一届全国中等职业学校“文化风采”竞赛获优秀组织奖</view>
+								<view class="td">一等奖</view>
+								<view class="td">2018</view>
+							</view>
+							<view class="table-tr">
+								<view class="td">第十二届全国中等职业学校“文化风采”竞赛获优秀组织奖</view>
+								<view class="td">一等奖</view>
+								<view class="td">2018</view>
+							</view>
+							<view class="table-tr">
+								<view class="td">机器人大赛</view>
+								<view class="td">一等奖</view>
+								<view class="td">2018</view>
+							</view>
 						</view>
 					</scroll-view>
 				</swiper-item>
 				<swiper-item class="swiper-item">
-					<view class="wy-table">
-						<table>
-							<tr>
-								<th>项目名称</th>
-								<th>级别</th>
-								<th>表彰日期</th>
-							</tr>
-							<tr>
-								<td>第十一届全国中等职业学校“文化风采”竞赛获优秀组织奖</td>
-								<td>一等奖</td>
-								<td>2019</td>
-							</tr>
-							<tr>
-								<td>第十一届全国中等职业学校“文化风采”竞赛获优秀组织奖</td>
-								<td>一等奖</td>
-								<td>2019</td>
-							</tr>
-							<tr>
-								<td>第十一届全国中等职业学校“文化风采”竞赛获优秀组织奖</td>
-								<td>一等奖</td>
-								<td>2019</td>
-							</tr>
-						</table>
-					</view>
+					<scroll-view scroll-y style="height: 100%;">
+						<view class="wy-table">
+							<view class="table-th">
+								<view class="td">项目名称</view>
+								<view class="td">级别</view>
+								<view class="td">表彰日期</view>
+							</view>
+							<view class="table-tr">
+								<view class="td">第十三届全国中等职业学校“文化风采”优秀组织大赛</view>
+								<view class="td">一等奖</view>
+								<view class="td">2017</view>
+							</view>
+							<view class="table-tr">
+								<view class="td">第十一届全国中等职业学校“文化风采”竞赛获优秀组织奖</view>
+								<view class="td">一等奖</view>
+								<view class="td">2018</view>
+							</view>
+							<view class="table-tr">
+								<view class="td">第十二届全国中等职业学校“文化风采”竞赛获优秀组织奖</view>
+								<view class="td">一等奖</view>
+								<view class="td">2018</view>
+							</view>
+						</view>
+					</scroll-view>
 				</swiper-item>
 				<swiper-item class="swiper-item">
-					<view class="wy-table">
-						<table>
-							<tr>
-								<th>项目名称</th>
-								<th>级别</th>
-								<th>表彰日期</th>
-							</tr>
-							<tr>
-								<td>第十一届全国中等职业学校“文化风采”竞赛获优秀组织奖</td>
-								<td>一等奖</td>
-								<td>2019</td>
-							</tr>
-							<tr>
-								<td>第十一届全国中等职业学校“文化风采”竞赛获优秀组织奖</td>
-								<td>一等奖</td>
-								<td>2019</td>
-							</tr>
-							<tr>
-								<td>第十一届全国中等职业学校“文化风采”竞赛获优秀组织奖</td>
-								<td>一等奖</td>
-								<td>2019</td>
-							</tr>
-						</table>
-					</view>
+					<scroll-view scroll-y style="height: 100%;">
+						<view class="wy-table">
+							<view class="table-th">
+								<view class="td">项目名称</view>
+								<view class="td">级别</view>
+								<view class="td">表彰日期</view>
+							</view>
+							<view class="table-tr">
+								<view class="td">第十三届全国中等职业学校“文化风采”优秀组织大赛</view>
+								<view class="td">一等奖</view>
+								<view class="td">2016</view>
+							</view>
+							<view class="table-tr">
+								<view class="td">第十一届全国中等职业学校“文化风采”竞赛获优秀组织奖</view>
+								<view class="td">一等奖</view>
+								<view class="td">2017</view>
+							</view>
+							<view class="table-tr">
+								<view class="td">第十二届全国中等职业学校“文化风采”竞赛获优秀组织奖</view>
+								<view class="td">一等奖</view>
+								<view class="td">2017</view>
+							</view>
+							<view class="table-tr">
+								<view class="td">机器人大赛</view>
+								<view class="td">一等奖</view>
+								<view class="td">2017</view>
+							</view>
+						</view>
+					</scroll-view>
 				</swiper-item>
 			</swiper>
 		</view>
-		<!-- <view class="no-data">
-			<image src="../../../static/no_data.png" mode="aspectFill"></image>
-			<p>你目前还没有关注的学校哦～</p>
-		</view> -->
 	</view>
 </template>
 
@@ -134,38 +138,41 @@
 </script>
 
 <style scoped lang="scss">
-	page {
-		background-color: #fff;
-		font-size: 28upx;
-	}
-	
 	.wy-table {
-		table {
-			width: 100%;
-			border-collapse: collapse;
+		background-color: #fff;
+		.table-th,.table-tr{
+			width: 750upx;
+			min-height: 100upx;
 			text-align: center;
+			display: flex;
+			align-items: center;
 		}
-	
-		table td {
-			border: 1px solid #cad9ea;
+		.table-th{
+			border-bottom: 1px solid #ddd;
+			border-top: 1px solid #ddd;
+			font-size:32upx;
+			color: #333;
+		}
+		.table-tr{
+			border-bottom: 1px solid #eee;
+			font-size:26upx;
+			line-height: 38upx;
 			color: #666;
-			padding: 15upx 20upx;
-			min-width: 120upx;
-	
+			&:nth-child(2n+1){
+				background:rgba(247,247,247,1);
+			}
 		}
-	
-		table th {
-			border: 1px solid #cad9ea;
-			padding: 15upx 20upx;
-			color: #fff;
-			background-color: #199ED8;
-			min-width: 120upx;
-	
-		}
-	
-		table thead th {
-			// background-color: #cce8eb;
-			background-color: #199ED8;
+		.td{
+			margin: 10upx;
+			&:nth-child(1){
+				width: 370upx;
+			}
+			&:nth-child(2){
+				width: 170upx;
+			}
+			&:nth-child(3){
+				width: 150upx;
+			}
 		}
 	}
 	.have-data {
@@ -186,25 +193,6 @@
 			&:first-child {
 				border-top: 20upx solid #F6F8FE;
 			}
-		}
-	}
-
-	.no-data {
-		image {
-			width: 444upx;
-			height: 374upx;
-			margin-top: 200upx;
-			text-align: center;
-		}
-
-		p {
-			text-align: center;
-			margin-top: 10upx;
-			font-size: 30upx;
-			font-weight: 400;
-			color: rgba(153, 153, 153, 1);
-			font-family: PingFangSC-Regular, PingFang SC;
-			line-height: 40px;
 		}
 	}
 </style>
