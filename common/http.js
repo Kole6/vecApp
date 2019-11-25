@@ -5,12 +5,11 @@ const http = (options) => {
 	return new Promise((resolve, reject) => {
 		uni.showLoading({
 			title: '加载中...',
-			mask: options.load ? true : false //是否出现透明层
+			mask: options.load || false // 默认不出现遮罩
 		});
 		uni.request({
 			url: (options.baseURL ? options.baseURL : baseURL) + options.url,
-			// 默认为POST请求
-			method: options.method || 'POST',
+			method: options.method || 'POST', // 默认为POST请求
 			data: options.data,
 			header: {
 				'v-token': '333333',
@@ -42,7 +41,7 @@ export default http
 /*
 this.$HTTP({
   method: 'GET',
-  url: 'https://unidemo.dcloud.net.cn/api/news',
+  url: '/api/news',
   data: {},
   header:'form',
   load:true

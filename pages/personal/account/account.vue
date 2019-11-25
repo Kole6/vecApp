@@ -29,7 +29,7 @@
 			</view>
 		</view>
 		<view class="outSign">
-			<button  class="vec-btn" type="primary" @tap="toRecharge()">退出登录</button>
+			<button class="vec-btn" type="primary" @tap="toRecharge()">退出登录</button>
 		</view>
 		<view class="content">
 			<chunLei-modal v-model="value" :mData="inputData" :type="type" @onConfirm="onConfirm" @onCancel="onCancel" navMask></chunLei-modal>
@@ -45,7 +45,7 @@
 		},
 		data() {
 			return {
-				nickname:uni.getStorageSync('nickname')?uni.getStorageSync('nickname'):"输入昵称",
+				nickname: uni.getStorageSync('nickname') ? uni.getStorageSync('nickname') : "输入昵称",
 				type: "input",
 				value: false,
 				inputData: {
@@ -62,7 +62,7 @@
 		methods: {
 			//模态框确认
 			onConfirm(e) {
-				if(e[0].content){
+				if (e[0].content) {
 					this.nickname = e[0].content;
 					e[0].content = '';
 					uni.showToast({
@@ -73,7 +73,7 @@
 						key: 'nickname',
 						data: this.nickname
 					});
-				}else{
+				} else {
 					uni.showToast({
 						title: '昵称为空，修改失败',
 						icon: 'none'
@@ -103,6 +103,16 @@
 			},
 			toNi() {
 				this.value = true
+			},
+			toRecharge(){
+				uni.removeStorage({
+				    key: 'userInfo',
+				    success: function (res) {
+				        uni.switchTab({
+				        	url:'../../tabBar/me/me'
+				        })
+				    }
+				});
 			},
 			clickYao() {
 				// #ifdef APP-PLUS
@@ -134,6 +144,7 @@
 <style scoped lang="scss">
 	.center_menu {
 		width: 100%;
+
 		.menu_item {
 			width: 100%;
 			font-size: 28upx;
@@ -188,13 +199,15 @@
 				font-size: 36upx;
 				color: #15d9a8;
 			}
+
 			&:nth-child(1) {
-			 	margin-top: 5px;
+				margin-top: 5px;
 			}
 		}
 
 	}
-	.outSign{
+
+	.outSign {
 		margin-top: 60px;
 	}
 </style>
