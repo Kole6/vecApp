@@ -60,9 +60,7 @@ export default {
 						pageIndex: this.page.pageIndex,
 						pageSize: this.page.pageSize
 					},
-					header:{
-						'content-type':'application/x-www-form-urlencoded'
-					},
+					header:'form',
 				})
 					.then((data) => {
 						if (data.code == 0) {

@@ -5,11 +5,11 @@
 			<form @submit="formSubmit">
 				<view class="uni-form-item uni-column">
 					<view class="title">姓名:</view>
-					<input class="uni-input" name="name" placeholder="请输入姓名" />
+					<input class="uni-input" required name="name" placeholder="请输入姓名" />
 					<view class="title">手机号:</view>
-					<input class="uni-input" type='number' name="phone" placeholder="请输入手机号" />
+					<input class="uni-input" required='required' type='number' name="phone" placeholder="请输入手机号" />
 					<view class="title">我的学校:</view>
-					<input class="uni-input" name="school" placeholder="请输入学校" />
+					<input class="uni-input" required name="school" placeholder="请输入学校" />
 				</view>
 				<view class="uni-btn-v">
 					<button class="btn" form-type="submit"><span class="sub">确认提交</span></button>
@@ -30,6 +30,22 @@
 			formSubmit: function(e) {
 				let formdata = e.detail.value;
 				console.log(formdata);
+				let reg = /^[1](([3][0-9])|([4][5-9])|([5][0-3,5-9])|([6][5,6])|([7][0-8])|([8][0-9])|([9][1,8,9]))[0-9]{8}$/;
+				if (formdata.phone == '' || formdata.name == '' || formdata.school == '') {
+					uni.showToast({
+						title: "请填写未填项",
+						duration: 2000,
+						icon: 'none'
+					})
+					return;
+				} else if (!reg.test(formdata.phone)) {
+					uni.showToast({
+						title: '手机格式不正确',
+						duration: 2000,
+						icon: 'none'
+					})
+					return;
+				}
 				this.$HTTP({
 					url: '/zjq/User/QuickRegister?phone=' + formdata.phone + '&userName=' + formdata
 						.name + '&schoolName=' + formdata.school,
@@ -43,6 +59,14 @@
 						icon: 'none'
 					});
 					if (data.code == '0') {
+						uni.setStorage({
+							key: 'launchFlag',
+							data: true
+						});
+						uni.setStorage({
+						    key: 'userInfo',
+							data:formdata
+						});
 						uni.switchTab({
 							url: './index'
 						})

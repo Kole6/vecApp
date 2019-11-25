@@ -11,10 +11,6 @@
 					url: './index'
 				});
 			} else {
-				uni.setStorage({
-					key: 'launchFlag',
-					data: true
-				});
 				uni.redirectTo({
 					url: './guide'
 				});
