@@ -51,6 +51,7 @@
 		</view>
 		<view class="m-pk" @tap="handlePK">
 			<view class="left">
+				<!-- /static/indexIcon/delete.png -->
 				<image src="/static/indexIcon/add.png" mode="aspectFit" style="width: 40upx;height: 40upx;"></image>
 				<text>添加本学校到对比列表</text>
 			</view>
@@ -88,11 +89,14 @@
 			  type="arrowright"
 			  size="24"/>
 		</view>
-		<view class="m-school_list" @tap="handleRouter('./jsmind')">
+		<view class="s-school_list" @tap="handleRouter('./jsmind')">
 			<text>拓扑图</text>
-			<uni-icons
+			<view class="">
+				<image src="/static/indexIcon/tpt.png" mode="aspectFit" style="width: 750upx; height:230upx;"></image>
+			</view>
+			<!-- <uni-icons
 			  type="arrowright"
-			  size="24"/>
+			  size="24"/> -->
 		</view>
 		
 		<view class="m-info">
@@ -408,7 +412,7 @@ export default {
 		z-index: 2;
 	}
 }
-.m-school_list{
+.m-school_list,.s-school_list{
 	@include  flexstyle(space-between,center)
 	padding: 28upx 31upx;
 	font-size: $uni-font-size-lg;
@@ -417,6 +421,12 @@ export default {
 	background: #FFFFFF;
 	border-bottom: solid 1upx $main-dividing-line1;
 	margin-bottom:20upx;
+}
+.s-school_list{
+	display: block;
+	image{
+		padding-top: 31upx;
+	}
 }
 // .m-bottom{
 // 	position: fixed;

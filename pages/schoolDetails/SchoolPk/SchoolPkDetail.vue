@@ -25,10 +25,13 @@
 		<swiper :style="{height:`${scrollH-400}upx`,borderTop: '1upx solid rgba(238, 238, 238, 0.3)'}" :current="current"
 			 @change="swiperChange" @transition="transition" @animationfinish="animationfinish">
 			<swiper-item>
+				<view class="swiper1">
 				<table-show showType='1' :tableHeight="tableHeight" :tableWidth="tableWidth" :dataObj="dataObj"></table-show>
+				</view>
 			</swiper-item>
 			<swiper-item>
-				<table-show showType="2" :tableHeight="tableHeight" :tableWidth="tableWidth"></table-show>
+				<ava-compare></ava-compare>
+				<!-- <table-show showType="2" :tableHeight="tableHeight" :tableWidth="tableWidth"></table-show> -->
 			</swiper-item>
 		</swiper>
 			
@@ -42,12 +45,14 @@
 import uCharts from '@/components/u-charts/u-charts.js';
 import tableShow from './table-show.vue'
 import QSTabs from '@/components/QS-tabs/QS-tabs.vue';
+import avaCompare from './AvaCompare.vue'
 var radar = null
 export default {
-	components:{tableShow,QSTabs},
+	components:{QSTabs,avaCompare,tableShow},
 	data() {
 		return {
 			current:0,
+			systemInfo:uni.getSystemInfoSync(),
 			tabs: ["信息对比", "画像对比"],
 			dataObj:{
 				title:{
@@ -166,6 +171,12 @@ export default {
 			return winHeight
 		}
 	},
+	mounted(){
+		// uni.setNavigationBarColor({
+		// 	frontColor:'#000000',
+		// 	backgroundColor:'#ffffff',
+		// })
+	},
 	onLoad() {
 		// this.tableHeight = uni.getSystemInfoSync().windowHeight - uni.upx2px(360) + 'px';
 		//#ifdef MP-ALIPAY
@@ -182,7 +193,7 @@ export default {
 		this.chartsInfo.cWidth = uni.upx2px(750);
 		this.chartsInfo.cHeight = uni.upx2px(700);
 		this.getServerData();
-		this.tableHeight = uni.getSystemInfoSync().windowHeight - uni.upx2px(240) + 'px';
+		this.tableHeight = uni.getSystemInfoSync().windowHeight - uni.upx2px(440) + 'px';
 	},
 	methods: {
 		change(index){
@@ -320,7 +331,6 @@ export default {
 	}
 }
 .m-table {
-	background: #ffffff;
 	overflow: auto;
 	margin-bottom: 140upx;
 	.f-o {
@@ -333,6 +343,9 @@ export default {
 			color: #999999;
 			padding-left: 10upx;
 		}
+	}
+	.swiper1{
+		background: #ffffff;
 	}
 	.t-table {
 		box-sizing: border-box;

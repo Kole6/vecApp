@@ -1,4 +1,6 @@
 <template>
+	<view v-if="show">
+		
 	<view v-if="showType == '1'">
 		<view class="t-table" :style="{ height: tableHeight, width: tableWidth }">
 			<view class="t-row t-title">
@@ -12,7 +14,7 @@
 		</view>
 	</view>
 	<view v-else>
-		<view :style="{ height: '300px',overflow:'auto',position:'relative'}">
+		<view :style="{ height: tableHeight,overflow:'auto',position:'relative'}">
 			<view class="div-table m-fixed">
 				<view class="thead">
 					<view class="tr">
@@ -57,6 +59,8 @@
 		</view>
 		
 	</view>
+	
+	</view>
 </template>
 
 <script>
@@ -67,8 +71,15 @@ export default {
 		dataObj: Object,
 		showType: [String, Number]
 	},
+	watch:{
+		tableHeight(){
+			console.log('===')
+			this.refresh();
+		}
+	},
 	data(){
 		return{
+			show:true,
 			titleData:['一级标签','二级标签','上海市江电职业技术学校','上海市江电职业技术学校'],
 			listArr: [{
 					title: '主持国家级专业教学资源',
@@ -111,10 +122,14 @@ export default {
 			]
 		}
 	},
-	mounted() {
-		console.log(this.tableHeight)
-		console.log(this.tableWidth)
-	}
+	methods:{
+		refresh(){
+			this.show = false;
+			this.$nextTick(()=>{
+				this.show = true;
+			})
+		}
+	},
 };
 </script>
 

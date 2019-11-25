@@ -1,6 +1,6 @@
 <template>
 	<view class="wrapper">
-		<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height: systemInfo.screenHeight - 80 +'px'}" :loadStatus="loadStatus">
+		<load-more ref="scroll" @onPullDown="onPullDown"  @onLoadMore="onLoadMore" :styleObj="{ height: systemInfo.screenHeight - 80 +'px'}" :loadStatus="loadStatus">
 			<school-list :isText="true" :showType="4" :listArr="dataArr"></school-list>
 		</load-more>
 
