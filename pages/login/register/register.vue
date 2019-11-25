@@ -23,7 +23,7 @@
 			</view>
 		</view>
 		<view class="sign-in">
-			<button type="primary" @tap="toIndex()">注 册</button>
+			<button class="vec-btn" type="primary" @tap="toIndex()">注 册</button>
 		</view>
 	</view>
 </template>

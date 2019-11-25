@@ -4,8 +4,8 @@
 .sign-logo{
 	padding: 40px 0 15px 0;
 	image{
-		width: 150upx;
-		height: 150upx;
+		width: 226upx;
+		height: 96upx;
 	}
 }
 
@@ -22,7 +22,7 @@
 	padding-right: 70upx;
 	text-align: right;
 	font-size: 28upx;
-	color: $main-base-color;
+	color: #999;
 	text-decoration: underline;
 }
 .sign-qie{
@@ -30,9 +30,12 @@
 	padding: 0 70upx;
 	font-size: 28upx;
 	color: $main-base-color;
-	text-decoration: underline;
+	// text-decoration: underline;
 	display:flex;
-	justify-content:space-between
+	justify-content:space-between;
+	.text1{
+		color: #999;
+	}
 }
 
 .order{
@@ -42,7 +45,7 @@
    display:flex;
 	.line {
 		flex: 1;
-		border-top:1px solid rgba($color: #999999, $alpha: 0.2);
+		border-top:1px solid #eee;
 		position: relative;
 		top:18upx;
 	}
@@ -55,7 +58,7 @@
 .order-img{
 	display: flex;
 	margin-top: 40upx;
-	padding: 0 240upx;
+	padding: 20upx 200upx;
 	justify-content: space-between;
 	image{
 		width: 80upx;
@@ -65,8 +68,9 @@
 .sign-xieyi{
 	margin-top: 90upx;
 	font-size: 26upx;
+	color: #ccc;
 	.xieyi{
-		color: #17d8a9;
+		color: $main-base-color;
 	}
 }
 

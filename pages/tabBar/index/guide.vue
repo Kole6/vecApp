@@ -48,10 +48,7 @@
 				}
 				this.$HTTP({
 					url: '/zjq/User/QuickRegister?phone=' + formdata.phone + '&userName=' + formdata
-						.name + '&schoolName=' + formdata.school,
-					method: "POST",
-					data: {},
-					load: true
+						.name + '&schoolName=' + formdata.school
 				}).then((data) => {
 					console.log(data);
 					uni.showToast({
