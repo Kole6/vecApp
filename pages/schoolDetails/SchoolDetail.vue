@@ -82,23 +82,18 @@
 				</block>
 			</view>
 		</view>
-		
+		<view class="s-school_list" @tap="handleRouter('./jsmind')">
+			<text>拓扑图</text>
+			<view class="">
+				<image src="/static/indexIcon/tpt.png" mode="aspectFit" style="width: 750upx; height:230upx;"></image>
+			</view>
+		</view>
 		<view class="m-school_list" @tap="handleRouter('./NearbySchool/NearbySchoolList')">
 			<text>附近学校</text>
 			<uni-icons
 			  type="arrowright"
 			  size="24"/>
 		</view>
-		<view class="s-school_list" @tap="handleRouter('./jsmind')">
-			<text>拓扑图</text>
-			<view class="">
-				<image src="/static/indexIcon/tpt.png" mode="aspectFit" style="width: 750upx; height:230upx;"></image>
-			</view>
-			<!-- <uni-icons
-			  type="arrowright"
-			  size="24"/> -->
-		</view>
-		
 		<view class="m-info">
 			<view class="title f-link">
 				<text>学校资讯</text>
@@ -412,7 +407,7 @@ export default {
 		z-index: 2;
 	}
 }
-.m-school_list,.s-school_list{
+.m-school_list{
 	@include  flexstyle(space-between,center)
 	padding: 28upx 31upx;
 	font-size: $uni-font-size-lg;
@@ -423,9 +418,23 @@ export default {
 	margin-bottom:20upx;
 }
 .s-school_list{
+	@include  flexstyle(space-between,center)
+	font-size: $uni-font-size-lg;
+	color: $main-text-color;
+	font-weight:bold;
+	background: #FFFFFF;
+	border-bottom: solid 1upx $main-dividing-line1;
+	margin-bottom:20upx;
 	display: block;
+	padding-top: 28upx;
+	text{
+		padding-left: 31upx;
+		
+	}
 	image{
-		padding-top: 31upx;
+		border-top: solid 1upx $main-dividing-line1;
+		margin-top: 28upx;
+		padding-top: 6upx;
 	}
 }
 // .m-bottom{

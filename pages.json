@@ -295,11 +295,6 @@
 			"style": {
 				"navigationBarTitleText": ""
 			}
-			// "style": {
-			// 	"app-plus": {
-			// 		"titleNView": false
-			// 	}
-			// }
 		}, {
 			"path": "pages/personal/account/account",
 			"style": {
