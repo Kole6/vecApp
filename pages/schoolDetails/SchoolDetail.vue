@@ -172,7 +172,7 @@ export default {
 			hasCompare: false,
 			schoolInfo:[{
 				name:'学校简介',
-				url:'./schoolProfile',
+				url:'./schoolProfile?schoolName='+'滨海职业学院',
 			},{
 				name:'校领导',
 				url:'./SchoolLeader/SchoolLeader',
