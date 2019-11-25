@@ -3,12 +3,11 @@
 		<view class="item" @tap="handleTap(item)" v-for="(item,index) in listArr" :key="index">
 			<view class="left">
 				<block v-if="item.src">
-					<image  :src="item.src" mode="aspectFit" style="height: 128upx;width: 152upx;"></image>
+					<image :src="item.src" mode="aspectFill"></image>
 				</block>
 				<block v-else>
 					item.src
 				</block>
-				
 			</view>
 			<view class="right">
 				<view class="title">
@@ -54,14 +53,18 @@
 			display: flex;
 			align-items: center;
 			// margin-bottom: 10upx;
-			padding: 20upx 50upx;
+			padding: 20upx 30upx;
 			background: #FFFFFF;
 			border-bottom: solid 1upx $main-dividing-line1;
 			.left{
-				width: 152upx;
+				width: 172upx;
 				height: 128upx;
-				background: #eee;
 				margin-right: 20upx;
+				image{
+					width: 172upx;
+					height: 128upx;
+					border-radius: 10upx;
+				}
 			}
 			.right{
 				.title{
