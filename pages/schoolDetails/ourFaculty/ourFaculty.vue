@@ -8,29 +8,46 @@
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;">
 						<view class="qiun-columns">
-							<view class="qiun-bg-white qiun-title-bar qiun-common-mt">
-								<view class="qiun-title-dot-light">教师性别占比</view>
+							<view class="qiun-new">
+								<view class="new-tip">
+									<text>教师性别占比</text>
+								</view>
+								<view class="qiun-charts">
+									<view class="charts-man">
+										<view class="male">
+											<image src="../../../static/p602.png" mode="aspectFill"></image>
+											<p>男教师 <span class="persent">40%</span></p>
+										</view>
+										<view class="female">
+											<image src="../../../static/p603.png" mode="aspectFill"></image>
+											<p>女教师 <span class="persent">60%</span></p>
+										</view>
+									</view>
+								</view>
 							</view>
-							<view class="qiun-charts">
-								<canvas canvas-id="canvasPie" id="canvasPie1" class="charts" @touchstart="touchPie"></canvas>
+							<view class="qiun-new">
+								<view class="new-tip">
+									<text>专职兼职教师占比</text>
+								</view>
+								<view class="qiun-charts">
+									<canvas class="charts" canvas-id="canvasPie2" id="canvasPie2" @touchstart="touchPie2"></canvas>
+								</view>
 							</view>
-							<view class="qiun-bg-white qiun-title-bar qiun-common-mt">
-								<view class="qiun-title-dot-light">专职兼职教师占比</view>
+							<view class="qiun-new">
+								<view class="new-tip">
+									<text>教师学历占比</text>
+								</view>
+								<view class="qiun-charts">
+									<canvas canvas-id="canvasPie3" id="canvasPie3" class="charts" @touchstart="touchPie3"></canvas>
+								</view>
 							</view>
-							<view class="qiun-charts">
-								<canvas canvas-id="canvasPie2" id="canvasPie2" class="charts" @touchstart="touchPie2"></canvas>
-							</view>
-							<view class="qiun-bg-white qiun-title-bar qiun-common-mt">
-								<view class="qiun-title-dot-light">教师学历占比</view>
-							</view>
-							<view class="qiun-charts">
-								<canvas canvas-id="canvasPie3" id="canvasPie3" class="charts" @touchstart="touchPie3"></canvas>
-							</view>
-							<view class="qiun-bg-white qiun-title-bar qiun-common-mt">
-								<view class="qiun-title-dot-light">教师年龄占比</view>
-							</view>
-							<view class="qiun-charts">
-								<canvas canvas-id="canvasPie4" id="canvasPie4" class="charts" @touchstart="touchPie4"></canvas>
+							<view class="qiun-new">
+								<view class="new-tip">
+									<text>教师年龄占比</text>
+								</view>
+								<view class="qiun-charts">
+									<canvas canvas-id="canvasPie4" id="canvasPie4" class="charts" @touchstart="touchPie4"></canvas>
+								</view>
 							</view>
 						</view>
 					</scroll-view>
@@ -343,40 +360,68 @@
 	.qiun-columns {
 		display: flex;
 		flex-direction: column !important;
+		align-items: center;
+		.qiun-new{
+			width: 730upx;
+			z-index: 999;
+			background:rgba(255,255,255,1);
+			box-shadow:0px 0px 20px 0px rgba(0,0,0,0.1);
+			border-radius:33upx;
+			margin: 20upx 0;
+			min-height: 300upx;
+			.new-tip{
+				font-size: 22upx;
+				text-align: center;
+				position: absolute;
+				padding: 9upx 34upx;
+				margin-top: -14upx;
+				margin-left: 80upx;
+				color: #fff;
+				background: url('../../../static/p601.png') no-repeat;
+				background-size: 100% 50upx;
+			}
+			.qiun-charts{
+				.charts-man{
+					height: 400upx;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					text-align: center;
+					color: #666;
+					font-size: 30upx;
+					.male{
+						margin:0 90upx;
+						image{
+							width: 191upx;
+							height: 206upx;
+						}
+						.persent{
+							color: #3FA1FF;
+						}
+					}
+					.female{
+						margin:0 90upx;
+						image{
+							width: 150upx;
+							height: 189upx;
+							padding-bottom: 17upx;
+						}
+						.persent{
+							color: #FC6C6D;
+						}
+					}
+				}
+				.charts{
+					width: 720upx;
+					height: 500upx;
+					margin-top: 14upx;
+				}
+			}
+			
+		}
 	}
-
-	.qiun-common-mt {
-		margin-top: 10upx;
-	}
-
-	.qiun-bg-white {
-		background: #FFFFFF;
-	}
-
-	.qiun-title-bar {
-		width: 96%;
-		padding: 10upx 2%;
-		flex-wrap: nowrap;
-	}
-
-	.qiun-title-dot-light {
-		border-left: 10upx solid #0ea391;
-		padding-left: 10upx;
-		font-size: 32upx;
-		color: #000000
-	}
-
-	.qiun-charts {
-		width: 750upx;
-		height: 500upx;
-		background-color: #FFFFFF;
-	}
-
-	.charts {
-		width: 750upx;
-		height: 500upx;
-		background-color: #FFFFFF;
-	}
+	
+	
 	.m-list{
 		padding: 10upx 30upx;
 		display: flex;

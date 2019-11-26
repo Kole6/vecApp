@@ -8,35 +8,21 @@
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;">
 						<view class="qiun-columns">
-							<view class="qiun-bg-white qiun-title-bar qiun-common-mt">
-								<view class="qiun-title-dot-light">就业占比</view>
+							<view class="qiun-new">
+								<view class="new-tip">
+									<text>就业占比</text>
+								</view>
+								<view class="qiun-charts">
+									<canvas canvas-id="canvasPie" id="canvasPie1" class="charts" @touchstart="touchPie"></canvas>
+								</view>
 							</view>
-							<view class="qiun-charts">
-								<canvas canvas-id="canvasPie" id="canvasPie1" class="charts" @touchstart="touchPie"></canvas>
-							</view>
-							<view class="qiun-bg-white qiun-title-bar qiun-common-mt">
-								<view class="qiun-title-dot-light">创业占比</view>
-							</view>
-							<view class="qiun-charts">
-								<canvas canvas-id="canvasPie2" id="canvasPie2" class="charts" @touchstart="touchPie2"></canvas>
-							</view>
-						</view>
-					</scroll-view>
-				</swiper-item>
-				<swiper-item class="swiper-item">
-					<scroll-view scroll-y style="height: 100%;">
-						<view class="qiun-columns">
-							<view class="qiun-bg-white qiun-title-bar qiun-common-mt">
-								<view class="qiun-title-dot-light">就业占比</view>
-							</view>
-							<view class="qiun-charts">
-								<canvas canvas-id="canvasPie" id="canvasPie1" class="charts" @touchstart="touchPie"></canvas>
-							</view>
-							<view class="qiun-bg-white qiun-title-bar qiun-common-mt">
-								<view class="qiun-title-dot-light">创业占比</view>
-							</view>
-							<view class="qiun-charts">
-								<canvas canvas-id="canvasPie2" id="canvasPie2" class="charts" @touchstart="touchPie2"></canvas>
+							<view class="qiun-new">
+								<view class="new-tip">
+									<text>创业占比</text>
+								</view>
+								<view class="qiun-charts">
+									<canvas canvas-id="canvasPie2" id="canvasPie2" class="charts" @touchstart="touchPie2"></canvas>
+								</view>
 							</view>
 						</view>
 					</scroll-view>
@@ -44,17 +30,43 @@
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;">
 						<view class="qiun-columns">
-							<view class="qiun-bg-white qiun-title-bar qiun-common-mt">
-								<view class="qiun-title-dot-light">就业占比</view>
+							<view class="qiun-new">
+								<view class="new-tip">
+									<text>就业占比</text>
+								</view>
+								<view class="qiun-charts">
+									<canvas canvas-id="canvasPie3"  class="charts"></canvas>
+								</view>
 							</view>
-							<view class="qiun-charts">
-								<canvas canvas-id="canvasPie" id="canvasPie1" class="charts" @touchstart="touchPie"></canvas>
+							<view class="qiun-new">
+								<view class="new-tip">
+									<text>创业占比</text>
+								</view>
+								<view class="qiun-charts">
+									<canvas canvas-id="canvasPie4"  class="charts"></canvas>
+								</view>
 							</view>
-							<view class="qiun-bg-white qiun-title-bar qiun-common-mt">
-								<view class="qiun-title-dot-light">创业占比</view>
+						</view>
+					</scroll-view>
+				</swiper-item>
+				<swiper-item class="swiper-item">
+					<scroll-view scroll-y style="height: 100%;">
+						<view class="qiun-columns">
+							<view class="qiun-new">
+								<view class="new-tip">
+									<text>就业占比</text>
+								</view>
+								<view class="qiun-charts">
+									<canvas canvas-id="canvasPie5"  class="charts" ></canvas>
+								</view>
 							</view>
-							<view class="qiun-charts">
-								<canvas canvas-id="canvasPie2" id="canvasPie2" class="charts" @touchstart="touchPie2"></canvas>
+							<view class="qiun-new">
+								<view class="new-tip">
+									<text>创业占比</text>
+								</view>
+								<view class="qiun-charts">
+									<canvas canvas-id="canvasPie6"  class="charts"></canvas>
+								</view>
 							</view>
 						</view>
 					</scroll-view>
@@ -74,6 +86,11 @@
 	var _self;
 	var canvaPie = null;
 	var canvaPie2 = null;
+	var canvaPie3 = null;
+	var canvaPie4 = null;
+	var canvaPie5 = null;
+	var canvaPie6 = null;
+	
 	export default {
 		components: {
 			QSTabs
@@ -124,12 +141,16 @@
 						"data": 77
 					}]
 				};
-				_self.showPie("canvasPie", Pie);
-				_self.showPie2("canvasPie2", Pie2);
+				canvaPie = _self.showPie("canvasPie", Pie);
+				canvaPie2 = _self.showPie2("canvasPie2", Pie2);
+				canvaPie3 = _self.showPie("canvasPie3", Pie);
+				canvaPie4 = _self.showPie2("canvasPie4", Pie2);
+				canvaPie5 = _self.showPie("canvasPie5", Pie);
+				canvaPie6 = _self.showPie2("canvasPie6", Pie2);
 			
 			},
 			showPie(canvasId, chartData) {
-				canvaPie = new uCharts({
+				let pie =  new uCharts({
 					$this: _self,
 					canvasId: canvasId,
 					colors:['#3ECBCB', '#E8E9E9', '#facc14', '#f04864', '#8543e0', '#90ed7d'],
@@ -151,9 +172,10 @@
 						}
 					},
 				});
+				return pie;
 			},
 			showPie2(canvasId, chartData) {
-				canvaPie2 = new uCharts({
+				let pie = new uCharts({
 					$this: _self,
 					canvasId: canvasId,
 					colors:['#3fa1ff', '#E8E9E9', '#facc14', '#f04864', '#8543e0', '#90ed7d'],
@@ -175,6 +197,7 @@
 						}
 					},
 				});
+				return pie;
 			},
 			touchPie(e) {
 				canvaPie.showToolTip(e, {
@@ -230,42 +253,67 @@
 		display: flex;
 		flex-direction: row !important;
 	}
-	
 	.qiun-columns {
 		display: flex;
 		flex-direction: column !important;
-	}
-	
-	.qiun-common-mt {
-		margin-top: 10upx;
-	}
-	
-	.qiun-bg-white {
-		background: #FFFFFF;
-	}
-	
-	.qiun-title-bar {
-		width: 96%;
-		padding: 10upx 2%;
-		flex-wrap: nowrap;
-	}
-	
-	.qiun-title-dot-light {
-		border-left: 10upx solid #0ea391;
-		padding-left: 10upx;
-		font-size: 32upx;
-		color: #000000
-	}
-	
-	.qiun-charts {
-		width: 750upx;
-		height: 500upx;
-		background-color: #FFFFFF;
-	}
-	
-	.charts {
-		width: 750upx;
-		height: 500upx;
-		background-color: #FFFFFF;
+		align-items: center;
+		.qiun-new{
+			width: 730upx;
+			z-index: 999;
+			background:rgba(255,255,255,1);
+			min-height: 300upx;
+			box-shadow:0px 0px 20px 0px rgba(0,0,0,0.1);
+			border-radius:33upx;
+			margin: 20upx 0;
+			.new-tip{
+				font-size: 22upx;
+				text-align: center;
+				position: absolute;
+				padding: 9upx 34upx;
+				margin-top: -14upx;
+				margin-left: 80upx;
+				color: #fff;
+				background: url('../../../static/p601.png') no-repeat;
+				background-size: 100% 50upx;
+			}
+			.qiun-charts{
+				.charts-man{
+					height: 400upx;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					text-align: center;
+					color: #666;
+					font-size: 30upx;
+					.male{
+						margin:0 90upx;
+						image{
+							width: 191upx;
+							height: 206upx;
+						}
+						.persent{
+							color: #3FA1FF;
+						}
+					}
+					.female{
+						margin:0 90upx;
+						image{
+							width: 150upx;
+							height: 189upx;
+							padding-bottom: 17upx;
+						}
+						.persent{
+							color: #FC6C6D;
+						}
+					}
+				}
+				.charts{
+					width: 720upx;
+					height: 500upx;
+					margin-top: 14upx;
+				}
+			}
+			
+		}
 	}
 </style>

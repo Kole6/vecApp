@@ -2,17 +2,15 @@
 	<view class="content">
 		<view class="list">
 			<view class="list-call">
-				<image class="img" src="/static/shilu-login/1.png"></image>
-				<input class="biaoti" v-model="phoneno" type="number" maxlength="11" placeholder="手机号" />
+				<input class="biaoti" v-model="phoneno" type="number" maxlength="11" placeholder="请输入手机号" />
 			</view>
 			<view class="list-call">
-				<image class="img" src="/static/shilu-login/3.png"></image>
-				<input class="biaoti" v-model="code" type="number" maxlength="4" placeholder="验证码" />
+				<input class="biaoti" v-model="code" type="number" maxlength="4" placeholder="请输入验证码" />
 				<view class="yzm" :class="{ yzms: second>0 }" @tap="getcode">{{yanzhengma}}{{second>0?'s':''}}</view>
 			</view>
 		</view>
 		<view class="sign-in">
-			<button type="primary" @tap="toIndex()">下一步</button>
+			<button class="vec-btn" type="primary" @tap="toIndex()">下 一 步</button>
 		</view>
 	</view>
 </template>
@@ -136,7 +134,11 @@
 		}
 	}
 </script>
-
+<style>
+	page{
+		background-color:#fff;
+	}
+</style>
 <style scoped lang="scss">
 	.content {
 		display: flex;
@@ -176,7 +178,7 @@
 		align-items: center;
 		height: 100upx;
 		color: #333333;
-		border-bottom: 1upx solid rgba(230, 230, 230, 1);
+		border-bottom: 1upx solid #999;
 	}
 
 	.list-call .img {
@@ -193,20 +195,18 @@
 	}
 
 	.yzm {
-		color: #FF7D13;
-		font-size: 24upx;
+		color: $main-base-color;
+		font-size: 25upx;
 		line-height: 64upx;
-		padding-left: 10upx;
-		padding-right: 10upx;
+		padding-left: 50upx;
+		padding-right: 50upx;
 		width: auto;
 		height: 64upx;
-		border: 1upx solid #FFA800;
-		border-radius: 50upx;
+		border-left: 2upx solid #999999;
 	}
-
+	
 	.yzms {
 		color: #999999 !important;
-		border: 1upx solid #999999;
 	}
 
 	.dlbutton {

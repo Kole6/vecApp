@@ -340,7 +340,7 @@
 		}, {
 			"path": "pages/login/register/register",
 			"style": {
-				"navigationBarTitleText": "注册"
+				"navigationBarTitleText": "新用户注册"
 			}
 		}, {
 			"path": "pages/login/forget/forget",
@@ -442,7 +442,13 @@
 				"navigationBarTitleText": "学校简介"
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/personal/verifyMailbox/verifyMailbox",
+            "style": {
+            	"navigationBarTitleText": "验证邮箱"
+            }
+        }
+    ],
 	"tabBar": {
 		"color": "#7a7e83",
 		"selectedColor": "#6451FC",

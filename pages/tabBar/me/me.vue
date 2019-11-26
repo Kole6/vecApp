@@ -52,11 +52,11 @@
 	export default {
 		data() {
 			return {
-				userInfo:''
+				userInfo: ''
 			};
 		},
 		onShow() {
-			this.userInfo = uni.getStorageSync('userInfo')
+			this.userInfo = uni.getStorageSync('userInfo');
 		},
 		methods: {
 			toLogin() {
@@ -65,34 +65,58 @@
 				});
 			},
 			toVip() {
-				uni.navigateTo({
-					url: "/pages/indexIcon/vip/vip"
-				})
+				if (this.userInfo) {
+					uni.navigateTo({
+						url: "/pages/indexIcon/vip/vip"
+					})
+				} else {
+					this.toLogin()
+				}
 			},
 			toAccount() {
-				uni.navigateTo({
-					url: "/pages/personal/account/account"
-				})
+				if (this.userInfo) {
+					uni.navigateTo({
+						url: "/pages/personal/account/account"
+					})
+				} else {
+					this.toLogin()
+				}
 			},
 			toFollow() {
-				uni.navigateTo({
-					url: "../../personal/follow/follow"
-				})
+				if (this.userInfo) {
+					uni.navigateTo({
+						url: "../../personal/follow/follow"
+					})
+				} else {
+					this.toLogin()
+				}
 			},
 			toFeedback() {
-				uni.navigateTo({
-					url: "../../personal/feedback/feedback"
-				})
+				if (this.userInfo) {
+					uni.navigateTo({
+						url: "../../personal/feedback/feedback"
+					})
+				} else {
+					this.toLogin()
+				}
 			},
 			toRecommend() {
-				uni.navigateTo({
-					url: "../../personal/recommend/recommend"
-				})
+				if (this.userInfo) {
+					uni.navigateTo({
+						url: "../../personal/recommend/recommend"
+					})
+				} else {
+					this.toLogin()
+				}
 			},
 			toAbountUs() {
-				uni.navigateTo({
-					url: "../../personal/aboutUs/aboutUs"
-				})
+				if (this.userInfo) {
+					uni.navigateTo({
+						url: "../../personal/aboutUs/aboutUs"
+					})
+				} else {
+					this.toLogin()
+				}
 			}
 		},
 	}

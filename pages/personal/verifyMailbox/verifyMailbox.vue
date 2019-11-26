@@ -2,20 +2,12 @@
 	<view class="content">
 		<view class="list">
 			<view class="list-call">
-				<input class="biaoti" v-model="password" type="text" maxlength="32" 
-				placeholder="请输入新密码" :password="!showPassword" />
-				<image class="img" :src="showPassword?'/static/shilu-login/op.png':'/static/shilu-login/cl.png'" 
-				@tap="display"></image>
+				<input class="biaoti" v-model="phoneno" type="text" maxlength="11" placeholder="请输入邮箱号" />
 			</view>
 			<view class="list-call">
-				<input class="biaoti" v-model="password2" type="text" maxlength="32" 
-				placeholder="确认新密码" :password="!showPassword2" />
-				<image class="img" :src="showPassword2?'/static/shilu-login/op.png':'/static/shilu-login/cl.png'" 
-				@tap="display2"></image>
+				<input class="biaoti" v-model="code" type="number" maxlength="4" placeholder="请输入验证码" />
+				<view class="yzm" :class="{ yzms: second>0 }" @tap="getcode">{{yanzhengma}}{{second>0?'s':''}}</view>
 			</view>
-		</view>
-		<view class="jieshi">
-			<text>密码必须是8-20个英文字母、数字或者符号（除空格），且字母、数字和标点符号至少包含两种。</text>
 		</view>
 		<view class="sign-in">
 			<button class="vec-btn" type="primary" @tap="toIndex()">提 交</button>
@@ -38,12 +30,10 @@
 			return {
 				phoneno: '',
 				password: '',
-				password2:'',
 				code: '',
 				invitation: '',
 				xieyi: true,
 				showPassword: false,
-				showPassword2: false,
 				second: 0
 			};
 		},
@@ -64,9 +54,6 @@
 			display() {
 				this.showPassword = !this.showPassword
 			},
-			display2() {
-				this.showPassword2 = !this.showPassword2
-			},
 			xieyitong() {
 				this.xieyi = !this.xieyi;
 			},
@@ -83,8 +70,8 @@
 				}, 1000)
 			},
 			toIndex() {
-				uni.navigateTo({
-					url: '/pages/login/signIn/signIn'
+				uni.navigateBack({
+				    delta: 1
 				});
 			},
 			bindLogin() {
@@ -149,7 +136,7 @@
 </script>
 <style>
 	page{
-		background-color: #fff;
+		background-color:#fff;
 	}
 </style>
 <style scoped lang="scss">
@@ -158,24 +145,6 @@
 		flex-direction: column;
 		justify-content: center;
 	}
-
-	.header {
-		width: 161upx;
-		height: 161upx;
-		background: rgba(63, 205, 235, 1);
-		box-shadow: 0upx 12upx 13upx 0upx rgba(63, 205, 235, 0.47);
-		border-radius: 50%;
-		margin-top: 30upx;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	.header image {
-		width: 161upx;
-		height: 161upx;
-		border-radius: 50%;
-	}
-
 	.list {
 		display: flex;
 		flex-direction: column;
@@ -190,7 +159,7 @@
 		justify-content: space-between;
 		align-items: center;
 		height: 100upx;
-		color: #333333;
+		color:rgba(170,170,170,1);
 		border-bottom: 1upx solid #999;
 	}
 
@@ -202,77 +171,27 @@
 	.list-call .biaoti {
 		flex: 1;
 		text-align: left;
-		font-size: 32upx;
+		font-size: 30upx;
 		line-height: 100upx;
 		margin-left: 16upx;
 	}
 
 	.yzm {
-		color: #FF7D13;
-		font-size: 24upx;
+		color: $main-base-color;
+		font-size: 25upx;
 		line-height: 64upx;
-		padding-left: 10upx;
-		padding-right: 10upx;
+		padding-left: 50upx;
+		padding-right: 50upx;
 		width: auto;
 		height: 64upx;
-		border: 1upx solid #FFA800;
-		border-radius: 50upx;
+		border-left: 2upx solid #999999;
 	}
 
 	.yzms {
 		color: #999999 !important;
-		border: 1upx solid #999999;
-	}
-
-	.dlbutton {
-		color: #FFFFFF;
-		font-size: 34upx;
-		width: 470upx;
-		height: 100upx;
-		background: linear-gradient(-90deg, rgba(63, 205, 235, 1), rgba(188, 226, 158, 1));
-		box-shadow: 0upx 0upx 13upx 0upx rgba(164, 217, 228, 0.2);
-		border-radius: 50upx;
-		line-height: 100upx;
-		text-align: center;
-		margin-left: auto;
-		margin-right: auto;
-		margin-top: 100upx;
-	}
-
-	.dlbutton-hover {
-		background: linear-gradient(-90deg, rgba(63, 205, 235, 0.9), rgba(188, 226, 158, 0.9));
-	}
-
-	.xieyi {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		font-size: 30upx;
-		margin-top: 80upx;
-		color: #FFA800;
-		text-align: center;
-		height: 40upx;
-		line-height: 40upx;
-	}
-
-	.xieyi image {
-		width: 40upx;
-		height: 40upx;
 	}
 
 	.sign-in {
-		margin-top: 25px;
-		text-align: center;
-
-		button {
-			width: 540upx;
-			background-color: #17d8a9;
-		}
-	}
-	.jieshi{
-		padding: 25upx 70upx;
-		color: #808080;
-		font-size: 26upx;
+		margin-top: 50px;
 	}
 </style>
