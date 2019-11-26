@@ -66,7 +66,7 @@
 	}
 }
 .sign-xieyi{
-	margin-top: 90upx;
+	margin-top: 48upx;
 	font-size: 26upx;
 	color: #ccc;
 	.xieyi{
@@ -87,7 +87,7 @@
 		align-items: center;
 		height: 100upx;
 		color: #333333;
-		border-bottom: 1upx solid rgba(230,230,230,1);
+		border-bottom: 1upx solid #999;
 	}
 	.list-call .img{
 		width: 40upx;
@@ -101,19 +101,17 @@
 		margin-left: 16upx;
 	}
 	.yzm {
-		color: #FF7D13;
-		font-size: 24upx;
+		color: $main-base-color;
+		font-size: 25upx;
 		line-height: 64upx;
-		padding-left: 10upx;
-		padding-right: 10upx;
-		width:auto;
-		height:64upx;
-		border:1upx solid #FFA800;
-		border-radius: 50upx;
+		padding-left: 50upx;
+		padding-right: 50upx;
+		width: auto;
+		height: 64upx;
+		border-left: 2upx solid #999999;
 	}
 	.yzms {
 		color: #999999 !important;
-		border:1upx solid #999999;
 	}
 }
 	

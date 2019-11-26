@@ -19,7 +19,7 @@
 				<text class="menu_l">昵称</text>
 				<view class="menu_r"><text class="menu_r_text">{{nickname}}</text></view>
 			</view>
-			<view class="menu_item" @tap="toNi()">
+			<view class="menu_item" @tap="toMail()">
 				<text class="menu_l">邮箱</text>
 				<view class="menu_r"><text class="menu_r_text">未绑定</text></view>
 			</view>
@@ -103,6 +103,11 @@
 			},
 			toNi() {
 				this.value = true
+			},
+			toMail(){
+				uni.navigateTo({
+					url: "/pages/personal/verifyMailbox/verifyMailbox"
+				})
 			},
 			toRecharge(){
 				uni.removeStorage({

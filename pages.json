@@ -293,14 +293,14 @@
 				"navigationBarTitleText": "搜索"
 			}
 		}, {
-			"path": "pages/login/signIn/signIn",
-			"style": {
-				"navigationBarTitleText": ""
-			}
-		}, {
 			"path": "pages/personal/account/account",
 			"style": {
 				"navigationBarTitleText": "账户设置"
+			}
+		}, {
+			"path": "pages/personal/aboutUs/introduce",
+			"style": {
+				"navigationBarTitleText": "介绍"
 			}
 		}, {
 			"path": "pages/personal/follow/follow",
@@ -328,11 +328,21 @@
 			"style": {
 				"navigationBarTitleText": "修改手机号"
 			}
+		}, {
+			"path": "pages/personal/verifyMailbox/verifyMailbox",
+			"style": {
+				"navigationBarTitleText": "验证邮箱"
+			}
 		},
 		{
 			"path": "pages/personal/modifyPwd/modifyPwd",
 			"style": {
 				"navigationBarTitleText": "重置密码"
+			}
+		}, {
+			"path": "pages/login/signIn/signIn",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		}, {
 			"path": "pages/login/userAgreement/userAgreement",
@@ -342,7 +352,7 @@
 		}, {
 			"path": "pages/login/register/register",
 			"style": {
-				"navigationBarTitleText": "注册"
+				"navigationBarTitleText": "新用户注册"
 			}
 		}, {
 			"path": "pages/login/forget/forget",
@@ -401,11 +411,7 @@
 			"style": {
 				"navigationBarTitleText": "双高计划"
 			}
-		}, {
-			"path": "components/ziXun/ziXun",
-			"style": {}
 		},
-		// 学校详情
 		{
 			"path": "pages/schoolDetails/SchoolDetail",
 			"style": {
@@ -432,11 +438,6 @@
 			"path": "pages/schoolDetails/ProfessionSetting/ProfessionSetting",
 			"style": {
 				"navigationBarTitleText": "专业设置"
-			}
-		}, {
-			"path": "pages/personal/aboutUs/introduce",
-			"style": {
-				"navigationBarTitleText": "介绍"
 			}
 		}, {
 			"path": "pages/schoolDetails/schoolProfile",

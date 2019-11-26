@@ -5,22 +5,22 @@
 		</view>
 		<view class="sign-list" v-if="!isPhoneSign">
 			<view class="list-call">
-				<image class="img" src="/static/shilu-login/1.png"></image>
-				<input class="biaoti" v-model="userno" type="text" maxlength="32" placeholder="账号" />
+				<!-- <image class="img" src="/static/shilu-login/1.png"></image> -->
+				<input class="biaoti" v-model="userno" type="text" maxlength="32" placeholder="请输入账号" />
 			</view>
 			<view class="list-call">
-				<image class="img" src="/static/shilu-login/2.png"></image>
-				<input class="biaoti" v-model="password" type="text" maxlength="32" placeholder="登录密码" :password="!showPassword" />
+				<!-- <image class="img" src="/static/shilu-login/2.png"></image> -->
+				<input class="biaoti" v-model="password" type="text" maxlength="32" placeholder="请输入密码" :password="!showPassword" />
 				<image class="img" :src="showPassword?'/static/shilu-login/op.png':'/static/shilu-login/cl.png'" @tap="display"></image>
 			</view>
 		</view>
 		<view class="sign-list" v-else>
 			<view class="list-call">
-				<image class="img" src="/static/shilu-login/1.png"></image>
-				<input class="biaoti" v-model="phoneno" type="number" maxlength="11" placeholder="手机号" />
+				<!-- <image class="img" src="/static/shilu-login/1.png"></image> -->
+				<input class="biaoti" v-model="phoneno" type="number" maxlength="11" placeholder="请输入手机号" />
 			</view>
 			<view class="list-call">
-				<image class="img" src="/static/shilu-login/3.png"></image>
+				<!-- <image class="img" src="/static/shilu-login/3.png"></image> -->
 				<input class="biaoti" v-model="code" type="number" maxlength="4" placeholder="验证码" />
 				<view class="yzm" :class="{ yzms: second>0 }" @tap="getcode">{{yanzhengma}}{{second>0?'s':''}}</view>
 			</view>
