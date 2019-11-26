@@ -52,7 +52,7 @@
 				<view class="right">
 					<text>对比</text>
 				</view>
-				<image class="bg1" src="/static/indexIcon/colorGroup.png" mode="aspectFit" style="width: 300upx;height: 100upx;"></image>
+				<image class="bg1" src="/static/indexIcon/colorGroup2.png" mode="aspectFit" style="width: 300upx;height: 100upx;"></image>
 				<image class="bg2" src="/static/indexIcon/vszong.png" mode="aspectFit" style="width: 70upx;height: 70upx;"></image>
 			</view>
 			<!-- 专业解读 -->

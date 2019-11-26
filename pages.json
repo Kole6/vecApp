@@ -188,8 +188,9 @@
 					"titleNView": {
 						"buttons": [{
 							"fontSrc": "/static/iconFont/iconfont.ttf",
-							"text": "\ue654",
-							"fontSize": "32px"
+							"text": "\ue630",
+							"fontSize": "20px",
+							"color":"#666666"
 						}]
 					}
 				}
@@ -234,8 +235,9 @@
 					"titleNView": {
 						"buttons": [{
 							"fontSrc": "/static/iconFont/iconfont.ttf",
-							"text": "\ue654",
-							"fontSize": "32px"
+							"text": "\ue630",
+							"fontSize": "20px",
+							"color":"#666666"
 						}]
 					}
 				}

@@ -50,7 +50,7 @@
 						url:'./ZLFile',
 						desc:'Quality Annual Report'
 					},{
-						name:'教学大纲',
+						name:'基础课程教学大纲',
 						url:'./JXDGFile',
 						desc:'Basics Course syllabus'
 					},
@@ -202,12 +202,13 @@
 		.title{
 			color: $main-text-color;
 			font-size: $uni-font-size-lg;
+			max-width: 150upx;
 		}
 		.desc{
 			margin-top: 10upx;
 			color: #999999;
-			font-size: $uni-font-size-sm;
-			width: 60%;
+			font-size: 20upx;
+			max-width: 150upx;
 		}
 		
 	}
