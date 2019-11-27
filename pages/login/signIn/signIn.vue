@@ -105,9 +105,25 @@
 				})
 			},
 			toLogin(){
-				uni.switchTab({
-					url: "../../tabBar/index/index"
-				})
+				if(this.userno && this.password){
+					uni.setStorage({
+					    key: 'userInfo',
+						data:{
+							phone:this.phoneno,
+							name:this.userno,
+							password:this.password
+						}
+					});
+					uni.switchTab({
+						url: "../../tabBar/me/me"
+					})
+				}else{
+					uni.showToast({
+						icon: 'none',
+						position: 'bottom',
+						title: '请输入账号密码'
+					});
+				}
 			},
 			toReg() {
 				uni.navigateTo({

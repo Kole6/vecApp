@@ -9,10 +9,10 @@
 			<view class="menu_item" @tap="toIntroduce()" hover-class="navigator-hover">
 				<text class="menu_l">职教圈介绍</text>
 			</view>
-			<view class="menu_item" hover-class="navigator-hover" @tap="toNotopen()">
+			<view class="menu_item" hover-class="navigator-hover" @tap="toShowWeixin()">
 				<text class="menu_l">官方微信</text>
 			</view>
-			<view class="menu_item" hover-class="navigator-hover"  @tap="toNotopen()">
+			<view class="menu_item" hover-class="navigator-hover"  @tap="toPhone()">
 				<text class="menu_l">联系我们</text>
 			</view>
 		</view>
@@ -45,6 +45,26 @@
 				uni.navigateTo({
 					url:"./introduce"
 				})
+			},
+			toShowWeixin(){
+				uni.showModal({
+					content: '请搜索微信公众号: 职教圈',
+					showCancel: false
+				})
+			},
+			toPhone(){
+				uni.showModal({
+				    content: '拨打: 021-62866809',
+				    success: function (res) {
+				        if (res.confirm) {
+				            uni.makePhoneCall({
+				                phoneNumber: '021-62866809'
+				            });
+				        } else if (res.cancel) {
+				            console.log('取消拨打');
+				        }
+				    }
+				});
 			},
 			toNotopen(){
 				uni.showToast({

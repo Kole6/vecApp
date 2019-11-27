@@ -110,13 +110,9 @@
 				}
 			},
 			toAbountUs() {
-				if (this.userInfo) {
-					uni.navigateTo({
-						url: "../../personal/aboutUs/aboutUs"
-					})
-				} else {
-					this.toLogin()
-				}
+				uni.navigateTo({
+					url: "../../personal/aboutUs/aboutUs"
+				})
 			}
 		},
 	}

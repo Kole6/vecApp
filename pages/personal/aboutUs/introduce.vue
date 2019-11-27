@@ -15,7 +15,7 @@
 	}
 
 	.wen {
-		font-size: 35upx;
+		font-size: 34upx;
 		padding-left: 80upx;
 		line-height: 60upx;
 	}
