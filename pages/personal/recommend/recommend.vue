@@ -21,6 +21,7 @@
 					<text class="txt"> 分享给朋友</text>
 					<text class="line"></text>
 				</view>
+				<!-- #ifdef APP-PLUS -->
 				<view class="inner-fen">
 					<view class="fen-item"  hover-class="navigator-hover" @tap="toNotopen()">
 						<p><image src="/static/p401.png" mode="aspectFill"></image></p>
@@ -43,6 +44,31 @@
 						<p>微博</p>
 					</view>
 				</view>
+				<!-- #endif -->
+				<!-- #ifndef APP-PLUS -->
+				<view class="inner-fen">
+					<view class="fen-item"  hover-class="navigator-hover" @tap="toNotopen()">
+						<p><image src="/static/p401.png" mode="aspectFill"></image></p>
+						<p>微信好友</p>
+					</view>
+					<view class="fen-item"  hover-class="navigator-hover" @tap="toNotopen()">
+						<p><image src="/static/p402.png" mode="aspectFill"></image></p>
+						<p>朋友圈</p>
+					</view>
+					<view class="fen-item" hover-class="navigator-hover" @tap="toNotopen()">
+						<p><image src="/static/p403.png" mode="aspectFill"></image></p>
+						<p>QQ</p>
+					</view>
+					<view class="fen-item" hover-class="navigator-hover" @tap="toNotopen()">
+						<p><image src="/static/p404.png" mode="aspectFill"></image></p>
+						<p>QQ空间</p>
+					</view>
+					<view class="fen-item" hover-class="navigator-hover" @tap="toNotopen()">
+						<p><image src="/static/p405.png" mode="aspectFill"></image></p>
+						<p>微博</p>
+					</view>
+				</view>
+				<!-- #endif -->
 			</view>
 		</view>
 	</view>
@@ -62,6 +88,9 @@
 			}
 		},
 		methods: {
+			toQQ(){ 
+				//只能载app中操作，其他分享会有各自的分享途径
+			},
 			toNotopen(){
 				uni.showToast({
 					icon:"none",

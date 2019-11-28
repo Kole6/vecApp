@@ -157,6 +157,23 @@
 					position: 'bottom',
 					title: '...'
 				});
+				// uni.getProvider({
+				//     service: 'oauth',
+				//     success: function (res) {
+				//         console.log(res.provider) //qq,xiaomi,sinaweibo,weixin
+				//         if (~res.provider.indexOf('qq')) {
+				//             uni.login({
+				//                 provider: 'qq', 
+				//                 success: function (loginRes) {
+				//                     console.log(JSON.stringify(loginRes));
+				// 					//{"authResult":{"access_token":"60EC2F15043D23DAE76E453AE810A1C1",
+				// 					//		"expires_in":7776000,"openid":"CD7B64C0568FB8721FA0A141665F5995",
+				// 					//		"scope":"snsapi_userinfo"},"errMsg":"login:ok"}
+				//                 }
+				//             });
+				//         }
+				//     }
+				// });
 			},
 		}
 	}
