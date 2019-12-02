@@ -67,6 +67,11 @@
                 "oauth" : {
                     "qq" : {
                         "appid" : "101832674"
+                    },
+                    "weixin" : {
+                        "appid" : "wx12c4cdd6719e09e5",
+                        "appsecret" : "35075a62dad707f08f40137726d446de",
+                        "UniversalLinks" : ""
                     }
                 },
                 "speech" : {}

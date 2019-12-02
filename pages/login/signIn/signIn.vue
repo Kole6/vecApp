@@ -46,7 +46,7 @@
 			<image @tap="login_qq()" src="../../../static/p108.png" mode="aspectFill"></image>
 			<image @tap="login_weixin()" src="../../../static/p109.png" mode="aspectFill"></image>
 		</view>
-		<!-- <textarea :value="log.log2" placeholder="" maxlength="900"/> -->
+		<!-- <textarea :value=" log.log1 +'vvvvvvvv'+log.log2" placeholder="" maxlength="900"/> -->
 		<view class="sign-xieyi">
 			<text>登录即表示同意职教圈
 				<text class="xieyi" @tap="toUserAgree()">《用户协议》</text>及
@@ -148,12 +148,55 @@
 				}, 1000)
 			},
 			login_weixin() {
-				//微信登录
+				// #ifndef APP-PLUS
 				uni.showToast({
 					icon: 'none',
 					position: 'bottom',
-					title: '...'
+					title: '目前仅APP支持'
 				});
+				// #endif
+				
+				// #ifdef APP-PLUS
+				var vm = this;
+				uni.getProvider({
+				    service: 'oauth',
+				    success: function (res) {
+				        console.log(res.provider) //qq,xiaomi,sinaweibo,weixin
+						vm.log.log1 = res.provider
+				        if (~res.provider.indexOf('weixin')) {
+				            uni.login({
+				                provider: 'weixin', 
+				                success: function (loginRes) {
+				                	vm.$HTTP({
+				                	  method: 'GET',
+				                	  baseURL:'https://api.weixin.qq.com/sns/userinfo',
+				                	  url: '',
+				                	  data: {
+				                		  openid:loginRes.authResult.openid,
+				                		  access_token:loginRes.authResult.access_token
+				                	  },
+				                	  load:true
+				                	}).then((data) =>{
+				                	  uni.setStorage({
+				                	    key: 'userInfo',
+				                	  	data:{
+				                			name:data.nickname,
+				                			picUrl:data.headimgurl
+				                		}
+				                	  });
+				                	  uni.switchTab({
+				                	  	url: "../../tabBar/me/me"
+				                	  })
+				                	}, (err) => {
+				                	  console.log(err)
+				                	});
+				                }
+				            });
+				        }
+				    }
+				});
+				// #endif
+				
 			},
 			login_qq() {
 				// #ifndef APP-PLUS
