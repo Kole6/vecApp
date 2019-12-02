@@ -49,7 +49,7 @@
 			<view class="uni-share">
 				<view class="uni-share-title">分享到</view>
 				<view class="uni-share-content">
-					<view v-for="(item, index) in bottomData" :key="index" class="uni-share-content-box">
+					<view v-for="(item, index) in bottomData" :key="index" class="uni-share-content-box" @tap="handleShareItem(item)">
 						<view class="uni-share-content-image">
 							<image :src="item.icon" class="image" />
 						</view>
@@ -72,14 +72,13 @@
 			return{
 				type:'bottom',
 				bottomData: [{
-						text: '微信',
+						text: '微信好友',
 						icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-2.png',
 						name: 'wx'
-					},
-					{
-						text: '支付宝',
-						icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-8.png',
-						name: 'wx'
+					},{
+						text: '朋友圈',
+						icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-2.png',
+						name: 'wxp'
 					},
 					{
 						text: 'QQ',
@@ -90,16 +89,6 @@
 						text: '新浪',
 						icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-1.png',
 						name: 'sina'
-					},
-					{
-						text: '百度',
-						icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-7.png',
-						name: 'copy'
-					},
-					{
-						text: '其他',
-						icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-5.png',
-						name: 'more'
 					}
 				]
 			}
@@ -115,6 +104,60 @@
 			})
 		},
 		methods:{
+			handleShareItem(item){
+				// console.log(item,'item')
+				uni.getProvider({
+					service:'share',
+					success:(res)=>{
+					}
+				})
+				let params = {}
+				if(item.name=='wx'){
+					// 微信好友
+					params = {
+						provider:'weixin',
+						type:1,
+						scene:'WXSceneSession',
+						summary:'测试地址',
+					}
+					
+				}else if(item.name == 'wxp'){
+					//微信朋友圈
+					params = {
+						provider:'weixin',
+						type:1,
+						scene:'WXSenceTimeline',
+						summary:'测试地址',
+					}
+				}else if(item.name == 'qq'){
+					//qq
+					params = {
+						provider:'qq',
+						type:3,
+						summary:'qqsumary',
+						title:'qq分享',
+						href:'http://www.pthink.com.cn/',
+						mediaUrl:'https://audiomicro-sources.s3.amazonaws.com/preview/295991/ceea70e41a4b013',
+					}
+					
+				}
+				uni.share({
+					...params,
+					success(res){
+						console.log(success,'su')
+					},
+					fail(err){
+						uni.showToast({
+							icon:'none',
+							title:err.errMsg
+						})
+					},
+					complete:(res)=>{
+						console.log(res)
+					}
+				})
+				this.cancel('share')
+			},
 			change(e){
 				console.log(e)
 			},

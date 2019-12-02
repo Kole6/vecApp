@@ -112,6 +112,7 @@
 			this.cWidth = uni.upx2px(750);
 			this.cHeight = uni.upx2px(500);
 			this.getServerData();
+			this.getData()
 		},
 		computed: {
 			scrollH() {
@@ -123,6 +124,20 @@
 			}
 		},
 		methods: {
+			getData(){
+				this.$HTTP({
+					url:'/zjq/College/GetTeacherInfo',
+					header:'form',
+					data:{
+						sid:'4151012965',
+						token:'d05902562e544db29bbe777954d43bb0',
+						pageIndex:'1',
+						pageSize:'10'
+					}
+				}).then(res=>{
+					console.log(res,'res')
+				})
+			},
 			getServerData() {
 				let Pie = {
 					series: [{

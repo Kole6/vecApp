@@ -166,7 +166,7 @@ export default {
 		display: inline-flex;
 		justify-content: center;
 		align-items: center;
-		border: solid 1upx $main-dividing-line1;
+		// border: solid 1upx $main-dividing-line1;
 		// background: $main-base-color;
 		background: url(../../../static/indexIcon/rank.png) no-repeat;
 		background-size: 100% 100%;

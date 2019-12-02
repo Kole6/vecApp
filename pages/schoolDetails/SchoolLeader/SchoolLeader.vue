@@ -1,13 +1,13 @@
 <template>
 	<view class="">
-		<load-more
+		<!-- <load-more
 			ref="scroll"
 			@onPullDown="onPullDown"
 			@onScroll="onScroll"
 			@onLoadMore="onLoadMore"
 			:styleObj="{ height: systemInfo.screenHeight - 80 + 'px' }"
 			:loadStatus="loadStatus"
-		>
+		> -->
 			<view class="m-list" v-for="(item, index) in dataArr" :key="index">
 				<view class="avatar">{{ item.teachername.substr(0, 1) }}</view>
 				<view class="name">{{ item.teachername }}</view>
@@ -15,7 +15,7 @@
 					<text v-for="(tag, i) in item.tags" :key="i">{{ tag }}</text>
 				</view>
 			</view>
-		</load-more>
+		<!-- </load-more> -->
 	</view>
 </template>
 
