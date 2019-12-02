@@ -445,10 +445,6 @@
 				"navigationBarTitleText": "学校简介"
 			}
 		}
-	    ,{
-            "path" : "pages/tabBar/me/tou",
-            "style" : {}
-        }
     ],
 	"tabBar": {
 		"color": "#7a7e83",
