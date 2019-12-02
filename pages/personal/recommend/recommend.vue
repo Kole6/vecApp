@@ -31,7 +31,7 @@
 						<p><image src="/static/p402.png" mode="aspectFill"></image></p>
 						<p>朋友圈</p>
 					</view>
-					<view class="fen-item" hover-class="navigator-hover" @tap="toNotopen()">
+					<view class="fen-item" hover-class="navigator-hover" @tap="toQQ()">
 						<p><image src="/static/p403.png" mode="aspectFill"></image></p>
 						<p>QQ</p>
 					</view>
@@ -88,8 +88,20 @@
 			}
 		},
 		methods: {
-			toQQ(){ 
-				//只能载app中操作，其他分享会有各自的分享途径
+			toQQ(){
+				uni.share({
+					provider:'qq',
+					title:'职教圈',
+					summary: '真实的职教，精准的圈子',
+					imageUrl:'https://tva4.sinaimg.cn/crop.0.0.239.239.180/005yBM71gw1ej3w1571gfj306o06omxm.jpg',
+					href:"https://weibo.com/u/5092062667",
+					success: (res) => {
+						console.log(45);
+					},
+					fail: (e) => {
+						console.log(4545);
+					}
+				});
 			},
 			toNotopen(){
 				uni.showToast({

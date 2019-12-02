@@ -5,7 +5,7 @@
 				<text @touchstart="toAccount()">{{userInfo.name}}</text>
 			</view>
 			<view class="box_right">
-				<image src="/static/p106.png" mode="aspectFill" @touchstart="toAccount()"></image>
+				<image :src="picUrl" mode="aspectFill" @touchstart="toAccount()"></image>
 			</view>
 		</view>
 		<view class="center_box" v-else>
@@ -13,7 +13,7 @@
 				<text @touchstart="toLogin()">登录 / 注册</text>
 			</view>
 			<view class="box_right">
-				<image src="/static/p106.png" mode="aspectFill" @touchstart="toLogin()"></image>
+				<image :src="picUrl" mode="aspectFill" @touchstart="toLogin()"></image>
 			</view>
 		</view>
 		<view class="center_box_bg">
@@ -52,11 +52,15 @@
 	export default {
 		data() {
 			return {
-				userInfo: ''
+				userInfo: '',
+				picUrl:'/static/p106.png'
 			};
 		},
 		onShow() {
 			this.userInfo = uni.getStorageSync('userInfo');
+			if(this.userInfo.picUrl){
+				this.picUrl =this.userInfo.picUrl
+			}
 		},
 		methods: {
 			toLogin() {

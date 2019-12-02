@@ -18,7 +18,7 @@
         /* 模块配置 */
         "modules" : {
             "Share" : {},
-            "Speech" : {}
+            "OAuth" : {}
         },
         /* 应用发布信息 */
         "distribute" : {
@@ -57,14 +57,18 @@
             "sdkConfigs" : {
                 "share" : {
                     "qq" : {
-                        "appid" : "1108016906"
+                        "appid" : "101832674"
                     },
                     "weixin" : {
                         "appid" : "wx12c4cdd6719e09e5",
                         "UniversalLinks" : ""
                     }
                 },
-                "oauth" : {},
+                "oauth" : {
+                    "qq" : {
+                        "appid" : "101832674"
+                    }
+                },
                 "speech" : {}
             },
             "splashscreen" : {

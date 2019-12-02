@@ -46,6 +46,7 @@
 			<image @tap="login_qq()" src="../../../static/p108.png" mode="aspectFill"></image>
 			<image @tap="login_weixin()" src="../../../static/p109.png" mode="aspectFill"></image>
 		</view>
+		<!-- <textarea :value="log.log2" placeholder="" maxlength="900"/> -->
 		<view class="sign-xieyi">
 			<text>登录即表示同意职教圈
 				<text class="xieyi" @tap="toUserAgree()">《用户协议》</text>及
@@ -76,7 +77,11 @@
 				xieyi: true,
 				showPassword: false,
 				second: 0,
-				isPhoneSign: false
+				isPhoneSign: false,
+				log:{
+					log1:'',
+					log2:''
+				}
 			}
 		},
 		computed: {
@@ -151,29 +156,57 @@
 				});
 			},
 			login_qq() {
-				//qq登录
+				// #ifndef APP-PLUS
 				uni.showToast({
 					icon: 'none',
 					position: 'bottom',
-					title: '...'
+					title: '目前仅APP支持'
 				});
-				// uni.getProvider({
-				//     service: 'oauth',
-				//     success: function (res) {
-				//         console.log(res.provider) //qq,xiaomi,sinaweibo,weixin
-				//         if (~res.provider.indexOf('qq')) {
-				//             uni.login({
-				//                 provider: 'qq', 
-				//                 success: function (loginRes) {
-				//                     console.log(JSON.stringify(loginRes));
-				// 					//{"authResult":{"access_token":"60EC2F15043D23DAE76E453AE810A1C1",
-				// 					//		"expires_in":7776000,"openid":"CD7B64C0568FB8721FA0A141665F5995",
-				// 					//		"scope":"snsapi_userinfo"},"errMsg":"login:ok"}
-				//                 }
-				//             });
-				//         }
-				//     }
-				// });
+				// #endif
+				
+				// #ifdef APP-PLUS
+				var vm = this;
+				uni.getProvider({
+				    service: 'oauth',
+				    success: function (res) {
+				        console.log(res.provider) //qq,xiaomi,sinaweibo,weixin
+						vm.log.log1 = res.provider
+				        if (~res.provider.indexOf('qq')) {
+				            uni.login({
+				                provider: 'qq', 
+				                success: function (loginRes) {
+									vm.$HTTP({
+									  method: 'GET',
+									  baseURL:'https://graph.qq.com/user/get_user_info',
+									  url: '',
+									  data: {
+										  openid:loginRes.authResult.openid,
+										  access_token:loginRes.authResult.access_token,
+										  appid:'101832674'
+									  },
+									  load:true
+									}).then((data) =>{
+									  console.log(data)
+									  uni.setStorage({
+									    key: 'userInfo',
+									  	data:{
+											name:data.nickname,
+											picUrl:data.figureurl_qq
+										}
+									  });
+									  uni.switchTab({
+									  	url: "../../tabBar/me/me"
+									  })
+									}, (err) => {
+									  console.log(err)
+									});
+				                }
+				            });
+				        }
+				    }
+				});
+				// #endif
+				
 			},
 		}
 	}
