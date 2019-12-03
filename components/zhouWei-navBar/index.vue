@@ -1,10 +1,19 @@
 <template>
 	<view>
+		<!-- #ifdef MP-WEIXIN -->
+		<view
+			class="header"
+			:class="{ fixed: navFixed, absolute: type == 'transparent', line: navLine, colorWhite: isWhite }"
+			:style="{ background: navBgColor, color: navFontColor, opacity: transparentValue }"
+		>
+		<!-- #endif -->
+		<!-- #ifndef MP-WEIXIN -->
 		<view
 			class="header"
 			:class="{ fixed: navFixed, absolute: type == 'transparent', line: navLine, colorWhite: isWhite }"
 			:style="{ paddingTop: statusBarHeight + 'px', background: navBgColor, color: navFontColor, opacity: transparentValue }"
 		>
+		<!-- #endif -->
 			<view class="left_box">
 				<slot name="left">
 					<view class="left_info" :class="{ btnMongol: isTwoBtn }" v-if="back || $slots.left || (firstPage && back) || home">
@@ -39,7 +48,12 @@
 			</view>
 			<view class="right_info"><slot name="transparentFixedRight"></slot></view>
 		</view>
+		<!-- #ifdef MP-WEIXIN -->
+		<view v-if="type == 'fixed'" class="station"></view>
+		<!-- #endif -->
+		<!-- #ifndef MP-WEIXIN -->
 		<view v-if="type == 'fixed'" :style="{ paddingTop: statusBarHeight + 'px' }" class="station"></view>
+		<!-- #endif -->
 	</view>
 </template>
 <script>

@@ -122,12 +122,12 @@
 						page: '/pages/indexIcon/schoolDatabase/schoolDatabase'
 					},
 					{
-						url: '/static/home_icon6.png',
+						url: '/static/home_icon7.png',
 						text: '专业库',
 						page: '/pages/indexIcon/majorDatabase/majorDatabase'
 					},
 					{
-						url: '/static/home_icon7.png',
+						url: '/static/home_icon6.png',
 						text: '资料库',
 						page: '/pages/indexIcon/materialDatabase/materialDatabase'
 					},

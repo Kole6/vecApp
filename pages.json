@@ -1,25 +1,27 @@
 {
-	"pages": [{
+	"pages": [
+		{
 			"path": "pages/tabBar/index/init",
 			"style": {
 				"navigationBarTitleText": "入口页"
 			}
-		}, {
-			"path": "pages/tabBar/index/guide",
-			"style": {
-				"navigationBarTitleText": "引导页",
-				"titleNView": false,
-				"app-plus": {
-					"bounce": "none"
-				}
-			}
-		},
+		}, 
 		{
 			"path": "pages/tabBar/index/index",
 			"style": {
 				"navigationBarTitleText": "首页",
 				"app-plus": {
 					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/tabBar/index/guide",
+			"style": {
+				"navigationBarTitleText": "引导页",
+				"titleNView": false,
+				"app-plus": {
+					"bounce": "none"
 				}
 			}
 		},

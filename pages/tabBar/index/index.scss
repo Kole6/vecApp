@@ -10,6 +10,9 @@
 		.search_box {
 			width: 380upx;
 			margin-right: 40upx;
+			/* #ifdef MP-WEIXIN */
+			margin-left: 55upx;
+			/* #endif */
 			height: 60upx;
 			background-color: $main-search-bg-color;
 			border-radius: 32upx;
