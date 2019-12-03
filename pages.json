@@ -190,7 +190,7 @@
 							"fontSrc": "/static/iconFont/iconfont.ttf",
 							"text": "\ue630",
 							"fontSize": "20px",
-							"color":"#666666"
+							"color": "#666666"
 						}]
 					}
 				}
@@ -237,7 +237,7 @@
 							"fontSrc": "/static/iconFont/iconfont.ttf",
 							"text": "\ue630",
 							"fontSize": "20px",
-							"color":"#666666"
+							"color": "#666666"
 						}]
 					}
 				}
@@ -444,8 +444,13 @@
 			"style": {
 				"navigationBarTitleText": "学校简介"
 			}
+		}, {
+			"path": "pages/personal/avatarSet/AvatarSet",
+			"style": {
+				"navigationBarTitleText": "头像设置"
+			}
 		}
-    ],
+	],
 	"tabBar": {
 		"color": "#7a7e83",
 		"selectedColor": "#6451FC",
