@@ -61,7 +61,6 @@
 	export default {
 		onLoad() {
 			tha = this;
-
 		},
 		onUnload() {
 			clearInterval(js)

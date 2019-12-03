@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="center_menu" hover-class="center_menu--hover">
-			<view class="menu_item">
+			<view class="menu_item" @tap="handleModifyAvatar">
 				<text class="menu_l">头像</text>
 				<view class="menu_r">
 					<image src="/static/p106.png" class="menu_r_png" mode="aspectFill"></image>
@@ -60,6 +60,13 @@
 			}
 		},
 		methods: {
+			// 修改头像
+			handleModifyAvatar(){
+				console.log('==')
+				uni.navigateTo({
+					url: "/pages/personal/avatarSet/AvatarSet"
+				});
+			},
 			//模态框确认
 			onConfirm(e) {
 				if (e[0].content) {
