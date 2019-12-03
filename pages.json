@@ -1,519 +1,479 @@
 {
-    "pages" : [
-        {
-            "path" : "pages/tabBar/index/init",
-            "style" : {
-                "navigationBarTitleText" : "入口页"
-            }
-        },
-        {
-            "path" : "pages/tabBar/index/guide",
-            "style" : {
-                "navigationBarTitleText" : "引导页",
-                "titleNView" : false,
-                "app-plus" : {
-                    "bounce" : "none"
-                }
-            }
-        },
-        {
-            "path" : "pages/tabBar/index/index",
-            "style" : {
-                "navigationBarTitleText" : "首页",
-                "app-plus" : {
-                    "titleNView" : false
-                }
-            }
-        },
-        {
-            "path" : "pages/tabBar/info/info",
-            "style" : {
-                "navigationBarTitleText" : "新闻资讯"
-            }
-        },
-        {
-            "path" : "pages/tabBar/me/me",
-            "style" : {
-                "navigationBarTitleText" : "个人中心",
-                "app-plus" : {
-                    "titleNView" : false
-                }
-            }
-        },
-        {
-            "path" : "pages/tabBar/info/infoDetail",
-            "style" : {
-                "navigationBarTitleText" : "资讯详情"
-            }
-        },
-        {
-            "path" : "pages/special/doubleHigh/doubleHigh",
-            "style" : {
-                "navigationBarTitleText" : "双高计划",
-                "app-plus" : {
-                    "titleNView" : {
-                        "buttons" : [
-                            {
-                                "type" : "none",
-                                "text" : "筛选",
-                                "fontSize" : "14px"
-                            }
-                        ]
-                    }
-                }
-            }
-        },
-        {
-            "path" : "pages/special/international/international",
-            "style" : {
-                "navigationBarTitleText" : "国际交流合作"
-            }
-        },
-        {
-            "path" : "pages/special/international/USASchool",
-            "style" : {
-                "navigationBarTitleText" : "中美合作交流"
-            }
-        },
-        {
-            "path" : "pages/special/international/PlusSchool",
-            "style" : {
-                "navigationBarTitleText" : "中加合作学校"
-            }
-        },
-        {
-            "path" : "pages/special/educationList/educationList",
-            "style" : {
-                "navigationBarTitleText" : "职教榜单"
-            }
-        },
-        {
-            "path" : "pages/special/educationList/AList",
-            "style" : {
-                "navigationBarTitleText" : "A榜单"
-            }
-        },
-        {
-            "path" : "pages/special/educationList/LikeList",
-            "style" : {
-                "navigationBarTitleText" : "人气榜"
-            }
-        },
-        {
-            "path" : "pages/special/serviceCentre/serviceCentre",
-            "style" : {
-                "navigationBarTitleText" : "服务中心"
-            }
-        },
-        {
-            "path" : "pages/indexIcon/schoolDatabase/schoolDatabase",
-            "style" : {
-                "app-plus" : {
-                    "titleNView" : false
-                }
-            }
-        },
-        {
-            "path" : "pages/indexIcon/schoolDatabase/SearchResult",
-            "style" : {
-                "app-plus" : {
-                    "titleNView" : false
-                }
-            }
-        },
-        {
-            "path" : "pages/indexIcon/majorDatabase/majorDatabase",
-            "style" : {
-                "navigationBarTitleText" : "专业库"
-            }
-        },
-        {
-            "path" : "pages/indexIcon/majorDatabase/BKCCSchool",
-            "style" : {
-                "navigationBarTitleText" : "本科层次职业教育"
-            }
-        },
-        {
-            "path" : "pages/indexIcon/majorDatabase/GZGZSchool",
-            "style" : {
-                "navigationBarTitleText" : "高职高专院校"
-            }
-        },
-        {
-            "path" : "pages/indexIcon/majorDatabase/ZDZYSchool",
-            "style" : {
-                "navigationBarTitleText" : "中等职业学校"
-            }
-        },
-        // 专业介绍
-        {
-            "path" : "pages/indexIcon/majorDatabase/ProfessionDesc",
-            "style" : {
-                "app-plus" : {
-                    "titleNView" : false
-                }
-            }
-        },
-        // 开设学校
-        {
-            "path" : "pages/indexIcon/majorDatabase/ProfessionSchool",
-            "style" : {
-                "navigationBarTitleText" : "专业信息"
-            }
-        },
-        // 专业对比
-        {
-            "path" : "pages/indexIcon/majorDatabase/ProfessionPK",
-            "style" : {
-                "navigationBarTitleText" : "专业信息"
-            }
-        },
-        {
-            "path" : "pages/indexIcon/majorDatabase/ProfessionPKAdd",
-            "style" : {
-                "navigationBarTitleText" : "添加专业"
-            }
-        },
-        {
-            "path" : "pages/indexIcon/majorDatabase/ProfessionPKDetail",
-            "style" : {
-                "navigationBarTitleText" : "专业信息",
-                "navigationBarTextStyle" : "white",
-                "transparentTitle" : "always"
-            }
-        },
-        {
-            "path" : "pages/indexIcon/materialDatabase/materialDatabase",
-            "style" : {
-                "navigationBarTitleText" : "资料库",
-                "app-plus" : {
-                    "titleNView" : {
-                        "buttons" : [
-                            {
-                                "fontSrc" : "/static/iconFont/iconfont.ttf",
-                                "text" : "\ue630",
-                                "fontSize" : "20px",
-                                "color" : "#666666"
-                            }
-                        ]
-                    }
-                }
-            }
-        },
-        {
-            "path" : "pages/indexIcon/materialDatabase/SearchFile",
-            "style" : {
-                "navigationBarTitleText" : "资料库名称"
-            }
-        },
-        {
-            "path" : "pages/indexIcon/materialDatabase/ZJFile",
-            "style" : {
-                "navigationBarTitleText" : "职教文件"
-            }
-        },
-        {
-            "path" : "pages/indexIcon/materialDatabase/JXBZFile",
-            "style" : {
-                "navigationBarTitleText" : "教学标准"
-            }
-        },
-        {
-            "path" : "pages/indexIcon/materialDatabase/ZLFile",
-            "style" : {
-                "navigationBarTitleText" : "质量年报"
-            }
-        },
-        {
-            "path" : "pages/indexIcon/materialDatabase/JXDGFile",
-            "style" : {
-                "navigationBarTitleText" : "教学大纲"
-            }
-        },
-        {
-            "path" : "pages/indexIcon/materialDatabase/FileDetail",
-            "style" : {
-                "navigationBarTitleText" : "详情",
-                "app-plus" : {
-                    "titleNView" : {
-                        "buttons" : [
-                            {
-                                "fontSrc" : "/static/iconFont/iconfont.ttf",
-                                "text" : "\ue630",
-                                "fontSize" : "20px",
-                                "color" : "#666666"
-                            }
-                        ]
-                    }
-                }
-            }
-        },
-        {
-            "path" : "pages/indexIcon/vip/vip",
-            "style" : {
-                "navigationBarTitleText" : "VIP会员"
-            }
-        },
-        {
-            "path" : "pages/indexIcon/vip/recharge",
-            "style" : {
-                "navigationBarTitleText" : "VIP充值"
-            }
-        },
-        {
-            "path" : "pages/indexIcon/schoolDatabase/BenkePage",
-            "style" : {
-                "navigationBarTitleText" : "本科层次职业教育"
-            }
-        },
-        {
-            "path" : "pages/indexIcon/schoolDatabase/GaozhiPage",
-            "style" : {
-                "navigationBarTitleText" : "高职高专院校"
-            }
-        },
-        {
-            "path" : "pages/indexIcon/schoolDatabase/GaozhiPageDetail",
-            "style" : {
-                "navigationBarTitleText" : "高职高专院校"
-            }
-        },
-        {
-            "path" : "pages/indexIcon/schoolDatabase/ZhongzhiPage",
-            "style" : {
-                "navigationBarTitleText" : "中等职业学校"
-            }
-        },
-        {
-            "path" : "pages/indexIcon/schoolDatabase/ZhongzhiPageDetail",
-            "style" : {
-                "navigationBarTitleText" : "中等职业学校"
-            }
-        },
-        {
-            "path" : "pages/indexIcon/indexSearch/indexSearch",
-            "style" : {
-                "navigationBarTitleText" : "搜索"
-            }
-        },
-        {
-            "path" : "pages/personal/account/account",
-            "style" : {
-                "navigationBarTitleText" : "账户设置"
-            }
-        },
-        {
-            "path" : "pages/personal/aboutUs/introduce",
-            "style" : {
-                "navigationBarTitleText" : "介绍"
-            }
-        },
-        {
-            "path" : "pages/personal/follow/follow",
-            "style" : {
-                "navigationBarTitleText" : "我的关注"
-            }
-        },
-        {
-            "path" : "pages/personal/feedback/feedback",
-            "style" : {
-                "navigationBarTitleText" : "意见反馈",
-                "backgroundColorBottom" : "#FF0000",
-                "backgroundColor" : "#007AFF"
-            }
-        },
-        {
-            "path" : "pages/personal/recommend/recommend",
-            "style" : {}
-        },
-        {
-            "path" : "pages/personal/aboutUs/aboutUs",
-            "style" : {
-                "navigationBarTitleText" : "关于我们"
-            }
-        },
-        {
-            "path" : "pages/personal/avatarSet/AvatarSet",
-            "style" : {
-                "navigationBarTitleText" : "头像设置"
-            }
-        },
-        {
-            "path" : "pages/personal/modifyPhone/modifyPhone",
-            "style" : {
-                "navigationBarTitleText" : "修改手机号"
-            }
-        },
-        {
-            "path" : "pages/personal/verifyMailbox/verifyMailbox",
-            "style" : {
-                "navigationBarTitleText" : "验证邮箱"
-            }
-        },
-        {
-            "path" : "pages/personal/modifyPwd/modifyPwd",
-            "style" : {
-                "navigationBarTitleText" : "重置密码"
-            }
-        },
-        {
-            "path" : "pages/login/signIn/signIn",
-            "style" : {
-                "navigationBarTitleText" : ""
-            }
-        },
-        {
-            "path" : "pages/login/userAgreement/userAgreement",
-            "style" : {
-                "navigationBarTitleText" : "用户服务协议"
-            }
-        },
-        {
-            "path" : "pages/login/register/register",
-            "style" : {
-                "navigationBarTitleText" : "新用户注册"
-            }
-        },
-        {
-            "path" : "pages/login/forget/forget",
-            "style" : {
-                "navigationBarTitleText" : "忘记密码"
-            }
-        },
-        {
-            "path" : "pages/schoolDetails/SchoolPk/SchoolPk",
-            "style" : {
-                "navigationBarTitleText" : "学校对比"
-            }
-        },
-        {
-            "path" : "pages/schoolDetails/SchoolPk/SchoolPkAdd",
-            "style" : {
-                "navigationBarTitleText" : "添加学校"
-            }
-        },
-        {
-            "path" : "pages/schoolDetails/SchoolPk/SchoolPkDetail",
-            "style" : {
-                "navigationBarTitleText" : "学校对比详情",
-                "navigationBarTextStyle" : "white",
-                "transparentTitle" : "always"
-            }
-        },
-        {
-            "path" : "pages/schoolDetails/ourFaculty/ourFaculty",
-            "style" : {
-                "navigationBarTitleText" : "师资情况"
-            }
-        },
-        {
-            "path" : "pages/schoolDetails/cooperation/cooperation",
-            "style" : {
-                "navigationBarTitleText" : "校企合作"
-            }
-        },
-        {
-            "path" : "pages/schoolDetails/schoolHonors/schoolHonors",
-            "style" : {
-                "navigationBarTitleText" : "学校荣誉"
-            }
-        },
-        {
-            "path" : "pages/schoolDetails/skillsCompetition/skillsCompetition",
-            "style" : {
-                "navigationBarTitleText" : "技能大赛"
-            }
-        },
-        {
-            "path" : "pages/schoolDetails/assistanceScholarship/assistanceScholarship",
-            "style" : {
-                "navigationBarTitleText" : "助奖学金"
-            }
-        },
-        {
-            "path" : "pages/schoolDetails/entrepreneurship/entrepreneurship",
-            "style" : {
-                "navigationBarTitleText" : "就业创业"
-            }
-        },
-        {
-            "path" : "pages/schoolDetails/doubleHighPlan/doubleHighPlan",
-            "style" : {
-                "navigationBarTitleText" : "双高计划"
-            }
-        },
-        {
-            "path" : "pages/schoolDetails/SchoolDetail",
-            "style" : {
-                "app-plus" : {
-                    "titleNView" : false
-                }
-            }
-        },
-        {
-            "path" : "pages/schoolDetails/jsmind",
-            "style" : {
-                "navigationBarTitleText" : "拓扑图"
-            }
-        },
-        {
-            "path" : "pages/schoolDetails/NearbySchool/NearbySchoolList",
-            "style" : {
-                "navigationBarTitleText" : "附近学校"
-            }
-        },
-        {
-            "path" : "pages/schoolDetails/SchoolLeader/SchoolLeader",
-            "style" : {
-                "navigationBarTitleText" : "校领导"
-            }
-        },
-        {
-            "path" : "pages/schoolDetails/ProfessionSetting/ProfessionSetting",
-            "style" : {
-                "navigationBarTitleText" : "专业设置"
-            }
-        },
-        {
-            "path" : "pages/schoolDetails/schoolProfile",
-            "style" : {
-                "navigationBarTitleText" : "学校简介"
-            }
-        },
-        {
-            "path" : "components/uploadImage/UploadImage",
-            "style" : {}
-        }
+	"pages": [{
+			"path": "pages/tabBar/index/init",
+			"style": {
+				"navigationBarTitleText": "入口页"
+			}
+		}, {
+			"path": "pages/tabBar/index/guide",
+			"style": {
+				"navigationBarTitleText": "引导页",
+				"titleNView": false,
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/tabBar/index/index",
+			"style": {
+				"navigationBarTitleText": "首页",
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/tabBar/info/info",
+			"style": {
+				"navigationBarTitleText": "新闻资讯"
+			}
+		},
+		{
+			"path": "pages/tabBar/me/me",
+			"style": {
+				"navigationBarTitleText": "个人中心",
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/tabBar/info/infoDetail",
+			"style": {
+				"navigationBarTitleText": "资讯详情"
+			}
+		},
+		{
+			"path": "pages/special/doubleHigh/doubleHigh",
+			"style": {
+				"navigationBarTitleText": "双高计划",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"type": "none",
+							"text": "筛选",
+							"fontSize": "14px"
+						}]
+					}
+				}
+			}
+		}, {
+			"path": "pages/special/international/international",
+			"style": {
+				"navigationBarTitleText": "国际交流合作"
+			}
+		},
+		{
+			"path": "pages/special/international/USASchool",
+			"style": {
+				"navigationBarTitleText": "中美合作交流"
+			}
+		},
+		{
+			"path": "pages/special/international/PlusSchool",
+			"style": {
+				"navigationBarTitleText": "中加合作学校"
+			}
+		},
+		{
+			"path": "pages/special/educationList/educationList",
+			"style": {
+				"navigationBarTitleText": "职教榜单"
+			}
+		},
+		{
+			"path": "pages/special/educationList/AList",
+			"style": {
+				"navigationBarTitleText": "A榜单"
+			}
+		},
+		{
+			"path": "pages/special/educationList/LikeList",
+			"style": {
+				"navigationBarTitleText": "人气榜"
+			}
+		},
+		{
+			"path": "pages/special/serviceCentre/serviceCentre",
+			"style": {
+				"navigationBarTitleText": "服务中心"
+			}
+		},
+		{
+			"path": "pages/indexIcon/schoolDatabase/schoolDatabase",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+
+				}
+			}
+		},
+		{
+			"path": "pages/indexIcon/schoolDatabase/SearchResult",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+
+				}
+			}
+		},
+		{
+			"path": "pages/indexIcon/majorDatabase/majorDatabase",
+			"style": {
+				"navigationBarTitleText": "专业库"
+			}
+		},
+		{
+			"path": "pages/indexIcon/majorDatabase/BKCCSchool",
+			"style": {
+				"navigationBarTitleText": "本科层次职业教育"
+			}
+		},
+		{
+			"path": "pages/indexIcon/majorDatabase/GZGZSchool",
+			"style": {
+				"navigationBarTitleText": "高职高专院校"
+			}
+		},
+		{
+			"path": "pages/indexIcon/majorDatabase/ZDZYSchool",
+			"style": {
+				"navigationBarTitleText": "中等职业学校"
+			}
+		},
+		// 专业介绍
+		{
+			"path": "pages/indexIcon/majorDatabase/ProfessionDesc",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+
+				}
+			}
+		},
+		// 开设学校
+		{
+			"path": "pages/indexIcon/majorDatabase/ProfessionSchool",
+			"style": {
+				"navigationBarTitleText": "专业信息"
+			}
+		},
+		// 专业对比
+		{
+			"path": "pages/indexIcon/majorDatabase/ProfessionPK",
+			"style": {
+				"navigationBarTitleText": "专业信息"
+			}
+		},
+		{
+			"path": "pages/indexIcon/majorDatabase/ProfessionPKAdd",
+			"style": {
+				"navigationBarTitleText": "添加专业"
+			}
+		},
+		{
+			"path": "pages/indexIcon/majorDatabase/ProfessionPKDetail",
+			"style": {
+				"navigationBarTitleText": "专业信息",
+				"navigationBarTextStyle": "white",
+				"transparentTitle": "always"
+			}
+		},
+		{
+			"path": "pages/indexIcon/materialDatabase/materialDatabase",
+			"style": {
+				"navigationBarTitleText": "资料库",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"fontSrc": "/static/iconFont/iconfont.ttf",
+							"text": "\ue630",
+							"fontSize": "20px",
+							"color":"#666666"
+						}]
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/indexIcon/materialDatabase/SearchFile",
+			"style": {
+				"navigationBarTitleText": "资料库名称"
+			}
+
+		},
+		{
+			"path": "pages/indexIcon/materialDatabase/ZJFile",
+			"style": {
+				"navigationBarTitleText": "职教文件"
+			}
+		},
+		{
+			"path": "pages/indexIcon/materialDatabase/JXBZFile",
+			"style": {
+				"navigationBarTitleText": "教学标准"
+			}
+		},
+		{
+			"path": "pages/indexIcon/materialDatabase/ZLFile",
+			"style": {
+				"navigationBarTitleText": "质量年报"
+			}
+		},
+		{
+			"path": "pages/indexIcon/materialDatabase/JXDGFile",
+			"style": {
+				"navigationBarTitleText": "教学大纲"
+			}
+		},
+		{
+			"path": "pages/indexIcon/materialDatabase/FileDetail",
+			"style": {
+				"navigationBarTitleText": "详情",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"fontSrc": "/static/iconFont/iconfont.ttf",
+							"text": "\ue630",
+							"fontSize": "20px",
+							"color":"#666666"
+						}]
+					}
+				}
+			}
+		},
+
+		{
+			"path": "pages/indexIcon/vip/vip",
+			"style": {
+				"navigationBarTitleText": "VIP会员"
+			}
+		},
+		{
+			"path": "pages/indexIcon/vip/recharge",
+			"style": {
+				"navigationBarTitleText": "VIP充值"
+			}
+		},
+		{
+			"path": "pages/indexIcon/schoolDatabase/BenkePage",
+			"style": {
+				"navigationBarTitleText": "本科层次职业教育"
+			}
+		},
+		{
+			"path": "pages/indexIcon/schoolDatabase/GaozhiPage",
+			"style": {
+				"navigationBarTitleText": "高职高专院校"
+			}
+		},
+		{
+			"path": "pages/indexIcon/schoolDatabase/GaozhiPageDetail",
+			"style": {
+				"navigationBarTitleText": "高职高专院校"
+			}
+		},
+		{
+			"path": "pages/indexIcon/schoolDatabase/ZhongzhiPage",
+			"style": {
+				"navigationBarTitleText": "中等职业学校"
+			}
+		},
+		{
+			"path": "pages/indexIcon/schoolDatabase/ZhongzhiPageDetail",
+			"style": {
+				"navigationBarTitleText": "中等职业学校"
+			}
+		},
+
+		{
+			"path": "pages/indexIcon/indexSearch/indexSearch",
+			"style": {
+				"navigationBarTitleText": "搜索"
+			}
+		}, {
+			"path": "pages/personal/account/account",
+			"style": {
+				"navigationBarTitleText": "账户设置"
+			}
+		}, {
+			"path": "pages/personal/aboutUs/introduce",
+			"style": {
+				"navigationBarTitleText": "介绍"
+			}
+		}, {
+			"path": "pages/personal/follow/follow",
+			"style": {
+				"navigationBarTitleText": "我的关注"
+			}
+		}, {
+			"path": "pages/personal/feedback/feedback",
+			"style": {
+				"navigationBarTitleText": "意见反馈",
+				"backgroundColorBottom": "#FF0000",
+				"backgroundColor": "#007AFF"
+			}
+		}, {
+			"path": "pages/personal/recommend/recommend",
+			"style": {}
+		}, {
+			"path": "pages/personal/aboutUs/aboutUs",
+			"style": {
+				"navigationBarTitleText": "关于我们"
+			}
+		},
+		{
+			"path": "pages/personal/modifyPhone/modifyPhone",
+			"style": {
+				"navigationBarTitleText": "修改手机号"
+			}
+		}, {
+			"path": "pages/personal/verifyMailbox/verifyMailbox",
+			"style": {
+				"navigationBarTitleText": "验证邮箱"
+			}
+		},
+		{
+			"path": "pages/personal/modifyPwd/modifyPwd",
+			"style": {
+				"navigationBarTitleText": "重置密码"
+			}
+		}, {
+			"path": "pages/login/signIn/signIn",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		}, {
+			"path": "pages/login/userAgreement/userAgreement",
+			"style": {
+				"navigationBarTitleText": "用户服务协议"
+			}
+		}, {
+			"path": "pages/login/register/register",
+			"style": {
+				"navigationBarTitleText": "新用户注册"
+			}
+		}, {
+			"path": "pages/login/forget/forget",
+			"style": {
+				"navigationBarTitleText": "忘记密码"
+			}
+		}, {
+			"path": "pages/schoolDetails/SchoolPk/SchoolPk",
+			"style": {
+				"navigationBarTitleText": "学校对比"
+			}
+		}, {
+			"path": "pages/schoolDetails/SchoolPk/SchoolPkAdd",
+			"style": {
+				"navigationBarTitleText": "添加学校"
+			}
+		}, {
+			"path": "pages/schoolDetails/SchoolPk/SchoolPkDetail",
+			"style": {
+				"navigationBarTitleText": "学校对比详情",
+				"navigationBarTextStyle": "white",
+				"transparentTitle": "always"
+			}
+		}, {
+			"path": "pages/schoolDetails/ourFaculty/ourFaculty",
+			"style": {
+				"navigationBarTitleText": "师资情况"
+			}
+		}, {
+			"path": "pages/schoolDetails/cooperation/cooperation",
+			"style": {
+				"navigationBarTitleText": "校企合作"
+			}
+		}, {
+			"path": "pages/schoolDetails/schoolHonors/schoolHonors",
+			"style": {
+				"navigationBarTitleText": "学校荣誉"
+			}
+		}, {
+			"path": "pages/schoolDetails/skillsCompetition/skillsCompetition",
+			"style": {
+				"navigationBarTitleText": "技能大赛"
+			}
+		}, {
+			"path": "pages/schoolDetails/assistanceScholarship/assistanceScholarship",
+			"style": {
+				"navigationBarTitleText": "助奖学金"
+			}
+		}, {
+			"path": "pages/schoolDetails/entrepreneurship/entrepreneurship",
+			"style": {
+				"navigationBarTitleText": "就业创业"
+			}
+		}, {
+			"path": "pages/schoolDetails/doubleHighPlan/doubleHighPlan",
+			"style": {
+				"navigationBarTitleText": "双高计划"
+			}
+		},
+		{
+			"path": "pages/schoolDetails/SchoolDetail",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		}, {
+			"path": "pages/schoolDetails/jsmind",
+			"style": {
+				"navigationBarTitleText": "拓扑图"
+			}
+		}, {
+			"path": "pages/schoolDetails/NearbySchool/NearbySchoolList",
+			"style": {
+				"navigationBarTitleText": "附近学校"
+			}
+		}, {
+			"path": "pages/schoolDetails/SchoolLeader/SchoolLeader",
+			"style": {
+				"navigationBarTitleText": "校领导"
+			}
+		}, {
+			"path": "pages/schoolDetails/ProfessionSetting/ProfessionSetting",
+			"style": {
+				"navigationBarTitleText": "专业设置"
+			}
+		}, {
+			"path": "pages/schoolDetails/schoolProfile",
+			"style": {
+				"navigationBarTitleText": "学校简介"
+			}
+		}
     ],
-    "tabBar" : {
-        "color" : "#7a7e83",
-        "selectedColor" : "#6451FC",
-        "borderStyle" : "white",
-        "backgroundColor" : "#ffffff",
-        "list" : [
-            {
-                "pagePath" : "pages/tabBar/index/index",
-                "text" : "首页",
-                "iconPath" : "static/img/tab1.png",
-                "selectedIconPath" : "static/img/tab1HL.png"
-            },
-            {
-                "pagePath" : "pages/tabBar/info/info",
-                "text" : "资讯",
-                "iconPath" : "static/img/tab2.png",
-                "selectedIconPath" : "static/img/tab2HL.png"
-            },
-            {
-                "pagePath" : "pages/tabBar/me/me",
-                "text" : "我的",
-                "iconPath" : "static/img/tab3.png",
-                "selectedIconPath" : "static/img/tab3HL.png"
-            }
-        ]
-    },
-    "globalStyle" : {
-        "navigationBarTextStyle" : "black",
-        "navigationBarTitleText" : "职教圈",
-        "navigationBarBackgroundColor" : "#fff"
-    }
+	"tabBar": {
+		"color": "#7a7e83",
+		"selectedColor": "#6451FC",
+		"borderStyle": "white",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/tabBar/index/index",
+				"text": "首页",
+				"iconPath": "static/img/tab1.png",
+				"selectedIconPath": "static/img/tab1HL.png"
+			},
+			{
+				"pagePath": "pages/tabBar/info/info",
+				"text": "资讯",
+				"iconPath": "static/img/tab2.png",
+				"selectedIconPath": "static/img/tab2HL.png"
+			},
+			{
+				"pagePath": "pages/tabBar/me/me",
+				"text": "我的",
+				"iconPath": "static/img/tab3.png",
+				"selectedIconPath": "static/img/tab3HL.png"
+			}
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "职教圈",
+		"navigationBarBackgroundColor": "#fff"
+	}
 }
