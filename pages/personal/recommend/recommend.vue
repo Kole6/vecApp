@@ -23,11 +23,11 @@
 				</view>
 				<!-- #ifdef APP-PLUS -->
 				<view class="inner-fen">
-					<view class="fen-item"  hover-class="navigator-hover" @tap="toNotopen()">
+					<view class="fen-item"  hover-class="navigator-hover" @tap="toWeixin()">
 						<p><image src="/static/p401.png" mode="aspectFill"></image></p>
 						<p>微信好友</p>
 					</view>
-					<view class="fen-item"  hover-class="navigator-hover" @tap="toNotopen()">
+					<view class="fen-item"  hover-class="navigator-hover" @tap="toWeixinLine()">
 						<p><image src="/static/p402.png" mode="aspectFill"></image></p>
 						<p>朋友圈</p>
 					</view>
@@ -96,10 +96,42 @@
 					imageUrl:'https://tva4.sinaimg.cn/crop.0.0.239.239.180/005yBM71gw1ej3w1571gfj306o06omxm.jpg',
 					href:"https://weibo.com/u/5092062667",
 					success: (res) => {
-						console.log(45);
+						console.log(res);
 					},
 					fail: (e) => {
-						console.log(4545);
+						console.log(e);
+					}
+				});
+			},
+			toWeixin(){
+				uni.share({
+					provider:'weixin',
+					scene: "WXSceneSession",
+					title:'职教圈',
+					summary: '真实的职教，精准的圈子',
+					imageUrl:'https://tva4.sinaimg.cn/crop.0.0.239.239.180/005yBM71gw1ej3w1571gfj306o06omxm.jpg',
+					href:"https://weibo.com/u/5092062667",
+					success: (res) => {
+						console.log(res);
+					},
+					fail: (e) => {
+						console.log(e);
+					}
+				});
+			},
+			toWeixinLine(){
+				uni.share({
+					provider:'weixin',
+					scene: 'WXSenceTimeline',
+					title:'职教圈',
+					summary: '真实的职教，精准的圈子',
+					imageUrl:'https://tva4.sinaimg.cn/crop.0.0.239.239.180/005yBM71gw1ej3w1571gfj306o06omxm.jpg',
+					href:"https://weibo.com/u/5092062667",
+					success: (res) => {
+						console.log(res);
+					},
+					fail: (e) => {
+						console.log(e);
 					}
 				});
 			},

@@ -53,14 +53,12 @@
 		data() {
 			return {
 				userInfo: '',
-				picUrl:'/static/p106.png'
+				picUrl: '/static/p106.png'
 			};
 		},
 		onShow() {
 			this.userInfo = uni.getStorageSync('userInfo');
-			if(this.userInfo.picUrl){
-				this.picUrl =this.userInfo.picUrl
-			}
+			this.picUrl = this.userInfo.picUrl ? this.userInfo.picUrl : '/static/p106.png';
 		},
 		methods: {
 			toLogin() {
