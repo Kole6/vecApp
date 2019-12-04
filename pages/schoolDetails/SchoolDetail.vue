@@ -1,3 +1,4 @@
+
 <template>
 	<view class="">
 		<!-- #ifdef APP-PLUS -->
@@ -87,7 +88,7 @@
 				<uni-icons type="arrowright" size="24" />
 			</view>
 			<view class="m-info">
-				<view class="title f-link">
+				<view class="title f-link" @tap="handleTab">
 					<text>学校资讯</text>
 					<uni-icons type="arrowright" size="24" />
 				</view>
@@ -220,6 +221,11 @@ export default {
 			.exec();
 	},
 	methods: {
+		handleTab(){
+			uni.switchTab({
+				url:'../tabBar/info/info'
+			})
+		},
 		handleSC() {
 			this.$HTTP({
 				url: '/zjq/User/Favorite',
@@ -230,10 +236,14 @@ export default {
 					type: '1'
 				}
 			}).then(res => {
-				uni.showToast({
-					title: res.message,
-					icon: 'none'
-				});
+				setTimeout(()=>{
+					uni.showToast({
+						title: res.message,
+						icon: 'none',
+						duration:1000
+					});
+				},200)
+				
 				this.hasSC = !this.hasSC;
 			});
 		},
@@ -481,6 +491,7 @@ export default {
 		font-weight: bold;
 		font-size: $uni-font-size-lg;
 		border-bottom: solid 1upx $main-dividing-line1;
+		color: $main-text-color;
 	}
 	.tags {
 		display: flex;
