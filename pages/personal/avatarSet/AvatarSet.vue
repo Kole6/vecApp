@@ -26,8 +26,20 @@ export default {
 		};
 	},
 	mounted() {},
+	onShow() {
+		this.url = uni.getStorageSync('avatar') || '/static/p106.png'
+	},
 	methods: {
 		handleConfirm(){
+			uni.setStorageSync('avatar',this.url)
+			uni.showToast({
+				title:'保存成功',
+				icon:'none',
+				duration:1000
+			})
+			setTimeout(()=>{
+				uni.navigateBack()
+			},1000)
 			// uni.uploadFile({
 			// 	url: 'https://www.example.com/upload', //仅为示例，非真实的接口地址
 			// 	filePath: tempFilePaths[0],

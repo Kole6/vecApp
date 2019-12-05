@@ -58,7 +58,8 @@
 		},
 		onShow() {
 			this.userInfo = uni.getStorageSync('userInfo');
-			this.picUrl = this.userInfo.picUrl ? this.userInfo.picUrl : '/static/p106.png';
+			this.picUrl = uni.getStorageSync('avatar') || '/static/p106.png'
+			// this.picUrl = this.userInfo.picUrl ? this.userInfo.picUrl : '/static/p106.png';
 		},
 		methods: {
 			toLogin() {

@@ -4,7 +4,7 @@
 			<view class="menu_item" @tap="handleModifyAvatar">
 				<text class="menu_l">头像</text>
 				<view class="menu_r">
-					<image src="/static/p106.png" class="menu_r_png" mode="aspectFill"></image>
+					<image :src="picUrl" class="menu_r_png" mode="aspectFill"></image>
 				</view>
 			</view>
 			<view class="menu_item" @tap="toPhone()">
@@ -45,6 +45,7 @@
 		},
 		data() {
 			return {
+				picUrl:'/static/p106.png',
 				nickname: uni.getStorageSync('nickname') ? uni.getStorageSync('nickname') : "输入昵称",
 				type: "input",
 				value: false,
@@ -58,6 +59,9 @@
 					}]
 				}
 			}
+		},
+		onShow() {
+			this.picUrl = uni.getStorageSync('avatar') || '/static/p106.png'
 		},
 		methods: {
 			// 修改头像
