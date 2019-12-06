@@ -106,8 +106,8 @@
 			"path": "pages/indexIcon/schoolDatabase/schoolDatabase",
 			"style": {
 				"app-plus": {
-					"titleNView": false
-
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
@@ -115,33 +115,45 @@
 			"path": "pages/indexIcon/schoolDatabase/SearchResult",
 			"style": {
 				"app-plus": {
-					"titleNView": false
-
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		},
 		{
 			"path": "pages/indexIcon/majorDatabase/majorDatabase",
 			"style": {
-				"navigationBarTitleText": "专业库"
+				"navigationBarTitleText": "专业库",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		{
 			"path": "pages/indexIcon/majorDatabase/BKCCSchool",
 			"style": {
-				"navigationBarTitleText": "本科层次职业教育"
+				"navigationBarTitleText": "本科层次职业教育",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		{
 			"path": "pages/indexIcon/majorDatabase/GZGZSchool",
 			"style": {
-				"navigationBarTitleText": "高职高专院校"
+				"navigationBarTitleText": "高职高专院校",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		{
 			"path": "pages/indexIcon/majorDatabase/ZDZYSchool",
 			"style": {
-				"navigationBarTitleText": "中等职业学校"
+				"navigationBarTitleText": "中等职业学校",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		// 专业介绍
@@ -149,7 +161,8 @@
 			"path": "pages/indexIcon/majorDatabase/ProfessionDesc",
 			"style": {
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 
 				}
 			}
@@ -158,20 +171,29 @@
 		{
 			"path": "pages/indexIcon/majorDatabase/ProfessionSchool",
 			"style": {
-				"navigationBarTitleText": "专业信息"
+				"navigationBarTitleText": "专业信息",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		// 专业对比
 		{
 			"path": "pages/indexIcon/majorDatabase/ProfessionPK",
 			"style": {
-				"navigationBarTitleText": "专业信息"
+				"navigationBarTitleText": "专业信息",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		{
 			"path": "pages/indexIcon/majorDatabase/ProfessionPKAdd",
 			"style": {
-				"navigationBarTitleText": "添加专业"
+				"navigationBarTitleText": "添加专业",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		{
@@ -179,7 +201,10 @@
 			"style": {
 				"navigationBarTitleText": "专业信息",
 				"navigationBarTextStyle": "white",
-				"transparentTitle": "always"
+				"transparentTitle": "always",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		{
@@ -187,6 +212,7 @@
 			"style": {
 				"navigationBarTitleText": "资料库",
 				"app-plus": {
+					"bounce": "none",
 					"titleNView": {
 						"buttons": [{
 							"fontSrc": "/static/iconFont/iconfont.ttf",
@@ -201,32 +227,47 @@
 		{
 			"path": "pages/indexIcon/materialDatabase/SearchFile",
 			"style": {
-				"navigationBarTitleText": "资料库名称"
+				"navigationBarTitleText": "资料库名称",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 
 		},
 		{
 			"path": "pages/indexIcon/materialDatabase/ZJFile",
 			"style": {
-				"navigationBarTitleText": "职教文件"
+				"navigationBarTitleText": "职教文件",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		{
 			"path": "pages/indexIcon/materialDatabase/JXBZFile",
 			"style": {
-				"navigationBarTitleText": "教学标准"
+				"navigationBarTitleText": "教学标准",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		{
 			"path": "pages/indexIcon/materialDatabase/ZLFile",
 			"style": {
-				"navigationBarTitleText": "质量年报"
+				"navigationBarTitleText": "质量年报",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		{
 			"path": "pages/indexIcon/materialDatabase/JXDGFile",
 			"style": {
-				"navigationBarTitleText": "教学大纲"
+				"navigationBarTitleText": "教学大纲",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		{
@@ -234,6 +275,7 @@
 			"style": {
 				"navigationBarTitleText": "详情",
 				"app-plus": {
+					"bounce": "none",
 					"titleNView": {
 						"buttons": [{
 							"fontSrc": "/static/iconFont/iconfont.ttf",
@@ -261,38 +303,56 @@
 		{
 			"path": "pages/indexIcon/schoolDatabase/BenkePage",
 			"style": {
-				"navigationBarTitleText": "本科层次职业教育"
+				"navigationBarTitleText": "本科层次职业教育",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		{
 			"path": "pages/indexIcon/schoolDatabase/GaozhiPage",
 			"style": {
-				"navigationBarTitleText": "高职高专院校"
+				"navigationBarTitleText": "高职高专院校",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		{
 			"path": "pages/indexIcon/schoolDatabase/GaozhiPageDetail",
 			"style": {
-				"navigationBarTitleText": "高职高专院校"
+				"navigationBarTitleText": "高职高专院校",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		{
 			"path": "pages/indexIcon/schoolDatabase/ZhongzhiPage",
 			"style": {
-				"navigationBarTitleText": "中等职业学校"
+				"navigationBarTitleText": "中等职业学校",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		{
 			"path": "pages/indexIcon/schoolDatabase/ZhongzhiPageDetail",
 			"style": {
-				"navigationBarTitleText": "中等职业学校"
+				"navigationBarTitleText": "中等职业学校",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 
 		{
 			"path": "pages/indexIcon/indexSearch/indexSearch",
 			"style": {
-				"navigationBarTitleText": "搜索"
+				"navigationBarTitleText": "搜索",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		}, {
 			"path": "pages/personal/account/account",
@@ -364,19 +424,28 @@
 		}, {
 			"path": "pages/schoolDetails/SchoolPk/SchoolPk",
 			"style": {
-				"navigationBarTitleText": "学校对比"
+				"navigationBarTitleText": "学校对比",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		}, {
 			"path": "pages/schoolDetails/SchoolPk/SchoolPkAdd",
 			"style": {
-				"navigationBarTitleText": "添加学校"
+				"navigationBarTitleText": "添加学校",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		}, {
 			"path": "pages/schoolDetails/SchoolPk/SchoolPkDetail",
 			"style": {
 				"navigationBarTitleText": "学校对比详情",
 				"navigationBarTextStyle": "white",
-				"transparentTitle": "always"
+				"transparentTitle": "always",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		}, {
 			"path": "pages/schoolDetails/ourFaculty/ourFaculty",
@@ -411,14 +480,18 @@
 		}, {
 			"path": "pages/schoolDetails/doubleHighPlan/doubleHighPlan",
 			"style": {
-				"navigationBarTitleText": "双高计划"
+				"navigationBarTitleText": "双高计划",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		{
 			"path": "pages/schoolDetails/SchoolDetail",
 			"style": {
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"bounce": "none"
 				}
 			}
 		}, {
@@ -429,17 +502,26 @@
 		}, {
 			"path": "pages/schoolDetails/NearbySchool/NearbySchoolList",
 			"style": {
-				"navigationBarTitleText": "附近学校"
+				"navigationBarTitleText": "附近学校",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		}, {
 			"path": "pages/schoolDetails/SchoolLeader/SchoolLeader",
 			"style": {
-				"navigationBarTitleText": "校领导"
+				"navigationBarTitleText": "校领导",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		}, {
 			"path": "pages/schoolDetails/ProfessionSetting/ProfessionSetting",
 			"style": {
-				"navigationBarTitleText": "专业设置"
+				"navigationBarTitleText": "专业设置",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		}, {
 			"path": "pages/schoolDetails/schoolProfile",
@@ -449,7 +531,18 @@
 		}, {
 			"path": "pages/personal/avatarSet/AvatarSet",
 			"style": {
-				"navigationBarTitleText": "头像设置"
+				"navigationBarTitleText": "头像设置",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},{
+			"path": "pages/schoolDetails/ProfessionSetting/GZYX",
+			"style": {
+				"navigationBarTitleText": "高职院校",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		}
 	],

@@ -1,14 +1,12 @@
 <template>
 	<view class="">
+		<!-- 高职院校 -->
 		<QSTabs ref="tabs" :current="current" :tabs="tabs" width="375" swiperWidth="750" activeColor="#6451FC"
 		 backgroundColor="#fff" @change="change($event)" />
 		<swiper :style="{height:`${scrollH-85}upx`,borderTop: '1upx solid rgba(238, 238, 238, 0.3)'}" :current="current"
 			 @change="swiperChange" @transition="transition" @animationfinish="animationfinish">
-			<swiper-item>
-				<my-follow />
-			</swiper-item>
-			<swiper-item>
-				<profession-student />
+			<swiper-item v-for="item in 3" :key="item">
+				<view class="">item</view>
 			</swiper-item>
 		</swiper>
 	</view>
@@ -22,8 +20,8 @@ export default {
 	components:{myFollow,professionStudent,QSTabs},
 	data() {
 		return {
-			tabs: ["学校专业", "专业学生分布"],
-			current:1,
+			tabs: ["本市", "本省","全国"],
+			current:0,
 		};
 	},
 	computed: {

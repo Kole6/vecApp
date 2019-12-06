@@ -65,7 +65,7 @@
 	</view>
 	
 	<view class="m-btn">
-		<text>下载对比报告</text>
+		<text>发送至邮箱</text>
 	</view>
 </view>
 </template>
