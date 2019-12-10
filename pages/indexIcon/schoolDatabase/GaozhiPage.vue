@@ -16,51 +16,45 @@
 	export default {
 		data(){
 			return{
-				categoryArr:[
-					{
-						name:'天津市',
-						desc:'45所高职',
-						IPC:'../../../static/indexIcon/city.png'
-					},{
-						name:'北京市',
-						desc:'45所高职',
-						IPC:'../../../static/indexIcon/city.png'
-					},{
-						name:'北京市',
-						desc:'45所高职',
-						IPC:'../../../static/indexIcon/city.png'
-					},{
-						name:'北京市',
-						desc:'45所高职',
-						IPC:'../../../static/indexIcon/city.png'
-					},{
-						name:'北京市',
-						desc:'45所高职',
-						IPC:'../../../static/indexIcon/city.png'
-					},{
-						name:'北京市',
-						desc:'45所高职',
-						IPC:'../../../static/indexIcon/city.png'
-					},{
-						name:'北京市',
-						desc:'45所高职',
-						IPC:'../../../static/indexIcon/city.png'
-					},{
-						name:'北京市',
-						desc:'45所高职',
-						IPC:'../../../static/indexIcon/city.png'
-					},
-				]
+				categoryArr:[]
 			}
+		},
+		mounted(){
+			this.getData()
 		},
 		methods:{
 			handleTap(item){
 				uni.navigateTo({
-					url:'./GaozhiPageDetail?province='+item.name,
+					url:`./GaozhiPageDetail?province=${item.name}&provinceId=${item.provinceid}`,
 					animationType: 'pop-in',
 					animationDuration: 200
 				})
-			}
+			},
+			getData(){
+				this.$HTTP({
+					url:'/zjq/College/GetYxsl',
+					header:'form',
+					data:{
+						token:'d05902562e544db29bbe777954d43bb0',
+						region:'',
+						pageIndex:1,
+						pageSize:100,
+					}
+				}).then(res=>{
+					if(res.code == 0){
+						let data = res.data.map(item=>{
+							return{
+								...item,
+								desc:item.number+'所高职',
+								name:item.provincename,
+								IPC: '../../../static/indexIcon/city.png',	
+								// IPC: item.ipc
+							}
+						})
+						this.categoryArr = data;
+					}
+				})
+			},
 		}
 	}
 </script>
@@ -96,7 +90,10 @@
 			}
 		}
 		.item:nth-of-type(2n+1){
-			border-right: solid 1upx #EEEEEE;
+			border-right: solid 1upx $main-dividing-line1;
+		}
+		.item:nth-of-type(1),.item:nth-of-type(2){
+			border-top: solid 1upx $main-dividing-line1;
 		}
 		
 	}

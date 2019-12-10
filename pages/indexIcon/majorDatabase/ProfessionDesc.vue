@@ -1,5 +1,5 @@
 <template>
-	<view >
+	<view>
 		<!-- 专业信息-专业介绍 -->
 		<!-- <view class="top">
 			<view class="top-btn active">专业介绍</view>
@@ -9,49 +9,43 @@
 		<view class="" style="height: 35px;background: #FFFFFF;"></view>
 		<!-- #endif -->
 		<uni-nav-bar @click-left="handleBack" left-icon="arrowleft" :shadow="false" :border="false" title="专业信息">
-			<view class="f-sc" slot="right" @tap="handleSC">
-				<image :src="hasSC?assets.sc2:assets.sc1" mode="aspectFit" style="height: 40upx; width: 40upx;"></image>
-			</view>
+			<view class="f-sc" slot="right" @tap="handleSC"><image :src="hasSC ? assets.sc2 : assets.sc1" mode="aspectFit" style="height: 40upx; width: 40upx;"></image></view>
 		</uni-nav-bar>
-		
-		<view class="content-wrapper" :style="{height:wrapperHeight}">
+
+		<view class="content-wrapper" :style="{ height: wrapperHeight }">
 			<!-- 基本信息 -->
 			<view class="m-base">
-				<view class="title">{{professionInfo.name}}</view>
+				<view class="title">{{ professionInfo.name }}</view>
 				<view class="item">
 					<text class="name">专业大类</text>
-					<text class="value">{{professionInfo.zydl}}</text>
+					<text class="value">{{ professionInfo.zydl }}</text>
 				</view>
 				<view class="item">
 					<text class="name">专业代码</text>
-					<text class="value">{{professionInfo.zydm}}</text>
+					<text class="value">{{ professionInfo.zydm }}</text>
 				</view>
 				<view class="item">
 					<text class="name">学历层次</text>
-					<text class="value">{{professionInfo.xlcc}}</text>
+					<text class="value">{{ professionInfo.xlcc }}</text>
 				</view>
 				<view class="item">
 					<text class="name">修业年限</text>
-					<text class="value">{{professionInfo.xynx}}</text>
+					<text class="value">{{ professionInfo.xynx }}</text>
 				</view>
-				<view :class="['f-base',hasDZ?'yes':'no']" @tap="hasDZ=!hasDZ">
-					<image :src="hasDZ?'/static/indexIcon/dz.png':'/static/indexIcon/dz.png'" mode="aspectFit" style="width: 40upx; height: 40upx;"></image>
-					<text >{{dzNumber}}</text>
+				<view :class="['f-base', hasDZ ? 'yes' : 'no']" @tap="hasDZ = !hasDZ">
+					<image :src="hasDZ ? '/static/indexIcon/dz.png' : '/static/indexIcon/dz.png'" mode="aspectFit" style="width: 40upx; height: 40upx;"></image>
+					<text>{{ dzNumber }}</text>
 				</view>
 			</view>
 			<!-- 已添加的对比专业 -->
-			<view class="m-tip">
-				{{tipMessage}}
-			</view>
+			<view class="m-tip">{{ tipMessage }}</view>
 			<!-- 对比列表 -->
 			<view class="m-pk" @tap="handlePK">
 				<view class="left">
 					<image src="/static/indexIcon/add.png" mode="aspectFit" style="width: 40upx;height: 40upx;"></image>
 					<text>添加本专业到对比列表</text>
 				</view>
-				<view class="right">
-					<text>对比</text>
-				</view>
+				<view class="right"><text>对比</text></view>
 				<image class="bg1" src="/static/indexIcon/colorGroup2.png" mode="aspectFit" style="width: 300upx;height: 100upx;"></image>
 				<image class="bg2" src="/static/indexIcon/vszong.png" mode="aspectFit" style="width: 70upx;height: 70upx;"></image>
 			</view>
@@ -59,12 +53,12 @@
 			<view class="m-pro">
 				<view class="title">专业解读</view>
 				<view class="list list1">
-					<view class="list-title">主要对应职业类型</view>	
-					<view class="item" v-for="(item,index) in list1" :key="index">{{item.name}}</view>
+					<view class="list-title">主要对应职业类型</view>
+					<view class="item" v-for="(item, index) in list1" :key="index">{{ item.name }}</view>
 				</view>
 				<view class="list list2">
-					<view class="list-title">衔接高职专业举例</view>	
-					<view class="item" v-for="(item,index) in list2" :key="index">{{item.name}}</view>
+					<view class="list-title">衔接高职专业举例</view>
+					<view class="item" v-for="(item, index) in list2" :key="index">{{ item.name }}</view>
 				</view>
 			</view>
 			<!-- 下载 -->
@@ -85,11 +79,16 @@
 			<!-- 相近专业 -->
 			<view class="m-simi u-pb">
 				<view class="title">相近专业</view>
-				<school-list :isText="true" :showType="4" :is-special="true" :listArr="dataArr" :handleTaped="false" @taped="handleListTaped"></school-list>
+				<block v-if="dataArr.length">
+					<school-list :isText="true" :showType="4" :is-special="true" :listArr="dataArr" :handleTaped="false" @taped="handleListTaped"></school-list>
+				</block>
+				<block v-else>
+					<view class="f-nothing">暂无相关专业</view>
+				</block>
 			</view>
 			<view class="m-fill"></view>
 		</view>
-		
+
 		<!-- 底部按钮 -->
 		<!-- <view class="m-bottom">
 			<view class="left" @tap="handleSave">
@@ -106,49 +105,53 @@
 </template>
 
 <script>
-import  schoolList from '@/pages/indexIcon/schoolDatabase/SchoolList.vue'
+import schoolList from '@/pages/indexIcon/schoolDatabase/SchoolList.vue';
 import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 // 防止在点击的时候因为图片加载出现闪烁
-import sc1 from '@/static/indexIcon/sc1.png'
-import sc2 from '@/static/indexIcon/sc2.png'
+import sc1 from '@/static/indexIcon/sc1.png';
+import sc2 from '@/static/indexIcon/sc2.png';
 export default {
-	components:{schoolList,uniNavBar},
+	components: { schoolList, uniNavBar },
 	data() {
 		return {
-			assets:{
+			assets: {
 				sc1,
-				sc2,
+				sc2
 			},
-			hasSC:false,//是否添加收藏
-			hasDZ:false,//是否点赞
-			hasSaved:false,//是否已收藏
-			dzNumber:'1w+',
-			tipMessage:'您还可以进行专业对比哦!您已经添加0个专业',
-			wrapperHeight:'auto',
+			hasSC: false, //是否添加收藏
+			hasDZ: false, //是否点赞
+			hasSaved: false, //是否已收藏
+			dzNumber: '1w+',
+			tipMessage: '您还可以进行专业对比哦!您已经添加0个专业',
+			wrapperHeight: 'auto',
 			systemInfo: uni.getSystemInfoSync(),
-			styleObj:{
-				'overflow':'auto'
+			styleObj: {
+				overflow: 'auto'
 			},
-			professionInfo:{
-				name:'部队政治工作',
-				zydl:'公安与司法大类',
-				zydm:'38327398',
-				xlcc:'学历层次',
-				xynx:'修业年限',
-				downloadName:'让新职教事业越来越红火',
+			professionInfo: {
+				name: '部队政治工作',
+				zydl: '公安与司法大类',
+				zydm: '38327398',
+				xlcc: '学历层次',
+				xynx: '修业年限',
+				downloadName: '让新职教事业越来越红火'
 			},
-			list1:[{name:'农业技术指导人员'},{name:'农作物生产人员'},{name:'农业生产服务人员'}],
-			list2:[{name:'农业技术指导人员'},{name:'农作物生产人员'}],
+			params:{},
+			downloadLink:'',
+			list1: [{ name: '农业技术指导人员' }, { name: '农作物生产人员' }, { name: '农业生产服务人员' }],
+			list2: [{ name: '农业技术指导人员' }, { name: '农作物生产人员' }],
 			dataArr: [
 				{
 					title: '汽车运用与维护',
 					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
-				},{
+					cards: [{ name: '学历层次', value: '高职' }, { name: '专业年限', value: '3年' }]
+				},
+				{
 					title: '汽车运用与维护',
 					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
-				}]
+					cards: [{ name: '学历层次', value: '高职' }, { name: '专业年限', value: '3年' }]
+				}
+			]
 		};
 	},
 	mounted() {
@@ -161,93 +164,149 @@ export default {
 			.exec();
 	},
 	onLoad(Option) {
-		uni.setStorageSync('freeChance',1)
+		uni.setStorageSync('freeChance', 1);
+		this.params = Option
+		this.getDetailData({
+			zyid:Option.id,
+			schoolType:Option.type
+		})
+		this.getChance()
+		this.getSimilarSchool()
 	},
 	methods: {
-		handleSC(){
-			this.hasSC = !this.hasSC
-			let title = ''
-			if(this.hasSC){
-				title = '收藏成功！'
-			}else{
-				title = '取消收藏！'
-			}
-			uni.showToast({
-				icon:'none',
-			    title,
-			    duration: 1000
+		getSimilarSchool(){
+			this.$HTTP({
+				url:'/zjq/mainpage/GetMajorInfo',
+				header:'form',
+				data:{
+					zyid:this.params.id
+				}
+			}).then((res)=>{
+				console.log('similar == >',res)
+			})
+		},
+		getDetailData(data){
+			this.$HTTP({
+				url:'/zjq/mainpage/GetMajorInfo',
+				header:'form',
+				data,
+			}).then((res)=>{
+				if(res.code == 0){
+					let data = res.data
+					this.professionInfo.name = data.majorname
+					this.professionInfo.zydl = data.zydl
+					this.professionInfo.zydm = data.majorcode
+					this.professionInfo.xlcc = data.xlcc
+					this.professionInfo.xynx = data.xynx
+					this.dzNumber = data.likenum
+					this.downloadLink = data.downloadLink
+					this.dataArr = data.list
+					this.list1 = data.mainzylx.split('；').map(name=>{
+						return{
+							name
+						}
+					})
+					
+				}
+			})
+		},
+		getChance(){
+			this.$HTTP({
+				url:'/zjq/User/UseTools',
+				header:'form',
+				data:{
+					token:'d05902562e544db29bbe777954d43bb0',
+					type:'ckzlcs',
+					
+				}
+			}).then((res)=>{
+				console.log(res,'res')
+			})
+		},
+		handleSC() {
+			this.$HTTP({
+				url: '/zjq/User/FavoriteZy',
+				header: 'form',
+				data: {
+					token:'d05902562e544db29bbe777954d43bb0',
+					zyid: this.params.id,
+					type: this.hasSC ? '2' : '1'
+				}
+			}).then(res => {
+				setTimeout(() => {
+					uni.showToast({
+						title: res.message,
+						icon: 'none',
+						duration: 1000
+					});
+				}, 200);
+
+				this.hasSC = !this.hasSC;
 			});
 		},
-		handleToSchool(){
+		handleToSchool() {
 			uni.navigateTo({
-				url:'./ProfessionSchool'
-			})
+				url: './ProfessionSchool'
+			});
 		},
-		handleListTaped(item){
-			
+		handleListTaped(item) {},
+		handleBack() {
+			uni.navigateBack();
 		},
-		handleBack(){
-			uni.navigateBack()
-		},
-		handlePK(){
+		handlePK() {
 			// 进行用户验证/VIP验证
 			const value = uni.getStorageSync('freeChance');
-			if(value){
+			if (value) {
 				uni.showModal({
-					content:'您有一次免费专业对比机会哦~',
-					confirmText:'去对比',
-					success:(result)=>{
-						if(result.confirm){
-							uni.setStorageSync('freeChance',0)
+					content: '您有一次免费专业对比机会哦~',
+					confirmText: '去对比',
+					success: result => {
+						if (result.confirm) {
+							uni.setStorageSync('freeChance', 0);
 							uni.navigateTo({
-								url:'./ProfessionPK'
-							})
-						}else if(result.cancel){
-							
+								url: './ProfessionPK'
+							});
+						} else if (result.cancel) {
 						}
 					},
-					complete:()=>{
-					}
-				})				
-			}else{
+					complete: () => {}
+				});
+			} else {
 				uni.showModal({
-					content:'您还没有开通VIP会员哦~',
-					confirmText:'去开通',
-					success:(value)=>{
-						console.log(JSON.stringify(value))
+					content: '您还没有开通VIP会员哦~',
+					confirmText: '去开通',
+					success: value => {
+						console.log(JSON.stringify(value));
 					},
-					complete:()=>{
-						
-					}
-				})
+					complete: () => {}
+				});
 			}
 		},
-		handleSave(){
+		handleSave() {
 			// TODO 进行vip验证/用户验证
 			uni.showModal({
-				content:'您还没有开通VIP会员哦~',
-				confirmText:'去开通',
-				success:(value)=>{
-					console.log(JSON.stringify(value))
+				content: '您还没有开通VIP会员哦~',
+				confirmText: '去开通',
+				success: value => {
+					console.log(JSON.stringify(value));
 				},
-				complete:()=>{
-					this.hasSaved = !this.hasSaved
+				complete: () => {
+					this.hasSaved = !this.hasSaved;
 				}
-			})
-			
+			});
 		},
-		handleDownload(){
+		handleDownload() {
 			const downloadTask = uni.downloadFile({
-				url:'https://code.jquery.com/jquery-3.4.1.min.js',
-				success(res){
-					if(res.statusCode == 200){
+				url: 'https://code.jquery.com/jquery-3.4.1.min.js',
+				success(res) {
+					if (res.statusCode == 200) {
 						// 打开下载文件
 						uni.openDocument({
-							filePath:res.tempFilePath
-						})
+							filePath: res.tempFilePath
+						});
 					}
 				}
-			})
+			});
 			// 监控下载进度，TODO是否需要下载提示
 			// downloadTask.onProgressUpdate(function (res) {
 			//     console.log('下载进度' + res.progress);

@@ -221,6 +221,16 @@ export default {
 			.exec();
 	},
 	methods: {
+		getDetail(){
+			this.$HTTP({
+				url:'/College/GetCollegeDetail',
+				header:'form',
+				data:{
+					token:'d05902562e544db29bbe777954d43bb0',
+					
+				}
+			})
+		},
 		handleTab(){
 			uni.switchTab({
 				url:'../tabBar/info/info'

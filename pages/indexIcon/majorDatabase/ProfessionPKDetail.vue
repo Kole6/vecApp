@@ -78,9 +78,8 @@
 				tableWidth:'750upx'
 			}
 		},
-		onLoad(){
+		onLoad(option){
 			this.tableHeight = uni.getSystemInfoSync().windowHeight - uni.upx2px(750) + 'px'
-			console.log(this.tableHeight)
 		},
 		methods:{
 			

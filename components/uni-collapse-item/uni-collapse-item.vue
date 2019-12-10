@@ -1,121 +1,118 @@
 <template>
-  <view
-    :class="['uni-collapse-cell', { 'uni-collapse-cell--disabled': disabled, 'uni-collapse-cell--open': isOpen }]"
-    :hover-class="disabled ? '' : 'uni-collapse-cell--hover'">
-    <view
-      class="uni-collapse-cell__title header"
-	  :class="{'uni-active': isOpen}"
-      @click="onClick">
-      <view
-        v-if="thumb"
-        class="uni-collapse-cell__title-extra" ><image
-          :src="thumb"
-          class="uni-collapse-cell__title-img" /></view>
-      <view class="uni-collapse-cell__title-inner" >
-        <view class="uni-collapse-cell__title-text">{{ title }}</view>
-      </view>
-      <view
-        :class="{ 'uni-active': isOpen, 'uni-collapse-cell--animation': showAnimation === true }"
-        class="uni-collapse-cell__title-arrow">
-		<image :src="isOpen?'/static/indexIcon/uparrow.png':'/static/indexIcon/downarrow.png'" mode="aspectFit" style="height: 12px;width: 12px;"></image>
-        <!-- <uni-icons
+	<view
+		:class="['uni-collapse-cell', { 'uni-collapse-cell--disabled': disabled, 'uni-collapse-cell--open': isOpen }]"
+		:hover-class="disabled ? '' : 'uni-collapse-cell--hover'"
+		@tap="handleTap"
+	>
+		<view class="uni-collapse-cell__title header" :class="{ 'uni-active': isOpen }" @click="onClick">
+			<view v-if="thumb" class="uni-collapse-cell__title-extra"><image :src="thumb" class="uni-collapse-cell__title-img" /></view>
+			<view class="uni-collapse-cell__title-inner">
+				<view class="uni-collapse-cell__title-text">{{ title }}</view>
+			</view>
+			<view :class="{ 'uni-active': isOpen, 'uni-collapse-cell--animation': showAnimation === true }" class="uni-collapse-cell__title-arrow">
+				<image :src="isOpen ? '/static/indexIcon/uparrow.png' : '/static/indexIcon/downarrow.png'" mode="aspectFit" style="height: 12px;width: 12px;"></image>
+				<!-- <uni-icons
           :color="isOpen?'#fff':'#bbb'"
           size="20"
           type="arrowdown" /> -->
-      </view>
-    </view>
-    <view
-      :style="{ height: isOpen ? 'auto' : '0px' }"
-      class="uni-collapse-cell__content">
-      <view :class="{ 'uni-collapse-cell--animation': showAnimation === true }" :style="{ transform: isOpen ? 'translateY(0px)' : 'translateY(-50%)','-webkit-transform' : isOpen ? 'translateY(0px)' : 'translateY(-50%)' }">
-        <slot />
-      </view>
-    </view>
-  </view>
+			</view>
+		</view>
+		<view :style="{ height: isOpen ? 'auto' : '0px' }" class="uni-collapse-cell__content">
+			<view
+				:class="{ 'uni-collapse-cell--animation': showAnimation === true }"
+				:style="{ transform: isOpen ? 'translateY(0px)' : 'translateY(-50%)', '-webkit-transform': isOpen ? 'translateY(0px)' : 'translateY(-50%)' }"
+			>
+				<slot />
+			</view>
+		</view>
+	</view>
 </template>
 
 <script>
-import uniIcons from '../uni-icons/uni-icons.vue'
+import uniIcons from '../uni-icons/uni-icons.vue';
 export default {
-  name: 'UniCollapseItem',
-  components: {
-    uniIcons
-  },
-  props: {
-    title: {
-      // 列表标题
-      type: String,
-      default: ''
-    },
-    name: {
-      // 唯一标识符
-      type: [Number, String],
-      default: 0
-    },
-    disabled: {
-      // 是否禁用
-      type: [Boolean, String],
-      default: false
-    },
-    showAnimation: {
-      // 是否显示动画
-      type: Boolean,
-      default: false
-    },
-    open: {
-      // 是否展开
-      type: [Boolean, String],
-      default: false
-    },
-    thumb: {
-      // 缩略图
-      type: String,
-      default: ''
-    }
-  },
-  data () {
-    return {
-      isOpen: false
-    }
-  },
-  watch: {
-    open (val) {
-      this.isOpen = val
-    }
-  },
-  inject: ['collapse'],
-  created () {
-    this.isOpen = this.open
-    this.nameSync = this.name ? this.name : this.collapse.childrens.length
-    this.collapse.childrens.push(this)
-    if (String(this.collapse.accordion) === 'true') {
-      if (this.isOpen) {
-        let lastEl = this.collapse.childrens[this.collapse.childrens.length - 2]
-        if (lastEl) {
-          this.collapse.childrens[this.collapse.childrens.length - 2].isOpen = false
-        }
-      }
-    }
-  },
-  methods: {
-    onClick () {
-      if (this.disabled) {
-        return
-      }
-      if (String(this.collapse.accordion) === 'true') {
-        this.collapse.childrens.forEach(vm => {
-          if (vm === this) {
-            return
-          }
-          vm.isOpen = false
-        })
-      }
-      this.isOpen = !this.isOpen
-      this.collapse.onChange && this.collapse.onChange()
-			this.$forceUpdate()
-    }
-  }
-}
+	name: 'UniCollapseItem',
+	components: {
+		uniIcons
+	},
+	props: {
+		title: {
+			// 列表标题
+			type: String,
+			default: ''
+		},
+		name: {
+			// 唯一标识符
+			type: [Number, String],
+			default: 0
+		},
+		disabled: {
+			// 是否禁用
+			type: [Boolean, String],
+			default: false
+		},
+		showAnimation: {
+			// 是否显示动画
+			type: Boolean,
+			default: false
+		},
+		open: {
+			// 是否展开
+			type: [Boolean, String],
+			default: false
+		},
+		thumb: {
+			// 缩略图
+			type: String,
+			default: ''
+		}
+	},
+	data() {
+		return {
+			isOpen: false
+		};
+	},
+	watch: {
+		open(val) {
+			this.isOpen = val;
+		}
+	},
+	inject: ['collapse'],
+	created() {
+		this.isOpen = this.open;
+		this.nameSync = this.name ? this.name : this.collapse.childrens.length;
+		this.collapse.childrens.push(this);
+		if (String(this.collapse.accordion) === 'true') {
+			if (this.isOpen) {
+				let lastEl = this.collapse.childrens[this.collapse.childrens.length - 2];
+				if (lastEl) {
+					this.collapse.childrens[this.collapse.childrens.length - 2].isOpen = false;
+				}
+			}
+		}
+	},
+	methods: {
+		handleTap() {
+			this.$emit('taped');
+		},
+		onClick() {
+			if (this.disabled) {
+				return;
+			}
+			if (String(this.collapse.accordion) === 'true') {
+				this.collapse.childrens.forEach(vm => {
+					if (vm === this) {
+						return;
+					}
+					vm.isOpen = false;
+				});
+			}
+			this.isOpen = !this.isOpen;
+			this.collapse.onChange && this.collapse.onChange();
+			this.$forceUpdate();
+		}
+	}
+};
 </script>
 
 <style lang="scss">
@@ -128,14 +125,14 @@ export default {
 }
 
 $collapse-title-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
-.uni-collapse-cell--open{
-	background: #F8FAFF;
+.uni-collapse-cell--open {
+	background: #f8faff;
 }
-.uni-collapse-cell__title.uni-active{
+.uni-collapse-cell__title.uni-active {
 	background: $main-base-color;
-	color: #FFFFFF;
+	color: #ffffff;
 }
-.uni-collapse-cell__title-text{
+.uni-collapse-cell__title-text {
 	color: #333333;
 }
 .uni-collapse-cell {

@@ -1,76 +1,99 @@
 <template>
 	<view class="">
-		<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height: systemInfo.screenHeight - 80 +'px'}" :loadStatus="loadStatus">
-		<view class="list">
-			<school-list showType="4" :listArr="dataArr" />
-			</view>
+		<load-more
+			ref="scroll"
+			@onPullDown="onPullDown"
+			@onScroll="onScroll"
+			@onLoadMore="onLoadMore"
+			:styleObj="{ height: systemInfo.screenHeight - 80 + 'px' }"
+			:loadStatus="loadStatus"
+		>
+			<view class="list"><school-list showType="4" :listArr="dataArr" /></view>
 		</load-more>
 	</view>
 </template>
 
 <script>
-
 import schoolList from './SchoolList.vue';
-import {schoolData} from '../mockData.js'
-import loadMore from '@/components/loadMore/you-scroll.vue'
+import { schoolData } from '../mockData.js';
+import loadMore from '@/components/loadMore/you-scroll.vue';
 export default {
-	components: { schoolList ,loadMore},
+	components: { schoolList, loadMore },
 	data() {
 		return {
-			dataArr: [...schoolData,...schoolData],
-			loadStatus:'more',
+			dataArr: [],
+			loadStatus: 'more',
 			systemInfo: uni.getSystemInfoSync(),
+			page: {
+				pageIndex: '1',
+				pageSize: '10'
+			}
 		};
 	},
 	mounted() {
-		// uni.setNavigationBarTitle({
-		// 　　title:'测试标题'
-		// })
+		this.onLoadMore();
 	},
 	methods: {
-		onPullDown(done){
-			setTimeout(()=>{
-				this.dataArr = schoolData
+		testData() {},
+		onPullDown(done) {
+			this.page.pageIndex = 1;
+			this.getData(true).finally(()=>{
 				done();
-			},2000)
-		},
-		onScroll(){
-		},
-		onLoadMore(){
-			this.loadStatus = 'loading'
-			// this.getData().then(()=>{
-			// })
-			setTimeout(() =>{
-				this.dataArr=[...this.dataArr,...schoolData]
-					this.loadStatus = 'more'
-			}, 1000);
-		},
-		getData(){
-			return new Promise((resolve,reject)=>{
-				uni.request({
-					url:'http://47.103.69.156:18089/zjq/College/GetSchoolMajorHighLightSearchList',
-					header:{
-						'content-type':'application/x-www-form-urlencoded'
-					},
-					data:{
-						token:'d05902562e544db29bbe777954d43bb0',
-						pageIndex:'1',
-						pageSize:'10',
-						key:'浙江'
-					},
-					method:'POST',
-					success:({data}) => {
-						if(data.code == 0){
-							
-						}
-						console.log(data,'res')
-					},
-					complete() {
-						resolve();
-					}
-				})
 			})
 		},
+		onScroll() {},
+		onLoadMore() {
+			this.loadStatus = 'loading';
+			this.getData().then((isLastPage)=>{
+				if(isLastPage){
+					this.loadStatus = 'noMore'
+				}else{
+					this.loadStatus = 'more'
+				}
+			})
+		},
+		getData(refresh = false) {
+			return new Promise((resolve, reject) => {
+				this.$HTTP({
+					url: '/zjq/College/GetSchoolSearchList',
+					header: 'form',
+					data: {
+						token: 'd05902562e544db29bbe777954d43bb0',
+						key: '',
+						pageIndex: this.page.pageIndex,
+						pageSize: this.page.pageSize,
+						sfbkcc:'1'
+					}
+				})
+					.then(res => {
+						if (res.code == 0) {
+							let data = res.data.list.map(item => {
+								return {
+									...item,
+									title: item.schoolname,
+									cards: item.tags.split(',').map(item=>{
+										return {
+											name:item
+										}
+									}),
+									tags:[{name:'地区',value:item.area},{name:'层次',value:item.level}]
+								};
+							});
+							if (refresh) {
+								this.dataArr = data;
+								this.page.pageIndex = '1';
+							} else {
+								this.dataArr.push(...data);
+								this.page.pageIndex = res.data.pageNumber+1+'';
+							}
+						}
+						resolve(res.data.lastPage);
+					})
+					.catch(err => {
+						reject(err);
+					});
+			});
+		}
 	}
 };
 </script>
@@ -80,7 +103,7 @@ export default {
 	padding: 5upx 30upx;
 	border-bottom: solid 1px $uni-border-color;
 }
-.list{
-	background: #FFFFFF;
+.list {
+	background: #ffffff;
 }
 </style>

@@ -6,12 +6,12 @@
 				<scroll-view class="nav-left" scroll-y :style="'height:' + height + 'px'">
 					<view
 						class="nav-left-item"
-						@click="categoryClickMain(item, index)"
+						@click="level1Click(item, index)"
 						:key="index"
 						:class="index == categoryActive ? 'active' : ''"
-						v-for="(item, index) in categoryList"
+						v-for="(item, index) in level1"
 					>
-						{{ item.name }}
+						{{ item.majorname }}
 					</view>
 				</scroll-view>
 				<scroll-view class="nav-right" scroll-y 
@@ -20,15 +20,16 @@
 							 :style="'height:' + height + 'px'" 
 							 scroll-with-animation>
 						<uni-collapse >
-						    <uni-collapse-item v-for="(list,index) in subCategoryList" 
-												:key="list.id"
-												:title="list.name" 
+						    <uni-collapse-item v-for="(list,index) in level2" 
+												@taped="level2Click(list,index)"
+												:key="list.majorcode"
+												:title="list.majorname" 
 												:show-animation="true"
 												:open="list.open">
-								<view class="category-item" v-for="(item,i) in list.detailList" 
-												:key="item.id"
-												@tap="handleItemTap(item,i,list,index)">
-									{{item.name}}
+								<view class="category-item" v-for="(item,i) in level3" 
+												:key="item.majorcode"
+												@tap="handleItemTap(item)">
+									{{item.majorname}}
 								</view>
 						    </uni-collapse-item>
 						</uni-collapse>
@@ -48,6 +49,10 @@ export default {
 		return {
 			categoryList: [],
 			subCategoryList: [],
+			level1:[],
+			level2:[],
+			level2Open:0,
+			level3:[],
 			height: 0,
 			categoryActive: 0,//当前分类选中index值
 			//滚动视图
@@ -57,11 +62,91 @@ export default {
 		};
 	},
 	onLoad: function() {
-		this.getCategory();
 		// 设置分类栏高度，保持在一屏内
 		this.height = uni.getSystemInfoSync().windowHeight;
 	},
+	mounted(){
+	},
+	created(){
+		this.initData()
+	},
 	methods: {
+		level1Click(categroy, index) {
+			this.categoryActive = index;
+			this.scrollTop = -this.scrollHeight * index;
+			this.initData(categroy.majorcode)
+		},
+		level2Click(item,index){
+			let level2Data = this.getData({
+				type:'zyfl',
+				pid:item.majorcode,
+				schoolType:'2',
+			}).then((data)=>{
+				if(data.length){
+					this.level2[this.level2Open].open=false;
+					this.level2Open = index;
+					item.open = true;
+					this.level3 = data
+				}else{
+					this.level3 = []
+				}
+			}).catch((err)=>{
+				uni.showToast({
+					title:err,
+					icon:'none'
+				})
+			})
+		},
+		async initData(majorId=''){
+			let level1Data = []
+			if(!majorId){
+				level1Data = await this.getData({
+					type:'zyfl',
+					pid:majorId,
+					schoolType:'2',
+				})
+				this.level1 = level1Data;
+				if(!level1Data.length){
+					this.level2 = this.level3 = []
+					return
+				};
+			}
+			let level2Data = await this.getData({
+				type:'zyfl',
+				pid:majorId || level1Data[0].majorcode,
+				schoolType:'2',
+			})
+			if(level2Data.length){
+				level2Data[0].open = true;
+				this.level2Open = 0;
+				this.level2 = level2Data
+			}else{
+				this.level3 = []
+				return;
+			}
+			let level3Data = await this.getData({
+				type:'zyfl',
+				pid:level2Data[0].majorcode,
+				schoolType:'2',
+			})
+			this.level3 = level3Data;
+		},
+		getData(data){
+			return new Promise((resolve,reject)=>{
+				this.$HTTP({
+					url:'/zjq/mainpage/GetDict',
+					header:'form',
+					data,
+				}).then((res)=>{
+					if(res.code == 0){
+						resolve(res.data)
+					}else{
+						reject(res.message)
+					}
+				})
+			})
+			
+		},
 		showAll(){
 			this.subCategoryList.forEach(item=>{
 				item.open = !this.isShowAll;
@@ -72,295 +157,10 @@ export default {
 		scroll(e) {
 			this.scrollHeight = e.detail.scrollHeight;
 		},
-		categoryClickMain(categroy, index) {
-			this.isShowAll = false;
-			this.categoryActive = index;
-			this.subCategoryList = categroy.subCategoryList;
-			this.scrollTop = -this.scrollHeight * index;
-		},
-		getCategory() {
-			let data = [
-				{
-					name:'农林牧渔'
-				},{
-					name:'资源环境与安全'
-				},{
-					name:'土木工程'
-				},{
-					name:'资源环境与安全'
-				},{
-					name:'装备制造'
-				},{
-					name:'生物与化工'
-				},{
-					name:'轻工纺织'
-				},{
-					name:'食品药品与粮食'
-				},{
-					name:'交通运输'
-				}
-			]
-			data.forEach((item,index)=>{
-				item.subCategoryList=[
-						{
-							name:'农业类',
-							open:false,
-							id:'00'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'01'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'02'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'03'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'04'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'05'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'06'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'07'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'08'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'09'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'10'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'11'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						},{
-							name:'农业类',
-							open:false,
-							id:'12'+index,
-							detailList:[
-								{
-									name:'农业种植',
-									id:'0000'+index
-								},{
-									name:'农业种植',
-									id:'0001'+index
-								},{
-									name:'农业种植',
-									id:'0002'+index
-								},{
-									name:'农业种植',
-									id:'0003'+index
-								},
-							]
-						}
-					]
-			})
-			this.categoryList = data
-			this.subCategoryList = this.categoryList[0].subCategoryList;
-		},
-		handleItemTap(target,targetIndex,list,listIndex){
-			console.log(target,targetIndex,list,listIndex)
+
+		handleItemTap(target,targetIndex){
 			uni.navigateTo({
-				url:'./ProfessionDesc?id='+target.id+'&name='+target.name,
-				animationType: 'pop-in',
-				animationDuration: 200
+				url:`./ProfessionDesc?id=${target.majorcode}&name=${target.majorname}&type=2`
 			})
 		}
 	}
@@ -403,7 +203,6 @@ export default {
 	font-size: $uni-font-size-lg ;
 	text-align: center;
 	color: #333;
-	background: #999999;
 	&.active {
 		border-left: solid 10upx $main-base-color;
 		background: #FFFFFF;
