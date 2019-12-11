@@ -12,7 +12,7 @@
 			Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
 			Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
 		</text> -->
-		<image src="../../../static/indexIcon/fwzx.png" mode="scaleToFill"></image>
+		<image src="/static/indexIcon/fwzx.png" mode="widthFix"></image>
 	</view>
 </template>
 
@@ -25,13 +25,17 @@
 		}
 	}
 </script>
-
+<style>
+	page{
+		background-color: #fff;
+	}
+</style>
 <style lang="scss">
 .content{
 	background: #FFFFFF;
 	line-height: 0;
 	image{
-		height: 1207upx;
+		// height: 100%;
 		width: 750upx;
 	}
 	// font-size: $uni-font-size-base;
