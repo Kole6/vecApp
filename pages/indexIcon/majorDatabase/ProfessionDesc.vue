@@ -166,25 +166,49 @@ export default {
 	onLoad(Option) {
 		uni.setStorageSync('freeChance', 1);
 		this.params = Option
+		console.log(Option)
 		this.getDetailData({
 			zyid:Option.id,
 			schoolType:Option.type
 		})
 		this.getChance()
 		this.getSimilarSchool()
+		this.judgeHasSC()
 	},
 	methods: {
-		//TODO 查询相似的学校，有问题，无响应
-		getSimilarSchool(){
+		// 是否已收藏专业
+		judgeHasSC(){
 			this.$HTTP({
-				url:'/zjq/mainpage/GetMajorInfo',
+				url:'/zjq/User/GetFavoriteList',
 				header:'form',
 				data:{
-					zyid:this.params.id
+					pageIndex:1,
+					pageSize:1000,
+					type:'2',
+					token:'d05902562e544db29bbe777954d43bb0'
 				}
-			}).then((res)=>{
-				console.log('similar == >',res)
+			}).then(res=>{
+				if(res.code == 0){
+					let hasSC = res.data.list.some((item)=>{
+						return item.majorcode == this.params.id
+					})
+					if(hasSC){
+						this.hasSC = true;
+					}
+				}
 			})
+		},
+		//TODO 查询相似的学校，有问题，无响应
+		getSimilarSchool(){
+			// this.$HTTP({
+			// 	url:'/zjq/mainpage/GetMajorInfo',
+			// 	header:'form',
+			// 	data:{
+			// 		zyid:this.params.id
+			// 	}
+			// }).then((res)=>{
+			// 	console.log('similar == >',res)
+			// })
 		},
 		getDetailData(data){
 			this.$HTTP({
@@ -247,7 +271,7 @@ export default {
 		},
 		handleToSchool() {
 			uni.navigateTo({
-				url: './ProfessionSchool'
+				url: `./ProfessionSchool?schoolType=${this.params.type}&zyid=${this.params.id}&name=${this.professionInfo.name}`
 			});
 		},
 		handleListTaped(item) {},
