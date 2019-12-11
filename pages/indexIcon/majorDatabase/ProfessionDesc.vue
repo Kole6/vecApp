@@ -174,6 +174,7 @@ export default {
 		this.getSimilarSchool()
 	},
 	methods: {
+		//TODO 查询相似的学校，有问题，无响应
 		getSimilarSchool(){
 			this.$HTTP({
 				url:'/zjq/mainpage/GetMajorInfo',

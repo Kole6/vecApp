@@ -14,7 +14,11 @@ export default {
 			type: Boolean,
 			default: true
 		},
-		message: String
+		message: String,
+		duration:{
+			type:Number,
+			default:1500,
+		}
 	},
 	watch: {
 		isShow: {
@@ -22,6 +26,9 @@ export default {
 				this.$nextTick(() => {
 					if (val) {
 						this.animation.height(uni.upx2px(88)).step();
+						this.timer = setTimeout(()=>{
+							this.$emit('update:isShow',false)
+						},this.duration)
 					} else {
 						this.animation.height(0).step();
 					}
@@ -32,7 +39,8 @@ export default {
 	},
 	data() {
 		return {
-			animationData: ''
+			animationData: '',
+			timer:'',
 		};
 	},
 	mounted() {

@@ -1,29 +1,27 @@
 <template>
 	<view class="list-content" :class="{'has':showBorder}" @tap="handleTap">
 		<view class="left">
-			{{item.title.substr(0,1)}}
+			{{!!item.schoolname?item.schoolname.substr(0,1):item.title.substr(0,1)}}
 		</view>
 		<view class="right">
-			<view class="title">
-				{{item.title}}
-			</view>
-			<scroll-view v-if="showType == 2 || showType ==4"  scroll-x="true" style="white-space: nowrap;">
+			<rich-text  class="title" :nodes="item.title"></rich-text>
+			<scroll-view v-if="showType == 2 || showType ==4"  scroll-x="true" style="white-space: nowrap;display: flex;align-items: center;padding: 15upx 0;">
 				<view class="tag tag-text"
 				v-for="(tag,i) in item.tags" :key="i">
-					<block >
-						{{ tag.name + ':' + tag.value }}
-					</block>
+					<text>{{ tag.name + ':' + tag.value }}</text>
 				</view>
 			</scroll-view>
-			<scroll-view v-if="showType == 4 || showType == 3" scroll-x="true" style="white-space: nowrap;">
+			<scroll-view v-if="showType == 4 || showType == 3" scroll-x="true" style="white-space: nowrap;display: flex;align-items: center;">
 				<block v-if="isSpecial">
 					<view  class="tag tag-text" v-for="(card,index) in item.cards" :key="index">
-							{{ card.name + ':' + card.value }}
+						<text>{{card.name + ':' + card.value}}</text>
 					</view>
 				</block>
 				<block v-else>
-					<view  class="card" v-for="(card,index) in item.cards" :key="index">
-							{{card.name}}
+					<view style="display: flex;align-items: center;">
+						<view  class="card" v-for="(card,index) in item.cards" :key="index">
+							<text>{{card.name}}</text>
+						</view>
 					</view>
 				</block>
 			</scroll-view>
@@ -75,13 +73,15 @@
 </script>
 
 <style scoped lang="scss">
+	*{
+		box-sizing: border-box;
+	}
 	.list-content{
 		padding: 30upx;
 		&.has{
 			border-bottom: solid 1px $main-dividing-line1;	
 		}
 		.left{
-			box-sizing: border-box;
 			display: inline-flex;
 			width:120upx;
 			height:120upx;
@@ -104,25 +104,33 @@
 				color: #333333;
 			}
 			.tag,.card{
-				display: inline-block;
+				display: inline-flex;
 				font-size: $uni-font-size-base;
 				padding: 5upx 10upx;
 				border-radius: 10upx;
 				border: solid 1px #FF750F;
 				color: #666666;
-				margin: 10upx  10upx 0 10upx;
+				margin: 0  10upx 0 10upx;
+				justify-content: center;
+				align-items: center;
+				&:first-child{
+					margin-left: 0;
+				}
 			}
 			.card{
 				color: #FF750F;;
 			}
 			.tag.tag-text {
-				display: inline-block;
+				// display: inline-block;
 				font-size: $uni-font-size-base;
 				padding: 0 10upx;
 				margin: 0;
 				border-radius: 0;
 				border: none;
 				border-right: solid 1px $uni-border-color;
+				&:first-child{
+					padding-left: 0;
+				}
 			}
 			.tag.tag-text:last-child {
 				border: none;

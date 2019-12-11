@@ -1,4 +1,5 @@
 const schoolData = [{
+		schoolname:'北京电子科技职业技术学院',
 		title: '北京电子科技职业技术学院',
 		tags: [{
 			name: '地区',
@@ -14,6 +15,7 @@ const schoolData = [{
 		}]
 	},
 	{
+		schoolname:'北京电子科技职业技术学院',
 		title: '北京电子科技职业技术学院',
 		tags: [{
 			name: '地区',
@@ -29,6 +31,7 @@ const schoolData = [{
 		}]
 	},
 	{
+		schoolname:'北京电子科技职业技术学院',
 		title: '北京电子科技职业技术学院',
 		tags: [{
 			name: '地区',
@@ -44,6 +47,7 @@ const schoolData = [{
 		}]
 	},
 	{
+		schoolname:'北京电子科技职业技术学院',
 		title: '北京电子科技职业技术学院',
 		tags: [{
 			name: '地区',
@@ -59,6 +63,7 @@ const schoolData = [{
 		}]
 	},
 	{
+		schoolname:'北京电子科技职业技术学院',
 		title: '北京电子科技职业技术学院',
 		tags: [{
 			name: '地区',
@@ -74,6 +79,7 @@ const schoolData = [{
 		}]
 	},
 	{
+		schoolname:'北京电子科技职业技术学院',
 		title: '北京电子科技职业技术学院',
 		tags: [{
 			name: '地区',

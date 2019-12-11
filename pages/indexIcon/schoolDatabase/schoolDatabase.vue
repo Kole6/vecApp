@@ -44,7 +44,11 @@ export default {
 			loadStatus:'noMore',
 			systemInfo: uni.getSystemInfoSync(),
 			wrapperHeight: 'auto',
-			dataArr: schoolData
+			dataArr: schoolData,
+			page: {
+			    pageIndex: 1,
+			    pageSize: 10,
+			}
 		};
 	},
 	onNavigationBarSearchInputClicked() {
@@ -82,33 +86,59 @@ export default {
 					this.loadStatus = 'more'
 			}, 1000);
 		},
-		getData(){
-			return new Promise((resolve,reject)=>{
-				uni.request({
-					url:'http://47.103.69.156:18089/zjq/College/GetSchoolMajorHighLightSearchList',
-					header:{
-						'content-type':'application/x-www-form-urlencoded'
-					},
-					data:{
-						token:'d05902562e544db29bbe777954d43bb0',
-						// type:'2',
-						pageIndex:'1',
-						pageSize:'10',
-						// sid:'4151012965',
-						key:'浙江'
-					},
-					method:'POST',
-					success:({data}) => {
-						if(data.code == 0){
-							
-						}
-						console.log(data,'res')
-					},
-					complete() {
-						resolve();
-					}
-				})
-			})
+		getData(isRefresh) {
+		    return new Promise((resolve, reject) => {
+		        this.$HTTP({
+		            url: '/zjq/mainpage/GetHotCollege',
+		            header: 'form',
+		            data: {
+		                type: '2',
+		                token: 'd05902562e544db29bbe777954d43bb0',
+		                pageIndex: this.page.pageIndex,
+		                pageSize: this.page.pageSize,
+		            }
+		        }).then(res => {
+		            console.log('result==', res);
+		            // if (res.code == 0) {
+		            //     let data = res.data.list.map(item => {
+		            //             item.tags = item.tags + ''
+		            //                 return {
+		            //                 ...item,
+		            //                 title: item.schoolname,
+		            //                 cards: item.tags.split(',').map(item => {
+		            //                     return {
+		            //                         name: item
+		            //                     };
+		            //                 }),
+		            //                 tags: [{
+		            //                         name: '地区',
+		            //                         value: item.area
+		            //                     }, {
+		            //                         name: '层次',
+		            //                         value: item.level
+		            //                     }
+		            //                 ]
+		            //             };
+		            //         });
+		            //     if (isRefresh) {
+		            //         this.searchResultMessage = `一共${res.data.totalRow}条搜索数据`
+		            //             this.dataArr = data
+		            //             this.page.pageIndex = 1;
+		            //         this.isShow = true;
+		            //     } else {
+		            //         this.dataArr.push(...data)
+		            //         this.page.pageIndex++
+		            //     }
+		            //     resolve(res.data.lastPage);
+		            // } else {
+		            //     uni.showToast({
+		            //         title: res.message,
+		            //         icon: 'none'
+		            //     });
+		            //     reject();
+		            // }
+		        });
+		    });
 		},
 		handleBack() {
 			uni.navigateBack();
