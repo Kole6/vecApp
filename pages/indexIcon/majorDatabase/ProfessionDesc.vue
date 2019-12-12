@@ -165,8 +165,10 @@ export default {
 	},
 	onLoad(Option) {
 		uni.setStorageSync('freeChance', 1);
+		// 测试用
+		Option.id = '520907'
+		Option.type = '1'
 		this.params = Option
-		console.log(Option)
 		this.getDetailData({
 			zyid:Option.id,
 			schoolType:Option.type
@@ -174,8 +176,23 @@ export default {
 		this.getChance()
 		this.getSimilarSchool()
 		this.judgeHasSC()
+		this.getCompareInfo();
 	},
 	methods: {
+		getCompareInfo(){
+			this.$HTTP({
+				url:'/zjq/User/GetComparison',
+				header:'form',
+				data:{
+					type:'2',
+					token:'d05902562e544db29bbe777954d43bb0'
+				}
+			}).then((res)=>{
+				if(res.code==0){
+					this.tipMessage=`您还可以进行专业对比哦!您已经添加${res.data.length}个专业`
+				}
+			})
+		},
 		// 是否已收藏专业
 		judgeHasSC(){
 			this.$HTTP({
@@ -189,6 +206,7 @@ export default {
 				}
 			}).then(res=>{
 				if(res.code == 0){
+					
 					let hasSC = res.data.list.some((item)=>{
 						return item.majorcode == this.params.id
 					})
@@ -225,7 +243,8 @@ export default {
 					this.professionInfo.xynx = data.xynx
 					this.dzNumber = data.likenum
 					this.downloadLink = data.downloadLink
-					this.dataArr = data.list
+					// 相近专业数值问题
+					// this.dataArr = data.list
 					this.list1 = data.mainzylx.split('；').map(name=>{
 						return{
 							name
@@ -237,15 +256,13 @@ export default {
 		},
 		getChance(){
 			this.$HTTP({
-				url:'/zjq/User/UseTools',
+				url:'/zjq/User/GetUser',
 				header:'form',
 				data:{
 					token:'d05902562e544db29bbe777954d43bb0',
-					type:'ckzlcs',
-					
 				}
 			}).then((res)=>{
-				console.log(res,'res')
+				console.log(res,'chance')
 			})
 		},
 		handleSC() {

@@ -1,7 +1,7 @@
 <template>
 	<view >
 		<!-- 专业对比 -->
-		<view class=""><message-info :message="searchResultMessage" :isShow.sync="isShowMessage" @close="handleMessageClose"></message-info></view>
+		<!-- <view class=""><message-info :message="searchResultMessage" :isShow.sync="isShowMessage" @close="handleMessageClose"></message-info></view> -->
 		<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height: '400px'}" :loadStatus="loadStatus">
 			<view class="wrapper">
 			<view class="list-item" v-for="(item,index) in listArr" :key="index">
@@ -24,7 +24,7 @@
 		</view>
 		<!-- 底部按钮 -->
 		<view class="m-bottom" >
-			<view class="left">退出</view>
+			<view class="left" @tap="handleQuit">退出</view>
 			<view class="right" @tap="handleRouter">开始对比</view>
 		</view>
 	</view>
@@ -89,6 +89,9 @@ export default {
 		
 	},
 	methods: {
+		handleQuit(){
+			uni.navigateBack()
+		},
 		onPullDown(done){
 			setTimeout(()=>{
 				this.dataArr = [
@@ -154,7 +157,7 @@ export default {
 			})
 		},
 		toAdd(){
-			uni.navigateTo({
+			uni.redirectTo({
 				url:'./ProfessionPKAdd',
 			})
 		},
