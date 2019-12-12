@@ -11,7 +11,7 @@
 						:class="index == categoryActive ? 'active' : ''"
 						v-for="(item, index) in level1"
 					>
-						{{ item.majorname }}
+						{{ item.name }}
 					</view>
 				</scroll-view>
 				<scroll-view class="nav-right" scroll-y 
@@ -22,14 +22,14 @@
 						<uni-collapse >
 						    <uni-collapse-item v-for="(list,index) in level2" 
 												@taped="level2Click(list,index)"
-												:key="list.majorcode"
-												:title="list.majorname" 
+												:key="list.code"
+												:title="list.name" 
 												:show-animation="true"
 												:open="list.open">
 								<view class="category-item" v-for="(item,i) in level3" 
-												:key="item.majorcode"
+												:key="item.code"
 												@tap="handleItemTap(item)">
-									{{item.majorname}}
+									{{item.name}}
 								</view>
 						    </uni-collapse-item>
 						</uni-collapse>
@@ -74,12 +74,12 @@ export default {
 		level1Click(categroy, index) {
 			this.categoryActive = index;
 			this.scrollTop = -this.scrollHeight * index;
-			this.initData(categroy.majorcode)
+			this.initData(categroy.code)
 		},
 		level2Click(item,index){
 			let level2Data = this.getData({
 				type:'zyfl',
-				pid:item.majorcode,
+				pid:item.code,
 				schoolType:'1',
 			}).then((data)=>{
 				if(data.length){
@@ -113,7 +113,7 @@ export default {
 			}
 			let level2Data = await this.getData({
 				type:'zyfl',
-				pid:majorId || level1Data[0].majorcode,
+				pid:majorId || level1Data[0].code,
 				schoolType:'1',
 			})
 			if(level2Data.length){
@@ -126,7 +126,7 @@ export default {
 			}
 			let level3Data = await this.getData({
 				type:'zyfl',
-				pid:level2Data[0].majorcode,
+				pid:level2Data[0].code,
 				schoolType:'1',
 			})
 			this.level3 = level3Data;
@@ -160,7 +160,7 @@ export default {
 
 		handleItemTap(target,targetIndex){
 			uni.navigateTo({
-				url:`./ProfessionDesc?id=${target.majorcode}&name=${target.majorname}&type=1`
+				url:`./ProfessionDesc?id=${target.code}&name=${target.name}&type=1`
 			})
 		}
 	}
