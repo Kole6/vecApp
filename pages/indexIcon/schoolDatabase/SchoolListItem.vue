@@ -60,12 +60,12 @@
 					this.$emit('taped',this.item)
 					return;
 				}
-				if(this.url){
-					
-				}else{
+				if(this.item.schoolno){
 					uni.navigateTo({
-						url:'../../schoolDetails/SchoolDetail'
+						url:`../../schoolDetails/SchoolDetail?schoolno=${this.item.schoolno}`
 					})
+				}else{
+					
 				}
 			}
 		}

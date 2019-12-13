@@ -66,7 +66,12 @@
 				<view class="title">专业教学标准</view>
 				<view class="content">
 					<text class="tips">下载内容：</text>
-					<text class="link" @tap="handleDownload">点击进入下载页面</text>
+					<block v-if="downloadLink && downloadLink!=='#'">
+						<text class="link" @tap="handleDownload">点击进入下载页面</text>		
+					</block>
+					<block v-else>
+						<text>暂无</text>
+					</block>
 				</view>
 			</view>
 			<view class="line"></view>
@@ -114,7 +119,7 @@ export default {
 			hasSC: false, //是否添加收藏
 			hasDZ: false, //是否点赞
 			hasSaved: false, //是否已收藏
-			dzNumber: '1w+',
+			dzNumber: '',
 			tipMessage: '您还可以进行专业对比哦!您已经添加0个专业',
 			wrapperHeight: 'auto',
 			systemInfo: uni.getSystemInfoSync(),
@@ -122,17 +127,17 @@ export default {
 				overflow: 'auto'
 			},
 			professionInfo: {
-				name: '部队政治工作',
-				zydl: '公安与司法大类',
-				zydm: '38327398',
+				name: '专业名称',
+				zydl: '专业大类',
+				zydm: '专业代码',
 				xlcc: '学历层次',
 				xynx: '修业年限',
-				downloadName: '让新职教事业越来越红火'
+				downloadName: '下载文件名称'
 			},
 			params:{},
 			downloadLink:'',
-			list1: [{ name: '农业技术指导人员' }, { name: '农作物生产人员' }, { name: '农业生产服务人员' }],
-			list2: [{ name: '农业技术指导人员' }, { name: '农作物生产人员' }],
+			list1: [],
+			list2: [],
 			dataArr: [
 				{
 					title: '汽车运用与维护',
@@ -235,7 +240,7 @@ export default {
 					this.professionInfo.xlcc = data.xlcc
 					this.professionInfo.xynx = data.xynx
 					this.dzNumber = data.likenum
-					this.downloadLink = data.downloadLink
+					this.downloadLink = data.downloadlink
 					// 相近专业数值问题
 					// this.dataArr = data.list
 					this.list1 = data.mainzylx.split('；').map(name=>{
@@ -299,7 +304,6 @@ export default {
 		},
 		handlePK() {
 			// 进行用户验证/VIP验证
-			const value = uni.getStorageSync('freeChance');
 			if (this.permission.sjbdcs || this.permission.isVip) {
 				if(this.permission.isVip){
 					uni.navigateTo({
@@ -337,7 +341,7 @@ export default {
 		},
 		handleDownload() {
 			const downloadTask = uni.downloadFile({
-				url: 'https://code.jquery.com/jquery-3.4.1.min.js',
+				url: this.downloadLink || 'https://code.jquery.com/jquery-3.4.1.min.js',
 				success(res) {
 					if (res.statusCode == 200) {
 						// 打开下载文件

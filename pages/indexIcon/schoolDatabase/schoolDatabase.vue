@@ -44,7 +44,7 @@ export default {
 			loadStatus:'noMore',
 			systemInfo: uni.getSystemInfoSync(),
 			wrapperHeight: 'auto',
-			dataArr: schoolData,
+			dataArr: [],
 			page: {
 			    pageIndex: 1,
 			    pageSize: 10,
@@ -52,7 +52,6 @@ export default {
 		};
 	},
 	onNavigationBarSearchInputClicked() {
-		console.log(arguments, 'arg');
 	},
 	mounted() {
 		// 限制列表高度
@@ -98,45 +97,42 @@ export default {
 		                pageSize: this.page.pageSize,
 		            }
 		        }).then(res => {
-		            console.log('result==', res);
-		            // if (res.code == 0) {
-		            //     let data = res.data.list.map(item => {
-		            //             item.tags = item.tags + ''
-		            //                 return {
-		            //                 ...item,
-		            //                 title: item.schoolname,
-		            //                 cards: item.tags.split(',').map(item => {
-		            //                     return {
-		            //                         name: item
-		            //                     };
-		            //                 }),
-		            //                 tags: [{
-		            //                         name: '地区',
-		            //                         value: item.area
-		            //                     }, {
-		            //                         name: '层次',
-		            //                         value: item.level
-		            //                     }
-		            //                 ]
-		            //             };
-		            //         });
-		            //     if (isRefresh) {
-		            //         this.searchResultMessage = `一共${res.data.totalRow}条搜索数据`
-		            //             this.dataArr = data
-		            //             this.page.pageIndex = 1;
-		            //         this.isShow = true;
-		            //     } else {
-		            //         this.dataArr.push(...data)
-		            //         this.page.pageIndex++
-		            //     }
-		            //     resolve(res.data.lastPage);
-		            // } else {
-		            //     uni.showToast({
-		            //         title: res.message,
-		            //         icon: 'none'
-		            //     });
-		            //     reject();
-		            // }
+		            if (res.code == 0) {
+		                let data = res.data.list.map(item => {
+		                        item.tags = item.tags + ''
+		                            return {
+		                            ...item,
+		                            title: item.schoolname,
+		                            cards: item.tags.split(',').map(item => {
+		                                return {
+		                                    name: item
+		                                };
+		                            }),
+		                            tags: [{
+		                                    name: '地区',
+		                                    value: item.area
+		                                }, {
+		                                    name: '层次',
+		                                    value: item.level
+		                                }
+		                            ]
+		                        };
+		                    });
+		                if (isRefresh) {
+							this.dataArr = data
+							this.page.pageIndex = 1;
+		                } else {
+		                    this.dataArr.push(...data)
+		                    this.page.pageIndex++
+		                }
+		                resolve(res.data.lastPage);
+		            } else {
+		                uni.showToast({
+		                    title: res.message,
+		                    icon: 'none'
+		                });
+		                reject();
+		            }
 		        });
 		    });
 		},

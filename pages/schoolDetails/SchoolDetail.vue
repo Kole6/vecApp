@@ -12,37 +12,32 @@
 				<view class="base">
 					<view class="left" @tap="handleLogoTaped">
 						<image
-							src="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=d1b03b49334e251fe2f7e3fe9fbdae2a/08f790529822720e9c777b8978cb0a46f21fab0c.jpg"
+							:src="schoolInfo.img"
 							mode="aspectFill"
 							style="width: 100%; height: 100%;"
 						></image>
 					</view>
 					<view class="right">
-						<view class="title">北京市滨海职业大学</view>
+						<view class="title">{{schoolInfo.name}}</view>
 						<view class="info">
-							<text>北京市</text>
-							<text>1999年</text>
-							<text>公办</text>
+							<text>{{schoolInfo.city}}</text>
+							<text>{{schoolInfo.birth}}</text>
+							<text>{{schoolInfo.schoolType}}</text>
 						</view>
-						<view class="num"><text>学校标示码:1234567890</text></view>
+						<view class="num"><text>学校标示码:{{schoolInfo.schoolno}}</text></view>
 					</view>
-					<view class="f-site">官网</view>
+					<view class="f-site" @tap="toWebsite">官网</view>
 					<view class="f-dz" @tap="hasDZ = !hasDZ">
 						<image :src="hasDZ ? '/static/indexIcon/dz.png' : '/static/indexIcon/dz.png'" mode="aspectFit" style="width: 40upx; height: 40upx;"></image>
-						<text>{{ dzNumber }}</text>
+						<text>{{ schoolInfo.dzNumber }}</text>
 					</view>
 				</view>
-				<!-- <view class="image">
-				<image src="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=d1b03b49334e251fe2f7e3fe9fbdae2a/08f790529822720e9c777b8978cb0a46f21fab0c.jpg" mode="aspectFit"></image>
-			</view> -->
 				<view class="tags">
-					<view class="item">理工</view>
-					<view class="item">国家重点</view>
-					<view class="item">国家示范校</view>
+					<view class="item" v-for="(item,index) in schoolInfo.schoolTags" :key="index">{{item}}</view>
 				</view>
 				<view class="address">
 					<text>地址：</text>
-					<text>北京市五道口职业技术学院</text>
+					<text>{{schoolInfo.address}}</text>
 				</view>
 			</view>
 			<view class="line"></view>
@@ -62,7 +57,7 @@
 			<view class="m-info">
 				<view class="u-title"><text>基本信息</text></view>
 				<view class="tags">
-					<block v-for="(item, index) in schoolInfo" :key="index">
+					<block v-for="(item, index) in schoolInfo1" :key="index">
 						<view class="item">
 							<text @tap="handleTap(item, index)">{{ item.name }}</text>
 						</view>
@@ -95,18 +90,6 @@
 				<zi-xun></zi-xun>
 			</view>
 		</view>
-		<!-- 底部按钮 -->
-		<!-- <view class="m-bottom">
-			<view class="left" @tap="handleSave">
-				<text class="vecfont icon-menu iconguanzhu" :class="{'saved':hasSaved}"></text>
-				<text class="text">
-					{{hasSaved?'取消关注':'关注'}}
-				</text>
-			</view>
-			<view class="right" @tap="handlePK">
-				<text>学校对比</text>
-			</view>
-		</view> -->
 		<uni-popup :show="showModal" type="center" :custom="true" :mask-click="false" @change="modalChange">
 			<view class="uni-tip">
 				<view class="tip-list">
@@ -133,9 +116,22 @@ export default {
 	components: { uniNavBar, uniIcons, ziXun, uniPopup },
 	data() {
 		return {
+			params:{},
+			schoolInfo:{
+				name:'学校名称',
+				city:'-',
+				birth:'-',
+				schoolType:'-',
+				schoolTags:[],
+				dzNumber:0,
+				schoolno:'',
+				address:'学校地址',
+				img:'',
+				website:'http://www.baidu.com',
+				baike:'https://baike.baidu.com/item/北京电子科技职业学院',
+			},
 			showModal: false, //模态框显示
 			tipMessage: '您还可以进行学校对比哦!您已经添加0个学校',
-			dzNumber: '1w+',
 			hasDZ: false, //是否点赞
 			hasSC: false,
 			assets: {
@@ -147,21 +143,12 @@ export default {
 			styleObj: {
 				top: '250px'
 			},
-			hasSaved: false,
-			webviewStyles: {
-				progress: {
-					color: '#FF3333'
-				}
-			},
-			baseInfo: {
-				address: '滨海市高新开发区建设路128号',
-				xxdm: '1286229618'
-			},
-			hasCompare: false,
-			schoolInfo: [
+			schoolInfo1: [
 				{
 					name: '学校简介',
-					url: './schoolProfile?schoolName=' + '滨海职业学院'
+					url: './schoolProfile',
+					// params  从schoolInfo中获取数据拼接到参数中
+					params:[{key:'baike',value:'baike'}]
 				},
 				{
 					name: '校领导',
@@ -197,7 +184,13 @@ export default {
 					name: '就业创业',
 					url: './entrepreneurship/entrepreneurship'
 				}
-			]
+			],
+			permission:{
+				isVip:false,
+				ckzycs:0,
+				sjbdcs:0,
+				ckzlcs:0,
+			},
 		};
 	},
 	created() {},
@@ -220,14 +213,77 @@ export default {
 			})
 			.exec();
 	},
+	onLoad(params) {
+		this.params = params
+		// this.params.schoolno = "4111010858"
+		this.getDetail();
+		this.judgeHasSC();
+		this.getChance();
+	},
 	methods: {
-		getDetail(){
+		getChance(){
 			this.$HTTP({
-				url:'/College/GetCollegeDetail',
+				url:'/zjq/User/GetUser',
 				header:'form',
 				data:{
 					token:'d05902562e544db29bbe777954d43bb0',
+				}
+			}).then((res)=>{
+				if(res.code == 0){
+					this.permission.isVip = !!res.data.isvip
+					this.permission.ckzlcs = res.data.ckzlcs
+					this.permission.ckzycs = res.data.ckzycs
+					this.permission.sjbdcs = res.data.sjbdcs
+				}
+			})
+		},
+		judgeHasSC(){
+			this.$HTTP({
+				url:'/zjq/User/GetFavoriteList',
+				header:'form',
+				data:{
+					pageIndex:1,
+					pageSize:1000,
+					type:'1',
+					token:'d05902562e544db29bbe777954d43bb0'
+				}
+			}).then(res=>{
+				if(res.code == 0){
 					
+					let hasSC = res.data.list.some((item)=>{
+						return item.majorcode == this.params.schoolno
+					})
+					if(hasSC){
+						this.hasSC = true;
+					}
+				}
+			})
+		},
+		getDetail(){
+			this.$HTTP({
+				url:'/zjq/College/GetCollegeDetail',
+				header:'form',
+				data:{
+					token:'d05902562e544db29bbe777954d43bb0',
+					sid:this.params.schoolno,
+				}
+			}).then(res=>{
+				if(res.code == 0){
+					let data = res.data
+					this.schoolInfo = {
+						...data,
+						name : data.schoolname,
+						city : data.city,
+						birth : data.establishdate,
+						schoolType : data.organizer,
+						schoolTags : data.schoolTags,
+						dzNumber : data.hitscount,
+						schoolno : data.schoolno,
+						address : data.address,
+						img : data.logo,
+						website : data.website,
+						baike : data.schoolBaikeUrl,
+					}
 				}
 			})
 		},
@@ -242,10 +298,11 @@ export default {
 				header: 'form',
 				data: {
 					token: 'd05902562e544db29bbe777954d43bb0',
-					sid: '3633000526',
-					type: '1'
+					sid: this.schoolInfo.schoolno,
+					type: this.hasSC?'2':'1'
 				}
 			}).then(res => {
+				console.log(res,'res')
 				setTimeout(()=>{
 					uni.showToast({
 						title: res.message,
@@ -259,7 +316,7 @@ export default {
 		},
 		modalChange() {},
 		handleLogoTaped() {
-			this.showModal = true;
+			// this.showModal = true;
 		},
 		handleRouter(url) {
 			uni.navigateTo({
@@ -270,14 +327,59 @@ export default {
 			uni.navigateBack();
 		},
 		handlePK() {
+			// 进行用户验证/VIP验证
+			const value = uni.getStorageSync('freeChance');
+			if (this.permission.sjbdcs || this.permission.isVip) {
+				if(this.permission.isVip){
+					uni.navigateTo({
+						url: './SchoolPk/SchoolPk'
+					});
+					return;
+				}
+				uni.showModal({
+					content: '您有一次免费学校对比机会哦~',
+					confirmText: '去对比',
+					success: result => {
+						if (result.confirm) {
+							uni.navigateTo({
+								url: './SchoolPk/SchoolPk'
+							});
+						} else if (result.cancel) {
+						}
+					},
+					complete: () => {}
+				});
+			} else {
+				uni.showModal({
+					content: '您还没有开通VIP会员哦~',
+					confirmText: '去开通',
+					success: result => {
+						if (result.confirm) {
+							uni.navigateTo({
+								url:'../indexIcon/vip/vip'
+							})
+						}
+					}
+				});
+			}
+		},
+		toWebsite(){
+			if(!this.schoolInfo.website)return;
 			uni.navigateTo({
-				url: './SchoolPk/SchoolPk'
+				url: `./schoolProfile?website=${this.schoolInfo.website}`
 			});
 		},
 		handleTap(item, index) {
 			if (item.url) {
+				let stringArr = []
+				if(item.params){
+					item.params.forEach(item=>{
+						stringArr.push(`${item.key}=${this.schoolInfo[item.value]}`)
+					})
+					console.log(stringArr,'arr')
+				}
 				uni.navigateTo({
-					url: item.url
+					url: item.url+'?'+stringArr.join('&')
 				});
 			}
 		}
@@ -286,276 +388,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-// 官网
-@mixin flexstyle($jusp, $alip) {
-	display: flex;
-	justify-content: $jusp;
-	align-items: $alip;
-}
-.f-sc {
-	padding-left: 30upx;
-}
-.line {
-	height: 20upx;
-}
-.u-title {
-	font-size: $uni-font-size-lg;
-	color: $main-text-color;
-	font-weight: bold;
-	padding: 29upx 31upx;
-	background: #ffffff;
-	border-bottom: solid 1upx $main-dividing-line1;
-}
-.m-top {
-	background: #ffffff;
-	border-top: solid 1upx $main-dividing-line1;
-	.base {
-		display: flex;
-		padding-top: 30upx;
-		padding-left: 50upx;
-		position: relative;
-		.left {
-			@include flexstyle(center, center) margin: 15upx 0;
-			width: 120upx;
-			height: 120upx;
-			// border: solid 1upx $main-base-color;
-			color: $main-base-color;
-			border-radius: 60upx;
-			font-size: 48upx;
-			overflow: hidden;
-		}
-		.right {
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			font-size: $uni-font-size-base;
-			color: #666666;
-			padding-left: 20upx;
-			.title {
-				font-size: $uni-font-size-lg;
-				color: $main-text-color;
-				font-weight: bold;
-			}
-			.info {
-				text {
-					padding: 0 15upx;
-					border-left: solid 1upx #666666;
-				}
-				text:first-child {
-					padding-left: 0;
-					border-left: none;
-				}
-			}
-		}
-		.f-site {
-			@include flexstyle(center, center) box-sizing: border-box;
-			position: absolute;
-			top: 30upx;
-			right: 61upx;
-			width: 90upx;
-			height: 45upx;
-			font-size: $uni-font-size-base;
-			color: $main-base-color;
-			border-radius: 5upx;
-			border: solid 1upx $main-base-color;
-		}
-		.f-dz {
-			@include flexstyle(flex-start, center) position: absolute;
-			top: 96upx;
-			right: 61upx;
-			font-size: $uni-font-size-base;
-			color: #999999;
-		}
-	}
-	.image {
-		padding: 0 32upx;
-		image {
-			width: 100%;
-		}
-	}
-	.tags {
-		padding-left: 32upx;
-		padding-top: 20upx;
-		.item {
-			display: inline-block;
-			box-sizing: border-box;
-			font-size: $uni-font-size-base;
-			padding: 5upx 10upx;
-			border: solid 1upx #ff750f;
-			color: #ff750f;
-			border-radius: 5upx;
-			margin-right: 20upx;
-		}
-	}
-	.address {
-		padding: 20upx 0 20upx 32upx;
-		font-size: $uni-font-size-base;
-		color: #999999;
-	}
-}
-.m-tip {
-	padding: 26upx 36upx;
-	font-size: $uni-font-size-base;
-	color: $main-text-color;
-	font-weight: bold;
-	background: #ffffff;
-}
-.m-pk {
-	background: #ffffff;
-	box-sizing: border-box;
-	@include flexstyle(space-between, center) position: relative;
-	height: 100upx;
-	padding: 20upx 35upx;
-	margin-bottom: 20upx;
-	.left {
-		display: inline-flex;
-		align-items: center;
-		font-size: $uni-font-size-base;
-		color: #999999;
-		text {
-			padding-left: 10upx;
-		}
-	}
-	.right {
-		z-index: 3;
-		color: #ffffff;
-	}
-	.bg1 {
-		position: absolute;
-		top: -2upx;
-		right: 0;
-		z-index: 1;
-	}
-	.bg2 {
-		position: absolute;
-		top: 14upx;
-		right: 128upx;
-		z-index: 2;
-	}
-}
-.m-school_list {
-	@include flexstyle(space-between, center) padding: 28upx 31upx;
-	font-size: $uni-font-size-lg;
-	color: $main-text-color;
-	font-weight: bold;
-	background: #ffffff;
-	border-bottom: solid 1upx $main-dividing-line1;
-	margin-bottom: 20upx;
-}
-.s-school_list {
-	@include flexstyle(space-between, center) font-size: $uni-font-size-lg;
-	color: $main-text-color;
-	font-weight: bold;
-	background: #ffffff;
-	border-bottom: solid 1upx $main-dividing-line1;
-	margin-bottom: 20upx;
-	display: block;
-	padding-top: 28upx;
-	text {
-		padding-left: 31upx;
-	}
-	image {
-		border-top: solid 1upx $main-dividing-line1;
-		margin-top: 28upx;
-		padding-top: 6upx;
-	}
-}
-// .m-bottom{
-// 	position: fixed;
-// 	bottom: 0;
-// 	font-size: $uni-font-size-lg + 8;
-// 	display: flex;
-// 	box-sizing: border-box;
-// 	width: 100vw;
-// 	.left{
-// 		width: 70%;
-// 		display: flex;
-// 		justify-content: center;
-// 		align-items: center;
-// 		padding:25upx 0;
-// 		background: #FFFFFF;
-// 		.text{
-// 			padding-left: 20upx;
-// 		}
-// 	}
-// 	.right{
-// 		width: 30%;
-// 		text-align: center;
-// 		background: #199ED8;
-// 		padding:25upx 0;
-// 		color: #FFFFFF;
-// 	}
-// 	.saved{
-// 		color: $main-base-color;
-// 	}
-// 	.saved+.text{
-// 		color: $main-base-color;
-// 	}
-// }
-.m-info {
-	border-bottom: solid 1upx $main-dividing-line1;
-	background: #ffffff;
-	margin-bottom: 20upx;
-	.title.f-link {
-		@include flexstyle(space-between, center) padding: 28upx 31upx;
-		font-weight: bold;
-		font-size: $uni-font-size-lg;
-		border-bottom: solid 1upx $main-dividing-line1;
-		color: $main-text-color;
-	}
-	.tags {
-		display: flex;
-		align-items: center;
-		flex-wrap: wrap;
-		padding: 20upx 0;
-		border-bottom: solid 1upx $main-dividing-line1;
-		.item {
-			box-sizing: border-box;
-			width: 30%;
-			font-size: $uni-font-size-base;
-			text-align: center;
-			padding: 10upx;
-			text {
-				display: inline-flex;
-				justify-content: center;
-				align-items: center;
-				color: $main-text-color;
-				background: #f5f5fb;
-				width: 200upx;
-				height: 54upx;
-				box-sizing: border-box;
-				padding: 10upx 0;
-				border: solid 1upx $main-dividing-line1;
-				border-radius: 54upx;
-			}
-		}
-	}
-}
-/* 提示窗口 */
-.uni-tip {
-	padding: 15px;
-	width: 400upx;
-	background: #fff;
-	box-sizing: border-box;
-	border-radius: 10px;
-	.tip-list {
-		.item {
-			text-align: center;
-			padding: 40upx 0;
-			font-size: $uni-font-size-base;
-			color: $main-text-color;
-		}
-	}
-	.close {
-		text-align: center;
-		text {
-			@include flexstyle(center, center);
-			display: inline-flex;
-			padding: 0 10upx 5upx 10upx;
-			font-size: 34upx;
-			color: #ffffff;
-			background: $main-base-color;
-		}
-	}
-}
+@import  './schoolDetails.scss';
 </style>
