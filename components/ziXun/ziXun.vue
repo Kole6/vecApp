@@ -1,12 +1,12 @@
 <template>
 	<view>
-		<view class="ziXun" hover-class="navigator-hover" v-for="(item,index) in infoListTest" :key="index" @tap="openInfo()">
+		<view class="ziXun" hover-class="navigator-hover" v-for="(item,index) in newList" :key="index" @tap="openInfo()">
 			<view class="z-left">
-				<p class="left-title">{{item.title}}</p> 
-				<p class="left-text">{{`时间：2019-03-02 来源：校园网`}}</p> 
+				<p class="left-title">{{item.newstitle}}</p> 
+				<p class="left-text">{{`时间：${item.createtime} 来源：${item.source}`}}</p> 
 			</view>
 			<view class="z-right">
-				<image mode="aspectFill" :src="item.img" class="image1"></image>
+				<image mode="aspectFill" :src="item.picurl" class="image1"></image>
 			</view>
 		</view>
 	</view>
@@ -14,25 +14,30 @@
 
 <script>
 	export default {
+		props: {
+			newList: {
+				type: Array
+			},
+		},
 		data() {
 			return {
-				infoListTest: [{
-						title: "恭喜我校“六音”吉他社，荣获上海市第三届音乐会三等奖，我校月…",
-						img: "https://pic.36krcnd.com/201911/06052619/cd2viy851dbu5tsr!heading",
-						time: '2019-03-02',
-						source: "校园网"
-					}, {
-						title: "恭喜我校“六音”吉他社，荣获上海市第三届音乐会三等奖，我校月…",
-						img: "https://pic.36krcnd.com/201910/31113337/dblb8niihg3y9pgb!heading",
-						time: '2019-03-02',
-						source: "校园网"
-					},{
-						title: "恭喜我校“六音”吉他社，荣获上海市第三届音乐会三等奖，我校月…",
-						img: "https://pic.36krcnd.com/201911/06023811/0nccc1mhji53qxzj!heading",
-						time: '2019-03-02',
-						source: "校园网"
-					}
-				]
+				// infoListTest: [{
+				// 		title: "恭喜我校“六音”吉他社，荣获上海市第三届音乐会三等奖，我校月…",
+				// 		img: "https://pic.36krcnd.com/201911/06052619/cd2viy851dbu5tsr!heading",
+				// 		time: '2019-03-02',
+				// 		source: "校园网"
+				// 	}, {
+				// 		title: "恭喜我校“六音”吉他社，荣获上海市第三届音乐会三等奖，我校月…",
+				// 		img: "https://pic.36krcnd.com/201910/31113337/dblb8niihg3y9pgb!heading",
+				// 		time: '2019-03-02',
+				// 		source: "校园网"
+				// 	},{
+				// 		title: "恭喜我校“六音”吉他社，荣获上海市第三届音乐会三等奖，我校月…",
+				// 		img: "https://pic.36krcnd.com/201911/06023811/0nccc1mhji53qxzj!heading",
+				// 		time: '2019-03-02',
+				// 		source: "校园网"
+				// 	}
+				// ]
 			};
 		},
 		methods: {
@@ -65,6 +70,7 @@
 			font-weight:400;
 			color:rgba(51,51,51,1);
 			line-height:40upx;
+			overflow: hidden;
 		}
 		.left-text{
 			font-size:20upx;

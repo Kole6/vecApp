@@ -10,12 +10,12 @@
 				<text class="prompt"> 学校 / 人名 / 专业 </text>
 			</view>
 		</nav-bar>
-		
+
 		<!-- 轮播图 -->
 		<view class="swiper-view">
 			<swiper class="swiper" indicator-dots="true" autoplay="true" circular="true" indicator-active-color="#ffffff">
-				<swiper-item v-for="swiper in swiperList" :key="swiper.sid" @tap="toSwiper(swiper)">
-					<image mode="aspectFill" :src="swiper.img"></image>
+				<swiper-item v-for="(swiper,index) in swiperList" :key="index" @tap="toSwiper(swiper)">
+					<image mode="aspectFill" :src="swiper.imageUrl"></image>
 				</swiper-item>
 			</swiper>
 		</view>
@@ -37,8 +37,8 @@
 				<navigator url="/pages/special/doubleHigh/doubleHigh" hover-class="none">
 					<view class="zhuan-btn">
 						<view class="z-left">
-							<p class="left-title">双高计划</p> 
-							<p class="left-text">Double high plan</p> 
+							<p class="left-title">双高计划</p>
+							<p class="left-text">Double high plan</p>
 						</view>
 						<view class="z-right">
 							<image mode="aspectFill" src="/static/p303.png" class="image1"></image>
@@ -48,8 +48,8 @@
 				<navigator url="/pages/special/international/international" hover-class="none">
 					<view class="zhuan-btn">
 						<view class="z-left">
-							<p class="left-title">合作办学</p> 
-							<p class="left-text">Cooperation in running schools</p> 
+							<p class="left-title">合作办学</p>
+							<p class="left-text">Cooperation in running schools</p>
 						</view>
 						<view class="z-right">
 							<image mode="aspectFill" src="/static/p301.png" class="image1"></image>
@@ -59,8 +59,8 @@
 				<navigator url="/pages/special/educationList/educationList" hover-class="none">
 					<view class="zhuan-btn">
 						<view class="z-left">
-							<p class="left-title">职教榜单</p> 
-							<p class="left-text">Vocational Education list</p> 
+							<p class="left-title">职教榜单</p>
+							<p class="left-text">Vocational Education list</p>
 						</view>
 						<view class="z-right">
 							<image mode="aspectFill" src="/static/p304.png" class="image1"></image>
@@ -70,8 +70,8 @@
 				<navigator url="/pages/special/serviceCentre/serviceCentre" hover-class="none">
 					<view class="zhuan-btn">
 						<view class="z-left">
-							<p class="left-title">服务中心</p> 
-							<p class="left-text">Service Centre</p> 
+							<p class="left-title">服务中心</p>
+							<p class="left-text">Service Centre</p>
 						</view>
 						<view class="z-right">
 							<image mode="aspectFill" src="/static/p302.png" class="image1"></image>
@@ -86,7 +86,7 @@
 			<span class="ex-right" @tap="toInfo()">更多 > </span>
 		</view>
 		<view class="xun">
-			<zi-xun></zi-xun>
+			<zi-xun :newList="newList"></zi-xun>
 		</view>
 	</view>
 </template>
@@ -105,17 +105,7 @@
 		},
 		data() {
 			return {
-				swiperList: [{
-						sid: 4,
-						src: '自定义src4',
-						img: '/static/swiper-img/4.png'
-					},
-					{
-						sid: 1,
-						src: '自定义src1',
-						img: '/static/swiper-img/2.jpg'
-					}
-				],
+				swiperList: [],
 				iconList: [{
 						url: '/static/home_icon5.png',
 						text: '院校库',
@@ -137,19 +127,31 @@
 						page: '/pages/indexIcon/vip/vip'
 					}
 				],
-				list2: [
-				]
+				newList: []
 			}
 		},
-		onLoad() {},
+		onLoad() {
+			this.getMainApi()
+		},
 		methods: {
+			getMainApi() {
+				this.$HTTP({
+					url: '/zjq/mainpage/GetMain',
+					data: {}
+				}).then((data) => {
+					this.swiperList = [...data.data.bannerList]
+					this.newList = [...data.data.hotSubjects.list]
+				}, (err) => {
+					console.log(err)
+				})
+			},
 			confirm() {
 				uni.navigateTo({
 					url: '/pages/indexIcon/indexSearch/indexSearch'
 				});
 			},
 			toSwiper(swiper) {
-				console.log(swiper.sid);
+				// console.log(swiper.sid);
 			},
 			toIndexicon(e) {
 				uni.navigateTo({
