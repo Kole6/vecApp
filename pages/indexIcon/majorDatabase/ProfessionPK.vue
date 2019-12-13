@@ -2,7 +2,7 @@
 	<view >
 		<!-- 专业对比 -->
 		<!-- <view class=""><message-info :message="searchResultMessage" :isShow.sync="isShowMessage" @close="handleMessageClose"></message-info></view> -->
-		<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height: '400px'}" :loadStatus="loadStatus">
+		<load-more ref="scroll" @onPullDown="onPullDown"  @onLoadMore="onLoadMore" :styleObj="{ height: '400px'}" :loadStatus="loadStatus">
 			<view class="wrapper">
 			<view class="list-item" v-for="(item,index) in listArr" :key="index">
 				<view class="flag"  @click="handleListTaped(item)">

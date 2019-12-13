@@ -1,12 +1,17 @@
 <template>
 	<view>
 		<!-- 搜索栏 -->
-		<view class="search"><uni-search-bar radius="100" clearButton="auto" @confirm="search" placeholder="资料名称" /></view>
+		<view class="search"><uni-search-bar ref="search" radius="100" clearButton="auto" @confirm="search" placeholder="资料名称" /></view>
 		<view class=""><message-info :message="searchResultMessage" :isShow.sync="isShow" @close="handleClose"></message-info></view>
 		<!-- 文件列表区 -->
-		<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height: wrapperHeight}" :loadStatus="loadStatus">
-		<view class="school-list" ><file-list :listArr="fileListArr"></file-list></view>
-		</load-more>
+		
+		<view class="list-wrapper" >
+			<block v-if="fileListArr.length">
+				<load-more ref="scroll" @onPullDown="onPullDown"  @onLoadMore="onLoadMore" :styleObj="{ height: wrapperHeight}" :loadStatus="loadStatus">
+				<view class="school-list" ><file-list :listArr="fileListArr"></file-list></view>
+				</load-more>
+			</block>
+		</view>
 
 	</view>
 </template>
@@ -16,163 +21,119 @@ import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue';
 import fileList from './FileList.vue';
 import messageInfo from '@/pages/indexIcon/schoolDatabase/messageInfo.vue';
 import loadMore from '@/components/loadMore/you-scroll.vue'
+import docx from '@/static/indexIcon/word.jpg'
+import xlsx from '@/static/indexIcon/xlsx.jpg'
+import pdf from '@/static/indexIcon/pdf.jpg'
 export default {
 	components: { uniSearchBar, fileList, messageInfo,loadMore },
 	data() {
 		return {
+			fileType:{
+				docx,
+				xlsx,
+				pdf
+			},
+			page:{
+				pageIndex:1,
+				pageSize:10,
+			},
+			searchValue:'',
 			loadStatus:'more',
-			searchResultMessage: '一共5条搜索数据',
-			isShow: true,
+			searchResultMessage: '',
+			isShow: false,
 			firstHeight:'0',
 			systemInfo: uni.getSystemInfoSync(),
 			wrapperHeight: 'auto',
-			fileListArr: [
-				{
-					name: '2018-2019中国大学排名800强完整榜单(校友会最新版)',
-					hasDownloaded: '263',
-					fileSize: '582.5KB',
-					other: '-50',
-					src: '/static/indexIcon/p1.png'
-				},
-				{
-					name: '2018-2019中国大学排名800强完整榜单(校友会最新版)',
-					hasDownloaded: '263',
-					fileSize: '582.5KB',
-					other: '-50',
-					src: '/static/indexIcon/p1.png'
-				},
-				{
-					name: '2018-2019中国大学排名800强完整榜单(校友会最新版)',
-					hasDownloaded: '263',
-					fileSize: '582.5KB',
-					other: '-50',
-					src: '/static/indexIcon/p1.png'
-				},
-				{
-					name: '2018-2019中国大学排名800强完整榜单(校友会最新版)',
-					hasDownloaded: '263',
-					fileSize: '582.5KB',
-					other: '-50',
-					src: '/static/indexIcon/p1.png'
-				},
-				{
-					name: '2018-2019中国大学排名800强完整榜单(校友会最新版)',
-					hasDownloaded: '263',
-					fileSize: '582.5KB',
-					other: '-50',
-					src: '/static/indexIcon/p1.png'
-				},
-				{
-					name: '2018-2019中国大学排名800强完整榜单(校友会最新版)',
-					hasDownloaded: '263',
-					fileSize: '582.5KB',
-					other: '-50',
-					src: '/static/indexIcon/p1.png'
-				},
-				{
-					name: '2018-2019中国大学排名800强完整榜单(校友会最新版)',
-					hasDownloaded: '263',
-					fileSize: '582.5KB',
-					other: '-50',
-					src: '/static/indexIcon/p1.png'
-				},
-				{
-					name: '2018-2019中国大学排名800强完整榜单(校友会最新版)',
-					hasDownloaded: '263',
-					fileSize: '582.5KB',
-					other: '-50',
-					src: '/static/indexIcon/p1.png'
-				},
-				{
-					name: '2018-2019中国大学排名800强完整榜单(校友会最新版)',
-					hasDownloaded: '263',
-					fileSize: '582.5KB',
-					other: '-50',
-					src: '/static/indexIcon/p1.png'
-				},
-				{
-					name: '2018-2019中国大学排名800强完整榜单(校友会最新版)',
-					hasDownloaded: '263',
-					fileSize: '582.5KB',
-					other: '-50',
-					src: '/static/indexIcon/p1.png'
-				},
-				{
-					name: '2018-2019中国大学排名800强完整榜单(校友会最新版)',
-					hasDownloaded: '263',
-					fileSize: '582.5KB',
-					other: '-50',
-					src: '/static/indexIcon/p1.png'
-				},
-				{
-					name: '2018-2019中国大学排名800强完整榜单(校友会最新版)',
-					hasDownloaded: '263',
-					fileSize: '582.5KB',
-					other: '-50',
-					src: '/static/indexIcon/p1.png'
-				}
-			]
+			fileListArr: []
 		};
 	},
 	mounted() {
+		this.$refs.search.searchClick();
 		this.calcScrollHeight(true);
 	},
 	methods: {
-		onPullDown(done){
-			setTimeout(()=>{
-				done();
-			},2000)
+		onPullDown(done) {
+		    this.page.pageIndex = 1;
+		    this.getData(true)
+		    .then(isLastPage => {
+		        if (isLastPage) {
+		            this.loadStatus = 'noMore';
+		        } else {
+		            this.loadStatus = 'more';
+		        }
+		    })
+		    .finally(() => {
+		        done && done();
+		    });
 		},
-		onScroll(){
+		onLoadMore() {
+		    this.loadStatus = 'loading';
+		    this.getData().then(isLastPage => {
+		        if (isLastPage) {
+		            this.loadStatus = 'noMore';
+		        } else {
+		            this.loadStatus = 'more';
+		        }
+		    });
 		},
-		onLoadMore(){
-			this.loadStatus = 'loading'
-			// this.getData().then(()=>{
-			// })
-			setTimeout(() =>{
-				this.loadStatus = 'more'
-			}, 1000);
-		},
-		getData(){
-			return new Promise((resolve,reject)=>{
-				uni.request({
-					url:'http://47.103.69.156:18089/zjq/College/GetSchoolMajorHighLightSearchList',
-					header:{
-						'content-type':'application/x-www-form-urlencoded'
-					},
-					data:{
-						token:'d05902562e544db29bbe777954d43bb0',
-						pageIndex:'1',
-						pageSize:'10',
-						key:'浙江'
-					},
-					method:'POST',
-					success:({data}) => {
-						if(data.code == 0){
-							
-						}
-						console.log(data,'res')
-					},
-					complete() {
-						resolve();
+		getData(isRefresh) {
+			return new Promise((resolve, reject) => {
+				this.$HTTP({
+					url: '/zjq/mainpage/GetFile',
+					header: 'form',
+					data: {
+						type: '',
+						token: 'd05902562e544db29bbe777954d43bb0',
+						pageIndex: this.page.pageIndex,
+						pageSize: this.page.pageSize,
+						key: this.searchValue
 					}
-				})
-			})
+				}).then(res => {
+					if (res.code == 0) {
+						let data = res.data.list.map(item => {
+							return {
+								...item,
+								name:item.filename,
+								hasDownloaded:item.downloadnum,
+								fileSize:item.filesize,
+								src:this.fileType[item.fileavatar] || '/static/indexIcon/p1.png'
+							};
+						});
+						if (isRefresh) {
+							this.searchResultMessage = `一共${res.data.totalRow}条搜索数据`;
+							this.fileListArr = data;
+							this.page.pageIndex = 1;
+							this.isShow = true;
+						} else {
+							this.fileListArr.push(...data);
+							this.page.pageIndex++;
+						}
+						resolve(res.data.lastPage);
+					} else {
+						uni.showToast({
+							title: res.message,
+							icon: 'none'
+						});
+						reject();
+					}
+				});
+			});
 		},
-		handleClose(){
+		handleClose() {
 			this.isShow = false;
 			this.calcScrollHeight();
 		},
-		search() {
-			this.isShow = !this.isShow;
-			this.calcScrollHeight();
+		search({value}) {
+			this.searchValue = value
+			this.page.pageIndex = 1;
+			this.onPullDown();
 		},
 		calcScrollHeight(isFirst = false) {
 			setTimeout(() => {
 				// 限制列表高度
 				let query = uni.createSelectorQuery().in(this);
 				query
-					.select('.school-list')
+					.select('.list-wrapper')
 					.boundingClientRect(data => {
 						let  height = ''
 						// #ifdef APP-PLUS
@@ -202,5 +163,8 @@ export default {
 <style scoped lang="scss">
 .search {
 	padding: 10upx 20upx;
+	background: #FFFFFF;
+	border-top: solid 1upx $main-dividing-line1;
+	border-bottom: solid 1upx $main-dividing-line1;
 }
 </style>

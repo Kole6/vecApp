@@ -2,8 +2,8 @@
 	<view class="">
 		<!-- 标题 -->
 		<view class="m-top">
-			<view class="title">2018年中国大学学科评估结果和双一流数据库(全)</view>
-			<view class="desc"><text class="special">216</text> 人已下载</view>
+			<view class="title">{{fileInfo.name}}</view>
+			<view class="desc"><text class="special">{{fileInfo.number}}</text> 人已下载</view>
 		</view>
 		<!-- 文档简介 -->
 		<view class="m-desc">
@@ -13,23 +13,23 @@
 			<view class="top">
 				<view class="item">
 					<text>文档类型 : </text>
-					<text>xls</text>文件
+					<text>{{fileInfo.fileType}}</text>文件
 				</view>
 				<view class="item">
 					<text>来源 : </text>
-					<text>辽宁郑老师整理提供</text>
+					<text>{{fileInfo.source}}</text>
 				</view>
 				<view class="item">
 					<text>发布时间 : </text>
-					<text>2019-04-30</text>
+					<text>{{fileInfo.createTime}}</text>
 				</view>
 				<view class="item">
 					<text>类型 : </text>
-					<text>院校&专业</text>
+					<text>{{fileInfo.type}}</text>
 				</view>
 			</view>
 			<view class="bottom">
-				<text>教育部第四轮学科评估结果,和双一流学科评定结果,是评估各所大学优秀在专业在全国院校中地位的官方数据!相当于官方出文说明哪些大学好,哪些专业好</text>
+				<text>{{fileInfo.desc}}</text>
 			</view>
 		</view>
 		<!-- 文档简洁(部分) -->
@@ -38,11 +38,11 @@
 				文档简介<text class="tips">(部分)</text>
 			</view>
 			<view class="content">
-				<view class="image"></view>
+					<image class="image" :src="fileInfo.fileImg" mode="aspectFit"></image>
 			</view>
 		</view>
 		<view class="m-btn-group">
-			<view class="u-btn down"><image class="img" src="/static/indexIcon/down.png" mode="aspectFit"></image>  下载文件</view>
+			<view class="u-btn down" @tap="handleDownload"><image class="img" src="/static/indexIcon/down.png" mode="aspectFit"></image>  下载文件</view>
 			<view class="u-btn share" @tap="handleShare"><image class="img" src="/static/indexIcon/share.png" mode="aspectFit" ></image>分享给好友</view>
 		</view>
 		<uni-popup ref="share" :type="type" :custom="true" @change="change">
@@ -71,6 +71,16 @@
 		data(){
 			return{
 				type:'bottom',
+				params:{},
+				fileInfo:{
+					name:'文件名称',
+					number:0,
+					fileType:'docx',
+					type:`院校&专业`,
+					createTime:'',
+					source:'',
+					desc:'',
+				},
 				bottomData: [{
 						text: '微信好友',
 						icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-2.png',
@@ -93,10 +103,10 @@
 				]
 			}
 		},
-		onLoad(options) {
-			console.log(options)
-		},
-		mounted(){
+		onLoad(options={}) {
+			this.params = options
+			// this.params.fileId = 1;
+			this.getDetailInfo();
 		},
 		onNavigationBarButtonTap() {
 			uni.navigateTo({
@@ -104,6 +114,39 @@
 			})
 		},
 		methods:{
+			handleDownload(){
+				this.$HTTP({
+					url:'/zjq/mainpage/GetFileDown',
+					header:'form',
+					data:{
+						token: 'd05902562e544db29bbe777954d43bb0',
+						fileid:this.params.fileId
+					}
+				}).then((res=>{
+					console.log(res,'res')
+				}))
+			},
+			getDetailInfo(){
+				this.$HTTP({
+					url:'/zjq/mainpage/GetFileDetail',
+					header:'form',
+					data:{
+						token: 'd05902562e544db29bbe777954d43bb0',
+						fileid:this.params.fileId
+					}
+				}).then((res)=>{
+					if(res.code==0){
+						let data = res.data
+						this.fileInfo.number = data.downloadnum
+						this.fileInfo.name = data.filename
+						this.fileInfo.source = data.filesource
+						this.fileInfo.fileType = data.fileavatar
+						this.fileInfo.createTime = data.createTime
+						this.fileInfo.desc = data.desc
+						this.fileInfo.fileImg = data.fileimg
+					}
+				})
+			},
 			handleShareItem(item){
 				// console.log(item,'item')
 				uni.getProvider({
@@ -243,7 +286,6 @@
 			.image{
 				width: 100%;
 				min-height: 800upx;
-				background-color: $main-base-color;
 				padding-bottom: 20upx;
 			}
 		}

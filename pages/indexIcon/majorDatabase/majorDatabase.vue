@@ -19,16 +19,9 @@
 			<view class="hot">热门专业</view>
 			<image class="hot-img" src="/static/indexIcon/hot.png" mode="aspectFit"></image>
 		</view>
-		<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height: wrapperHeight}" :loadStatus="loadStatus">
-		<view class="school-list" >
-			<school-list :showType="4" 
-						:is-special="true" 
-						:listArr="dataArr" 
-						:handleTaped="false" 
-						@taped="handleListTaped" />
-		</view>
+		<load-more ref="scroll" @onPullDown="onPullDown" @onLoadMore="onLoadMore" :styleObj="{ height: wrapperHeight }" :loadStatus="loadStatus">
+			<view class="school-list"><school-list :showType="4" :is-special="true" :listArr="dataArr" :handleTaped="false" @taped="handleListTaped" /></view>
 		</load-more>
-
 	</view>
 </template>
 
@@ -36,20 +29,23 @@
 import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue';
 import schoolList from '../schoolDatabase/SchoolList.vue';
 import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
-import {professionData} from '../mockData.js'
-import loadMore from '@/components/loadMore/you-scroll.vue'
+import { professionData } from '../mockData.js';
+import loadMore from '@/components/loadMore/you-scroll.vue';
 export default {
-	components: { uniSearchBar, schoolList, uniNavBar,loadMore },
+	components: { uniSearchBar, schoolList, uniNavBar, loadMore },
 	data() {
 		return {
+			page: {
+				pageIndex: 1,
+				pageSize: 10
+			},
 			systemInfo: uni.getSystemInfoSync(),
 			wrapperHeight: 'auto',
-			loadStatus:'more',
-			dataArr: professionData
+			loadStatus: 'more',
+			dataArr: []
 		};
 	},
 	onNavigationBarSearchInputClicked() {
-		console.log(arguments, 'arg');
 	},
 	mounted() {
 		// 限制列表高度
@@ -61,58 +57,95 @@ export default {
 				// #ifdef H5
 				this.wrapperHeight = this.systemInfo.screenHeight - data.top - 44 + 'px';
 				// #endif
-				
 			})
 			.exec();
+		this.onPullDown();
 	},
 	methods: {
-		onPullDown(done){
-			setTimeout(()=>{
-				this.dataArr = professionData
-				done();
-			},2000)
-		},
-		onScroll(){
-		},
-		onLoadMore(){
-			this.loadStatus = 'loading'
-			// this.getData().then(()=>{
-			// })
-			setTimeout(() =>{
-				this.dataArr=[...this.dataArr,...professionData]
-					this.loadStatus = 'more'
-			}, 1000);
-		},
-		getData(){
-			return new Promise((resolve,reject)=>{
-				uni.request({
-					url:'http://47.103.69.156:18089/zjq/College/GetSchoolMajorHighLightSearchList',
-					header:{
-						'content-type':'application/x-www-form-urlencoded'
-					},
-					data:{
-						token:'d05902562e544db29bbe777954d43bb0',
-						pageIndex:'1',
-						pageSize:'10',
-						key:'浙江'
-					},
-					method:'POST',
-					success:({data}) => {
-						if(data.code == 0){
-							
-						}
-						console.log(data,'res')
-					},
-					complete() {
-						resolve();
+		onPullDown(done) {
+			this.page.pageIndex = 1;
+			this.getData(true)
+				.then(isLastPage => {
+					if (isLastPage) {
+						this.loadStatus = 'noMore';
+					} else {
+						this.loadStatus = 'more';
 					}
 				})
+				.finally(() => {
+					done && done();
+				});
+		},
+		onLoadMore() {
+			this.loadStatus = 'loading';
+			this.getData().then(isLastPage => {
+				if (isLastPage) {
+					this.loadStatus = 'noMore';
+				} else {
+					this.loadStatus = 'more';
+				}
+			});
+		},
+		getData(isRefresh) {
+			return new Promise((resolve, reject) => {
+				this.$HTTP({
+					url: '/zjq/College/GetMajors',
+					header: 'form',
+					data: {
+						token: 'd05902562e544db29bbe777954d43bb0',
+						pageIndex: this.page.pageIndex,
+						pageSize: this.page.pageSize
+					}
+				}).then(res => {
+					if (res.code == 0) {
+						let data = res.data.list.map(item => {
+							return {
+								...item,
+								title: item.majorname,
+								cards: [
+									{
+										name: '学历层次',
+										value: item.area || ''
+									},
+									{
+										name: '专业年限',
+										value: item.level
+									}
+								],
+								tags: [
+									{
+										name: '专业大类',
+										value: item.zydl || ''
+									},
+									{
+										name: '代码',
+										value: item.majorcode
+									}
+								]
+							};
+						});
+						if (isRefresh) {
+							this.dataArr = data;
+							this.page.pageIndex = 1;
+						} else {
+							this.dataArr.push(...data);
+							this.page.pageIndex++;
+						}
+						resolve(res.data.lastPage);
+					} else {
+						uni.showToast({
+							title: res.message,
+							icon: 'none'
+						});
+						reject();
+					}
+				});
+			});
+		},
+		handleListTaped({ item, index }) {
+			uni.navigateTo({
+				url:`./ProfessionDesc?id=${item.code}&name=${item.name}&type=${item.type}`
 			})
-		},
-		handleListTaped({item,index}){
-		},
-		search({ value }) {
-			console.log(value, 'value');
 		},
 		handleBack() {
 			uni.navigateBack();
@@ -127,9 +160,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.search {
-	padding: 10upx 50upx;
-}
 .nav {
 	display: flex;
 	justify-content: space-around;

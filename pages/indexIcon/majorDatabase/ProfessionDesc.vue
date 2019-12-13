@@ -88,19 +88,6 @@
 			</view>
 			<view class="m-fill"></view>
 		</view>
-
-		<!-- 底部按钮 -->
-		<!-- <view class="m-bottom">
-			<view class="left" @tap="handleSave">
-				<text class="vecfont icon-menu iconguanzhu" :class="{'saved':hasSaved}"></text>
-				<text class="text">
-					{{hasSaved?'取消关注':'关注'}}
-				</text>
-			</view>
-			<view class="right" @tap="handlePK">
-				<text>专业对比</text>
-			</view>
-		</view> -->
 	</view>
 </template>
 
@@ -117,6 +104,12 @@ export default {
 			assets: {
 				sc1,
 				sc2
+			},
+			permission:{
+				isVip:false,
+				ckzycs:0,
+				sjbdcs:0,
+				ckzlcs:0,
 			},
 			hasSC: false, //是否添加收藏
 			hasDZ: false, //是否点赞
@@ -166,8 +159,8 @@ export default {
 	onLoad(Option) {
 		uni.setStorageSync('freeChance', 1);
 		// 测试用
-		Option.id = '520907'
-		Option.type = '1'
+		// Option.id = '520907'
+		// Option.type = '1'
 		this.params = Option
 		this.getDetailData({
 			zyid:Option.id,
@@ -250,7 +243,11 @@ export default {
 							name
 						}
 					})
-					
+					this.list2 = data.xjgz.split('；').map(name=>{
+						return{
+							name
+						}
+					})
 				}
 			})
 		},
@@ -262,7 +259,12 @@ export default {
 					token:'d05902562e544db29bbe777954d43bb0',
 				}
 			}).then((res)=>{
-				console.log(res,'chance')
+				if(res.code == 0){
+					this.permission.isVip = !!res.data.isvip
+					this.permission.ckzlcs = res.data.ckzlcs
+					this.permission.ckzycs = res.data.ckzycs
+					this.permission.sjbdcs = res.data.sjbdcs
+				}
 			})
 		},
 		handleSC() {
@@ -298,13 +300,18 @@ export default {
 		handlePK() {
 			// 进行用户验证/VIP验证
 			const value = uni.getStorageSync('freeChance');
-			if (value) {
+			if (this.permission.sjbdcs || this.permission.isVip) {
+				if(this.permission.isVip){
+					uni.navigateTo({
+						url: './ProfessionPK'
+					});
+					return;
+				}
 				uni.showModal({
 					content: '您有一次免费专业对比机会哦~',
 					confirmText: '去对比',
 					success: result => {
 						if (result.confirm) {
-							uni.setStorageSync('freeChance', 0);
 							uni.navigateTo({
 								url: './ProfessionPK'
 							});
@@ -317,25 +324,16 @@ export default {
 				uni.showModal({
 					content: '您还没有开通VIP会员哦~',
 					confirmText: '去开通',
-					success: value => {
-						console.log(JSON.stringify(value));
+					success: result => {
+						if (result.confirm) {
+							uni.navigateTo({
+								url:'../vip/vip'
+							})
+						}
 					},
 					complete: () => {}
 				});
 			}
-		},
-		handleSave() {
-			// TODO 进行vip验证/用户验证
-			uni.showModal({
-				content: '您还没有开通VIP会员哦~',
-				confirmText: '去开通',
-				success: value => {
-					console.log(JSON.stringify(value));
-				},
-				complete: () => {
-					this.hasSaved = !this.hasSaved;
-				}
-			});
 		},
 		handleDownload() {
 			const downloadTask = uni.downloadFile({

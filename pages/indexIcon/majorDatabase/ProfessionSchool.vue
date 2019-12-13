@@ -4,7 +4,7 @@
 		<view class="f-filter">
 			<sl-filter ref="filter" @conditionTap="handleConditionTap" :menuListArr="menuList" :topFixed="true" :topFixedHeight="topFixedHeight" @result="handleSearch"></sl-filter>
 		</view>
-		<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height: '400px' }" :loadStatus="loadStatus">
+		<load-more ref="scroll" @onPullDown="onPullDown"  @onLoadMore="onLoadMore" :styleObj="{ height: '400px' }" :loadStatus="loadStatus">
 			<view class="m-result"><school-list :isText="true" :showType="4" :listArr="dataArr"></school-list></view>
 		</load-more>
 

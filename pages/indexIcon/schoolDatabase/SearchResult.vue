@@ -9,7 +9,7 @@
 		<view class=""><message-info :message="searchResultMessage" :isShow.sync="isShow" @close="handleClose"></message-info></view>
 		<view class="list-wrapper" >
 			<block v-if="dataArr.length">
-				<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height: wrapperHeight }" :loadStatus="loadStatus">
+				<load-more ref="scroll" @onPullDown="onPullDown"  @onLoadMore="onLoadMore" :styleObj="{ height: wrapperHeight }" :loadStatus="loadStatus">
 					<view class="list"><school-list showType="4" :listArr="dataArr" /></view>
 				</load-more>
 			</block>
@@ -41,11 +41,6 @@ export default {
 				pageSize: 10
 			}
 		};
-	},
-	watch:{
-		"isShow"(val){
-			// this.calcScrollHeight();
-		}
 	},
 	mounted() {
 		this.$refs.search.searchClick();
@@ -179,7 +174,7 @@ export default {
 		search({ value }) {
 			this.searchValue = value;
 			this.page.pageIndex = 1;
-			this.getData(true);
+			this.onPullDown();
 		}
 	}
 };

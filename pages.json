@@ -227,7 +227,7 @@
 		{
 			"path": "pages/indexIcon/materialDatabase/SearchFile",
 			"style": {
-				"navigationBarTitleText": "资料库名称",
+				"navigationBarTitleText": "资料库文件查找",
 				"app-plus": {
 					"bounce": "none"
 				}

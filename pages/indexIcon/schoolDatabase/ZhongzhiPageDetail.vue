@@ -7,7 +7,7 @@
 		<load-more
 			ref="scroll"
 			@onPullDown="onPullDown"
-			@onScroll="onScroll"
+			
 			@onLoadMore="onLoadMore"
 			:styleObj="{ height: systemInfo.screenHeight - 100 + 'px' }"
 			:loadStatus="loadStatus"

@@ -35,9 +35,9 @@
 			}
 		},
 		methods:{
-			handleTap(){
+			handleTap(item){
 				uni.navigateTo({
-					url:'./FileDetail'
+					url:`./FileDetail?fileId=${item.id}`
 				})
 				// this.$emit()
 			}
