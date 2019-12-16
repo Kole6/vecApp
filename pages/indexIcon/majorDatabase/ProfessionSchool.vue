@@ -126,7 +126,7 @@ export default {
 		this.currentSearch.zyid = Option.zyid
 		// 改变导航栏标题名称
 		uni.setNavigationBarTitle({
-			title: Option.name
+			title: Option.name || ''
 		});
 		// #ifdef APP-PLUS
 		(this.topFixedHeight = '0'),

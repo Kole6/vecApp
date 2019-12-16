@@ -15,7 +15,7 @@
 			<view class="hot">热门学校</view>
 			<image class="hot-img" src="/static/indexIcon/hot.png" mode="aspectFit"></image>
 		</view>
-		<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height:wrapperHeight}" :loadStatus="loadStatus">
+		<load-more ref="scroll" @onPullDown="onPullDown"  @onLoadMore="onLoadMore" :styleObj="{ height:wrapperHeight}" :loadStatus="loadStatus">
 		<view class="school-list" >
 			<school-list :isText="true" :showType="4" :listArr="dataArr"></school-list>
 		</view>
@@ -33,42 +33,14 @@ export default {
 	components: { uniSearchBar, schoolList ,loadMore},
 	data() {
 		return {
+			page:{
+				pageIndex:1,
+				pageSize:10,
+			},
 			loadStatus:'more',
 			systemInfo: uni.getSystemInfoSync(),
 			wrapperHeight: 'auto',
-			dataArr: [
-				{
-					title: '上海市江电职业学校',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					title: '上海市江电职业学校',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					title: '上海市江电职业学校',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},{
-					title: '上海市江电职业学校',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},{
-					title: '上海市江电职业学校',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},{
-					title: '上海市江电职业学校',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},{
-					title: '上海市江电职业学校',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-			]
+			dataArr: []
 		};
 	},
 	mounted() {
@@ -89,48 +61,84 @@ export default {
 				}
 			})
 			.exec();
+			this.onPullDown();
 	},
 	methods:{
-		onPullDown(done){
-			setTimeout(()=>{
-				done();
-			},2000)
+		onPullDown(done) {
+		    this.page.pageIndex = 1;
+		    this.getData(true)
+		    .then(isLastPage => {
+		        if (isLastPage) {
+		            this.loadStatus = 'noMore';
+		        } else {
+		            this.loadStatus = 'more';
+		        }
+		    })
+		    .finally(() => {
+		        done && done();
+		    });
 		},
-		onScroll(){
+		onLoadMore() {
+		    this.loadStatus = 'loading';
+		    this.getData().then(isLastPage => {
+		        if (isLastPage) {
+		            this.loadStatus = 'noMore';
+		        } else {
+		            this.loadStatus = 'more';
+		        }
+		    });
 		},
-		onLoadMore(){
-			this.loadStatus = 'loading'
-			// this.getData().then(()=>{
-			// })
-			setTimeout(() =>{
-				this.loadStatus = 'more'
-			}, 1000);
-		},
-		getData(){
-			return new Promise((resolve,reject)=>{
-				uni.request({
-					url:'http://47.103.69.156:18089/zjq/College/GetSchoolMajorHighLightSearchList',
-					header:{
-						'content-type':'application/x-www-form-urlencoded'
-					},
-					data:{
-						token:'d05902562e544db29bbe777954d43bb0',
-						pageIndex:'1',
-						pageSize:'10',
-						key:'浙江'
-					},
-					method:'POST',
-					success:({data}) => {
-						if(data.code == 0){
-							
-						}
-						console.log(data,'res')
-					},
-					complete() {
-						resolve();
-					}
-				})
-			})
+		getData(isRefresh) {
+		    return new Promise((resolve, reject) => {
+		        this.$HTTP({
+		            url: '/zjq/College/GetSchoolSearchList',
+		            header: 'form',
+		            data: {
+		                token: 'd05902562e544db29bbe777954d43bb0',
+		                pageIndex: this.page.pageIndex,
+		                pageSize: this.page.pageSize,
+						sfhzbx:'1'
+		            }
+		        }).then(res => {
+		            console.log('result==', res);
+		            if (res.code == 0) {
+		                let data = res.data.list.map(item => {
+		                        item.tags = item.tags + ''
+		                            return {
+		                            ...item,
+		                            title: item.schoolname,
+		                            cards: item.tags.split(',').map(item => {
+		                                return {
+		                                    name: item
+		                                };
+		                            }),
+		                            tags: [{
+		                                    name: '地区',
+		                                    value: item.area
+		                                }, {
+		                                    name: '层次',
+		                                    value: item.level
+		                                }
+		                            ]
+		                        };
+		                    });
+		                if (isRefresh) {
+							this.dataArr = data
+							this.page.pageIndex = 1;
+		                } else {
+		                    this.dataArr.push(...data)
+		                    this.page.pageIndex++
+		                }
+		                resolve(res.data.lastPage);
+		            } else {
+		                uni.showToast({
+		                    title: res.message,
+		                    icon: 'none'
+		                });
+		                reject();
+		            }
+		        });
+		    });
 		},
 	}
 };
@@ -199,7 +207,7 @@ export default {
 .school-list {
 	box-sizing: border-box;
 	overflow: auto;
-	padding-bottom: 50upx;
+	// padding-bottom: 50upx;
 	background: #FFFFFF;
 }
 </style>

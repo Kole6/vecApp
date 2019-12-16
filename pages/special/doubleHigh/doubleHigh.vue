@@ -7,11 +7,11 @@
 		<view class="">
 			<sl-filter ref="filter" @conditionTap="handleConditionTap" :menuListArr="menuList" :topFixed="true" :topFixedHeight="topFixedHeight" @result="handleSearch"></sl-filter>
 		</view>
-		<load-more ref="scroll" @onPullDown="onPullDown" @onScroll="onScroll" @onLoadMore="onLoadMore" :styleObj="{ height: wrapperHeight}" :loadStatus="loadStatus">
-		<view class="list"><school-list :listArr="listArr" showType="4"></school-list></view>
+		<load-more ref="scroll" @onPullDown="onPullDown"  @onLoadMore="onLoadMore" :styleObj="{ height: wrapperHeight}" :loadStatus="loadStatus">
+		<view class="list"><school-list :listArr="dataArr" showType="4"></school-list></view>
 		</load-more>
 		
-		<drawer-filter :tagList="tagList" :isShow="showDrawer"  @close="showDrawer = false" @CClick="handleCClick" @IClick="handleIClick"></drawer-filter>
+		<drawer-filter :tagList="tagList" :isShow="showDrawer"  @close="showDrawer = false" @CClick="handleCClick" @IClick="handleIClick" @reset="handleDrawerReset" @confirm="handleDrawerConfirm"></drawer-filter>
 	</view>
 </template>
 
@@ -29,6 +29,16 @@ export default {
 	},
 	data() {
 		return {
+			searchValue:'',
+			provinceArr: [],
+			cityArr: [],
+			page: {
+				pageIndex: 1,
+				pageSize: 10
+			},
+			currentSearch:{
+				token: 'd05902562e544db29bbe777954d43bb0'
+			},
 			loadStatus:'more',
 			systemInfo: uni.getSystemInfoSync(),
 			showDrawer: false,
@@ -108,48 +118,7 @@ export default {
 				}
 			],
 			topFixedHeight: '44px',
-			listArr: [
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				},
-				{
-					title: '北京电子科技职业技术学院',
-					tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-					cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-				}
-			],
+			dataArr: [],
 			menuList: [
 				{
 					title: '省份',
@@ -161,40 +130,25 @@ export default {
 					title: '城市',
 					key: 'key_2',
 					isMutiple: false,
-					detailList: [
-						{
-							title: '全部',
-							value: ''
-						}
-					]
+					detailList: []
 				},
 				{
 					title: '学校属性',
 					key: 'key_3',
 					isMutiple: false,
 					nowrap: true,
-					detailList: [
-						{
-							title: '国家示范校',
-							value: '1'
-						},
-						{
-							title: '国家重点校',
-							value: '2'
-						}
-					]
+					detailList: []
 				}
 			]
 		};
 	},
 	onLoad(Option) {
 		// #ifdef APP-PLUS
-		this.topFixedHeight='44px',
+		this.topFixedHeight='44px'
 		// #endif
 		// #ifdef H5
-		this.topFixedHeight='94px',
+		this.topFixedHeight='94px'
 		// #endif
-		this.setSearch();
 	},
 	mounted() {
 		let query = uni.createSelectorQuery().in(this);
@@ -212,117 +166,233 @@ export default {
 
 			})
 			.exec();
+			this.initSearch();
 	},
 	methods: {
+		handleDrawerConfirm(){
+			this.isShow = false;
+		},
+		handleDrawerReset(){
+			this.tagList.forEach((category,index)=>{
+				category.list.forEach((item,idx)=>{
+					item.selected = false;
+				})
+			})
+		},
 		handleIClick({item,itemIndex,tag,tagIndex}){
 			this.tagList[itemIndex].list[tagIndex].selected = !this.tagList[itemIndex].list[tagIndex].selected
 		},
 		handleCClick({item,index}){
 			this.tagList[index].title.isShow = !this.tagList[index].title.isShow
-		},
-		onPullDown(done){
-			setTimeout(()=>{
-				done();
-			},2000)
-		},
-		onScroll(){
-		},
-		onLoadMore(){
-			this.loadStatus = 'loading'
-			// this.getData().then(()=>{
-			// })
-			setTimeout(() =>{
-				this.loadStatus = 'noMore'
-			}, 1000);
-		},
-		getData(){
-			return new Promise((resolve,reject)=>{
-				uni.request({
-					url:'http://47.103.69.156:18089/zjq/College/GetSchoolMajorHighLightSearchList',
-					header:{
-						'content-type':'application/x-www-form-urlencoded'
-					},
-					data:{
-						token:'d05902562e544db29bbe777954d43bb0',
-						pageIndex:'1',
-						pageSize:'10',
-						key:'浙江'
-					},
-					method:'POST',
-					success:({data}) => {
-						if(data.code == 0){
-							
-						}
-						console.log(data,'res')
-					},
-					complete() {
-						resolve();
-					}
-				})
-			})
-		},
-		handleReset() {
-			this.tagList.forEach(item => {
-				item.titleList.forEach(tag => {
-					tag.selected = false;
+		},		/*
+		 *@params type 转化的类型 1 查询条件  2 数据列表
+		 */
+		transformData(data, type = 1) {
+			if (type === 1) {
+				return data.map(item => {
+					return {
+						...item,
+						title: item.name,
+						value: item.code
+					};
 				});
-				item.list.forEach(tag => {
-					tag.selected = false;
+			} else if (type === 2) {
+				return data.map(item => {});
+			} else {
+				return data;
+			}
+		},
+		async initSearch() {
+			try {
+				// 获取省
+				let provinceData = await this.getSearchCondition({
+					type: 'xzqh',
+					pid: '0'
+				});
+				if (!provinceData.length) return;
+				this.provinceArr = this.transformData(provinceData);
+				// 获取市
+				let cityData = await this.getSearchCondition({
+					type: 'xzqh',
+					pid: provinceData[0].code
+				});
+				if (!cityData.length) return;
+				this.cityArr = this.transformData(cityData);
+				// 获取学校类型与国家示范校
+				let schoolType = await this.getSearchCondition({
+					type: 'xxlx',
+					pid: '0',
+				});
+
+				this.menuList[2].detailList = this.transformData(schoolType);
+				this.$refs.filter.resetMenuList(this.menuList);
+				this.setSearch('',true);
+				// 初次加载数据
+				this.onLoadMore();
+			} catch (err) {
+				console.error(err)
+			}
+		},
+		getSearchCondition(data = {}) {
+			return new Promise((resolve, reject) => {
+				this.$HTTP({
+					url: '/zjq/mainpage/GetDict',
+					header: 'form',
+					data
+				}).then(res => {
+					if (res.code == 0) {
+						resolve(res.data);
+					} else {
+						uni.showToast({
+							title: res.message,
+							icon: 'none'
+						});
+						reject();
+					}
 				});
 			});
 		},
-		handleConfirm() {
-			this.showDrawer = false;
+		onPullDown(done) {
+			this.page.pageIndex = 1;
+			let params = {
+				...this.currentSearch,
+				pageIndex: this.page.pageIndex,
+				pageSize: this.page.pageSize
+			};
+			this.getData(params, true)
+				.then(isLastPage => {
+					if (isLastPage) {
+						this.loadStatus = 'noMore';
+					} else {
+						this.loadStatus = 'more';
+					}
+				})
+				.finally(() => {
+					done && done();
+				});
 		},
-		setSearch(provinceName) {
-			// 初始省份
+		onLoadMore() {
+			this.loadStatus = 'loading';
+			this.getData().then(isLastPage => {
+				if (isLastPage) {
+					this.loadStatus = 'noMore';
+				} else {
+					this.loadStatus = 'more';
+				}
+			});
+		},
+		getData(data = { ...this.currentSearch, pageIndex: this.page.pageIndex, pageSize: this.page.pageSize}, isRefresh = false) {
+			// 查询为双高计划的学校
+			data.sfsg = '1'
+			return new Promise((resolve, reject) => {
+				this.$HTTP({
+					url: '/zjq/College/GetSchoolSearchList',
+					header: 'form',
+					data
+				}).then(res => {
+					if (res.code == 0) {
+						let data = res.data.list.map(item => {
+							// 防止tags为空
+							item.tags = item.tags + '';
+							return {
+								...item,
+								title: item.schoolname,
+								cards: item.tags.split(',').map(item => {
+									return {
+										name: item
+									};
+								}),
+								tags: [{ name: '地区', value: item.area }, { name: '层次', value: item.level }]
+							};
+						});
+						if (isRefresh) {
+							this.page.pageIndex = 1;
+							this.dataArr = data;
+						} else {
+							this.page.pageIndex++;
+							this.dataArr.push(...data);
+						}
+						resolve(res.data.lastPage);
+					} else {
+						uni.showToast({
+							title: res.message,
+							icon: 'none'
+						});
+					}
+				});
+			});
+		},
+		setSearch(provinceId,isFirst=false) {
 			let index = 0,
-				provinceArr = cityData.map((item, idx) => {
-					if (provinceName === item.title) {
+				provinceName = '',
+				data = JSON.parse(JSON.stringify(this.menuList)),
+				provinceArr = this.provinceArr.map((item, idx) => {
+					if (provinceId == item.value) {
 						index = idx;
+						provinceName = item.title;
 					}
 					return {
-						title: item.title,
-						value: item.value
+						...item
 					};
-				}),
-				// 初始第一个省份下的城市
-				cityArr = cityData[0].children,
-				data = JSON.parse(JSON.stringify(this.menuList));
-
+				});
+			if(!provinceId){
+				provinceName = provinceArr[0].title
+			}
 			data[0].detailList = provinceArr;
-			data[1].detailList = cityArr;
-			if (provinceName) {
+			this.getSearchCondition({
+				type: 'xzqh',
+				pid: provinceId?provinceId:provinceArr[0].code
+			}).then(resData => {
+				let cityData = this.transformData(resData);
+				data[1].detailList = cityData;
+				if(isFirst){
+					this.$nextTick(() => {
+						this.$refs.filter.resetMenuList(data);
+					});
+					return;
+				}
 				data[0].title = provinceName;
 				data[0].defaultSelectedIndex = index;
-				data[1].detailList = cityData[index].children;
-				if (cityData[index].children.length === 1) {
+				if (cityData.length == 1) {
 					data[1].defaultSelectedIndex = 0;
-					data[1].title = cityData[index].children[0].title;
+					data[1].title = cityData[0].title;
 				}
-			}
+				this.$nextTick(() => {
+					this.$refs.filter.resetMenuList(data);
+				});
+			});
 			this.$nextTick(() => {
 				this.$refs.filter.resetMenuList(data);
 			});
 		},
 		handleSearch(result) {
-			console.log(result, 'result');
 			if (!result.key_2) {
 				uni.showToast({
 					title: '请选择具体城市',
-					duration: 2000,
+					duration: 1000,
 					icon: 'none'
 				});
+				return;
 			}
+			this.currentSearch = {
+				provinceId: result.key_1,
+				cityId: result.key_2,
+				schoolType: result.key_3,
+				token: 'd05902562e544db29bbe777954d43bb0'
+			};
+			this.onPullDown();
 		},
 		handleConditionTap({ key, list, index }) {
 			// 选择省份的时候进行城市赋值
 			if (key == 'key_1') {
-				this.setSearch(list[index].title);
+				this.setSearch(list[index].code);
 			}
 		},
-		search(){
-			
+		handleConfirm() {
+			this.showDrawer = false;
+		},
+		search({value}){
+			this.searchValue = value;
 		}
 	}
 };

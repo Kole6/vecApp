@@ -1,5 +1,5 @@
 <template>
-	<uni-drawer :visible="isShow" mode="right" @close="handleClose">
+	<uni-drawer :visible="isShow" mode="right" @close="handleEmit('close')">
 		<!-- <view class="m-title">筛选标签</view> -->
 		<!-- 筛选项 -->
 		<view class="m-drawer-content">
@@ -15,8 +15,8 @@
 			</view>
 		</view>
 		<view class="m-btn-group">
-			<view class="left-btn" @tap="handleReset">重置</view>
-			<view class="right-btn" @tap="handleConfirm">确定</view>
+			<view class="left-btn" @tap="handleEmit('reset')">重置</view>
+			<view class="right-btn" @tap="handleEmit('confirm')">确定</view>
 		</view>
 	</uni-drawer>
 </template>
@@ -44,14 +44,8 @@ export default {
 		handleClick(item,index){
 			this.$emit('CClick',{item,index})
 		},
-		handleClose() {
-			this.$emit('close')
-		},
-		handleReset(){
-			
-		},
-		handleConfirm(){
-			
+		handleEmit(eventString){
+			this.$emit(eventString)
 		},
 	}
 };

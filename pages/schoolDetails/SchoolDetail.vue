@@ -219,8 +219,23 @@ export default {
 		this.getDetail();
 		this.judgeHasSC();
 		this.getChance();
+		this.getCompareInfo();
 	},
 	methods: {
+		getCompareInfo(){
+			this.$HTTP({
+				url:'/zjq/User/GetComparison',
+				header:'form',
+				data:{
+					type:'1',
+					token:'d05902562e544db29bbe777954d43bb0'
+				}
+			}).then((res)=>{
+				if(res.code==0){
+					this.tipMessage=`您还可以进行专业对比哦!您已经添加${res.data.length}个学校`
+				}
+			})
+		},
 		getChance(){
 			this.$HTTP({
 				url:'/zjq/User/GetUser',

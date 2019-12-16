@@ -1,29 +1,25 @@
 <template>
-	<view >
+	<view>
 		<!-- 专业对比 -->
 		<!-- <view class=""><message-info :message="searchResultMessage" :isShow.sync="isShowMessage" @close="handleMessageClose"></message-info></view> -->
-		<load-more ref="scroll" @onPullDown="onPullDown"  @onLoadMore="onLoadMore" :styleObj="{ height: '400px'}" :loadStatus="loadStatus">
-			<view class="wrapper">
-			<view class="list-item" v-for="(item,index) in listArr" :key="index">
-				<view class="flag"  @click="handleListTaped(item)">
-					<block v-if="item.hasSelected">
-						<view class="selecting"></view>
-					</block>
-					<block v-else>
-						<image src="/static/indexIcon/selected.png" mode="aspectFit" style="height: 36upx; width:36upx"></image>
-					</block>
+		<!-- <load-more ref="scroll" @onPullDown="onPullDown" @onLoadMore="onLoadMore" :styleObj="{ height: '400px' }" :loadStatus="loadStatus"> -->
+			<view class="wrapper" :style="{ 'max-height': '400px',overflow:'auto' }">
+				<view class="list-item" v-for="(item, index) in dataArr" :key="index">
+					<view class="flag" @click="handleListTaped(item)">
+						<block v-if="item.hasSelected"><image src="/static/indexIcon/selected.png" mode="aspectFit" style="height: 36upx; width:36upx"></image></block>
+						<block v-else><view class="selecting"></view></block>
+					</view>
+					<school-list-item :item="item" :showType="4" :is-special="true" :handleTaped="false" @taped="handleListTaped(item)"></school-list-item>
 				</view>
-				<school-list-item :item="item" :showType="4" :is-special="true" :handleTaped="false" @taped="handleListTaped(item)"></school-list-item>
 			</view>
-		</view>
-		</load-more>
+		<!-- </load-more> -->
 		<view class="line"></view>
 		<view class="m-tips" @tap="toAdd">
 			<image src="/static/indexIcon/add.png" mode="aspectFit" style="width: 40upx; height: 40upx;"></image>
 			<text>继续添加对比专业,最多添加四个</text>
 		</view>
 		<!-- 底部按钮 -->
-		<view class="m-bottom" >
+		<view class="m-bottom">
 			<view class="left" @tap="handleQuit">退出</view>
 			<view class="right" @tap="handleRouter">开始对比</view>
 		</view>
@@ -34,8 +30,8 @@
 import messageInfo from '@/pages/indexIcon/schoolDatabase/messageInfo.vue';
 import uniSwipeAction from '@/components/uni-swipe-action/uni-swipe-action.vue';
 import schoolListItem from '@/pages/indexIcon/schoolDatabase/SchoolListItem.vue';
-import {professionData} from '../mockData.js'
-import loadMore from '@/components/loadMore/you-scroll.vue'
+import { professionData } from '../mockData.js';
+import loadMore from '@/components/loadMore/you-scroll.vue';
 export default {
 	components: {
 		uniSwipeAction,
@@ -45,139 +41,136 @@ export default {
 	},
 	data() {
 		return {
-			loadStatus:'more',
-			searchResultMessage:'已添加3个专业到对比库',
-			isShowMessage:true,
+			page: {
+				pageIndex: 1,
+				pageSize: 10
+			},
+			loadStatus: 'more',
+			searchResultMessage: '已添加3个专业到对比库',
+			isShowMessage: true,
 			wrapperHeight: 'auto',
 			systemInfo: uni.getSystemInfoSync(),
-			listArr: [
-				{
-					hasSelected:true,
-					title: '汽车运用与维护',
-					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
-				},{
-					hasSelected:true,
-					title: '汽车运用与维护',
-					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
-				},{
-					hasSelected:false,
-					title: '汽车运用与维护',
-					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
-				},{
-					hasSelected:false,
-					title: '汽车运用与维护',
-					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
-				},{
-					hasSelected:false,
-					title: '汽车运用与维护',
-					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
-				},{
-					hasSelected:false,
-					title: '汽车运用与维护',
-					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
-				}
-			]
+			dataArr: []
 		};
 	},
 	mounted() {
-		
+		this.onPullDown();
 	},
 	methods: {
-		handleQuit(){
-			uni.navigateBack()
-		},
-		onPullDown(done){
-			setTimeout(()=>{
-				this.dataArr = [
-				{
-					hasSelected:true,
-					title: '汽车运用与维护',
-					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
-				},{
-					hasSelected:true,
-					title: '汽车运用与维护',
-					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
-				},{
-					hasSelected:false,
-					title: '汽车运用与维护',
-					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
-				},{
-					hasSelected:false,
-					title: '汽车运用与维护',
-					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
+		addProfession(string) {
+			this.$HTTP({
+				url: '/zjq/User/MyComparison',
+				header: 'form',
+				data: {
+					token: 'd05902562e544db29bbe777954d43bb0',
+					type: '2',
+					optype: 'A',
+					majorCode: string
 				}
-			]
-				done();
-			},2000)
+			}).then(res => {
+			});
 		},
-		onScroll(){
+		handleQuit() {
+			uni.navigateBack();
 		},
-		onLoadMore(){
-			this.loadStatus = 'loading'
-			// this.getData().then(()=>{
-			// })
-			setTimeout(() =>{
-				this.loadStatus = 'more'
-			}, 1000);
-		},
-		getData(){
-			return new Promise((resolve,reject)=>{
-				uni.request({
-					url:'http://47.103.69.156:18089/zjq/College/GetSchoolMajorHighLightSearchList',
-					header:{
-						'content-type':'application/x-www-form-urlencoded'
-					},
-					data:{
-						token:'d05902562e544db29bbe777954d43bb0',
-						pageIndex:'1',
-						pageSize:'10',
-						key:'浙江'
-					},
-					method:'POST',
-					success:({data}) => {
-						if(data.code == 0){
-							
-						}
-						console.log(data,'res')
-					},
-					complete() {
-						resolve();
+		onPullDown(done) {
+			this.page.pageIndex = 1;
+			this.getData(true)
+				.then(isLastPage => {
+					if (isLastPage) {
+						this.loadStatus = 'noMore';
+					} else {
+						this.loadStatus = 'more';
 					}
 				})
-			})
+				.finally(() => {
+					done && done();
+				});
 		},
-		toAdd(){
+		onLoadMore() {
+			this.loadStatus = 'loading';
+			this.getData().then(isLastPage => {
+				if (isLastPage) {
+					this.loadStatus = 'noMore';
+				} else {
+					this.loadStatus = 'more';
+				}
+			});
+		},
+
+		getData(isRefresh) {
+			return new Promise((resolve, reject) => {
+				this.$HTTP({
+					url: '/zjq/User/GetComparison',
+					header: 'form',
+					data: {
+						token: 'd05902562e544db29bbe777954d43bb0',
+						pageIndex: this.page.pageIndex,
+						pageSize: this.page.pageSize,
+						type: '2'
+					}
+				}).then(res => {
+					if (res.code == 0) {
+						let data = res.data.map(item => {
+							return {
+								...item,
+								hasSelected:false,
+								title: item.majorname,
+								cards: [
+									{
+										name: '学历层次',
+										value: item.area || ''
+									},
+									{
+										name: '专业年限',
+										value: item.level
+									}
+								],
+								tags: [
+									{
+										name: '专业大类',
+										value: item.zydl || ''
+									},
+									{
+										name: '代码',
+										value: item.majorcode
+									}
+								]
+							};
+						});
+						if (isRefresh) {
+							this.dataArr = data;
+							this.page.pageIndex = 1;
+						} else {
+							this.dataArr.push(...data);
+							this.page.pageIndex++;
+						}
+						resolve(res.data.lastPage);
+					} else {
+						uni.showToast({
+							title: res.message,
+							icon: 'none'
+						});
+						reject();
+					}
+				});
+			});
+		},
+		toAdd() {
 			uni.redirectTo({
-				url:'./ProfessionPKAdd',
-			})
+				url: './ProfessionPKAdd'
+			});
 		},
-		handleListTaped(item){
-			item.hasSelected = !item.hasSelected
+		handleListTaped(item) {
+			item.hasSelected = !item.hasSelected;
 		},
-		handleMessageClose(){
+		handleMessageClose() {
 			this.isShowMessage = false;
-		},
-		checkboxChange() {
-			console.log(arguments, 'arg');
-		},
-		handleSwipeChange() {},
-		handleChecked(item, index) {
-			this.$set(item, 'checked', !item.checked);
 		},
 		handleRouter() {
 			uni.navigateTo({
-				url:'./ProfessionPKDetail'
-			})
+				url: './ProfessionPKDetail'
+			});
 		}
 	}
 };
@@ -186,26 +179,26 @@ export default {
 <style scoped lang="scss">
 // @import  './profession.scss';
 
-.list-item{
-	background: #FFFFFF;
+.list-item {
+	background: #ffffff;
 	position: relative;
-	&:first-child{
+	&:first-child {
 		border-top: solid 1upx $main-dividing-line1;
 	}
-	.flag{
+	.flag {
 		position: absolute;
 		z-index: 2;
 		top: 26upx;
 		right: 29upx;
 		width: 36upx;
 		height: 36upx;
-		.selecting{
+		.selecting {
 			box-sizing: border-box;
 			width: 100%;
 			height: 100%;
 			border-radius: 50%;
 			border: solid 1upx $main-dividing-line1;
-			background: #FFFFFF;
+			background: #ffffff;
 		}
 	}
 }
@@ -223,32 +216,32 @@ export default {
 	width: 100%;
 	z-index: 10;
 	border-top: solid 1upx $main-dividing-line1;
-	.left{
+	.left {
 		width: 324upx;
 		text-align: center;
 		padding: 25upx 0;
 		color: #666666;
-		background: #FFFFFF;
+		background: #ffffff;
 	}
-	.right{
+	.right {
 		width: 426upx;
 		text-align: center;
 		background: $main-base-color;
 		padding: 25upx 0;
-		color: #FFFFFF;
+		color: #ffffff;
 	}
 }
-.line{
+.line {
 	height: 20upx;
 }
-.m-tips{
+.m-tips {
 	display: flex;
 	align-items: center;
 	padding: 70upx 30upx;
-	background: #FFFFFF;
-	color:#999999;
+	background: #ffffff;
+	color: #999999;
 	font-size: $uni-font-size-lg;
-	text{
+	text {
 		padding-left: 20upx;
 	}
 }

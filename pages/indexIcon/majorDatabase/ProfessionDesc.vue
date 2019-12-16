@@ -167,6 +167,7 @@ export default {
 		// Option.id = '520907'
 		// Option.type = '1'
 		this.params = Option
+		console.log(this.params.id)
 		this.getDetailData({
 			zyid:Option.id,
 			schoolType:Option.type
@@ -265,7 +266,7 @@ export default {
 				}
 			}).then((res)=>{
 				if(res.code == 0){
-					this.permission.isVip = !!res.data.isvip
+					this.permission.isVip = 1//!!res.data.isvip
 					this.permission.ckzlcs = res.data.ckzlcs
 					this.permission.ckzycs = res.data.ckzycs
 					this.permission.sjbdcs = res.data.sjbdcs

@@ -156,7 +156,7 @@ export default {
 	}
 	.rank {
 		position: absolute;
-		top: 34upx;
+		top: 45upx;
 		left:145upx;
 		box-sizing: border-box;
 		width: 36upx;
