@@ -10,4 +10,4 @@ login  登录相关页面
 schoolDetails  学校详情
 
 ## 原型
-![职教圈](https://upload-images.jianshu.io/upload_images/5141942-9bdde1d03e5b8727.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+<img src="https://upload-images.jianshu.io/upload_images/5141942-9bdde1d03e5b8727.png" alt="职教圈"  width="375">
