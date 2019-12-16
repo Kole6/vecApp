@@ -2,18 +2,18 @@
 	<view class="center">
 		<view class="center_box" v-if="userInfo">
 			<view class="box_left">
-				<text @touchstart="toAccount()">{{userInfo.name}}</text>
+				<text @click="toAccount()">{{userInfo.name}}</text>
 			</view>
 			<view class="box_right">
-				<image :src="picUrl" mode="aspectFill" @touchstart="toAccount()"></image>
+				<image :src="picUrl" mode="aspectFill"  @click="toAccount()"></image>
 			</view>
 		</view>
 		<view class="center_box" v-else>
 			<view class="box_left">
-				<text @touchstart="toLogin()">登录 / 注册</text>
+				<text @click="toLogin()">登录 / 注册</text>
 			</view>
 			<view class="box_right">
-				<image :src="picUrl" mode="aspectFill" @touchstart="toLogin()"></image>
+				<image :src="picUrl" mode="aspectFill" @click="toLogin()"></image>
 			</view>
 		</view>
 		<view class="center_box_bg">

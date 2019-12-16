@@ -1,11 +1,11 @@
 {
 	"pages": [
-		{
-			"path": "pages/tabBar/index/init",
-			"style": {
-				"navigationBarTitleText": "入口页"
-			}
-		}, 
+		// {
+		// 	"path": "pages/tabBar/index/init",
+		// 	"style": {
+		// 		"navigationBarTitleText": "入口页"
+		// 	}
+		// }, 
 		{
 			"path": "pages/tabBar/index/index",
 			"style": {

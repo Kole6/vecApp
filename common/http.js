@@ -45,8 +45,8 @@ this.$HTTP({
   data: {},
   header:'form',
   load:true
-}).then((data) =>{
-  console.log(data)
+}).then((res) =>{
+  console.log(res)
 }, (err) => {
   console.log(err)
 })

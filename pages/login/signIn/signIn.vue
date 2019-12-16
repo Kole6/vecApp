@@ -21,7 +21,7 @@
 			</view>
 			<view class="list-call">
 				<!-- <image class="img" src="/static/shilu-login/3.png"></image> -->
-				<input class="biaoti" v-model="code" type="number" maxlength="4" placeholder="验证码" />
+				<input class="biaoti" v-model="code" type="number" maxlength="6" placeholder="验证码" />
 				<view class="yzm" :class="{ yzms: second>0 }" @tap="getcode">{{yanzhengma}}{{second>0?'s':''}}</view>
 			</view>
 		</view>
@@ -46,7 +46,6 @@
 			<image @tap="login_qq()" src="../../../static/p108.png" mode="aspectFill"></image>
 			<image @tap="login_weixin()" src="../../../static/p109.png" mode="aspectFill"></image>
 		</view>
-		<!-- <textarea :value=" log.log1 +'vvvvvvvv'+log.log2" placeholder="" maxlength="900"/> -->
 		<view class="sign-xieyi">
 			<text>登录即表示同意职教圈
 				<text class="xieyi" @tap="toUserAgree()">《用户协议》</text>及
@@ -109,24 +108,70 @@
 				})
 			},
 			toLogin(){
-				if(this.userno && this.password){
-					uni.setStorage({
-					    key: 'userInfo',
-						data:{
-							phone:this.phoneno,
-							name:this.userno,
-							password:this.password
+				if(this.isPhoneSign){
+					this.$HTTP({
+						url: '/zjq/User/LoginCode',
+						header: 'form',
+						data: {
+							phone: this.phoneno,
+							code: this.code
 						}
-					});
-					uni.switchTab({
-						url: "../../tabBar/me/me"
+					}).then((res) => {
+						if (res.code == 0) {
+							uni.showToast({
+								icon: 'none',
+								title: res.message
+							});
+							uni.setStorage({
+								key: 'token',
+								data: res.data.token
+							});
+							setTimeout(() => {
+								uni.switchTab({
+									url: '/pages/tabBar/me/me'
+								});
+							}, 500);
+						} else {
+							uni.showModal({
+								content: res.message,
+								showCancel: false
+							});
+						}
+					}, (err) => {
+						console.log(err)
 					})
-				}else{
-					uni.showToast({
-						icon: 'none',
-						position: 'bottom',
-						title: '请输入账号密码'
-					});
+				}else{ //账号密码登录
+					this.$HTTP({
+						url: '/zjq/User/Login',
+						header: 'form',
+						data: {
+							username: this.userno,
+							password: this.password
+						}
+					}).then((res) => {
+						if (res.code == 0) {
+							uni.showToast({
+								icon: 'none',
+								title: res.message
+							});
+							uni.setStorage({
+								key: 'token',
+								data: res.data.token
+							});
+							setTimeout(() => {
+								uni.switchTab({
+									url: '/pages/tabBar/me/me'
+								});
+							}, 500);
+						} else {
+							uni.showModal({
+								content: res.message,
+								showCancel: false
+							});
+						}
+					}, (err) => {
+						console.log(err)
+					})
 				}
 			},
 			toReg() {
@@ -144,7 +189,31 @@
 					if (tha.second == 0) {
 						clearInterval(js)
 					}
-				}, 1000)
+				}, 1000);
+				this.apiSendSmsValidateCode();
+			},
+			apiSendSmsValidateCode() {
+				this.$HTTP({
+					url: '/zjq/User/SendSmsValidateCode',
+					header: 'form',
+					data: {
+						phone: this.phoneno
+					}
+				}).then((res) => {
+					if (res.code == 0) {
+						uni.showModal({
+							content: `验证码：${res.data.vcode}`,
+							showCancel: false
+						});
+					} else {
+						uni.showModal({
+							content: res.message,
+							showCancel: false
+						});
+					}
+				}, (err) => {
+					console.log(err)
+				})
 			},
 			login_weixin() {
 				// #ifndef APP-PLUS

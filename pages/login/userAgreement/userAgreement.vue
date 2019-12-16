@@ -1,6 +1,6 @@
 <template>
 	<view>
-		无
+		暂无
 	</view>
 </template>
 

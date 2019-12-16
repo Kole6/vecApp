@@ -2,63 +2,38 @@
 	<view class="content">
 		<view class="list">
 			<view class="list-call">
-				<input class="biaoti" v-model="password" type="text" maxlength="32" 
-				placeholder="请输入新密码" :password="!showPassword" />
-				<image class="img" :src="showPassword?'/static/shilu-login/op.png':'/static/shilu-login/cl.png'" 
-				@tap="display"></image>
+				<input class="biaoti" v-model="password" type="text" maxlength="20" placeholder="请输入新密码" :password="!showPassword" />
+				<image class="img" :src="showPassword?'/static/shilu-login/op.png':'/static/shilu-login/cl.png'" @tap="display"></image>
 			</view>
 			<view class="list-call">
-				<input class="biaoti" v-model="password2" type="text" maxlength="32" 
-				placeholder="确认新密码" :password="!showPassword2" />
-				<image class="img" :src="showPassword2?'/static/shilu-login/op.png':'/static/shilu-login/cl.png'" 
-				@tap="display2"></image>
+				<input class="biaoti" v-model="password2" type="text" maxlength="20" placeholder="确认新密码" :password="!showPassword2" />
+				<image class="img" :src="showPassword2?'/static/shilu-login/op.png':'/static/shilu-login/cl.png'" @tap="display2"></image>
 			</view>
 		</view>
 		<view class="jieshi">
 			<text>密码必须是8-20个英文字母、数字或者符号（除空格），且字母、数字和标点符号至少包含两种。</text>
 		</view>
 		<view class="sign-in">
-			<button class="vec-btn" type="primary" @tap="toIndex()">提 交</button>
+			<button class="vec-btn" type="primary" @tap="toSub()">提 交</button>
 		</view>
 	</view>
 </template>
 
 <script>
-	var tha, js;
 	export default {
-		onLoad() {
-			tha = this;
-
-		},
-		onUnload() {
-			clearInterval(js)
-			this.second = 0;
+		onLoad(e) {
+			this.phoneno = e.phoneno;
+			this.code = e.code
 		},
 		data() {
 			return {
 				phoneno: '',
-				password: '',
-				password2:'',
 				code: '',
-				invitation: '',
-				xieyi: true,
+				password: '',
+				password2: '',
 				showPassword: false,
-				showPassword2: false,
-				second: 0
+				showPassword2: false
 			};
-		},
-		computed: {
-			yanzhengma() {
-				if (this.second == 0) {
-					return '获取验证码';
-				} else {
-					if (this.second < 10) {
-						return '重新获取0' + this.second;
-					} else {
-						return '重新获取' + this.second;
-					}
-				}
-			}
 		},
 		methods: {
 			display() {
@@ -67,88 +42,51 @@
 			display2() {
 				this.showPassword2 = !this.showPassword2
 			},
-			xieyitong() {
-				this.xieyi = !this.xieyi;
-			},
-			getcode() {
-				if (this.second > 0) {
-					return;
-				}
-				this.second = 60;
-				js = setInterval(function() {
-					tha.second--;
-					if (tha.second == 0) {
-						clearInterval(js)
-					}
-				}, 1000)
-			},
-			toIndex() {
-				uni.navigateTo({
-					url: '/pages/login/signIn/signIn'
-				});
-			},
-			bindLogin() {
-				if (this.xieyi == false) {
-					uni.showToast({
-						icon: 'none',
-						title: '请先阅读《软件用户协议》'
-					});
-					return;
-				}
-				if (this.phoneno.length != 11) {
-					uni.showToast({
-						icon: 'none',
-						title: '手机号不正确'
-					});
-					return;
-				}
-				if (this.password.length < 6) {
-					uni.showToast({
-						icon: 'none',
-						title: '密码不正确'
-					});
-					return;
-				}
-				if (this.code.length != 4) {
-					uni.showToast({
-						icon: 'none',
-						title: '验证码不正确'
-					});
-					return;
-				}
-				uni.request({
-					url: 'http://***/reg.html',
+			apiResetPassword(){
+				this.$HTTP({
+					url: '/zjq/User/ResetPassword',
+					header: 'form',
 					data: {
-						phoneno: this.phoneno,
+						phone: this.phoneno,
 						password: this.password,
-						code: this.code,
-						invitation: this.invitation
-					},
-					method: 'POST',
-					dataType: 'json',
-					success: (res) => {
-						if (res.data.code != 200) {
-							uni.showToast({
-								title: res.data.msg,
-								icon: 'none'
-							});
-						} else {
-							uni.showToast({
-								title: res.data.msg
-							});
-							setTimeout(function() {
-								uni.navigateBack();
-							}, 1500)
-						}
+						code:this.code
 					}
-				});
-
-			}
+				}).then((res) => {
+					if (res.code == 0) {
+						uni.showToast({
+							icon: 'none',
+							title: res.message
+						});
+						setTimeout(() => {
+							uni.navigateTo({
+								url: '/pages/login/signIn/signIn'
+							});
+						}, 500);
+					} else {
+						uni.showModal({
+							content: res.message,
+							showCancel: false
+						});
+					}
+				}, (err) => {
+					console.log(err)
+				})
+			},
+			toSub() {
+				if((this.password == this.password2) && this.password){
+					this.apiResetPassword()
+				}else{
+					uni.showModal({
+						content: '请输入相同的密码！',
+						showCancel: false
+					});
+				}
+			},
 		}
 	}
 </script>
 <style>
-	page{
+	page {
 		background-color: #fff;
 	}
 </style>
@@ -270,7 +208,8 @@
 			background-color: #17d8a9;
 		}
 	}
-	.jieshi{
+
+	.jieshi {
 		padding: 25upx 70upx;
 		color: #808080;
 		font-size: 26upx;
