@@ -1,12 +1,12 @@
 <template>
 	<view>
-		<view class="ziXun" hover-class="navigator-hover" v-for="(item,index) in infoListTest" :key="index" @tap="openInfo()">
+		<view class="ziXun" hover-class="navigator-hover" v-for="(item,index) in newList" :key="index" @tap="openInfo(item)">
 			<view class="z-left">
-				<image mode="aspectFill" :src="item.img" class="image1"></image>
+				<image mode="aspectFill" :src="item.picurl" class="image1"></image>
 			</view>
 			<view class="z-right">
-				<p class="left-title">{{item.title}}</p>
-				<p class="left-text">{{`时间：2019-03-02 来源：校园网`}}</p>
+				<p class="left-title">{{item.newstitle}}</p>
+				<p class="left-text">{{`时间：${item.createtime}  来源：${item.source}`}}</p>
 			</view>
 		</view>
 	</view>
@@ -14,104 +14,19 @@
 
 <script>
 	export default {
-		data() {
-			return {
-				infoListTest: [{
-						title: "恭喜我校“六音”吉他社，荣获上海市第三届音乐会三等奖，我校月…",
-						img: "https://pic.36krcnd.com/201911/06052619/cd2viy851dbu5tsr!heading",
-						time: '2019-03-02',
-						source: "校园网"
-					},
-					{
-						title: "恭喜我校“六音”吉他社，荣获上海市第三届音乐会三等奖，我校月…",
-						img: "https://pic.36krcnd.com/201911/06034718/5tdyeebs8wgckl8q!heading",
-						time: '2019-03-02',
-						source: "校园网"
-					}, {
-						title: "恭喜我校“六音”吉他社，荣获上海市第三届音乐会三等奖，我校月…",
-						img: "https://pic.36krcnd.com/201910/31113337/dblb8niihg3y9pgb!heading",
-						time: '2019-03-02',
-						source: "校园网"
-					}, {
-						title: "恭喜我校“六音”吉他社，荣获上海市第三届音乐会三等奖，我校月…",
-						img: "https://pic.36krcnd.com/201911/06023811/0nccc1mhji53qxzj!heading",
-						time: '2019-03-02',
-						source: "校园网"
-					}, {
-						title: "恭喜我校“六音”吉他社，荣获上海市第三届音乐会三等奖，我校月…",
-						img: "https://pic.36krcnd.com/201911/05050439/e5a59suvfy2f70sf!heading",
-						time: '2019-03-02',
-						source: "校园网"
-					},
-					{
-						title: "恭喜我校“六音”吉他社，荣获上海市第三届音乐会三等奖，我校月…",
-						img: "https://pic.36krcnd.com/201911/06062518/dmq1wk7eun6h5kqm!heading",
-						time: '2019-03-02',
-						source: "校园网"
-					}, {
-						title: "恭喜我校“六音”吉他社，荣获上海市第三届音乐会三等奖，我校月…",
-						img: "https://pic.36krcnd.com/201911/06055456/cp3o4f1m8qxdb9w7!heading",
-						time: '2019-03-02',
-						source: "校园网"
-					},
-					{
-						title: "恭喜我校“六音”吉他社，荣获上海市第三届音乐会三等奖，我校月…",
-						img: "https://pic.36krcnd.com/201911/06034718/5tdyeebs8wgckl8q!heading",
-						time: '2019-03-02',
-						source: "校园网"
-					},
-					{
-						title: "恭喜我校“六音”吉他社，荣获上海市第三届音乐会三等奖，我校月…",
-						img: "https://pic.36krcnd.com/201911/05073218/3nz0iv38brbivack!heading",
-						time: '2019-03-02',
-						source: "校园网"
-					}, {
-						title: "恭喜我校“六音”吉他社，荣获上海市第三届音乐会三等奖，我校月…",
-						img: "https://pic.36krcnd.com/201911/06030536/bnv4v7ckhatuy5e9!heading",
-						time: '2019-03-02',
-						source: "校园网"
-					}, {
-						title: "恭喜我校“六音”吉他社，荣获上海市第三届音乐会三等奖，我校月…",
-						img: "https://pic.36krcnd.com/201911/06024231/8a6f9i75mzzzdcty!heading",
-						time: '2019-03-02',
-						source: "校园网"
-					},
-					{
-						title: "恭喜我校“六音”吉他社，荣获上海市第三届音乐会三等奖，我校月…",
-						img: "https://pic.36krcnd.com/201911/06033623/jy7d4zpt3dn8jy6s!heading",
-						time: '2019-03-02',
-						source: "校园网"
-					}, {
-						title: "恭喜我校“六音”吉他社，荣获上海市第三届音乐会三等奖，我校月…",
-						img: "https://pic.36krcnd.com/201911/05115608/4351qau8cqebkxr8!heading",
-						time: '2019-03-02',
-						source: "校园网"
-					}
-				],
-				news:[]
-			};
-		},
-		onLoad:function(){
-			uni.showLoading({
-				title:"加载中...."
-			})
-			uni.request({
-				url: 'https://unidemo.dcloud.net.cn/api/news',
-				method: 'GET',
-				data: {},
-				success: res => {
-					this.news = res.data;
-					uni.hideLoading();
-				},
-				fail: () => {},
-				complete: () => {}
-			});
+		props: {
+			newList: {
+				type: Array
+			},
 		},
 		methods: {
-			openInfo(e) {
-				var newsid = '115';
+			openInfo(i) {
+				uni.setStorage({
+				    key: 'selectNews',
+					data:i
+				});
 				uni.navigateTo({
-					url: "/pages/tabBar/info/infoDetail?newsid="+newsid
+					url: "/pages/tabBar/info/infoDetail"
 				});
 			}
 		}
@@ -139,6 +54,11 @@
 				font-weight: 400;
 				color: rgba(51, 51, 51, 1);
 				line-height: 40upx;
+				overflow: hidden;
+				text-overflow:ellipsis;
+				display:-webkit-box; 
+				-webkit-box-orient:vertical;
+				-webkit-line-clamp:2;
 			}
 
 			.left-text {

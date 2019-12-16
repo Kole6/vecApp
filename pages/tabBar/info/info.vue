@@ -3,7 +3,7 @@
 		<view class="search">
 			<uni-search-bar radius="100" clearButton="left" @confirm="search" />
 		</view>
-		<zi-xun />
+		<zi-xun :newList="newList" />
 	</view>
 </template>
 
@@ -15,6 +15,14 @@
 			ziXun,
 			uniSearchBar
 		},
+		data() {
+			return {
+				newList: []
+			}
+		},
+		onLoad() {
+			this.apiGetNews()
+		},
 		methods: {
 			search(res) {
 				uni.showModal({
@@ -22,6 +30,16 @@
 					showCancel: false
 				})
 			},
+			apiGetNews(){
+				this.$HTTP({
+					url: '/zjq/College/GetNews',
+					data: {}
+				}).then((data) => {
+					this.newList = [...data.data.list]
+				}, (err) => {
+					console.log(err)
+				})
+			}
 		},
 	}
 </script>

@@ -131,16 +131,20 @@
 			}
 		},
 		onLoad() {
-			this.getMainApi()
+			this.apiGetMain()
 		},
 		methods: {
-			getMainApi() {
+			apiGetMain() {
 				this.$HTTP({
 					url: '/zjq/mainpage/GetMain',
 					data: {}
 				}).then((data) => {
 					this.swiperList = [...data.data.bannerList]
 					this.newList = [...data.data.hotSubjects.list]
+					uni.setStorage({
+						key: 'hotNewsList',
+						data: this.newList
+					});
 				}, (err) => {
 					console.log(err)
 				})
