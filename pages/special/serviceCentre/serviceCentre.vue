@@ -1,45 +1,46 @@
 <!--服务中心-->
 <template>
-	<view class="content">
-		<!-- <text>
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. 
-			Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. 
-			Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-			Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. 
-			Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
-			Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. 
-			Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
-			Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
-		</text> -->
+	<view class="content" :style={height}>
+		<view class="kong1"></view>
 		<image src="/static/indexIcon/fwzx.png" mode="widthFix"></image>
+		<view class="kong2"></view>
 	</view>
 </template>
 
 <script>
 	export default {
+		onShow() {
+			let sys = uni.getSystemInfoSync();
+			this.height = sys.windowHeight + 'px';
+		},
 		data() {
 			return {
-				
-			};
+				height: '600px'
+			}
 		}
 	}
 </script>
 <style>
-	page{
-		background-color: #fff;
-	}
+	/* page {
+		background-color: #f7f6f6;
+	} */
 </style>
 <style lang="scss">
-.content{
-	background: #FFFFFF;
-	line-height: 0;
-	image{
-		// height: 100%;
-		width: 750upx;
+	.content {
+		display: flex;
+		flex-direction: column;
+		.kong1 {
+			flex: 1;
+			width: 750upx;
+			background-color: #f7f6f6;
+		}
+		image {
+			width: 750upx;
+		}
+		.kong2 {
+			flex: 1;
+			width: 750upx;
+			background-color: #bbbcbb;
+		}
 	}
-	// font-size: $uni-font-size-base;
-	// padding: 20upx 60upx;
-	// min-height: calc(100vh - 74px);
-}
 </style>
