@@ -12,9 +12,9 @@
 			</view>
 		</view>
 		<view class="sc-area">
-			<textarea value="" placeholder="不能愉快的使用现有功能？上传相关页面内容方便我们快速解决问题哦～" />
+			<textarea v-model="message" placeholder="不能愉快的使用现有功能？上传相关页面内容方便我们快速解决问题哦～" />
 			</view>
-		<button  class="vec-btn vip-open" type="primary" @tap="toSubmission()">提交</button>
+		<button class="vec-btn vip-open" type="primary" @tap="toSubmission()">提交</button>
 	</view>
 
 </template>
@@ -29,17 +29,39 @@
 			return {
 				selIndex:0,
 				selList:[
-					{name:"功能异常",code:'1001'},
-					{name:"体验问题",code:'1002'},
-					{name:"新功能建议",code:'1003'},
-					{name:"其他",code:'1004'}
-				]
+					{name:"功能异常",code:'0'},
+					{name:"体验问题",code:'1'},
+					{name:"新功能建议",code:'2'},
+					{name:"其他",code:'3'}
+				],
+				message:'',
 			};
 		},
 		methods: {
 			toSubmission() {
-				uni.showToast({
-				  title: '提交成功'
+				this.$HTTP({
+					url: '/zjq/User/FeedBack',
+					header: 'form',
+					data: {
+						token:uni.getStorageSync('token'),
+						type:this.selIndex,
+						message:this.message
+					}
+				}).then((res) => {
+					if (res.code == 0) {
+						this.message = '';
+						uni.showToast({
+							title: res.message,
+							icon: 'none'
+						});
+					} else {
+						uni.showModal({
+							content: res.message,
+							showCancel: false
+						});
+					}
+				}, (err) => {
+					console.log(err)
 				})
 			},
 			reStyle(i){

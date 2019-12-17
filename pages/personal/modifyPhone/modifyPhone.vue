@@ -5,7 +5,7 @@
 				<input class="biaoti" v-model="phoneno" type="number" maxlength="11" placeholder="请输入手机号" />
 			</view>
 			<view class="list-call">
-				<input class="biaoti" v-model="code" type="number" maxlength="4" placeholder="请输入验证码" />
+				<input class="biaoti" v-model="code" type="number" maxlength="6" placeholder="请输入验证码" />
 				<view class="yzm" :class="{ yzms: second>0 }" @tap="getcode">{{yanzhengma}}{{second>0?'s':''}}</view>
 			</view>
 		</view>
@@ -20,7 +20,6 @@
 	export default {
 		onLoad() {
 			tha = this;
-
 		},
 		onUnload() {
 			clearInterval(js)
@@ -51,12 +50,6 @@
 			}
 		},
 		methods: {
-			display() {
-				this.showPassword = !this.showPassword
-			},
-			xieyitong() {
-				this.xieyi = !this.xieyi;
-			},
 			getcode() {
 				if (this.second > 0) {
 					return;
@@ -67,76 +60,78 @@
 					if (tha.second == 0) {
 						clearInterval(js)
 					}
-				}, 1000)
+				}, 1000);
+				this.apiSendSmsValidateCode();
+			},
+			apiSendSmsValidateCode() {
+				this.$HTTP({
+					url: '/zjq/User/SendSmsValidateCode',
+					header: 'form',
+					data: {
+						phone: this.phoneno
+					}
+				}).then((res) => {
+					if (res.code == 0) {
+						this.testCode = res.data.vcode;
+						uni.showModal({
+							content: `验证码：${res.data.vcode}`,
+							showCancel: false
+						});
+					} else {
+						uni.showModal({
+							content: res.message,
+							showCancel: false
+						});
+					}
+				}, (err) => {
+					console.log(err)
+				})
+			},
+			apiBindPhone() {
+				this.$HTTP({
+					url: '/zjq/User/BindPhone',
+					header: 'form',
+					data: {
+						phone: this.phoneno,
+						code: this.code,
+						token: uni.getStorageSync('token')
+					}
+				}).then((res) => {
+					if (res.code == 0) {
+						uni.showToast({
+							title: '绑定成功！'
+						})
+						setTimeout(() => {
+							uni.navigateTo({
+								url: `/pages/login/signIn/signIn`
+							});
+						}, 1000)
+					} else {
+						uni.showModal({
+							content: res.message,
+							showCancel: false
+						});
+					}
+				}, (err) => {
+					console.log(err)
+				})
 			},
 			toIndex() {
-				// uni.navigateTo({
-				// 	url: 'me'
-				// });
+				if (this.code && (this.testCode == this.code)) {
+					this.apiBindPhone();
+				} else {
+					uni.showModal({
+						content: '请填写正确的手机号和验证码！',
+						showCancel: false
+					});
+				}
 			},
-			bindLogin() {
-				if (this.xieyi == false) {
-					uni.showToast({
-						icon: 'none',
-						title: '请先阅读《软件用户协议》'
-					});
-					return;
-				}
-				if (this.phoneno.length != 11) {
-					uni.showToast({
-						icon: 'none',
-						title: '手机号不正确'
-					});
-					return;
-				}
-				if (this.password.length < 6) {
-					uni.showToast({
-						icon: 'none',
-						title: '密码不正确'
-					});
-					return;
-				}
-				if (this.code.length != 4) {
-					uni.showToast({
-						icon: 'none',
-						title: '验证码不正确'
-					});
-					return;
-				}
-				uni.request({
-					url: 'http://***/reg.html',
-					data: {
-						phoneno: this.phoneno,
-						password: this.password,
-						code: this.code,
-						invitation: this.invitation
-					},
-					method: 'POST',
-					dataType: 'json',
-					success: (res) => {
-						if (res.data.code != 200) {
-							uni.showToast({
-								title: res.data.msg,
-								icon: 'none'
-							});
-						} else {
-							uni.showToast({
-								title: res.data.msg
-							});
-							setTimeout(function() {
-								uni.navigateBack();
-							}, 1500)
-						}
-					}
-				});
-
-			}
 		}
 	}
 </script>
 <style>
-	page{
-		background-color:#fff;
+	page {
+		background-color: #fff;
 	}
 </style>
 <style scoped lang="scss">
@@ -145,6 +140,7 @@
 		flex-direction: column;
 		justify-content: center;
 	}
+
 	.list {
 		display: flex;
 		flex-direction: column;
@@ -159,7 +155,7 @@
 		justify-content: space-between;
 		align-items: center;
 		height: 100upx;
-		color:rgba(170,170,170,1);
+		color: rgba(170, 170, 170, 1);
 		border-bottom: 1upx solid #999;
 	}
 

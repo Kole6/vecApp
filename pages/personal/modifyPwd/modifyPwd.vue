@@ -22,6 +22,7 @@
 <script>
 	export default {
 		onLoad(e) {
+			console.log('phone',e);
 			this.phoneno = e.phoneno;
 			this.code = e.code
 		},

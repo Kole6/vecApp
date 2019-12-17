@@ -388,7 +388,7 @@
 		{
 			"path": "pages/personal/modifyPhone/modifyPhone",
 			"style": {
-				"navigationBarTitleText": "修改手机号"
+				"navigationBarTitleText": "绑定手机号"
 			}
 		}, {
 			"path": "pages/personal/verifyMailbox/verifyMailbox",
@@ -419,7 +419,7 @@
 		}, {
 			"path": "pages/login/forget/forget",
 			"style": {
-				"navigationBarTitleText": "忘记密码"
+				"navigationBarTitleText": "手机验证"
 			}
 		}, {
 			"path": "pages/schoolDetails/SchoolPk/SchoolPk",

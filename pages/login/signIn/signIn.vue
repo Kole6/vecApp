@@ -60,6 +60,8 @@
 	export default {
 		onLoad() {
 			tha = this;
+			uni.removeStorageSync('token');
+			uni.removeStorageSync('userInfo');
 		},
 		onUnload() {
 			clearInterval(js)
@@ -118,19 +120,7 @@
 						}
 					}).then((res) => {
 						if (res.code == 0) {
-							uni.showToast({
-								icon: 'none',
-								title: res.message
-							});
-							uni.setStorage({
-								key: 'token',
-								data: res.data.token
-							});
-							setTimeout(() => {
-								uni.switchTab({
-									url: '/pages/tabBar/me/me'
-								});
-							}, 500);
+							this.loginSuccess(res);
 						} else {
 							uni.showModal({
 								content: res.message,
@@ -150,19 +140,7 @@
 						}
 					}).then((res) => {
 						if (res.code == 0) {
-							uni.showToast({
-								icon: 'none',
-								title: res.message
-							});
-							uni.setStorage({
-								key: 'token',
-								data: res.data.token
-							});
-							setTimeout(() => {
-								uni.switchTab({
-									url: '/pages/tabBar/me/me'
-								});
-							}, 500);
+							this.loginSuccess(res);
 						} else {
 							uni.showModal({
 								content: res.message,
@@ -178,6 +156,17 @@
 				uni.navigateTo({
 					url: "../register/register"
 				})
+			},
+			loginSuccess(res){
+				uni.showToast({
+					icon: 'none',
+					title: res.message
+				});
+				uni.setStorage({
+					key: 'token',
+					data: res.data.token
+				});
+				this.apiGetUser(res.data.token);
 			},
 			getcode() {
 				if (this.second > 0) {
@@ -204,6 +193,34 @@
 						uni.showModal({
 							content: `验证码：${res.data.vcode}`,
 							showCancel: false
+						});
+					} else {
+						uni.showModal({
+							content: res.message,
+							showCancel: false
+						});
+					}
+				}, (err) => {
+					console.log(err)
+				})
+			},
+			apiGetUser(token) {
+				this.$HTTP({
+					url: '/zjq/User/GetUser',
+					header: 'form',
+					data: {
+						token,
+					}
+				}).then((res) => {
+					if (res.code == 0) {
+						uni.setStorage({
+							key: 'userInfo',
+							data: res.data,
+							success() {
+								uni.switchTab({
+									url: '/pages/tabBar/me/me'
+								});
+							}
 						});
 					} else {
 						uni.showModal({

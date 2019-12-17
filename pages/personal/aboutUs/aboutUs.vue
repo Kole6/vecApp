@@ -1,7 +1,9 @@
 <template>
 	<view>
 		<view class="logo">
-			<p><image src="/static/1024.png" mode="aspectFill"></image></p>
+			<p>
+				<image src="/static/1024.png" mode="aspectFill"></image>
+			</p>
 			<p>真实的职教，精准的圈子</p>
 			<p>v1.0 (当前版本)</p>
 		</view>
@@ -12,14 +14,14 @@
 			<view class="menu_item" hover-class="navigator-hover" @tap="toShowWeixin()">
 				<text class="menu_l">官方微信</text>
 			</view>
-			<view class="menu_item" hover-class="navigator-hover"  @tap="toPhone()">
+			<view class="menu_item" hover-class="navigator-hover" @tap="toPhone()">
 				<text class="menu_l">联系我们</text>
 			</view>
 		</view>
 		<view class="box" :style="{height:`${scrollH - 690}upx`}">
 			<view class="inner">
-				<p>
-					用户协议 | 隐私政策
+				<p @tap="toUserAgree()">
+					用户协议<span class="mail">|</span>隐私政策
 				</p>
 				<p class="mail">
 					公司邮箱：3420612413.qq.com
@@ -43,34 +45,39 @@
 		methods: {
 			toIntroduce() {
 				uni.navigateTo({
-					url:"./introduce"
+					url: "./introduce"
 				})
 			},
-			toShowWeixin(){
+			toShowWeixin() {
 				uni.showModal({
 					content: '请搜索微信公众号: 职教圈',
 					showCancel: false
 				})
 			},
-			toPhone(){
+			toPhone() {
 				uni.showModal({
-				    content: '拨打: 021-62866809',
-				    success: function (res) {
-				        if (res.confirm) {
-				            uni.makePhoneCall({
-				                phoneNumber: '021-62866809'
-				            });
-				        } else if (res.cancel) {
-				            console.log('取消拨打');
-				        }
-				    }
+					content: '拨打: 021-62866809',
+					success: function(res) {
+						if (res.confirm) {
+							uni.makePhoneCall({
+								phoneNumber: '021-62866809'
+							});
+						} else if (res.cancel) {
+							console.log('取消拨打');
+						}
+					}
 				});
 			},
-			toNotopen(){
+			toNotopen() {
 				uni.showToast({
-					icon:"none",
-					title:"暂未开通",
-					position:'bottom'
+					icon: "none",
+					title: "暂未开通",
+					position: 'bottom'
+				})
+			},
+			toUserAgree() {
+				uni.navigateTo({
+					url: "/pages/login/userAgreement/userAgreement"
 				})
 			}
 		},
@@ -78,52 +85,62 @@
 </script>
 
 <style scoped lang="scss">
-	.logo{
+	.logo {
 		border-top: 1px solid rgba(238, 238, 238, 1);
 		width: 750upx;
 		height: 340upx;
 		background-color: #fff;
 		text-align: center;
-		image{
+
+		image {
 			width: 125upx;
 			height: 125upx;
 			border-radius: 20upx;
 		}
-		p:nth-child(1){
+
+		p:nth-child(1) {
 			padding-top: 40upx;
 		}
-		p:nth-child(2){
-			font-size:32upx;
-			font-weight:700;
-			color:rgba(102,102,102,1);
+
+		p:nth-child(2) {
+			font-size: 32upx;
+			font-weight: 700;
+			color: rgba(102, 102, 102, 1);
 			padding-top: 22upx;
 		}
-		p:nth-child(3){
-			font-size:28upx;
-			font-weight:400;
-			color:rgba(153,153,153,1);
+
+		p:nth-child(3) {
+			font-size: 28upx;
+			font-weight: 400;
+			color: rgba(153, 153, 153, 1);
 			padding-top: 18upx;
 		}
 	}
+
 	.box {
 		display: flex;
 		justify-content: center;
 		align-items: flex-end;
+
 		.inner {
 			width: 500upx;
 			height: 80upx;
 			text-align: center;
 			font-size: 26upx;
 			color: rgba(114, 97, 253, 1);
-			line-height:40upx;
-			.mail{
-				font-size:24upx;
-				color:rgba(153,153,153,1);
+			line-height: 40upx;
+
+			.mail {
+				font-size: 24upx;
+				color: rgba(153, 153, 153, 1);
+				padding: 0 5px;
 			}
 		}
 	}
+
 	.center_menu {
 		width: 100%;
+
 		.menu_item {
 			width: 100%;
 			font-size: 30upx;
@@ -133,7 +150,7 @@
 			overflow: hidden;
 			display: inline-block;
 			border-bottom: 1px solid #EFEFEF;
-	
+
 			&::after {
 				content: '';
 				width: 30upx;
@@ -144,18 +161,18 @@
 				background-size: 100%;
 				margin-top: 30upx;
 			}
-	
+
 			.center_menu--hover {
 				background-color: #f1f1f1
 			}
-	
+
 			.menu_l {
 				width: 300upx;
 				position: absolute;
 				line-height: 90upx;
 				padding-left: 5%;
 			}
-	
+
 			.menu_r {
 				position: absolute;
 				color: #808080;
@@ -163,25 +180,26 @@
 				width: 350upx;
 				text-align: right;
 			}
-	
+
 			.menu_r_png {
 				width: 60upx;
 				height: 60upx;
 				margin-top: 10upx;
 			}
-	
+
 			.menu_r_text {
 				line-height: 90upx;
 			}
-	
+
 			.icon-menu {
 				font-size: 36upx;
 				color: #15d9a8;
 			}
+
 			&:nth-child(1) {
-			 	margin-top: 5px;
+				margin-top: 5px;
 			}
 		}
-	
+
 	}
 </style>

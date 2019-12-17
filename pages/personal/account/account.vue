@@ -7,9 +7,10 @@
 					<image :src="picUrl" class="menu_r_png" mode="aspectFill"></image>
 				</view>
 			</view>
-			<view class="menu_item" @tap="toPhone()">
+			<view class="menu_item" @tap="toPhone(userInfo.phone)">
 				<text class="menu_l">手机</text>
-				<view class="menu_r"><text class="menu_r_text">修改手机号</text></view>
+				<view class="menu_r" v-if="userInfo.phone"><text class="menu_r_text">{{userInfo.phone}}</text></view>
+				<view class="menu_r" v-else><text class="menu_r_text">未绑定</text></view>
 			</view>
 			<view class="menu_item" @tap="toPwd()">
 				<text class="menu_l">密码</text>
@@ -43,10 +44,14 @@
 		components: {
 			chunLeiModal
 		},
+		onLoad() {
+			this.userInfo = uni.getStorageSync('userInfo');
+		},
 		data() {
 			return {
-				picUrl:'/static/p106.png',
-				nickname: uni.getStorageSync('nickname') ? uni.getStorageSync('nickname') : "输入昵称",
+				userInfo: {},
+				picUrl: '/static/p106.png',
+				nickname: uni.getStorageSync('userInfo').nickname || "输入昵称",
 				type: "input",
 				value: false,
 				inputData: {
@@ -65,25 +70,47 @@
 		},
 		methods: {
 			// 修改头像
-			handleModifyAvatar(){
+			handleModifyAvatar() {
 				console.log('==')
 				uni.navigateTo({
 					url: "/pages/personal/avatarSet/AvatarSet"
 				});
 			},
+			apiModifyNickName(nickname, token) {
+				this.$HTTP({
+					url: '/zjq/User/ModifyNickName',
+					header: 'form',
+					data: {
+						nickname,
+						token,
+					}
+				}).then((res) => {
+					if (res.code == 0) {
+						this.nickname = nickname
+						this.userInfo.nickname = nickname
+						uni.setStorage({
+							key: 'userInfo',
+							data: this.userInfo
+						});
+						uni.showToast({
+							title: '修改成功',
+							icon: 'none'
+						});
+					} else {
+						uni.showModal({
+							content: res.message,
+							showCancel: false
+						});
+					}
+				}, (err) => {
+					console.log(err)
+				})
+			},
 			//模态框确认
 			onConfirm(e) {
 				if (e[0].content) {
-					this.nickname = e[0].content;
+					this.apiModifyNickName(e[0].content, uni.getStorageSync('token'))
 					e[0].content = '';
-					uni.showToast({
-						title: '修改成功',
-						icon: 'none'
-					});
-					uni.setStorage({
-						key: 'nickname',
-						data: this.nickname
-					});
 				} else {
 					uni.showToast({
 						title: '昵称为空，修改失败',
@@ -102,35 +129,34 @@
 					url: "/pages/login/signIn/signIn"
 				});
 			},
-			toPhone() {
-				uni.navigateTo({
-					url: "/pages/personal/modifyPhone/modifyPhone"
-				})
+			toPhone(p) {
+				if (p) {
+					uni.showToast({
+						title: '已绑定手机号'
+					})
+				} else {
+					uni.navigateTo({
+						url: "/pages/personal/modifyPhone/modifyPhone"
+					})
+				}
 			},
 			toPwd() {
 				uni.navigateTo({
-					url: "/pages/personal/modifyPwd/modifyPwd"
+					url: "/pages/login/forget/forget"
 				})
 			},
 			toNi() {
 				this.value = true
 			},
-			toMail(){
+			toMail() {
 				uni.navigateTo({
 					url: "/pages/personal/verifyMailbox/verifyMailbox"
 				})
 			},
-			toRecharge(){
-				uni.removeStorage({
-				    key: 'userInfo',
-				    success: function (res) {
-						let date = new Date().getTime()
-				        uni.switchTab({
-				        	url:'../../tabBar/me/me'
-				        })
-						
-				    }
-				});
+			toRecharge() {
+				uni.navigateTo({
+					url: '/pages/login/signIn/signIn'
+				})
 			},
 			clickYao() {
 				// #ifdef APP-PLUS

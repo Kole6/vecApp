@@ -2,10 +2,10 @@
 	<view class="center">
 		<view class="center_box" v-if="userInfo">
 			<view class="box_left">
-				<text @click="toAccount()">{{userInfo.name}}</text>
+				<text @click="toAccount()">{{userInfo.nickname || userInfo.username}}</text>
 			</view>
 			<view class="box_right">
-				<image :src="picUrl" mode="aspectFill"  @click="toAccount()"></image>
+				<image :src="picUrl" mode="aspectFill" @click="toAccount()"></image>
 			</view>
 		</view>
 		<view class="center_box" v-else>
@@ -58,8 +58,7 @@
 		},
 		onShow() {
 			this.userInfo = uni.getStorageSync('userInfo');
-			this.picUrl = uni.getStorageSync('avatar') || '/static/p106.png'
-			// this.picUrl = this.userInfo.picUrl ? this.userInfo.picUrl : '/static/p106.png';
+			// this.picUrl = uni.getStorageSync('avatar') || '/static/p106.png'
 		},
 		methods: {
 			toLogin() {
