@@ -20,11 +20,6 @@
 		}
 	}
 </script>
-<style>
-	/* page {
-		background-color: #f7f6f6;
-	} */
-</style>
 <style lang="scss">
 	.content {
 		display: flex;
