@@ -59,9 +59,9 @@
 							title: res.message
 						});
 						setTimeout(() => {
-							uni.navigateTo({
+							uni.reLaunch({
 								url: '/pages/login/signIn/signIn'
-							});
+							})
 						}, 500);
 					} else {
 						uni.showModal({

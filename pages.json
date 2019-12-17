@@ -402,9 +402,20 @@
 				"navigationBarTitleText": "重置密码"
 			}
 		}, {
+			"path": "pages/personal/avatarSet/AvatarSet",
+			"style": {
+				"navigationBarTitleText": "头像设置",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
 			"path": "pages/login/signIn/signIn",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "登录",
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		}, {
 			"path": "pages/login/userAgreement/userAgreement",
@@ -529,14 +540,6 @@
 				"navigationBarTitleText": "学校简介"
 			}
 		}, {
-			"path": "pages/personal/avatarSet/AvatarSet",
-			"style": {
-				"navigationBarTitleText": "头像设置",
-				"app-plus": {
-					"bounce": "none"
-				}
-			}
-		},{
 			"path": "pages/schoolDetails/ProfessionSetting/GZYX",
 			"style": {
 				"navigationBarTitleText": "高职院校",

@@ -284,9 +284,8 @@ export default {
 				}
 			}).then(res=>{
 				if(res.code == 0){
-					let data = res.data
 					this.schoolInfo = {
-						...data,
+						...res.data,
 						name : data.schoolname,
 						city : data.city,
 						birth : data.establishdate,

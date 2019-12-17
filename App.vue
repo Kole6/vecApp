@@ -2,6 +2,9 @@
 	export default {
 		onLaunch: function() {
 			console.log('VEC App Launch')
+			// #ifdef APP-PLUS
+			plus.screen.lockOrientation('portrait-primary'); //控制竖屏
+			// #endif
 		},
 		onShow: function() {
 			console.log('VEC App Show')

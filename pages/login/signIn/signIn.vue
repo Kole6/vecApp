@@ -1,31 +1,30 @@
 <template>
 	<view class="sign">
+		<view class="sign-x">
+			<image src="/static/p111.png" mode="aspectFill" @tap="toMe()"></image>
+		</view>
 		<view class="sign-logo">
 			<image src="/static/logo-img.png" mode="aspectFill"></image>
 		</view>
 		<view class="sign-list" v-if="!isPhoneSign">
 			<view class="list-call">
-				<!-- <image class="img" src="/static/shilu-login/1.png"></image> -->
 				<input class="biaoti" v-model="userno" type="text" maxlength="32" placeholder="请输入账号" />
 			</view>
 			<view class="list-call">
-				<!-- <image class="img" src="/static/shilu-login/2.png"></image> -->
 				<input class="biaoti" v-model="password" type="text" maxlength="32" placeholder="请输入密码" :password="!showPassword" />
 				<image class="img" :src="showPassword?'/static/shilu-login/op.png':'/static/shilu-login/cl.png'" @tap="display"></image>
 			</view>
 		</view>
 		<view class="sign-list" v-else>
 			<view class="list-call">
-				<!-- <image class="img" src="/static/shilu-login/1.png"></image> -->
 				<input class="biaoti" v-model="phoneno" type="number" maxlength="11" placeholder="请输入手机号" />
 			</view>
 			<view class="list-call">
-				<!-- <image class="img" src="/static/shilu-login/3.png"></image> -->
 				<input class="biaoti" v-model="code" type="number" maxlength="6" placeholder="验证码" />
 				<view class="yzm" :class="{ yzms: second>0 }" @tap="getcode">{{yanzhengma}}{{second>0?'s':''}}</view>
 			</view>
 		</view>
-		<view class="wangji">
+		<view class="sign-forget">
 			<navigator url="/pages/login/forget/forget" hover-class="none">
 				忘记密码?
 			</navigator>
@@ -43,8 +42,8 @@
 			<text class="line"></text>
 		</view>
 		<view class="order-img">
-			<image @tap="login_qq()" src="../../../static/p108.png" mode="aspectFill"></image>
-			<image @tap="login_weixin()" src="../../../static/p109.png" mode="aspectFill"></image>
+			<image @tap="login_qq()" src="/static/p108.png" mode="aspectFill"></image>
+			<image @tap="login_weixin()" src="/static/p109.png" mode="aspectFill"></image>
 		</view>
 		<view class="sign-xieyi">
 			<text>登录即表示同意职教圈
@@ -78,9 +77,9 @@
 				showPassword: false,
 				second: 0,
 				isPhoneSign: false,
-				log:{
-					log1:'',
-					log2:''
+				log: {
+					log1: '',
+					log2: ''
 				}
 			}
 		},
@@ -109,8 +108,13 @@
 					url: "../userAgreement/userAgreement"
 				})
 			},
-			toLogin(){
-				if(this.isPhoneSign){
+			toMe() {
+				uni.switchTab({
+					url: '/pages/tabBar/me/me'
+				})
+			},
+			toLogin() {
+				if (this.isPhoneSign) {
 					this.$HTTP({
 						url: '/zjq/User/LoginCode',
 						header: 'form',
@@ -130,7 +134,7 @@
 					}, (err) => {
 						console.log(err)
 					})
-				}else{ //账号密码登录
+				} else { //账号密码登录
 					this.$HTTP({
 						url: '/zjq/User/Login',
 						header: 'form',
@@ -157,7 +161,7 @@
 					url: "../register/register"
 				})
 			},
-			loginSuccess(res){
+			loginSuccess(res) {
 				uni.showToast({
 					icon: 'none',
 					title: res.message
@@ -232,6 +236,20 @@
 					console.log(err)
 				})
 			},
+			apiLoginQQWeChat(type, sessionid, nickname, photo) {
+				this.$HTTP({
+					url: '/zjq/User/LoginQQWeChat',
+					data: {
+						type,
+						sessionid,
+						nickname,
+						photo
+					},
+					header: 'form'
+				}).then((res) => {
+					this.loginSuccess(res);
+				})
+			},
 			login_weixin() {
 				// #ifndef APP-PLUS
 				uni.showToast({
@@ -240,48 +258,39 @@
 					title: '目前仅APP支持'
 				});
 				// #endif
-				
+
 				// #ifdef APP-PLUS
 				var vm = this;
 				uni.getProvider({
-				    service: 'oauth',
-				    success: function (res) {
-				        console.log(res.provider) //qq,xiaomi,sinaweibo,weixin
+					service: 'oauth',
+					success: function(res) {
+						console.log(res.provider) //qq,xiaomi,sinaweibo,weixin
 						vm.log.log1 = res.provider
-				        if (~res.provider.indexOf('weixin')) {
-				            uni.login({
-				                provider: 'weixin', 
-				                success: function (loginRes) {
-				                	vm.$HTTP({
-				                	  method: 'GET',
-				                	  baseURL:'https://api.weixin.qq.com/sns/userinfo',
-				                	  url: '',
-				                	  data: {
-				                		  openid:loginRes.authResult.openid,
-				                		  access_token:loginRes.authResult.access_token
-				                	  },
-				                	  load:true
-				                	}).then((data) =>{
-				                	  uni.setStorage({
-				                	    key: 'userInfo',
-				                	  	data:{
-				                			name:data.nickname,
-				                			picUrl:data.headimgurl
-				                		}
-				                	  });
-				                	  uni.switchTab({
-				                	  	url: "../../tabBar/me/me"
-				                	  })
-				                	}, (err) => {
-				                	  console.log(err)
-				                	});
-				                }
-				            });
-				        }
-				    }
+						if (~res.provider.indexOf('weixin')) {
+							uni.login({
+								provider: 'weixin',
+								success: function(loginRes) {
+									vm.$HTTP({
+										method: 'GET',
+										baseURL: 'https://api.weixin.qq.com/sns/userinfo',
+										url: '',
+										data: {
+											openid: loginRes.authResult.openid,
+											access_token: loginRes.authResult.access_token
+										},
+										load: true
+									}).then((data) => {
+										vm.apiLoginQQWeChat(5, loginRes.authResult.openid, data.nickname, data.headimgurl);
+									}, (err) => {
+										console.log(err)
+									});
+								}
+							});
+						}
+					}
 				});
 				// #endif
-				
+
 			},
 			login_qq() {
 				// #ifndef APP-PLUS
@@ -291,56 +300,47 @@
 					title: '目前仅APP支持'
 				});
 				// #endif
-				
+
 				// #ifdef APP-PLUS
 				var vm = this;
 				uni.getProvider({
-				    service: 'oauth',
-				    success: function (res) {
-				        console.log(res.provider) //qq,xiaomi,sinaweibo,weixin
+					service: 'oauth',
+					success: function(res) {
+						console.log(res.provider) //qq,xiaomi,sinaweibo,weixin
 						vm.log.log1 = res.provider
-				        if (~res.provider.indexOf('qq')) {
-				            uni.login({
-				                provider: 'qq', 
-				                success: function (loginRes) {
+						if (~res.provider.indexOf('qq')) {
+							uni.login({
+								provider: 'qq',
+								success: function(loginRes) {
+									console.log('loginRes',loginRes)
 									vm.$HTTP({
-									  method: 'GET',
-									  baseURL:'https://graph.qq.com/user/get_user_info',
-									  url: '',
-									  data: {
-										  openid:loginRes.authResult.openid,
-										  access_token:loginRes.authResult.access_token,
-										  appid:'101832674'
-									  },
-									  load:true
-									}).then((data) =>{
-									  console.log(data)
-									  uni.setStorage({
-									    key: 'userInfo',
-									  	data:{
-											name:data.nickname,
-											picUrl:data.figureurl_qq
-										}
-									  });
-									  uni.switchTab({
-									  	url: "../../tabBar/me/me"
-									  })
+										method: 'GET',
+										baseURL: 'https://graph.qq.com/user/get_user_info',
+										url: '',
+										data: {
+											openid: loginRes.authResult.openid,
+											access_token: loginRes.authResult.access_token,
+											appid: '101832674'
+										},
+										load: true
+									}).then((data) => {
+										vm.apiLoginQQWeChat(4, loginRes.authResult.openid, data.nickname, data.figureurl_qq);
 									}, (err) => {
-									  console.log(err)
+										console.log(err)
 									});
-				                }
-				            });
-				        }
-				    }
+								}
+							});
+						}
+					}
 				});
 				// #endif
-				
+
 			},
 		}
 	}
 </script>
 <style>
-	page{
+	page {
 		background-color: #fff;
 	}
 </style>

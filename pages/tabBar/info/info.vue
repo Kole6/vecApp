@@ -21,23 +21,21 @@
 			}
 		},
 		onLoad() {
-			this.apiGetNews()
+			this.apiGetNews('')
 		},
 		methods: {
 			search(res) {
-				uni.showModal({
-					content: '搜索：' + res.value,
-					showCancel: false
-				})
+				this.apiGetNews(res.value);
 			},
-			apiGetNews(){
+			apiGetNews(key){
 				this.$HTTP({
 					url: '/zjq/College/GetNews',
-					data: {}
+					header:'form',
+					data: {
+						key,
+					}
 				}).then((data) => {
 					this.newList = [...data.data.list]
-				}, (err) => {
-					console.log(err)
 				})
 			}
 		},

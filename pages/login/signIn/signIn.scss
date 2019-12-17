@@ -1,6 +1,14 @@
 .sign{
 	text-align: center;
 }
+.sign-x{
+	text-align: left;
+	padding: 60upx 0 10upx 20upx;
+	image{
+		width: 52upx;
+		height: 53upx;
+	}
+}
 .sign-logo{
 	padding: 40px 0 15px 0;
 	image{
@@ -17,7 +25,7 @@
 		background-color: #17d8a9;
 	}
 }
-.wangji{
+.sign-forget{
 	margin-top: 20upx;
 	padding-right: 70upx;
 	text-align: right;
