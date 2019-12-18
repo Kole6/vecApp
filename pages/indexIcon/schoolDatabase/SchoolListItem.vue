@@ -1,25 +1,22 @@
 <template>
 	<view class="list-content" :class="{'has':showBorder}" @tap="handleTap">
-		<view class="left">
-			{{!!item.schoolname?item.schoolname.substr(0,1):item.title.substr(0,1)}}
-		</view>
+		<view class="left">{{item.title.substr(0,1)}}</view>
 		<view class="right">
-			<rich-text  class="title" :nodes="item.title"></rich-text>
-			<scroll-view v-if="showType == 2 || showType ==4"  scroll-x="true" style="white-space: nowrap;display: flex;align-items: center;padding: 15upx 0;">
-				<view class="tag tag-text"
-				v-for="(tag,i) in item.tags" :key="i">
-					<text>{{ tag.name + ':' + tag.value }}</text>
+			<rich-text class="title" :nodes="item.title"></rich-text>
+			<scroll-view v-if="showType == 2 || showType ==4" scroll-x="true" style="white-space: nowrap;display: flex;align-items: center;padding: 15upx 0;">
+				<view class="tag tag-text" v-for="(tag,i) in item.tags" :key="i">
+					<text>{{ tag.name}}：{{tag.value}}</text>
 				</view>
 			</scroll-view>
 			<scroll-view v-if="showType == 4 || showType == 3" scroll-x="true" style="white-space: nowrap;display: flex;align-items: center;">
 				<block v-if="isSpecial">
-					<view  class="tag tag-text" v-for="(card,index) in item.cards" :key="index">
-						<text>{{card.name + ':' + card.value}}</text>
+					<view class="tag tag-text" v-for="(card,index) in item.cards" :key="index">
+						<text>{{card.name}}：{{card.value}}</text>
 					</view>
 				</block>
 				<block v-else>
 					<view style="display: flex;align-items: center;">
-						<view  class="card" v-for="(card,index) in item.cards" :key="index">
+						<view class="card" v-for="(card,index) in item.cards" :key="index">
 							<text>{{card.name}}</text>
 						</view>
 					</view>
@@ -31,41 +28,41 @@
 
 <script>
 	export default {
-		props:{
-			showType:{
-				type:[Number,String],
-				default:'1'
+		props: {
+			showType: {
+				type: [Number, String],
+				default: '1'
 			},
-			item:{
-				type:Object,
-				default(){
-					return{}
+			item: {
+				type: Object,
+				default () {
+					return {}
 				}
 			},
-			showBorder:{
-				type:Boolean,
-				default:true,
+			showBorder: {
+				type: Boolean,
+				default: true,
 			},
-			handleTaped:Boolean,
-			url:String,
+			handleTaped: Boolean,
+			url: String,
 			// 是否特殊显示cards
-			isSpecial:{
-				type:Boolean,
-				default:false
+			isSpecial: {
+				type: Boolean,
+				default: false
 			}
 		},
-		methods:{
-			handleTap(){
-				if(!this.handleTaped){
-					this.$emit('taped',this.item)
+		methods: {
+			handleTap() {
+				if (!this.handleTaped) {
+					this.$emit('taped', this.item)
 					return;
 				}
-				if(this.item.schoolno){
+				if (this.item.schoolno) {
 					uni.navigateTo({
-						url:`../../schoolDetails/SchoolDetail?schoolno=${this.item.schoolno}`
+						url: `../../schoolDetails/SchoolDetail?schoolno=${this.item.schoolno}`
 					})
-				}else{
-					
+				} else {
+
 				}
 			}
 		}
@@ -73,18 +70,21 @@
 </script>
 
 <style scoped lang="scss">
-	*{
+	* {
 		box-sizing: border-box;
 	}
-	.list-content{
+
+	.list-content {
 		padding: 30upx;
-		&.has{
-			border-bottom: solid 1px $main-dividing-line1;	
+
+		&.has {
+			border-bottom: solid 1px $main-dividing-line1;
 		}
-		.left{
+
+		.left {
 			display: inline-flex;
-			width:120upx;
-			height:120upx;
+			width: 120upx;
+			height: 120upx;
 			border-radius: 60upx;
 			background: #FFFFFF;
 			border: solid 1px $main-base-color;
@@ -94,32 +94,40 @@
 			font-size: 45upx;
 			color: $main-base-color;
 		}
-		.right{
+
+		.right {
 			display: inline-block;
 			width: calc(100% - 150upx);
 			vertical-align: middle;
 			margin-left: 20upx;
 			font-size: $uni-font-size-lg;
-			.title{
+
+			.title {
 				color: #333333;
 			}
-			.tag,.card{
+
+			.tag,
+			.card {
 				display: inline-flex;
 				font-size: $uni-font-size-base;
 				padding: 5upx 10upx;
 				border-radius: 10upx;
 				border: solid 1px #FF750F;
 				color: #666666;
-				margin: 0  10upx 0 10upx;
+				margin: 0 10upx 0 10upx;
 				justify-content: center;
 				align-items: center;
-				&:first-child{
+
+				&:first-child {
 					margin-left: 0;
 				}
 			}
-			.card{
-				color: #FF750F;;
+
+			.card {
+				color: #FF750F;
+				;
 			}
+
 			.tag.tag-text {
 				// display: inline-block;
 				font-size: $uni-font-size-base;
@@ -128,10 +136,12 @@
 				border-radius: 0;
 				border: none;
 				border-right: solid 1px $uni-border-color;
-				&:first-child{
+
+				&:first-child {
 					padding-left: 0;
 				}
 			}
+
 			.tag.tag-text:last-child {
 				border: none;
 			}

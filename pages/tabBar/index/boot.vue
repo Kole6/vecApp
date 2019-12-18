@@ -1,20 +1,6 @@
 <template>
 	<view class="content">
-		<swiper class="swiper" :autoplay="autoplay" :duration="duration" @change="change" @animationfinish="animationfinish">
-			<swiper-item>
-				<view class="swiper-item">
-					<view class="swiper-item-img1">
-						<image src="/static/guide/p001_1.png" mode="widthFix"></image>
-					</view>
-					<view class="swiper-item-img2">
-						<image src="/static/guide/p001_2.png" mode="aspectFill"></image>
-					</view>
-					<view class="spot">
-						<view v-for="(item,index) in 4" :key="item" :class="[index==selIndex ? 'spot-s' : '','spot-t']"></view>
-					</view>
-				</view>
-				<view class="jump-over" @tap="launchFlag()">{{jumpover}}</view>
-			</swiper-item>
+		<swiper class="swiper" :autoplay="autoplay" :duration="duration" @change="change">
 			<swiper-item>
 				<view class="swiper-item">
 					<view class="swiper-item-img1">
@@ -32,10 +18,10 @@
 			<swiper-item>
 				<view class="swiper-item">
 					<view class="swiper-item-img1">
-						<image src="/static/guide/p003_1.png" mode="widthFix"></image>
+						<image src="/static/guide/p001_1.png" mode="widthFix"></image>
 					</view>
 					<view class="swiper-item-img2">
-						<image src="/static/guide/p003_2.png" mode="aspectFill"></image>
+						<image src="/static/guide/p001_2.png" mode="aspectFill"></image>
 					</view>
 					<view class="spot">
 						<view v-for="(item,index) in 4" :key="item" :class="[index==selIndex ? 'spot-s' : '','spot-t']"></view>
@@ -50,6 +36,20 @@
 					</view>
 					<view class="swiper-item-img2">
 						<image src="/static/guide/p004_2.png" mode="aspectFill"></image>
+					</view>
+					<view class="spot">
+						<view v-for="(item,index) in 4" :key="item" :class="[index==selIndex ? 'spot-s' : '','spot-t']"></view>
+					</view>
+				</view>
+				<view class="jump-over" @tap="launchFlag()">{{jumpover}}</view>
+			</swiper-item>
+			<swiper-item>
+				<view class="swiper-item">
+					<view class="swiper-item-img1">
+						<image src="/static/guide/p003_1.png" mode="widthFix"></image>
+					</view>
+					<view class="swiper-item-img2">
+						<image src="/static/guide/p003_2.png" mode="aspectFill"></image>
 					</view>
 					<view class="spot">
 						<view class="experience2" @tap="launchFlag()">{{experience}}</view>
