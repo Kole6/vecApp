@@ -130,11 +130,14 @@
 				newList: []
 			}
 		},
-		onLoad() {
-			this.apiGetMain()
+		onShow() {
+			this.apiGetMain();
 		},
 		methods: {
 			apiGetMain() {
+				if (this.swiperList.length != 0) {
+					return;
+				}
 				this.$HTTP({
 					url: '/zjq/mainpage/GetMain',
 					data: {}

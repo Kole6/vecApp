@@ -2,15 +2,15 @@
     "name" : "职教圈",
     "appid" : "__UNI__90F3DA1",
     "description" : "真实的职教 精准的圈子",
-    "versionName" : "1.0.8",
-    "versionCode" : 108,
+    "versionName" : "1.0.9",
+    "versionCode" : 109,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {
         "usingComponents" : true,
         "nvueCompiler" : "uni-app",
         "splashscreen" : {
-            "alwaysShowBeforeRender" : true,
+            "alwaysShowBeforeRender" : false,
             "waiting" : false,
             "autoclose" : true,
             "delay" : 0

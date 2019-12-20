@@ -20,17 +20,20 @@
 				newList: []
 			}
 		},
-		onLoad() {
+		onShow() {
 			this.apiGetNews('')
 		},
 		methods: {
 			search(res) {
 				this.apiGetNews(res.value);
 			},
-			apiGetNews(key){
+			apiGetNews(key) {
+				if (key == '' && this.newList.length != 0) {
+					return;
+				}
 				this.$HTTP({
 					url: '/zjq/College/GetNews',
-					header:'form',
+					header: 'form',
 					data: {
 						key,
 					}
@@ -42,8 +45,8 @@
 	}
 </script>
 <style scoped lang="scss">
-	.search{
-		border-top: 1px solid rgb(238,238,238);
+	.search {
+		border-top: 1px solid rgb(238, 238, 238);
 		padding: 0 32upx;
 	}
 </style>
