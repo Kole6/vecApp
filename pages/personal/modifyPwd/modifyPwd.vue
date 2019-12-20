@@ -3,11 +3,11 @@
 		<view class="list">
 			<view class="list-call">
 				<input class="biaoti" v-model="password" type="text" maxlength="20" placeholder="请输入新密码" :password="!showPassword" />
-				<image class="img" :src="showPassword?'/static/shilu-login/op.png':'/static/shilu-login/cl.png'" @tap="display"></image>
+				<image class="img" :src="showPassword?'/static/p702.png':'/static/p701.png'" @tap="display"></image>
 			</view>
 			<view class="list-call">
 				<input class="biaoti" v-model="password2" type="text" maxlength="20" placeholder="确认新密码" :password="!showPassword2" />
-				<image class="img" :src="showPassword2?'/static/shilu-login/op.png':'/static/shilu-login/cl.png'" @tap="display2"></image>
+				<image class="img" :src="showPassword?'/static/p702.png':'/static/p701.png'" @tap="display"></image>
 			</view>
 		</view>
 		<view class="jieshi">

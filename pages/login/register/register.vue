@@ -2,21 +2,17 @@
 	<view class="content">
 		<view class="list">
 			<view class="list-call">
-				<!-- <image class="img" src="/static/shilu-login/1.png"></image> -->
 				<input class="biaoti" v-model="phoneno" type="number" maxlength="11" placeholder="请输入手机号" />
 			</view>
 			<view class="list-call">
-				<!-- <image class="img" src="/static/shilu-login/3.png"></image> -->
 				<input class="biaoti" v-model="code" type="number" maxlength="6" placeholder="请输入验证码" />
 				<view class="yzm" :class="{ yzms: second>0 }" @tap="getcode">{{yanzhengma}}{{second>0?'s':''}}</view>
 			</view>
 			<view class="list-call">
-				<!-- <image class="img" src="/static/shilu-login/2.png"></image> -->
 				<input class="biaoti" v-model="password" type="text" maxlength="32" placeholder="请设置密码" :password="!showPassword" />
-				<image class="img" :src="showPassword?'/static/shilu-login/op.png':'/static/shilu-login/cl.png'" @tap="display"></image>
+				<image class="img" :src="showPassword?'/static/p702.png':'/static/p701.png'" @tap="display"></image>
 			</view>
 			<view class="list-call">
-				<!-- <image class="img" src="/static/shilu-login/4.png"></image> -->
 				<input class="biaoti" v-model="invitation" type="text" maxlength="12" placeholder="邀请码（选填）" />
 			</view>
 		</view>

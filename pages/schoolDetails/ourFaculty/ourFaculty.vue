@@ -438,7 +438,7 @@
 	
 	
 	.m-list{
-		padding: 10upx 30upx;
+		padding: 15upx 30upx;
 		display: flex;
 		align-items: center;
 		background: #FFFFFF;
@@ -450,9 +450,9 @@
 		.avatar{
 			box-sizing: border-box;
 			display: inline-flex;
-			width:120upx;
-			height:120upx;
-			border-radius: 60upx;
+			width:110upx;
+			height:110upx;
+			border-radius: 110upx;
 			background: #FFFFFF;
 			border: solid 1px #68BCF5;
 			vertical-align: middle;

@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<!-- navBar -->
+		<!-- 搜索框 -->
 		<nav-bar>
 			<view slot="left" class="address_select">
 				<image src="/static/logo-img.png" mode="aspectFill"></image>
@@ -10,7 +10,6 @@
 				<text class="prompt"> 学校 / 人名 / 专业 </text>
 			</view>
 		</nav-bar>
-
 		<!-- 轮播图 -->
 		<view class="swiper-view">
 			<swiper class="swiper" indicator-dots="true" autoplay="true" circular="true" indicator-active-color="#ffffff">
@@ -23,7 +22,7 @@
 		<view class="example-body">
 			<uni-grid :column="4" @change="toIndexicon" :show-border="false" :square="false">
 				<uni-grid-item v-for="(item, index) in iconList" :key="index">
-					<image :src="item.url" class="image" mode="aspectFill" />
+					<image class="image" :src="item.url" mode="aspectFill" />
 					<text class="text">{{ item.text }}</text>
 				</uni-grid-item>
 			</uni-grid>

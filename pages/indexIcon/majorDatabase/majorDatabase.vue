@@ -9,10 +9,10 @@
 				<view class="nav-item nav-item-1"><text>本科层次职业教育</text></view>
 			</navigator>
 			<navigator url="/pages/indexIcon/majorDatabase/GZGZSchool">
-				<view class="nav-item nav-item-2"><text>高职高专院校</text></view>
+				<view class="nav-item nav-item-2"><text>高职<br/>高专院校</text></view>
 			</navigator>
 			<navigator url="/pages/indexIcon/majorDatabase/ZDZYSchool">
-				<view class="nav-item nav-item-3"><text>中等职业学校</text></view>
+				<view class="nav-item nav-item-3"><text>中等<br/>职业学校</text></view>
 			</navigator>
 		</view>
 		<view class="list-title">
@@ -182,7 +182,6 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-
 		width: 220upx;
 		text-align: center;
 		box-sizing: border-box;

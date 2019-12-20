@@ -61,7 +61,7 @@
 	.info-art {
 		font-family: PingFangSC-Regular, PingFang SC;
 		background-color: #fff;
-		padding: 0 30upx 30upx 30upx;
+		padding: 10upx 30upx 30upx 30upx;
 
 		.art-title {
 			font-size: 34upx;

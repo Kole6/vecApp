@@ -1,14 +1,14 @@
 .content {
 		.address_select {
 			image{
-				width: 160upx;
-				height: 66upx;
+				width: 131upx;
+				height: 56upx;
 				margin-left: 40upx;
-				margin-top: 10upx;
+				margin-top: 16upx;
 			}
 		}
 		.search_box {
-			width: 380upx;
+			width: 420upx;
 			margin-right: 40upx;
 			/* #ifdef MP-WEIXIN */
 			margin-left: 55upx;
@@ -35,12 +35,14 @@
 		}
 
 		.swiper-view {
+			padding: 10upx 7upx;
 			.swiper {
 				width: 100%;
-				height: 300upx;
+				height: 340upx;
 				image {
+					border-radius: 15upx;
 					width: 100%;
-					height: 320upx;
+					height: 340upx;
 				}
 			}
 		}
@@ -56,7 +58,6 @@
 			justify-content: space-between;
 			background-color: #fff;
 			border-bottom: 1px #F8FAFF solid;
-
 			image {
 				width: 36upx;
 				height: 36upx;
@@ -80,7 +81,6 @@
 				flex-wrap: wrap;
 				justify-content: space-between;
 				padding-bottom: 26upx;
-				
 				.zhuan-btn{
 					width: 340upx;
 					height: 200upx;
@@ -116,14 +116,9 @@
 				}
 			}
 		}
-		
-		.xun{
-			padding-bottom: 15upx;
-		}
 		.example-body {
-			padding: 5upx 30upx;
+			padding: 5upx 0;
 			background: #fff;
-
 			.image {
 				width: 90upx;
 				height: 90upx;
@@ -137,5 +132,7 @@
 				margin-top: 10upx;
 			}
 		}
-
+		.xun{
+			padding-bottom: 15upx;
+		}
 	}
