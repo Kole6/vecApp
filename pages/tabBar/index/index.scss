@@ -35,7 +35,8 @@
 		}
 
 		.swiper-view {
-			padding: 10upx 7upx;
+			background-color: #fff;
+			padding: 7upx 7upx;
 			.swiper {
 				width: 100%;
 				height: 340upx;
@@ -91,6 +92,7 @@
 					display: flex;
 					justify-content: space-between;
 					align-items:center;
+					overflow:hidden;
 					.z-left{
 						padding-left: 20upx;
 						.left-title{
@@ -133,6 +135,23 @@
 			}
 		}
 		.xun{
-			padding-bottom: 15upx;
+			border-bottom: 1px #F8FAFF solid;
+		}
+	}
+	.order{
+	   padding: 35upx 70upx 40upx 70upx;
+	   font-size: 28upx;
+	   display:flex;
+	   background-color: #fff;
+		.line {
+			flex: 1;
+			border-top:1px solid #eee;
+			position: relative;
+			top:18upx;
+		}
+		.txt {
+		   color: #999999;
+		   padding: 0 10upx;
+		   vertical-align: middle;
 		}
 	}

@@ -5,7 +5,7 @@
 				<text @click="toAccount()">{{userInfo.nickname || userInfo.username}}</text>
 			</view>
 			<view class="box_right">
-				<image :src="picUrl" mode="aspectFill" @click="toAccount()"></image>
+				<image :src="userInfo.photo || picUrl" mode="aspectFill" @click="toAccount()"></image>
 			</view>
 		</view>
 		<view class="center_box" v-else>

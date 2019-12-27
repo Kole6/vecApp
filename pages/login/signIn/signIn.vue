@@ -170,6 +170,7 @@
 					key: 'token',
 					data: res.data.token
 				});
+				console.log('res',res)
 				this.apiGetUser(res.data.token);
 			},
 			getcode() {
@@ -219,6 +220,7 @@
 				this.$HTTP({
 					url: '/zjq/User/GetUser',
 					header: 'form',
+					load:true,
 					data: {
 						token,
 					}
@@ -244,6 +246,7 @@
 				})
 			},
 			apiLoginQQWeChat(type, sessionid, nickname, photo) {
+				console.log('apiLoginQQWeChat',type, sessionid, nickname, photo);
 				this.$HTTP({
 					url: '/zjq/User/LoginQQWeChat',
 					data: {
@@ -331,6 +334,7 @@
 										},
 										load: true
 									}).then((data) => {
+										console.log('get_user_info',data);
 										vm.apiLoginQQWeChat(4, loginRes.authResult.openid, data.nickname, data.figureurl_qq);
 									}, (err) => {
 										console.log(err)

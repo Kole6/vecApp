@@ -166,7 +166,6 @@
 				}
 			}
 		},
-		// 专业介绍
 		{
 			"path": "pages/indexIcon/majorDatabase/ProfessionDesc",
 			"style": {
@@ -177,7 +176,6 @@
 				}
 			}
 		},
-		// 开设学校
 		{
 			"path": "pages/indexIcon/majorDatabase/ProfessionSchool",
 			"style": {
@@ -187,7 +185,6 @@
 				}
 			}
 		},
-		// 专业对比
 		{
 			"path": "pages/indexIcon/majorDatabase/ProfessionPK",
 			"style": {
@@ -227,7 +224,7 @@
 						"buttons": [{
 							"fontSrc": "/static/iconFont/iconfont.ttf",
 							"text": "\ue630",
-							"fontSize": "20px",
+							"fontSize": "18px",
 							"color": "#666666"
 						}]
 					}

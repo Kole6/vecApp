@@ -20,9 +20,10 @@
 				<text class="menu_l">昵称</text>
 				<view class="menu_r"><text class="menu_r_text">{{nickname}}</text></view>
 			</view>
-			<view class="menu_item" @tap="toMail()">
+			<view class="menu_item" @tap="toMail(userInfo.email)">
 				<text class="menu_l">邮箱</text>
-				<view class="menu_r"><text class="menu_r_text">未绑定</text></view>
+				<view class="menu_r" v-if="userInfo.email"><text class="menu_r_text">{{userInfo.email}}</text></view>
+				<view class="menu_r" v-else><text class="menu_r_text">未绑定</text></view>
 			</view>
 			<view class="menu_item" @tap="clickYao()">
 				<text class="menu_l">我的邀请码</text>
@@ -148,7 +149,7 @@
 			toNi() {
 				this.value = true
 			},
-			toMail() {
+			toMail(p) {
 				uni.navigateTo({
 					url: "/pages/personal/verifyMailbox/verifyMailbox"
 				})

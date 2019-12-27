@@ -2,10 +2,10 @@
 	<view class="content">
 		<view class="list">
 			<view class="list-call">
-				<input class="biaoti" v-model="phoneno" type="text" maxlength="11" placeholder="请输入邮箱号" />
+				<input class="biaoti" v-model="mailno" type="text" maxlength="11" placeholder="请输入邮箱号" />
 			</view>
 			<view class="list-call">
-				<input class="biaoti" v-model="code" type="number" maxlength="4" placeholder="请输入验证码" />
+				<input class="biaoti" v-model="code" type="number" maxlength="6" placeholder="请输入验证码" />
 				<view class="yzm" :class="{ yzms: second>0 }" @tap="getcode">{{yanzhengma}}{{second>0?'s':''}}</view>
 			</view>
 		</view>
@@ -28,7 +28,7 @@
 		},
 		data() {
 			return {
-				phoneno: '',
+				mailno: '',
 				password: '',
 				code: '',
 				invitation: '',
@@ -58,10 +58,10 @@
 				this.xieyi = !this.xieyi;
 			},
 			getcode() {
-				if(!(/^1(3\d|4\d|5\d|6\d|7\d|8\d|9\d)\d{8}$/g.test(this.phoneno))){
+				if (!(/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/.test(this.mailno))) {
 					uni.showToast({
-						title:'手机号格式错误！',
-						icon:'none'
+						title: '邮箱号格式错误！',
+						icon: 'none'
 					})
 					return;
 				}
@@ -77,73 +77,45 @@
 				}, 1000)
 			},
 			toIndex() {
-				uni.navigateBack({
-				    delta: 1
-				});
-			},
-			bindLogin() {
-				if (this.xieyi == false) {
-					uni.showToast({
-						icon: 'none',
-						title: '请先阅读《软件用户协议》'
-					});
-					return;
-				}
-				if (this.phoneno.length != 11) {
-					uni.showToast({
-						icon: 'none',
-						title: '手机号不正确'
-					});
-					return;
-				}
-				if (this.password.length < 6) {
-					uni.showToast({
-						icon: 'none',
-						title: '密码不正确'
-					});
-					return;
-				}
-				if (this.code.length != 4) {
-					uni.showToast({
-						icon: 'none',
-						title: '验证码不正确'
-					});
-					return;
-				}
-				uni.request({
-					url: 'http://***/reg.html',
+				this.$HTTP({
+					url: '/zjq/User/ModiUser',
 					data: {
-						phoneno: this.phoneno,
-						password: this.password,
-						code: this.code,
-						invitation: this.invitation
+						token: uni.getStorageSync('token'),
+						email: this.mailno,
+						code: this.code
 					},
-					method: 'POST',
-					dataType: 'json',
-					success: (res) => {
-						if (res.data.code != 200) {
-							uni.showToast({
-								title: res.data.msg,
-								icon: 'none'
-							});
-						} else {
-							uni.showToast({
-								title: res.data.msg
-							});
-							setTimeout(function() {
-								uni.navigateBack();
-							}, 1500)
-						}
+					header: 'form'
+				}).then((res) => {
+					if (res.code == 0) {
+						uni.showModal({
+							content: res.message,
+							showCancel: false
+						});
+						let userInfo = uni.getStorageSync('userInfo');
+						userInfo.email = this.mailno;
+						uni.setStorage({
+							key: 'userInfo',
+							data: userInfo,
+							success() {
+								uni.reLaunch({
+									url: '/pages/personal/account/account'
+								});
+							}
+						});
+					} else {
+						uni.showModal({
+							content: res.message,
+							showCancel: false
+						});
 					}
-				});
-
+				})
 			}
 		}
 	}
 </script>
 <style>
-	page{
-		background-color:#fff;
+	page {
+		background-color: #fff;
 	}
 </style>
 <style scoped lang="scss">
@@ -152,6 +124,7 @@
 		flex-direction: column;
 		justify-content: center;
 	}
+
 	.list {
 		display: flex;
 		flex-direction: column;
@@ -166,7 +139,7 @@
 		justify-content: space-between;
 		align-items: center;
 		height: 100upx;
-		color:rgba(170,170,170,1);
+		color: rgba(170, 170, 170, 1);
 		border-bottom: 1upx solid #999;
 	}
 

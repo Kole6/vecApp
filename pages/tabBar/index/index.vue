@@ -47,8 +47,8 @@
 				<navigator url="/pages/special/international/international" hover-class="none">
 					<view class="zhuan-btn">
 						<view class="z-left">
-							<p class="left-title">合作办学</p>
-							<p class="left-text">Cooperation in running schools</p>
+							<p class="left-title">国际合作</p>
+							<p class="left-text">International co-operation</p>
 						</view>
 						<view class="z-right">
 							<image mode="aspectFill" src="/static/p301.png" class="image1"></image>
@@ -86,6 +86,12 @@
 		</view>
 		<view class="xun">
 			<zi-xun :newList="newList"></zi-xun>
+		</view>
+		<!-- 底线 -->
+		<view class="order">
+			<text class="line"></text>
+			<text class="txt"> 我是有底线的 </text>
+			<text class="line"></text>
 		</view>
 	</view>
 </template>
@@ -172,7 +178,6 @@
 		}
 	}
 </script>
-
 <style scoped lang="scss">
 	@import "./index.scss";
 </style>

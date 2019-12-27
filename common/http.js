@@ -1,12 +1,16 @@
 // created by wangyong for uni-app request
-import {baseURL} from '../config'
+import {
+	baseURL
+} from '../config'
 const http = (options) => {
 	return new Promise((resolve, reject) => {
-		uni.showLoading({
-			title: '加载中...',
-			mask: options.load || false // 默认遮罩出现可以继续操作
-		});
-		try{
+		if (options.load) { //默认遮罩不出现
+			uni.showLoading({
+				title: '加载中...',
+				mask: false // 遮罩出现可以继续操作
+			});
+		}
+		try {
 			uni.request({
 				url: (options.baseURL || baseURL) + options.url,
 				method: options.method || 'POST', // 默认为POST请求
@@ -34,11 +38,15 @@ const http = (options) => {
 					} */
 				},
 				complete: () => {
-					uni.hideLoading();
+					if (options.load) {
+						uni.hideLoading();
+					}
 				}
 			});
-		}catch(e){
-			uni.hideLoading();
+		} catch (e) {
+			if (options.load) {
+				uni.hideLoading();
+			}
 			uni.showToast({
 				title: '服务端异常',
 				icon: 'none'

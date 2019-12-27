@@ -52,7 +52,7 @@
 						<image src="/static/guide/p003_2.png" mode="aspectFill"></image>
 					</view>
 					<view class="spot">
-						<view class="experience2" @tap="launchFlag()">{{experience}}</view>
+						<view class="experience" @tap="launchFlag()">{{experience}}</view>
 					</view>
 				</view>
 			</swiper-item>
@@ -122,10 +122,12 @@
 	.swiper-item-img2 {
 		width: 100%;
 	}
-	.swiper-item-img1 image{
+
+	.swiper-item-img1 image {
 		width: 750upx;
 		height: 780upx;
 	}
+
 	.swiper-item-img2 image {
 		width: 750upx;
 		height: 100upx;
@@ -150,21 +152,6 @@
 	}
 
 	.experience {
-		position: absolute;
-		height: 60upx;
-		line-height: 60upx;
-		border-radius: 30upx;
-		font-size: 34upx;
-		color: #6451FC;
-		border: 1px solid #6451FC;
-		z-index: 999;
-		padding: 4upx 50upx;
-		right: 50%;
-		margin-right: -116upx;
-		bottom: 65upx;
-	}
-
-	.experience2 {
 		border-radius: 30upx;
 		font-size: 32upx;
 		color: #6451FC;
