@@ -2,7 +2,7 @@
 	<view class="content">
 		<view class="list">
 			<view class="list-call">
-				<input class="biaoti" v-model="mailno" type="text" maxlength="11" placeholder="请输入邮箱号" />
+				<input class="biaoti" v-model="mailno" type="text" placeholder="请输入邮箱号" />
 			</view>
 			<view class="list-call">
 				<input class="biaoti" v-model="code" type="number" maxlength="6" placeholder="请输入验证码" />
@@ -31,6 +31,7 @@
 				mailno: '',
 				password: '',
 				code: '',
+				vcode:'',
 				invitation: '',
 				xieyi: true,
 				showPassword: false,
@@ -75,8 +76,31 @@
 						clearInterval(js)
 					}
 				}, 1000)
+				this.apiSendEmailCode();
 			},
-			toIndex() {
+			apiSendEmailCode() { //获取邮箱验证码
+				this.$HTTP({
+					url: '/zjq/User/SendEmailCode',
+					data: {
+						email: this.mailno
+					},
+					header: 'form'
+				}).then((res) => {
+					console.log('res', res);
+					if (res.code == 0) {
+						this.vcode = res.data.vcode;
+						uni.showToast({
+							title: '发送成功，请查看邮箱！'
+						})
+					} else {
+						uni.showModal({
+							content: res.message,
+							showCancel: false
+						});
+					}
+				})
+			},
+			apiModiUser() { //修改邮箱
 				this.$HTTP({
 					url: '/zjq/User/ModiUser',
 					data: {
@@ -109,6 +133,16 @@
 						});
 					}
 				})
+			},
+			toIndex() {
+				if(this.code!=this.vcode){
+					uni.showToast({
+						title: '请填写正确的验证码',
+						icon:"none"
+					})
+					return;
+				}
+				this.apiModiUser()
 			}
 		}
 	}
