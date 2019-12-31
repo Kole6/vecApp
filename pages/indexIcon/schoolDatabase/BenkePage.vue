@@ -58,7 +58,7 @@ export default {
 					url: '/zjq/College/GetSchoolSearchList',
 					header: 'form',
 					data: {
-						token: 'd05902562e544db29bbe777954d43bb0',
+						token: uni.getStorageSync('token'),
 						key: '',
 						pageIndex: this.page.pageIndex,
 						pageSize: this.page.pageSize,

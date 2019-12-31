@@ -119,7 +119,7 @@
 					url:'/zjq/mainpage/GetFileDown',
 					header:'form',
 					data:{
-						token: 'd05902562e544db29bbe777954d43bb0',
+						token: uni.getStorageSync('token'),
 						fileid:this.params.fileId
 					}
 				}).then((res=>{
@@ -131,7 +131,7 @@
 					url:'/zjq/mainpage/GetFileDetail',
 					header:'form',
 					data:{
-						token: 'd05902562e544db29bbe777954d43bb0',
+						token: uni.getStorageSync('token'),
 						fileid:this.params.fileId
 					}
 				}).then((res)=>{

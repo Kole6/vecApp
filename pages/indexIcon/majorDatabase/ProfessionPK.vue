@@ -62,7 +62,7 @@ export default {
 				url: '/zjq/User/MyComparison',
 				header: 'form',
 				data: {
-					token: 'd05902562e544db29bbe777954d43bb0',
+					token: uni.getStorageSync('token'),
 					type: '2',
 					optype: 'A',
 					majorCode: string
@@ -104,7 +104,7 @@ export default {
 					url: '/zjq/User/GetComparison',
 					header: 'form',
 					data: {
-						token: 'd05902562e544db29bbe777954d43bb0',
+						token: uni.getStorageSync('token'),
 						pageIndex: this.page.pageIndex,
 						pageSize: this.page.pageSize,
 						type: '2'

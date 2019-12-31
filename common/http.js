@@ -4,7 +4,7 @@ import {
 } from '../config'
 const http = (options) => {
 	return new Promise((resolve, reject) => {
-		if (options.load) { //默认遮罩不出现
+		if (options.load) { //默认遮罩是否出现
 			uni.showLoading({
 				title: '加载中...',
 				mask: false // 遮罩出现可以继续操作
@@ -20,6 +20,23 @@ const http = (options) => {
 					'Content-Type': options.header == 'form' ? 'application/x-www-form-urlencoded' : 'application/json'
 				},
 				success: res => {
+					//全局处理权限问题
+					if(res.data.message =="token不能为空"){
+						uni.showModal({
+						    content: '登录之后才可以查看!',
+						    success: function (res) {
+						        if (res.confirm) {
+						            uni.navigateTo({
+						            	url:'/pages/login/signIn/signIn'
+						            })
+						        } else if (res.cancel) {
+						            uni.switchTab({
+						            	url:'/pages/tabBar/index/index'
+						            })
+						        }
+						    }
+						});
+					}
 					resolve(res.data)
 				},
 				fail: (err) => {
@@ -38,15 +55,13 @@ const http = (options) => {
 					} */
 				},
 				complete: () => {
-					if (options.load) {
+					if (options.load)
 						uni.hideLoading();
-					}
 				}
 			});
 		} catch (e) {
-			if (options.load) {
+			if (options.load)
 				uni.hideLoading();
-			}
 			uni.showToast({
 				title: '服务端异常',
 				icon: 'none'

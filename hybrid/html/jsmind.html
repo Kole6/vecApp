@@ -10,7 +10,7 @@
 		<style>
 			html {
 				width: 100%;
-				height: 600px;
+				height: 100vh;
 			}
 
 			body {
@@ -21,7 +21,7 @@
 			#jsmind_container {
 				width: 100vw;
 				height: 100%;
-				background: #f4f4f4;
+				/* background: #f4f4f4; */
 			}
 		</style>
 	</head>
@@ -29,22 +29,11 @@
 	<body>
 		<div id="jsmind_container"></div>
 		<script src="./js/jsmind.js"></script>
-		<script src="./js/jsmind.draggable.js"></script>
-		<script src="./js/ajax.js"></script>
+		<script type="text/javascript" src="http://www.hqzj-ip.com/resource/js/jquery-1.10.2.min.js"></script>
 		<script>
-			function getQuery(name) {
-			    // 正则：[找寻'&' + 'url参数名字' = '值' + '&']（'&'可以不存在）
-			    let reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-			    let r = window.location.search.substr(1).match(reg);
-			    if(r != null) {
-			        // 对参数值进行解码
-			        return unescape(r[2]);
-			    }
-			    return null;
-			}
 			var mind = {
 				meta: {
-					name: 'demo',
+					name: 'vec',
 					author: 'hizzgdev@163.com',
 					version: '0.2'
 				},
@@ -52,112 +41,86 @@
 				data: [{
 						id: 'root',
 						isroot: true,
-						topic: 'jsMind'
+						topic: '杭州湾中等职业学校'
 					},
-
 					{
 						id: 'sub1',
 						parentid: 'root',
-						topic: 'sub1',
-						'background-color': '#0000ff'
+						topic: '外国语学院'
 					},
 					{
 						id: 'sub4',
 						parentid: 'root',
-						topic: 'sub4',
-						'background-color': '#0000ff',
-						direction:"left"
+						topic: '经济管理学院',
+						direction: "left"
+					},
+					{
+						id: 'sub41',
+						parentid: 'sub4',
+						topic: '世界经济学'
+					},
+					{
+						id: 'sub42',
+						parentid: 'sub4',
+						topic: '金融学'
 					},
 					{
 						id: 'sub5',
 						parentid: 'root',
-						topic: 'sub5',
-						'background-color': '#0000ff',
-						direction:"left"
+						topic: '物理学院',
+						direction: "left"
 					},
 					{
 						id: 'sub6',
 						parentid: 'root',
-						topic: 'sub6',
-						direction:"left"
-					},
-					{
-						id: 'sub7',
-						parentid: 'root',
-						topic: 'sub7',
-						direction:"left"
-					},
-					{
-						id: 'sub8',
-						parentid: 'root',
-						topic: 'sub8',
-						direction:"left"
-					},
-					{
-						id: 'sub9',
-						parentid: 'root',
-						topic: 'sub9',
-						'background-color': '#0000ff',
-						direction:"left"
-					},
-					{
-						id: 'sub10',
-						parentid: 'root',
-						topic: 'sub10',
-						'background-color': '#0000ff',
-						direction:"left"
-					},
-					{
-						id: 'sub11',
-						parentid: 'sub1',
-						topic: 'sub11'
-					},
-					{
-						id: 'sub12',
-						parentid: 'sub1',
-						topic: 'sub12'
+						topic: '化工学院',
+						direction: "left"
 					},
 					{
 						id: 'sub13',
 						parentid: 'sub1',
-						topic: 'sub13'
+						topic: '日语'
 					},
-
+					{
+						id: 'sub15',
+						parentid: 'sub1',
+						topic: '法语'
+					},
+					{
+						id: 'sub14',
+						parentid: 'sub1',
+						topic: '俄语'
+					},
 					{
 						id: 'sub2',
 						parentid: 'root',
-						topic: 'sub2'
+						topic: '机电一体化'
 					},
 					{
 						id: 'sub21',
 						parentid: 'sub2',
-						topic: 'sub21'
+						topic: '车俩工程'
 					},
 					{
 						id: 'sub22',
 						parentid: 'sub2',
-						topic: 'sub22',
-						'foreground-color': '#33ff33'
+						topic: '机械工程'
 					},
-
 					{
 						id: 'sub3',
 						parentid: 'root',
-						topic: 'sub3'
+						topic: '护理专业'
 					}
 				]
 			};
 			var options = {
 				container: 'jsmind_container',
 				editable: true,
-				theme: 'primary'
+				theme: 'greensea'
 			};
 			window.jm = jsMind.show(options, mind);
-
-			jm.add_node('sub2', 'sub23', 'new node', {
-				'background-color': 'red'
-			});
-			jm.set_node_color('sub21', 'green', '#ccc');
+			// jm.add_node('sub2', 'sub23', 'new node', {'background-color': 'red'});
+			// jm.set_node_color('sub21', 'green', '#ccc');
 			document.addEventListener('UniAppJSBridgeReady', function() {
 				uni.postMessage({
 					data: {
@@ -166,9 +129,31 @@
 				});
 				uni.getEnv(function(res) {
 					console.log('当前环境：' + JSON.stringify(res));
-					console.log(getQuery('data'))
+					console.log('sid',getQuery('sid'))
 				});
 			});
+
+			function getQuery(name) {
+				// 正则：[找寻'&' + 'url参数名字' = '值' + '&']（'&'可以不存在）
+				let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+				let r = window.location.search.substr(1).match(reg);
+				if (r != null) {
+					// 对参数值进行解码
+					return unescape(r[2]);
+				}
+				return null;
+			}
+			/* $.ajax({
+				url: ADMIN_URL + "/meet/findAll",
+				type: "GET",
+				success: function(data) {
+					$("#tableList").html(tab);
+				},
+				error: function(e) {
+					console.log(e);
+					alert('网络失败，请刷新页面后重试');
+				}
+			}); */
 		</script>
 	</body>
 

@@ -71,9 +71,9 @@
 					</block>
 				</view>
 			</view>
-			<view class="s-school_list" @tap="handleRouter('./jsmind')">
+			<view class="s-school_list" @tap="handleMind()">
 				<text>拓扑图</text>
-				<view class="">
+				<view class="tuopu">
 					<image src="/static/indexIcon/tpt.png" mode="aspectFit" style="width: 750upx; height:230upx;"></image>
 				</view>
 			</view>
@@ -237,7 +237,7 @@
 					url: '/zjq/User/GetUser',
 					header: 'form',
 					data: {
-						token: 'd05902562e544db29bbe777954d43bb0',
+						token: uni.getStorageSync('token'),
 					}
 				}).then((res) => {
 					if (res.code == 0) {
@@ -275,7 +275,7 @@
 					url: '/zjq/College/GetCollegeDetail',
 					header: 'form',
 					data: {
-						token: 'd05902562e544db29bbe777954d43bb0',
+						token: uni.getStorageSync('token'),
 						sid: this.params.schoolno,
 					}
 				}).then(res => {
@@ -308,7 +308,7 @@
 					url: '/zjq/User/Favorite',
 					header: 'form',
 					data: {
-						token: 'd05902562e544db29bbe777954d43bb0',
+						token: uni.getStorageSync('token'),
 						sid: this.schoolInfo.schoolno,
 						type: this.hasSC ? '2' : '1'
 					}
@@ -332,6 +332,11 @@
 			handleRouter(url) {
 				uni.navigateTo({
 					url: url
+				});
+			},
+			handleMind(){
+				uni.navigateTo({
+					url: `./jsmind?sid=${this.schoolInfo.schoolno}`
 				});
 			},
 			handleBack() {

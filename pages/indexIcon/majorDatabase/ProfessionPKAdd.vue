@@ -177,7 +177,7 @@ export default {
 					header: 'form',
 					data: {
 						type: '2',
-						token: 'd05902562e544db29bbe777954d43bb0',
+						token: uni.getStorageSync('token'),
 						pageIndex: this.page1.pageIndex,
 						pageSize: this.page1.pageSize
 						// key: this.searchValue
@@ -236,7 +236,7 @@ export default {
 					url: '/zjq/College/GetMajors',
 					header: 'form',
 					data: {
-						token: 'd05902562e544db29bbe777954d43bb0',
+						token: uni.getStorageSync('token'),
 						pageIndex: this.page2.pageIndex,
 						pageSize: this.page2.pageSize
 						// key: this.searchValue

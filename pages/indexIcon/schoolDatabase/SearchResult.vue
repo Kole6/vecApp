@@ -108,7 +108,7 @@ export default {
 					header: 'form',
 					data: {
 						type: '',
-						token: 'd05902562e544db29bbe777954d43bb0',
+						token: uni.getStorageSync('token'),
 						pageIndex: this.page.pageIndex,
 						pageSize: this.page.pageSize,
 						key: this.searchValue

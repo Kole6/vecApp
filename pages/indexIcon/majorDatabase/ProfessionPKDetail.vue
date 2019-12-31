@@ -70,7 +70,7 @@ export default {
 				url: '/zjq/User/MyZydb',
 				header: 'form',
 				data: {
-					token: 'd05902562e544db29bbe777954d43bb0',
+					token: uni.getStorageSync('token'),
 					zyids: '510103,510104,510105,510106'
 				}
 			}).then(res => {
