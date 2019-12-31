@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<view class="search">
-			<uni-search-bar radius="100" clearButton="left" @confirm="search" placeholder=" 学校 / 人名 / 专业 "/>
+			<uni-search-bar radius="100" clearButton="left" @confirm="search" placeholder=" 学校 / 人名 / 专业 " />
 		</view>
 		<view class="have-data">
 			<QSTabs ref="tabs" :current="current" :tabs="tabs" width="250" swiperWidth="750" activeColor="#6451FC"
@@ -13,28 +13,28 @@
 						<view class="list-title">
 							<p>院校</p>
 						</view>
-						<view class="school-list" >
-							<school-list :isText="true" :showType="4" :is-special="true" :listArr="dataArr2" :handleTaped="handleListTaped"></school-list>
+						<view class="school-list">
+							<school-list class="" :isText="true" :showType="4" :listArr="dataArr"></school-list>
 						</view>
 						<view class="list-title">
 							<p>专业</p>
 						</view>
 						<view class="school-list">
-							<school-list :isText="true" :showType="4" :listArr="dataArr"></school-list>
+							<school-list :showType="4" :is-special="true" :listArr="dataArr" :handleTaped="false" @taped="handleListTaped" />
 						</view>
 					</scroll-view>
 				</swiper-item>
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;">
 						<view class="school-list">
-							<school-list :isText="true" :showType="4" :is-special="true" :listArr="dataArr2" :handleTaped="handleListTaped"></school-list>
+							<school-list class="" :isText="true" :showType="4" :listArr="dataArr"></school-list>
 						</view>
 					</scroll-view>
 				</swiper-item>
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;">
 						<view class="school-list">
-							<school-list :isText="true" :showType="4" :listArr="dataArr"></school-list>
+							<school-list :showType="4" :is-special="true" :listArr="dataArr" :handleTaped="false" @taped="handleListTaped" />
 						</view>
 					</scroll-view>
 				</swiper-item>
@@ -53,57 +53,16 @@
 			QSTabs,
 			schoolList
 		},
+		onLoad() {
+			this.apiGetSchools();
+			this.apiGetMajors();
+		},
 		data() {
 			return {
-				tabs: ["全部","院校","专业"],
+				tabs: ["全部", "院校", "专业"],
 				current: 0,
-				dataArr: [
-					{
-						title: '北京电子科技职业技术学院',
-						tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-						cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-					},
-					{
-						title: '北京电子科技职业技术学院',
-						tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-						cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-					},
-					{
-						title: '北京电子科技职业技术学院',
-						tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-						cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-					},
-					{
-						title: '北京电子科技职业技术学院',
-						tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-						cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-					},
-					{
-						title: '北京电子科技职业技术学院',
-						tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-						cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-					},
-					{
-						title: '北京电子科技职业技术学院',
-						tags: [{ name: '地区', value: '上海' }, { name: '层次', value: '高职' }],
-						cards: [{ name: '民办' }, { name: '本科层次职业教育' }]
-					}
-				],
-				dataArr2: [
-					{
-						title: '汽车运用与维护',
-						tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-						cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
-					},{
-						title: '汽车运用与维护',
-						tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-						cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
-					},{
-						title: '汽车运用与维护',
-						tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-						cards:[{name:'学历层次',value:'高职'},{name:'专业年限',value:'3年'}]
-					}
-				]
+				dataArr: [],
+				dataArr2: []
 			}
 		},
 		computed: {
@@ -117,44 +76,141 @@
 		},
 		methods: {
 			search(res) {
-				uni.showModal({
+				/* uni.showModal({
 					content: '搜索：' + res.value,
 					showCancel: false
+				}) */
+				this.apiGetSchools()
+				this.apiGetMajors()
+			},
+			apiGetSchools() {
+				this.$HTTP({
+					url: '/zjq/College/GetSchools',
+					data: {},
+					load: true,
+					header: 'form'
+				}).then((res) => {
+					if (res.code == 0) {
+						let va = res.data.list.map(item => {
+							item.tags = item.tags + ''
+							return {
+								...item,
+								title: item.schoolname,
+								cards: item.tags.split(',').map(item => {
+									return {
+										name: item
+									};
+								}),
+								tags: [{
+									name: '地区',
+									value: item.area
+								}, {
+									name: '层次',
+									value: item.level
+								}]
+							};
+						});
+						this.dataArr = va
+					} else {
+						uni.showToast({
+							title: res.message,
+							icon: 'none'
+						});
+					}
 				})
 			},
-			handleListTaped(){
-				
+			apiGetMajors() {
+				this.$HTTP({
+					url: '/zjq/College/GetMajors',
+					data: {},
+					header: 'form'
+				}).then((res) => {
+					if (res.code == 0) {
+						let data = res.data.list.map(item => {
+							return {
+								...item,
+								title: item.majorname,
+								cards: [{
+										name: '学历层次',
+										value: item.xlcc || ''
+									},
+									{
+										name: '专业年限',
+										value: item.xynx || ''
+									}
+								],
+								tags: [{
+										name: '专业大类',
+										value: item.zydl || ''
+									},
+									{
+										name: '代码',
+										value: item.majorcode
+									}
+								]
+							};
+						});
+						this.dataArr2 = data
+					} else {
+						uni.showToast({
+							title: res.message,
+							icon: 'none'
+						});
+					}
+				})
+			},
+			handleListTaped({
+				item,
+				index
+			}) {
+				uni.navigateTo({
+					url: `/pages/indexIcon/majorDatabase/ProfessionDesc?id=${item.code}&name=${item.name}&type=${item.type}`
+				})
 			},
 			change(index) {
 				this.current = index;
 			},
-			swiperChange({detail: { current }}) {
+			swiperChange({
+				detail: {
+					current
+				}
+			}) {
 				this.current = current;
 			},
-			transition({detail: { dx }}) {
+			transition({
+				detail: {
+					dx
+				}
+			}) {
 				this.$refs.tabs.setDx(dx);
 			},
-			animationfinish({detail: { current }}) {
+			animationfinish({
+				detail: {
+					current
+				}
+			}) {
 				this.$refs.tabs.setFinishCurrent(current);
 			},
 		},
 	}
 </script>
 <style>
-	page{
+	page {
 		background-color: #fff;
 	}
 </style>
 <style scoped lang="scss">
-	.search{
-		// border-top: 1px solid rgb(238,238,238);
+	.search {
 		padding: 0 32upx;
 	}
+
 	.have-data {
 		border-top: 1px solid rgba(238, 238, 238, 1)
 	}
+
 	.swiper-item {
 		background-color: #fff;
+
 		.sc-it {
 			background-color: #fff;
 			border-bottom: 8upx solid #F6F8FE;
@@ -162,20 +218,22 @@
 			font-size: 28upx;
 			line-height: 100upx;
 			padding-left: 30upx;
-	
+
 			&:first-child {
 				border-top: 17upx solid #F6F8FE;
 			}
 		}
 	}
-	.list-title{
+
+	.list-title {
 		padding-left: 30upx;
 		height: 98upx;
-		font-size:32upx;
-		font-weight:700;
-		color:rgba(51,51,51,1);
-		line-height:98upx;
+		font-size: 32upx;
+		font-weight: 700;
+		color: rgba(51, 51, 51, 1);
+		line-height: 98upx;
 	}
+
 	.school-list {
 		background: #ffffff;
 		overflow: auto;

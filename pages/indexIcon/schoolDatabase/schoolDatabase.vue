@@ -24,8 +24,7 @@
 		</view>
 		<load-more ref="scroll" @onPullDown="onPullDown"  @onLoadMore="onLoadMore" :styleObj="{ height: wrapperHeight}" :loadStatus="loadStatus">
 			<view class="school-list">
-			<school-list class="" :isText="true" :showType="4" :listArr="dataArr"></school-list>
-				
+				<school-list class="" :isText="true" :showType="4" :listArr="dataArr"></school-list>
 			</view>
 		</load-more>
 	</view>
