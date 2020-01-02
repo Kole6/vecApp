@@ -79,6 +79,13 @@
 	var canvaPie3 = null;
 	var canvaPie4 = null;
 	export default {
+		onLoad() {
+			_self = this;
+			this.cWidth = uni.upx2px(750);
+			this.cHeight = uni.upx2px(500);
+			this.getServerData();
+			this.getData()
+		},
 		components: {
 			QSTabs
 		},
@@ -107,13 +114,6 @@
 				]
 			}
 		},
-		onLoad() {
-			_self = this;
-			this.cWidth = uni.upx2px(750);
-			this.cHeight = uni.upx2px(500);
-			this.getServerData();
-			this.getData()
-		},
 		computed: {
 			scrollH() {
 				let sys = uni.getSystemInfoSync();
@@ -124,7 +124,7 @@
 			}
 		},
 		methods: {
-			getData(){
+			api(){
 				this.$HTTP({
 					url:'/zjq/College/GetTeacherInfo',
 					header:'form',

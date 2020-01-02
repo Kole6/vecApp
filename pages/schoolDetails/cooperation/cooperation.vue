@@ -7,15 +7,15 @@
 			<view class="txt">
 				<view class="txt-box">
 					<p>产学合作总数</p>
-					<p>4</p>
+					<p>{{listObj.totalNum}}</p>
 				</view>
 				<view class="txt-box">
 					<p>订单培养数</p>
-					<p>—</p>
+					<p>{{listObj.orderNum}}</p>
 				</view>
 				<view class="txt-box">
 					<p>共同开发课程</p>
-					<p>4</p>
+					<p>{{listObj.course}}</p>
 				</view>
 			</view>
 		</view>
@@ -24,43 +24,70 @@
 
 <script>
 	export default {
+		onLoad(e) {
+			this.sid = e.sid;
+			this.apiGetCooperation()
+		},
 		data() {
 			return {
-				
+				sid:'',
+				listObj:{}
 			};
+		},
+		methods:{
+			apiGetCooperation(){
+				this.$HTTP({
+					url: '/zjq/College/GetCooperation',
+					header: 'form',
+					data: {
+						sid: this.sid,
+						token: uni.getStorageSync('token')
+					}
+				}).then((res) => {
+					if (res.code == 0) {
+						this.listObj = res.data
+					} else {
+						uni.showToast({
+							icon: "none",
+							title: res.message
+						});
+					}
+				})
+			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
+@import "./base64.scss";	
 .box{
-	width:686upx;
-	height:308upx;
-	background:rgba(255,255,255,1);
+	width:684upx;
+	height:350upx;
+	background: $cooperation_bg no-repeat;
+	background-size: 100%;
 	box-shadow:0px 0px 10px 0px rgba(100,81,252,0.1);
 	border-radius:31upx;
 	margin: 20upx auto;
 	.title{
-		border-bottom: 1px solid #eee;
-		font-size:34upx;
+		font-size:40upx;
 		font-weight:600;
-		color:rgba(51,51,51,1);
+		color:rgba(255,255,255,1);
 		line-height:48upx;
-		padding: 27upx 35upx;
+		padding: 40upx 35upx;
 	}
 	.txt{
 		font-size: 28upx;
 		font-weight: 500;
 		display: flex;
 		line-height: 45upx;
-		color: #666;
+		color: #fff;
 		.txt-box{
 			text-align: center;
 			flex: 1;
 			p:nth-child(2){
-				color: #333;
+				color: #fff;
 				font-weight: 700;
-				font-size: 36upx;
+				font-size: 42upx;
 				padding-top:25upx ;
 			}
 			margin: 46upx 0;

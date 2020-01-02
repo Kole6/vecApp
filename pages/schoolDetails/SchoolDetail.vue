@@ -151,36 +151,68 @@
 					},
 					{
 						name: '校领导',
-						url: './SchoolLeader/SchoolLeader'
+						url: './SchoolLeader/SchoolLeader',
+						params: [{
+							key: 'sid',
+							value: 'schoolno'
+						}]
 					},
 					{
 						name: '学校荣誉',
-						url: './schoolHonors/schoolHonors'
+						url: './schoolHonors/schoolHonors',
+						params: [{
+							key: 'sid',
+							value: 'schoolno'
+						}]
 					},
 					{
 						name: '奖助学金',
-						url: './assistanceScholarship/assistanceScholarship'
+						url: './assistanceScholarship/assistanceScholarship',
+						params: [{
+							key: 'sid',
+							value: 'schoolno'
+						}]
 					}
 				],
 				schoolInfo2: [{
 						name: '师资情况',
-						url: './ourFaculty/ourFaculty'
+						url: './ourFaculty/ourFaculty',
+						params: [{
+							key: 'sid',
+							value: 'schoolno'
+						}]
 					},
 					{
 						name: '校企合作',
-						url: './cooperation/cooperation'
+						url: './cooperation/cooperation',
+						params: [{
+							key: 'sid',
+							value: 'schoolno'
+						}]
 					},
 					{
 						name: '专业设置',
-						url: './ProfessionSetting/ProfessionSetting'
+						url: './ProfessionSetting/ProfessionSetting',
+						params: [{
+							key: 'sid',
+							value: 'schoolno'
+						}]
 					},
 					{
 						name: '技能大赛',
-						url: './skillsCompetition/skillsCompetition'
+						url: './skillsCompetition/skillsCompetition',
+						params: [{
+							key: 'sid',
+							value: 'schoolno'
+						}]
 					},
 					{
 						name: '就业创业',
-						url: './entrepreneurship/entrepreneurship'
+						url: './entrepreneurship/entrepreneurship',
+						params: [{
+							key: 'sid',
+							value: 'schoolno'
+						}]
 					}
 				],
 				permission: {

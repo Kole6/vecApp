@@ -41,4 +41,12 @@
 		border-radius: 44upx;
 		font-weight: 600;
 	}
+	
+	.table-null {
+		text-align: center;
+		margin: 20upx;
+		color: #999;
+		font-size: 30upx;
+		padding-bottom:20upx ;
+	}
 </style>

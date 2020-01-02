@@ -9,10 +9,11 @@
 			:loadStatus="loadStatus"
 		> -->
 			<view class="m-list" v-for="(item, index) in dataArr" :key="index">
-				<view class="avatar">{{ item.teachername.substr(0, 1) }}</view>
-				<view class="name">{{ item.teachername }}</view>
+				<view class="avatar">{{ item.firstname }}</view>
+				<view class="name">{{ item.name }}</view>
 				<view class="position">
-					<text v-for="(tag, i) in item.tags" :key="i">{{ tag }}</text>
+					<text>{{ item.position }}</text>
+					<!-- <text v-for="(tag, i) in item.tags" :key="i">{{ tag }}</text> -->
 				</view>
 			</view>
 		<!-- </load-more> -->
@@ -35,8 +36,8 @@ export default {
 			dataArr: []
 		};
 	},
-	onLoad(params) {
-		this.page.sid = params.sid || '3633000526';
+	onLoad(e) {
+		this.page.sid = e.sid;
 		this.getData();
 	},
 	methods: {
@@ -56,30 +57,14 @@ export default {
 					method: 'POST',
 					data: {
 						sid: this.page.sid,
-						token: uni.getStorageSync('token'),
-						pageIndex: this.page.pageIndex,
-						pageSize: this.page.pageSize
+						token: uni.getStorageSync('token')
 					},
 					header:'form',
 				})
 					.then((data) => {
 						if (data.code == 0) {
-							let arr = data.data.list.map(item => {
-								return {
-									...item,
-									tags: item.positon.split('、')
-								};
-							});
-							this.dataArr = arr;
-							// 是否为最后一页
-							if (data.data.lastPage) {
-								this.loadStatus = 'noMore';
-							} else {
-								this.page.pageIndex++;
-								this.loadStatus = 'more';
-							}
+							this.dataArr = [...data.data];
 						} else {
-							this.loadStatus = 'noMore';
 							uni.showModal({
 								content: data.message,
 								icon: 'none'

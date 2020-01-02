@@ -13,26 +13,12 @@
 								<view class="td">级别</view>
 								<view class="td">表彰日期</view>
 							</view>
-							<view class="table-tr">
-								<view class="td">第十三届全国中等职业学校“文化风采”优秀组织大赛</view>
-								<view class="td">一等奖</view>
-								<view class="td">2019</view>
+							<view class="table-tr" v-for="(item,i) of listArr.y2018" :key="i">
+								<view class="td">{{item.columns.projectName}}</view>
+								<view class="td">{{item.columns.level}}</view>
+								<view class="td">{{item.columns.date}}</view>
 							</view>
-							<view class="table-tr">
-								<view class="td">第十一届全国中等职业学校“文化风采”竞赛获优秀组织奖</view>
-								<view class="td">一等奖</view>
-								<view class="td">2018</view>
-							</view>
-							<view class="table-tr">
-								<view class="td">第十二届全国中等职业学校“文化风采”竞赛获优秀组织奖</view>
-								<view class="td">一等奖</view>
-								<view class="td">2018</view>
-							</view>
-							<view class="table-tr">
-								<view class="td">机器人大赛</view>
-								<view class="td">一等奖</view>
-								<view class="td">2018</view>
-							</view>
+							<view class="table-null" v-show="listArr.y2018.length==0">无数据</view>
 						</view>
 					</scroll-view>
 				</swiper-item>
@@ -44,21 +30,12 @@
 								<view class="td">级别</view>
 								<view class="td">表彰日期</view>
 							</view>
-							<view class="table-tr">
-								<view class="td">第十三届全国中等职业学校“文化风采”优秀组织大赛</view>
-								<view class="td">一等奖</view>
-								<view class="td">2017</view>
+							<view class="table-tr" v-for="(item,i) of listArr.y2017" :key="i">
+								<view class="td">{{item.columns.projectName}}</view>
+								<view class="td">{{item.columns.level}}</view>
+								<view class="td">{{item.columns.date}}</view>
 							</view>
-							<view class="table-tr">
-								<view class="td">第十一届全国中等职业学校“文化风采”竞赛获优秀组织奖</view>
-								<view class="td">一等奖</view>
-								<view class="td">2018</view>
-							</view>
-							<view class="table-tr">
-								<view class="td">第十二届全国中等职业学校“文化风采”竞赛获优秀组织奖</view>
-								<view class="td">一等奖</view>
-								<view class="td">2018</view>
-							</view>
+							<view class="table-null" v-show="listArr.y2017.length==0">无数据</view>
 						</view>
 					</scroll-view>
 				</swiper-item>
@@ -70,26 +47,12 @@
 								<view class="td">级别</view>
 								<view class="td">表彰日期</view>
 							</view>
-							<view class="table-tr">
-								<view class="td">第十三届全国中等职业学校“文化风采”优秀组织大赛</view>
-								<view class="td">一等奖</view>
-								<view class="td">2016</view>
+							<view class="table-tr" v-for="(item,i) of listArr.y2016" :key="i">
+								<view class="td">{{item.columns.projectName}}</view>
+								<view class="td">{{item.columns.level}}</view>
+								<view class="td">{{item.columns.date}}</view>
 							</view>
-							<view class="table-tr">
-								<view class="td">第十一届全国中等职业学校“文化风采”竞赛获优秀组织奖</view>
-								<view class="td">一等奖</view>
-								<view class="td">2017</view>
-							</view>
-							<view class="table-tr">
-								<view class="td">第十二届全国中等职业学校“文化风采”竞赛获优秀组织奖</view>
-								<view class="td">一等奖</view>
-								<view class="td">2017</view>
-							</view>
-							<view class="table-tr">
-								<view class="td">机器人大赛</view>
-								<view class="td">一等奖</view>
-								<view class="td">2017</view>
-							</view>
+							<view class="table-null" v-show="listArr.y2016.length==0">无数据</view>
 						</view>
 					</scroll-view>
 				</swiper-item>
@@ -101,14 +64,26 @@
 <script>
 	import QSTabs from '@/components/QS-tabs/QS-tabs.vue';
 	export default {
+		onLoad(e) {
+			this.sid = e.sid
+			this.apiGetSchoolAwards('2018');
+			this.apiGetSchoolAwards('2017');
+			this.apiGetSchoolAwards('2016');
+		},
 		components: {
 			QSTabs
 		},
 		data() {
 			return {
 				haveData: true,
-				tabs: ["2018-2019学年", "2017-2018学年","2016-2017学年"],
-				current: 0
+				tabs: ["2018-2019学年", "2017-2018学年", "2016-2017学年"],
+				current: 0,
+				sid: '3633000526',
+				listArr: {
+					'y2018':[],
+					'y2017':[],
+					'y2016':[],
+				},
 			}
 		},
 		computed: {
@@ -121,16 +96,48 @@
 			}
 		},
 		methods: {
+			apiGetSchoolAwards(year) {
+				this.$HTTP({
+					url: '/zjq/College/GetSchoolAwards',
+					header: 'form',
+					data: {
+						sid: this.sid,
+						token: uni.getStorageSync('token'),
+						year: year
+					}
+				}).then((res) => {
+					if (res.code == 0) {
+						this.listArr[`y${year}`] = res.data[0].list
+					} else {
+						uni.showToast({
+							icon: "none",
+							title: res.message
+						});
+					}
+				})
+			},
 			change(index) {
 				this.current = index;
 			},
-			swiperChange({detail: { current }}) {
+			swiperChange({
+				detail: {
+					current
+				}
+			}) {
 				this.current = current;
 			},
-			transition({detail: { dx }}) {
+			transition({
+				detail: {
+					dx
+				}
+			}) {
 				this.$refs.tabs.setDx(dx);
 			},
-			animationfinish({detail: { current }}) {
+			animationfinish({
+				detail: {
+					current
+				}
+			}) {
 				this.$refs.tabs.setFinishCurrent(current);
 			}
 		}
@@ -140,41 +147,51 @@
 <style scoped lang="scss">
 	.wy-table {
 		background-color: #fff;
-		.table-th,.table-tr{
+
+		.table-th,
+		.table-tr {
 			width: 750upx;
 			min-height: 100upx;
 			text-align: center;
 			display: flex;
 			align-items: center;
 		}
-		.table-th{
+
+		.table-th {
 			border-bottom: 1px solid #ddd;
 			border-top: 1px solid #ddd;
-			font-size:32upx;
+			font-size: 32upx;
 			color: #333;
 		}
-		.table-tr{
+
+		.table-tr {
 			border-bottom: 1px solid #eee;
-			font-size:26upx;
+			font-size: 26upx;
 			line-height: 38upx;
 			color: #666;
-			&:nth-child(2n+1){
-				background:rgba(247,247,247,1);
+
+			&:nth-child(2n+1) {
+				background: rgba(247, 247, 247, 1);
 			}
 		}
-		.td{
+
+		.td {
 			margin: 10upx;
-			&:nth-child(1){
+
+			&:nth-child(1) {
 				width: 370upx;
 			}
-			&:nth-child(2){
+
+			&:nth-child(2) {
 				width: 170upx;
 			}
-			&:nth-child(3){
+
+			&:nth-child(3) {
 				width: 150upx;
 			}
 		}
 	}
+
 	.have-data {
 		border-top: 1px solid rgba(238, 238, 238, 1)
 	}

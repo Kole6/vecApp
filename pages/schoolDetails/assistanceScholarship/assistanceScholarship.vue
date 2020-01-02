@@ -5,35 +5,47 @@
 			<view class="td">项目种类</view>
 			<view class="td">奖助范围</view>
 		</view>
-		<view class="table-tr">
-			<view class="td">天津市中等职业学校国家助学金</view>
-			<view class="td">助学金</view>
-			<view class="td">国家级</view>
+		<view class="table-tr" v-for="(item,i) of listArr" :key="i">
+			<view class="td">{{item.projectname0}}</view>
+			<view class="td">{{item.type0}}</view>
+			<view class="td">{{item.range0}}</view>
 		</view>
-		<view class="table-tr">
-			<view class="td">天津市中等职业学校国家助学金</view>
-			<view class="td">助学金</view>
-			<view class="td">国家级</view>
-		</view>
-		<view class="table-tr">
-			<view class="td">天津市中等职业学校国家助学金</view>
-			<view class="td">助学金</view>
-			<view class="td">国家级</view>
-		</view>
-		<view class="table-tr">
-			<view class="td">天津市中等职业学校国家助学金</view>
-			<view class="td">助学金</view>
-			<view class="td">国家级</view>
-		</view>
+		<view class="table-null" v-show="listArr.length==0">无数据</view>
 	</view>
 </template>
 
 <script>
 	export default {
+		onLoad(e) {
+			this.sid = e.sid;
+			this.apiGetSchoolarships()
+		},
 		data() {
 			return {
-
+				sid:'',
+				listArr:[]
 			};
+		},
+		methods:{
+			apiGetSchoolarships(){
+				this.$HTTP({
+					url: '/zjq/College/GetSchoolarships',
+					header: 'form',
+					data: {
+						sid: this.sid,
+						token: uni.getStorageSync('token')
+					}
+				}).then((res) => {
+					if (res.code == 0) {
+						this.listArr = res.data
+					} else {
+						uni.showToast({
+							icon: "none",
+							title: res.message
+						});
+					}
+				})
+			}
 		}
 	}
 </script>

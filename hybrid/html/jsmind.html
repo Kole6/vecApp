@@ -29,7 +29,7 @@
 	<body>
 		<div id="jsmind_container"></div>
 		<script src="./js/jsmind.js"></script>
-		<script type="text/javascript" src="http://www.hqzj-ip.com/resource/js/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
 		<script>
 			var mind = {
 				meta: {
@@ -38,89 +38,36 @@
 					version: '0.2'
 				},
 				format: 'node_array',
-				data: [{
-						id: 'root',
-						isroot: true,
-						topic: '杭州湾中等职业学校'
-					},
-					{
-						id: 'sub1',
-						parentid: 'root',
-						topic: '外国语学院'
-					},
-					{
-						id: 'sub4',
-						parentid: 'root',
-						topic: '经济管理学院',
-						direction: "left"
-					},
-					{
-						id: 'sub41',
-						parentid: 'sub4',
-						topic: '世界经济学'
-					},
-					{
-						id: 'sub42',
-						parentid: 'sub4',
-						topic: '金融学'
-					},
-					{
-						id: 'sub5',
-						parentid: 'root',
-						topic: '物理学院',
-						direction: "left"
-					},
-					{
-						id: 'sub6',
-						parentid: 'root',
-						topic: '化工学院',
-						direction: "left"
-					},
-					{
-						id: 'sub13',
-						parentid: 'sub1',
-						topic: '日语'
-					},
-					{
-						id: 'sub15',
-						parentid: 'sub1',
-						topic: '法语'
-					},
-					{
-						id: 'sub14',
-						parentid: 'sub1',
-						topic: '俄语'
-					},
-					{
-						id: 'sub2',
-						parentid: 'root',
-						topic: '机电一体化'
-					},
-					{
-						id: 'sub21',
-						parentid: 'sub2',
-						topic: '车俩工程'
-					},
-					{
-						id: 'sub22',
-						parentid: 'sub2',
-						topic: '机械工程'
-					},
-					{
-						id: 'sub3',
-						parentid: 'root',
-						topic: '护理专业'
-					}
-				]
+				data: []
 			};
 			var options = {
 				container: 'jsmind_container',
 				editable: true,
 				theme: 'greensea'
 			};
-			window.jm = jsMind.show(options, mind);
-			// jm.add_node('sub2', 'sub23', 'new node', {'background-color': 'red'});
-			// jm.set_node_color('sub21', 'green', '#ccc');
+			var sid = getRoute('sid') || '3633000526';
+			var token = getRoute('token') || '28d3efdcbb484c789d81d783fed3f6ef';
+			$.ajax({
+				url: "http://47.103.69.156:18089/zjq/College/GetZyTpt",
+				type: "POST",
+				data: {
+					sid: sid,
+					token: token
+				},
+				success: function(res) {
+					console.log('res', res);
+					mind.data = res.data;
+					window.jm = jsMind.show(options, mind);
+				},
+				error: function(e) {
+					console.log(e);
+					alert('网络失败，请刷新页面后重试');
+				}
+			});
+
+			// window.jm = jsMind.show(options, mind);
+			/* jm.add_node('sub2', 'sub23', 'new node', {'background-color': 'red'});
+			jm.set_node_color('sub21', 'green', '#ccc');
 			document.addEventListener('UniAppJSBridgeReady', function() {
 				uni.postMessage({
 					data: {
@@ -129,11 +76,11 @@
 				});
 				uni.getEnv(function(res) {
 					console.log('当前环境：' + JSON.stringify(res));
-					console.log('sid',getQuery('sid'))
+					console.log('sid',getRoute('sid'))
 				});
-			});
+			}); */
 
-			function getQuery(name) {
+			function getRoute(name) {
 				// 正则：[找寻'&' + 'url参数名字' = '值' + '&']（'&'可以不存在）
 				let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
 				let r = window.location.search.substr(1).match(reg);
@@ -143,17 +90,6 @@
 				}
 				return null;
 			}
-			/* $.ajax({
-				url: ADMIN_URL + "/meet/findAll",
-				type: "GET",
-				success: function(data) {
-					$("#tableList").html(tab);
-				},
-				error: function(e) {
-					console.log(e);
-					alert('网络失败，请刷新页面后重试');
-				}
-			}); */
 		</script>
 	</body>
 
