@@ -112,7 +112,7 @@ export default {
 		                                    value: item.area
 		                                }, {
 		                                    name: '层次',
-		                                    value: item.level
+		                                    value: item.level==1?'高职':(item.level==2?'中职':item.level)
 		                                }
 		                            ]
 		                        };

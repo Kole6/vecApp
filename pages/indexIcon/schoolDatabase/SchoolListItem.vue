@@ -1,6 +1,6 @@
 <template>
 	<view class="list-content" :class="{'has':showBorder}" @tap="handleTap">
-		<view class="left">{{item.title.substr(0,1)}}</view>
+		<view class="left">{{item.schoolname?item.schoolname.substr(0,1):item.title.substr(0,1)}}</view>
 		<view class="right">
 			<rich-text class="title" :nodes="item.title"></rich-text>
 			<scroll-view v-if="showType == 2 || showType ==4" scroll-x="true" style="white-space: nowrap;display: flex;align-items: center;padding: 15upx 0;">

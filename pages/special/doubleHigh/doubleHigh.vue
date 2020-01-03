@@ -302,7 +302,7 @@ export default {
 										name: item
 									};
 								}),
-								tags: [{ name: '地区', value: item.area }, { name: '层次', value: item.level }]
+								tags: [{ name: '地区', value: item.area }, { name: '层次', value: item.level==1?'高职':(item.level==2?'中职':item.level) }]
 							};
 						});
 						if (isRefresh) {

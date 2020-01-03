@@ -1,187 +1,211 @@
 <template>
-	<view class="">
-		<!-- #ifdef APP-PLUS -->
-		<view class="" style="height: 35px;background: #FFFFFF;"></view>
-		<!-- #endif -->
-		<uni-nav-bar @click-left="handleBack" left-icon="arrowleft" :shadow="false" :border="false">
-			<uni-search-bar ref="search" style="width: 100%;" radius="100" clearButton="auto" @confirm="search" />
-		</uni-nav-bar>
-		<view class=""><message-info :message="searchResultMessage" :isShow.sync="isShow" @close="handleClose"></message-info></view>
-		<view class="list-wrapper" >
-			<block v-if="dataArr.length">
-				<load-more ref="scroll" @onPullDown="onPullDown"  @onLoadMore="onLoadMore" :styleObj="{ height: wrapperHeight }" :loadStatus="loadStatus">
-					<view class="list"><school-list showType="4" :listArr="dataArr" /></view>
-				</load-more>
-			</block>
-			
-		</view>
-	</view>
+  <view class>
+    <!-- #ifdef APP-PLUS -->
+    <view class style="height: 35px;background: #FFFFFF;"></view>
+    <!-- #endif -->
+    <uni-nav-bar @click-left="handleBack" left-icon="arrowleft" :shadow="false" :border="false">
+      <uni-search-bar
+        ref="search"
+        style="width: 100%;"
+        radius="100"
+        clearButton="auto"
+        @confirm="search"
+      />
+    </uni-nav-bar>
+    <view class>
+      <message-info :message="searchResultMessage" :isShow.sync="isShow" @close="handleClose"></message-info>
+    </view>
+    <view class="list-wrapper">
+      <block v-if="dataArr.length">
+        <load-more
+          ref="scroll"
+          @onPullDown="onPullDown"
+          @onLoadMore="onLoadMore"
+          :styleObj="{ height: wrapperHeight }"
+          :loadStatus="loadStatus"
+        >
+          <view class="list">
+			  <school-list class="" :isText="true" :showType="4" :listArr="dataArr"></school-list>
+            <!-- <school-list showType="4" :listArr="dataArr" /> -->
+          </view>
+        </load-more>
+      </block>
+    </view>
+  </view>
 </template>
 
 <script>
-import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
-import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue';
-import schoolList from './SchoolList.vue';
-import loadMore from '@/components/loadMore/you-scroll.vue';
-import messageInfo from '@/pages/indexIcon/schoolDatabase/messageInfo.vue';
+import uniNavBar from "@/components/uni-nav-bar/uni-nav-bar.vue";
+import uniSearchBar from "@/components/uni-search-bar/uni-search-bar.vue";
+import schoolList from "./SchoolList.vue";
+import loadMore from "@/components/loadMore/you-scroll.vue";
+import messageInfo from "@/pages/indexIcon/schoolDatabase/messageInfo.vue";
 export default {
-	components: { uniNavBar, uniSearchBar, schoolList, loadMore, messageInfo },
-	data() {
-		return {
-			dataArr: [],
-			loadStatus: 'noMore',
-			systemInfo: uni.getSystemInfoSync(),
-			searchResultMessage: '',
-			isShow: false,
-			wrapperHeight: 'auto',
-			firstHeight: '0',
-			searchValue: '',
-			page: {
-				pageIndex: 1,
-				pageSize: 10
-			}
-		};
-	},
-	mounted() {
-		this.$refs.search.searchClick();
-		this.calcScrollHeight(true);
-	},
-	methods: {
-		handleClose() {
-			this.isShow = false;
-			this.calcScrollHeight();
-		},
-		calcScrollHeight(isFirst = false) {
-			setTimeout(() => {
-				// 限制列表高度
-				let query = uni.createSelectorQuery().in(this);
-				query
-					.select('.list-wrapper')
-					.boundingClientRect(data => {
-						// TODO 待验证app中列表高度
-						let height = '';
-						height = this.systemInfo.screenHeight - data.top - 10;
-						if (height && isFirst) {
-							this.wrapperHeight = height + 'px';
-							this.firstHeight = height;
-						} else if (!isFirst) {
-							// 有message
-							if (this.isShow) {
-								this.wrapperHeight = this.firstHeight + 'px';
-							} else {
-								this.wrapperHeight = this.firstHeight + 40 + 'px';
-							}
-						}
-					})
-					.exec();
-			}, 300);
-		},
-		onPullDown(done) {
-			this.page.pageIndex = 1;
-			this.getData(true)
-				.then(isLastPage => {
-					if (isLastPage) {
-						this.loadStatus = 'noMore';
-					} else {
-						this.loadStatus = 'more';
-					}
-				})
-				.finally(() => {
-					done && done();
-				});
-		},
-		onScroll() {},
-		onLoadMore() {
-			this.loadStatus = 'loading';
-			this.getData().then(isLastPage => {
-				if (isLastPage) {
-					this.loadStatus = 'noMore';
-				} else {
-					this.loadStatus = 'more';
-				}
-			});
-		},
-		getData(isRefresh) {
-			return new Promise((resolve, reject) => {
-				this.$HTTP({
-					url: '/zjq/College/GetSchoolSearchList',
-					header: 'form',
-					data: {
-						type: '',
-						token: uni.getStorageSync('token'),
-						pageIndex: this.page.pageIndex,
-						pageSize: this.page.pageSize,
-						key: this.searchValue
-					}
-				}).then(res => {
-					if (res.code == 0) {
-						let data = res.data.list.map(item => {
-							item.tags = item.tags + '';
-							let string = item.schoolname.replace(this.searchValue, `<span style="color:#6451FC">${this.searchValue}</span>`);
-							return {
-								...item,
-								title: string,
-								cards: item.tags.split(',').map(item => {
-									return {
-										name: item
-									};
-								}),
-								tags: [
-									{
-										name: '地区',
-										value: item.area
-									},
-									{
-										name: '层次',
-										value: item.level
-									}
-								]
-							};
-						});
-						if (isRefresh) {
-							this.searchResultMessage = `一共${res.data.totalRow}条搜索数据`;
-							this.dataArr = data;
-							this.page.pageIndex = 1;
-							this.isShow = true;
-						} else {
-							this.dataArr.push(...data);
-							this.page.pageIndex++;
-						}
-						resolve(res.data.lastPage);
-					} else {
-						uni.showToast({
-							title: res.message,
-							icon: 'none'
-						});
-						reject();
-					}
-				});
-			});
-		},
-		handleBack() {
-			// dev
+  components: { uniNavBar, uniSearchBar, schoolList, loadMore, messageInfo },
+  data() {
+    return {
+      dataArr: [],
+      loadStatus: "noMore",
+      systemInfo: uni.getSystemInfoSync(),
+      searchResultMessage: "",
+      isShow: false,
+      wrapperHeight: "auto",
+      firstHeight: "0",
+      searchValue: "",
+      page: {
+        pageIndex: 1,
+        pageSize: 10
+      }
+    };
+  },
+  mounted() {
+    this.$refs.search.searchClick();
+    this.calcScrollHeight(true);
+  },
+  methods: {
+    handleClose() {
+      this.isShow = false;
+      this.calcScrollHeight();
+    },
+    calcScrollHeight(isFirst = false) {
+      setTimeout(() => {
+        // 限制列表高度
+        let query = uni.createSelectorQuery().in(this);
+        query
+          .select(".list-wrapper")
+          .boundingClientRect(data => {
+            // TODO 待验证app中列表高度
+            let height = "";
+            height = this.systemInfo.screenHeight - data.top - 10;
+            if (height && isFirst) {
+              this.wrapperHeight = height + "px";
+              this.firstHeight = height;
+            } else if (!isFirst) {
+              // 有message
+              if (this.isShow) {
+                this.wrapperHeight = this.firstHeight + "px";
+              } else {
+                this.wrapperHeight = this.firstHeight + 40 + "px";
+              }
+            }
+          })
+          .exec();
+      }, 300);
+    },
+    onPullDown(done) {
+      this.page.pageIndex = 1;
+      this.getData(true)
+        .then(isLastPage => {
+          if (isLastPage) {
+            this.loadStatus = "noMore";
+          } else {
+            this.loadStatus = "more";
+          }
+        })
+        .finally(() => {
+          done && done();
+        });
+    },
+    onScroll() {},
+    onLoadMore() {
+      this.loadStatus = "loading";
+      this.getData().then(isLastPage => {
+        if (isLastPage) {
+          this.loadStatus = "noMore";
+        } else {
+          this.loadStatus = "more";
+        }
+      });
+    },
+    getData(isRefresh) {
+      return new Promise((resolve, reject) => {
+        this.$HTTP({
+          url: "/zjq/College/GetSchoolSearchList",
+          header: "form",
+          data: {
+            type: "",
+            token: uni.getStorageSync("token"),
+            pageIndex: this.page.pageIndex,
+            pageSize: this.page.pageSize,
+            key: this.searchValue
+          }
+        }).then(res => {
+          if (res.code == 0) {
+            let data = res.data.list.map(item => {
+              item.tags = item.tags + "";
+              let string = item.schoolname.replace(
+                this.searchValue,
+                `<span style="color:#6451FC">${this.searchValue}</span>`
+              );
+              return {
+                ...item,
+                title: string,
+                cards: item.tags.split(",").map(item => {
+                  return {
+                    name: item
+                  };
+                }),
+                tags: [
+                  {
+                    name: "地区",
+                    value: item.area
+                  },
+                  {
+                    name: "层次",
+                    value:
+                      item.level == 1
+                        ? "高职"
+                        : item.level == 2
+                        ? "中职"
+                        : item.level
+                  }
+                ]
+              };
+            });
+            if (isRefresh) {
+              this.searchResultMessage = `一共${res.data.totalRow}条搜索数据`;
+              this.dataArr = data;
+              this.page.pageIndex = 1;
+              this.isShow = true;
+            } else {
+              this.dataArr.push(...data);
+              this.page.pageIndex++;
+            }
+            resolve(res.data.lastPage);
+          } else {
+            uni.showToast({
+              title: res.message,
+              icon: "none"
+            });
+            reject();
+          }
+        });
+      });
+    },
+    handleBack() {
+      // dev
 
-			let data = getCurrentPages();
-			if (data.length < 1) {
-				uni.switchTab({
-					url: '/pages/tabBar/index/index'
-				});
-			} else {
-				// pro
-				uni.navigateBack({});
-			}
-		},
-		search({ value }) {
-			this.searchValue = value;
-			this.page.pageIndex = 1;
-			this.onPullDown();
-		}
-	}
+      let data = getCurrentPages();
+      if (data.length < 1) {
+        uni.switchTab({
+          url: "/pages/tabBar/index/index"
+        });
+      } else {
+        // pro
+        uni.navigateBack({});
+      }
+    },
+    search({ value }) {
+      this.searchValue = value;
+      this.page.pageIndex = 1;
+      this.onPullDown();
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 .list {
-	background: #ffffff;
+  background: #ffffff;
 }
 </style>

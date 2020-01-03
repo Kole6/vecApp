@@ -12,7 +12,8 @@
 			<view class="m-top">
 				<view class="base">
 					<view class="left" @tap="handleLogoTaped">
-						<image :src="schoolInfo.img" mode="aspectFill" style="width: 100%; height: 100%;"></image>
+						<image :src="schoolInfo.logo || 'https://gitee.com/wy333/kole/raw/master/img/20200102.png'" mode="aspectFill"
+						 style="width: 100%; height: 100%;"></image>
 					</view>
 					<view class="right">
 						<view class="title">{{schoolInfo.name}}</view>
@@ -21,7 +22,7 @@
 							<text>{{schoolInfo.birth}}</text>
 							<text>{{schoolInfo.schoolType}}</text>
 						</view>
-						<view class="num"><text>学校标示码:{{schoolInfo.schoolno}}</text></view>
+						<view class="num"><text>学校标示码：{{schoolInfo.schoolno}}</text></view>
 					</view>
 					<view class="f-site" @tap="toWebsite">官网</view>
 					<view class="f-dz" @tap="hasDZ = !hasDZ">
@@ -73,11 +74,12 @@
 			</view>
 			<view class="s-school_list" @tap="handleMind()">
 				<text>拓扑图</text>
+				<uni-icons type="arrowright" size="24" class="list-right" />
 				<view class="tuopu">
 					<image src="/static/indexIcon/tpt.png" mode="aspectFit" style="width: 750upx; height:230upx;"></image>
 				</view>
 			</view>
-			<view class="m-school_list" @tap="handleRouter('./NearbySchool/NearbySchoolList')">
+			<view class="m-school_list" @tap="handleRouter(`./NearbySchool/NearbySchoolList?sid=${schoolInfo.schoolno}`)">
 				<text>附近学校</text>
 				<uni-icons type="arrowright" size="24" />
 			</view>
@@ -127,7 +129,7 @@
 					dzNumber: 0,
 					schoolno: '',
 					address: '学校地址',
-					img: '',
+					logo: '',
 					website: 'http://www.baidu.com',
 					baike: 'https://baike.baidu.com/item/北京电子科技职业学院',
 				},
@@ -172,6 +174,19 @@
 							key: 'sid',
 							value: 'schoolno'
 						}]
+					},
+					{
+						name: '质量年报',
+						url: '/pages/indexIcon/materialDatabase/FileDetail?fileId=4',
+						params: [{
+								key: 'sid',
+								value: 'schoolno'
+							},
+							{
+								key: 'fileId',
+								value: 'fileId'
+							}
+						]
 					}
 				],
 				schoolInfo2: [{
@@ -292,7 +307,6 @@
 					}
 				}).then(res => {
 					if (res.code == 0) {
-
 						let hasSC = res.data.list.some((item) => {
 							return item.majorcode == this.params.schoolno
 						})
@@ -323,7 +337,6 @@
 							dzNumber: data.hitscount,
 							schoolno: data.schoolno,
 							address: data.address,
-							img: data.logo,
 							website: data.website,
 							baike: data.schoolBaikeUrl,
 						}
@@ -366,7 +379,7 @@
 					url: url
 				});
 			},
-			handleMind(){
+			handleMind() {
 				uni.navigateTo({
 					url: `./jsmind?sid=${this.schoolInfo.schoolno}`
 				});

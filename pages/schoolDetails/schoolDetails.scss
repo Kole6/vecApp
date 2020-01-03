@@ -24,10 +24,11 @@
 	.base {
 		display: flex;
 		padding-top: 30upx;
-		padding-left: 50upx;
+		padding-left: 35upx;
 		position: relative;
 		.left {
-			@include flexstyle(center, center) margin: 15upx 0;
+			@include flexstyle(center, center);
+			margin: 15upx 0;
 			width: 120upx;
 			height: 120upx;
 			// border: solid 1upx $main-base-color;
@@ -72,8 +73,9 @@
 			border: solid 1upx $main-base-color;
 		}
 		.f-dz {
-			@include flexstyle(flex-start, center) position: absolute;
-			top: 126upx;
+			@include flexstyle(flex-start, center) ;
+			position: absolute;
+			top: 135upx;
 			right: 61upx;
 			font-size: $uni-font-size-base;
 			color: #999999;
@@ -115,7 +117,7 @@
 .m-pk {
 	background: #ffffff;
 	box-sizing: border-box;
-	@include flexstyle(space-between, center) position: relative;
+	@include flexstyle(space-between, center); position: relative;
 	height: 100upx;
 	padding: 20upx 35upx;
 	margin-bottom: 20upx;
@@ -170,6 +172,9 @@
 		border-top: solid 1upx $main-dividing-line1;
 		margin-top: 28upx;
 		padding-top: 6upx;
+	}
+	.list-right{
+		margin-left: 550upx;
 	}
 }
 .m-info {

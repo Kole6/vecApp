@@ -9,10 +9,10 @@
 				<view class="nav-item nav-item-1"><text>本科层次职业教育</text></view>
 			</navigator>
 			<navigator url="/pages/indexIcon/majorDatabase/GZGZSchool">
-				<view class="nav-item nav-item-2"><text>高职<br/>高专院校</text></view>
+				<view class="nav-item nav-item-2"><text>高职<br />高专院校</text></view>
 			</navigator>
 			<navigator url="/pages/indexIcon/majorDatabase/ZDZYSchool">
-				<view class="nav-item nav-item-3"><text>中等<br/>职业学校</text></view>
+				<view class="nav-item nav-item-3"><text>中等<br />职业学校</text></view>
 			</navigator>
 		</view>
 		<view class="list-title">
@@ -111,15 +111,6 @@
 								return {
 									...item,
 									title: item.majorname,
-									cards: [{
-											name: '学历层次',
-											value: item.xlcc || ''
-										},
-										{
-											name: '专业年限',
-											value: item.xynx || ''
-										}
-									],
 									tags: [{
 											name: '专业大类',
 											value: item.zydl || ''
@@ -127,6 +118,15 @@
 										{
 											name: '代码',
 											value: item.majorcode
+										}
+									],
+									cards: [{
+											name: '学历层次',
+											value: item.xlcc == 1 ? '高职' : (item.xlcc == 2 ? '中职' : (item.xlcc || ''))
+										},
+										{
+											name: '专业年限',
+											value: item.xynx || ''
 										}
 									]
 								};

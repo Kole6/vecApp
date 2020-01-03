@@ -34,7 +34,7 @@
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;">
 						<view class="school-list">
-							<school-list :showType="4" :is-special="true" :listArr="dataArr" :handleTaped="false" @taped="handleListTaped" />
+							<school-list :showType="4" :is-special="true" :listArr="dataArr2" :handleTaped="false" @taped="handleListTaped" />
 						</view>
 					</scroll-view>
 				</swiper-item>
@@ -106,7 +106,7 @@
 									value: item.area
 								}, {
 									name: '层次',
-									value: item.level
+									value: item.level==1?'高职':(item.level==2?'中职':item.level)
 								}]
 							};
 						});
