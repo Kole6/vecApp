@@ -84,11 +84,10 @@
 				<uni-icons type="arrowright" size="24" />
 			</view>
 			<view class="m-info">
-				<view class="title f-link" @tap="handleTab">
+				<view class="title f-link">
 					<text>学校资讯</text>
-					<uni-icons type="arrowright" size="24" />
 				</view>
-				<zi-xun></zi-xun>
+				<zi-xun :newList="newList" />
 			</view>
 		</view>
 		<uni-popup :show="showModal" type="center" :custom="true" :mask-click="false" @change="modalChange">
@@ -108,7 +107,7 @@
 <script>
 	import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 	import uniIcons from '@/components/uni-icons/uni-icons';
-	import ziXun from '@/components/ziXun/ziXun.vue';
+	import ziXun from '@/components/ziXun/ziXunLeft.vue';
 	import uniPopup from '@/components/uni-popup/uni-popup.vue';
 	export default {
 		components: {
@@ -139,6 +138,7 @@
 				hasSC: false,
 				wrapperHeight: 'auto',
 				systemInfo: uni.getSystemInfoSync(),
+				newList:[],
 				styleObj: {
 					top: '250px'
 				},
@@ -263,6 +263,7 @@
 			this.judgeHasSC();
 			this.getChance();
 			this.getCompareInfo();
+			this.newList = uni.getStorageSync('hotNewsList')
 		},
 		methods: {
 			getCompareInfo() {

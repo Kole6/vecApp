@@ -1,6 +1,6 @@
 <template>
-	<view class="m-bar" style="">
-		<canvas canvas-id="canvasColumn" id="canvasColumn" class="charts" style="background-color: #FFF;" @touchstart="touchIt($event, 'canvasColumn')"></canvas>
+	<view class="m-bar">
+		<canvas canvas-id="canvasColumn" id="canvasColumn" class="charts" @touchstart="touchIt($event, 'canvasColumn')"></canvas>
 		<view class="m-tips">
 			百分比为专业学生占全校学生的占比
 		</view>
@@ -115,9 +115,12 @@ export default {
 				animation: true,
 				categories: chartData.categories,
 				series: chartData.series,
+				// enableScroll: true,//开启图表拖拽功能
 				xAxis: {
 					disableGrid: true,
 					rotateLabel:true,
+					// itemCount:4,
+					// scrollShow:true,
 				},
 				yAxis: {
 					format: val => {
@@ -161,10 +164,13 @@ export default {
 	height: 800upx;
 	background-color: #ffffff;
 }
+.m-bar{
+	border-top: 1px solid #eee;
+}
 .m-tips{
 	padding: 20upx;
 	text-align: center;
-	font-size: $uni-font-size-base;
+	font-size: 30upx;
 	color: #666666;
 	margin-top: 40upx;
 	background: #FFFFFF;

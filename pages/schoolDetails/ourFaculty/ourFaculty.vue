@@ -16,11 +16,11 @@
 									<view class="charts-man">
 										<view class="male">
 											<image src="../../../static/p602.png" mode="aspectFill"></image>
-											<p>男教师 <span class="persent">40%</span></p>
+											<p>{{teacherPec[0].name}}教师 <span class="persent">{{teacherPec[0].value}}%</span></p>
 										</view>
 										<view class="female">
 											<image src="../../../static/p603.png" mode="aspectFill"></image>
-											<p>女教师 <span class="persent">60%</span></p>
+											<p>{{teacherPec[1].name}}教师 <span class="persent">{{teacherPec[1].value}}%</span></p>
 										</view>
 									</view>
 								</view>
@@ -55,7 +55,7 @@
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;">
 						<view class="m-list" v-for="(item,index) in dataArr" :key="index">
-							<view class="avatar">{{item.teachername.substr(0,1)}}</view>	
+							<view class="avatar">{{item.teachername.substr(0,1)}}</view>
 							<view class="name">{{item.teachername}}</view>
 							<view class="position">
 								<text v-for="(tag,i) in item.tags" :key="i">
@@ -79,12 +79,12 @@
 	var canvaPie3 = null;
 	var canvaPie4 = null;
 	export default {
-		onLoad() {
+		onLoad(e) {
 			_self = this;
+			this.sid = e.sid;
 			this.cWidth = uni.upx2px(750);
 			this.cHeight = uni.upx2px(500);
-			this.getServerData();
-			this.getData()
+			this.apiGetTeacherInfo();
 		},
 		components: {
 			QSTabs
@@ -98,18 +98,27 @@
 				cHeight: '',
 				pixelRatio: 1,
 				serverData: '',
-				dataArr:[
-					{
-						teachername:'时志福',
-						tags:['国家级名师']
+				sid: '',
+				teacherPec: [{
+						"name": "男",
+						"value": 57.00
 					},
 					{
-						teachername:'潘宏义',
-						tags:['国家级名师']
+						"name": "女",
+						"value": 43.00
+					}
+				],
+				dataArr: [{
+						teachername: '时志福',
+						tags: ['国家级名师']
 					},
 					{
-						teachername:'杨道德',
-						tags:['副校长','国家级名师']
+						teachername: '潘宏义',
+						tags: ['国家级名师']
+					},
+					{
+						teachername: '杨道德',
+						tags: ['副校长', '国家级名师']
 					}
 				]
 			}
@@ -124,97 +133,62 @@
 			}
 		},
 		methods: {
-			api(){
+			apiGetTeacherInfo() {
 				this.$HTTP({
-					url:'/zjq/College/GetTeacherInfo',
-					header:'form',
-					data:{
-						sid:'4151012965',
-						token:'d05902562e544db29bbe777954d43bb0',
-						pageIndex:'1',
-						pageSize:'10'
+					url: '/zjq/College/GetTeacherInfo',
+					header: 'form',
+					data: {
+						sid: '4151012965',
+						token: uni.getStorageSync('token')
 					}
-				}).then(res=>{
-					console.log(res,'res')
+				}).then(res => {
+					if (res.code == 0) {
+						var pie2 = [],
+							pie3 = [],
+							pie4 = [];
+						for (let i of res.data) {
+							if (i.title == "教师性别分布") {
+								this.teacherPec = i.content
+							}
+							if (i.title == "校内教师分布") {
+								pie2 = this.getSeries(i.content)
+							}
+							if (i.title == "教师学历分布") {
+								pie3 = this.getSeries(i.content)
+							}
+							if (i.title == "教师年龄分布") {
+								pie4 = this.getSeries(i.content)
+							}
+						}
+						this.getServerData({
+							series: pie2
+						}, {
+							series: pie3
+						}, {
+							series: pie4
+						})
+					} else {
+						uni.showToast({
+							icon: 'none',
+							title: res.message
+						});
+					}
 				})
 			},
-			getServerData() {
-				let Pie = {
-					series: [{
-						"name": "男教师",
-						"data": 40
-					}, {
-						"name": "女教师",
-						"data": 60
-					}]
-				};
-				let Pie2 = {
-					series: [{
-						"name": "专职教师",
-						"data": 72
-					}, {
-						"name": "兼职教师",
-						"data": 28
-					}]
-				};
-				let Pie3 = {
-					series: [{
-						"name": "本科",
-						"data": 23
-					}, {
-						"name": "硕士",
-						"data": 77
-					},{
-						"name": "博士",
-						"data": 17
-					}, {
-						"name": "其他",
-						"data": 28
-					}]
-				};
-				let Pie4 = {
-					series: [{
-						"name": "35岁以下",
-						"data": 90
-					}, {
-						"name": "35-45岁",
-						"data": 50
-					},{
-						"name": "45-55岁",
-						"data": 57
-					}, {
-						"name": "55岁以上",
-						"data": 14
-					}]
-				};
-				_self.showPie("canvasPie", Pie);
+			getSeries(content) {
+				let o = []
+				for (let i of content) {
+					o.push({
+						name: i.name,
+						data: i.value
+					})
+				}
+				return o
+			},
+			getServerData(Pie2, Pie3, Pie4) {
 				_self.showPie2("canvasPie2", Pie2);
 				_self.showPie3("canvasPie3", Pie3);
 				_self.showPie4("canvasPie4", Pie4);
-			},
-			showPie(canvasId, chartData) {
-				canvaPie = new uCharts({
-					$this: _self,
-					canvasId: canvasId,
-					colors: ['#69b8ff', '#fd7677', '#facc14', '#f04864', '#8543e0', '#90ed7d'],
-					type: 'ring',
-					fontSize: 11,
-					legend: {
-						show: true
-					},
-					background: '#FFFFFF',
-					pixelRatio: _self.pixelRatio,
-					series: chartData.series,
-					animation: true,
-					width: _self.cWidth * _self.pixelRatio,
-					height: _self.cHeight * _self.pixelRatio,
-					dataLabel: true,
-					extra: {
-						pie: {
-							lableWidth: 15
-						}
-					},
-				});
 			},
 			showPie2(canvasId, chartData) {
 				canvaPie2 = new uCharts({
@@ -286,14 +260,6 @@
 							lableWidth: 15
 						}
 					},
-				});
-			},
-			touchPie(e) {
-				canvaPie.showToolTip(e, {
-					format: function(item) {
-						console.log(item.name + ':' + item.data);
-						return item.name + ':' + item.data
-					}
 				});
 			},
 			touchPie2(e) {
@@ -376,15 +342,17 @@
 		display: flex;
 		flex-direction: column !important;
 		align-items: center;
-		.qiun-new{
+
+		.qiun-new {
 			width: 730upx;
 			z-index: 999;
-			background:rgba(255,255,255,1);
-			box-shadow:0px 0px 20px 0px rgba(0,0,0,0.1);
-			border-radius:33upx;
+			background: rgba(255, 255, 255, 1);
+			box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+			border-radius: 33upx;
 			margin: 20upx 0;
 			min-height: 300upx;
-			.new-tip{
+
+			.new-tip {
 				font-size: 22upx;
 				text-align: center;
 				position: absolute;
@@ -395,8 +363,9 @@
 				background: url('../../../static/p601.png') no-repeat;
 				background-size: 100% 50upx;
 			}
-			.qiun-charts{
-				.charts-man{
+
+			.qiun-charts {
+				.charts-man {
 					height: 400upx;
 					display: flex;
 					align-items: center;
@@ -404,54 +373,63 @@
 					text-align: center;
 					color: #666;
 					font-size: 30upx;
-					.male{
-						margin:0 90upx;
-						image{
+
+					.male {
+						margin: 0 90upx;
+
+						image {
 							width: 191upx;
 							height: 206upx;
 						}
-						.persent{
+
+						.persent {
 							color: #3FA1FF;
 						}
 					}
-					.female{
-						margin:0 90upx;
-						image{
+
+					.female {
+						margin: 0 90upx;
+
+						image {
 							width: 150upx;
 							height: 189upx;
 							padding-bottom: 17upx;
 						}
-						.persent{
+
+						.persent {
 							color: #FC6C6D;
 						}
 					}
 				}
-				.charts{
+
+				.charts {
 					width: 720upx;
 					height: 500upx;
 					margin-top: 14upx;
 				}
 			}
-			
+
 		}
 	}
-	
-	
-	.m-list{
+
+
+	.m-list {
 		padding: 15upx 30upx;
 		display: flex;
 		align-items: center;
 		background: #FFFFFF;
 		border-bottom: solid 1upx $main-dividing-line1;
 		font-size: $uni-font-size-lg;
-		&:first-child{
+
+		&:first-child {
 			border-top: solid 1upx $main-dividing-line1;
 		}
-		.avatar{
+
+		.avatar {
 			box-sizing: border-box;
 			display: inline-flex;
-			width:110upx;
-			height:110upx;
+			width: 110upx;
+			height: 110upx;
 			border-radius: 110upx;
 			background: #FFFFFF;
 			border: solid 1px #68BCF5;
@@ -462,13 +440,15 @@
 			color: #fff;
 			background-color: #68BCF5;
 		}
-		.name{
+
+		.name {
 			margin-left: 20upx;
 			font-size: $uni-font-size-lg;
 			color: $main-text-color;
 		}
-		.position{
-			text{
+
+		.position {
+			text {
 				margin-left: 20upx;
 				box-sizing: border-box;
 				display: inline-flex;
@@ -479,7 +459,7 @@
 				background: #6451FC;
 				color: #FFFFFF;
 				// border: solid 1upx $main-base-color;
-				font-size: $uni-font-size-base;				
+				font-size: $uni-font-size-base;
 			}
 		}
 	}

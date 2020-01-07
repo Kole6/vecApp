@@ -55,13 +55,11 @@
 							icon: 'none'
 						});
 					} else {
-						uni.showModal({
-							content: res.message,
-							showCancel: false
+						uni.showToast({
+							title: res.message,
+							icon: 'none'
 						});
 					}
-				}, (err) => {
-					console.log(err)
 				})
 			},
 			reStyle(i){

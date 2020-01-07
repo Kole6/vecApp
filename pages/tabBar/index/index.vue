@@ -37,7 +37,7 @@
 					<view class="zhuan-btn">
 						<view class="z-left">
 							<p class="left-title">双高计划</p>
-							<p class="left-text">Double high plan</p>
+							<p class="left-text">Double high <br> plan</p>
 						</view>
 						<view class="z-right">
 							<image mode="aspectFill" src="/static/p303.png" class="image1"></image>
@@ -48,7 +48,7 @@
 					<view class="zhuan-btn">
 						<view class="z-left">
 							<p class="left-title">国际合作</p>
-							<p class="left-text">International co-operation</p>
+							<p class="left-text">International <br>  co-operation</p>
 						</view>
 						<view class="z-right">
 							<image mode="aspectFill" src="/static/p301.png" class="image1"></image>
@@ -70,7 +70,7 @@
 					<view class="zhuan-btn">
 						<view class="z-left">
 							<p class="left-title">服务中心</p>
-							<p class="left-text">Service Centre</p>
+							<p class="left-text">Service <br> Centre</p>
 						</view>
 						<view class="z-right">
 							<image mode="aspectFill" src="/static/p302.png" class="image1"></image>
@@ -90,7 +90,7 @@
 		<!-- 底线 -->
 		<view class="order">
 			<text class="line"></text>
-			<text class="txt"> 我是有底线的 </text>
+			<text class="txt"> 没有更多了哦~ </text>
 			<text class="line"></text>
 		</view>
 	</view>

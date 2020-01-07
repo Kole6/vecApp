@@ -40,11 +40,12 @@ const http = (options) => {
 					resolve(res.data)
 				},
 				fail: (err) => {
-					reject(err.data);
 					uni.showToast({
 						title: '请检查网络连接',
+						duration: 2000,
 						icon: 'none'
-					})
+					});
+					reject(err.data);
 					/*错误码处理
 					let code = err.data.code; 
 					switch (code) {
@@ -55,13 +56,15 @@ const http = (options) => {
 					} */
 				},
 				complete: () => {
-					if (options.load)
+					if (options.load){
 						uni.hideLoading();
+					}
 				}
 			});
 		} catch (e) {
-			if (options.load)
+			if (options.load){
 				uni.hideLoading();
+			}
 			uni.showToast({
 				title: '服务端异常',
 				icon: 'none'

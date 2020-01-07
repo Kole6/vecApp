@@ -23,7 +23,7 @@ export default {
 	data() {
 		return {
 			tabs: ["学校专业", "专业学生分布"],
-			current:1,
+			current:0,
 		};
 	},
 	computed: {
@@ -51,7 +51,11 @@ export default {
 	}
 };
 </script>
-
+<style>
+page{
+	background-color: #fff
+}
+</style>
 <style lang="scss" scoped>
 .m-card {
 	display: flex;
