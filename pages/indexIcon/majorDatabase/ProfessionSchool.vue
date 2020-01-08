@@ -18,8 +18,7 @@
 
 <script>
 import slFilter from '@/components/sl-filter/sl-filter.vue';
-import schoolList from '@/pages/indexIcon/schoolDatabase/SchoolList.vue';
-
+import schoolList from '@/components/vec-school-list/vec-school-list.vue';
 import { schoolData, professionData } from '../mockData.js';
 import loadMore from '@/components/loadMore/you-scroll.vue';
 export default {

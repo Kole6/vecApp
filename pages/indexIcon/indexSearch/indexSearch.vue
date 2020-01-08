@@ -46,7 +46,7 @@
 <script>
 	import uniSearchBar from "@/components/uni-search-bar/uni-search-bar.vue";
 	import QSTabs from '@/components/QS-tabs/QS-tabs.vue';
-	import schoolList from '@/pages/indexIcon/schoolDatabase/SchoolList';
+	import schoolList from '@/components/vec-school-list/vec-school-list.vue';
 	export default {
 		components: {
 			uniSearchBar,

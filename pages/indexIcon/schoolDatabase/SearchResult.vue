@@ -1,7 +1,7 @@
 <template>
   <view class>
     <!-- #ifdef APP-PLUS -->
-    <view class style="height: 35px;background: #FFFFFF;"></view>
+    <view style="height: 34px;background: #FFFFFF;"></view>
     <!-- #endif -->
     <uni-nav-bar @click-left="handleBack" left-icon="arrowleft" :shadow="false" :border="false">
       <uni-search-bar
@@ -37,7 +37,7 @@
 <script>
 import uniNavBar from "@/components/uni-nav-bar/uni-nav-bar.vue";
 import uniSearchBar from "@/components/uni-search-bar/uni-search-bar.vue";
-import schoolList from "./SchoolList.vue";
+import schoolList from '@/components/vec-school-list/vec-school-list.vue';
 import loadMore from "@/components/loadMore/you-scroll.vue";
 import messageInfo from "@/pages/indexIcon/schoolDatabase/messageInfo.vue";
 export default {

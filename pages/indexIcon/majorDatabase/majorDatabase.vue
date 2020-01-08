@@ -27,7 +27,7 @@
 
 <script>
 	import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue';
-	import schoolList from '../schoolDatabase/SchoolList.vue';
+	import schoolList from '@/components/vec-school-list/vec-school-list.vue';
 	import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 	import {
 		professionData

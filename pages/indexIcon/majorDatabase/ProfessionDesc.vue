@@ -97,7 +97,7 @@
 </template>
 
 <script>
-import schoolList from '@/pages/indexIcon/schoolDatabase/SchoolList.vue';
+import schoolList from '@/components/vec-school-list/vec-school-list.vue';
 import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
 // 防止在点击的时候因为图片加载出现闪烁
 import sc1 from '@/static/indexIcon/sc1.png';

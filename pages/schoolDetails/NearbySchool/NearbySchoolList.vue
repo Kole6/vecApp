@@ -6,7 +6,7 @@
 
 <script>
 	import loadMore from '@/components/loadMore/you-scroll.vue'
-	import schoolList from '@/pages/indexIcon/schoolDatabase/SchoolList.vue';
+	import schoolList from '@/components/vec-school-list/vec-school-list.vue';
 	export default {
 		onLoad(e) {
 			this.sid = e.sid;
