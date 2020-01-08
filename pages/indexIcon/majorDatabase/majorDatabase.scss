@@ -1,0 +1,80 @@
+.uni-collapse-cell__title-text {
+    color: #333333;
+  }
+  /* category */
+  .category {
+    padding: 15px 0;
+    border-bottom: solid 1px $main-dividing-line1;
+  }
+  /* 分类 */
+  .page-body {
+    display: flex;
+  }
+  
+  .nav {
+    display: flex;
+    width: 100%;
+  }
+  
+  .nav-left {
+    width: 250upx;
+    background-color: rgba(102, 102, 102, 0.1);
+    border-top: 1px solid rgba(204,204,204,1);
+  }
+  
+  .nav-left-item {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    min-height: 110upx;
+    padding: 5upx 20upx;
+    font-size: $uni-font-size-middle;
+    text-align: left;
+    color: #333;
+    border-left: solid 2upx rgba(0, 0, 0, 0);
+    &.active {
+      border-left: solid 7upx $main-base-color;
+      color: $main-base-color;
+      background: #ffffff;
+    }
+  }
+  
+  .nav-right {
+    width: 500upx;
+    background: #ffffff;
+  }
+  
+  .nav-right-item image {
+    width: 100upx;
+    height: 100upx;
+  }
+  
+  .right-show-all {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    font-size: $uni-font-size-lg;
+    border-bottom: solid 1px $main-dividing-line1;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #fff;
+    .scroll-title {
+      color: $main-base-color;
+      font-size: $uni-font-size-lg + 3upx;
+    }
+    .scroll-btn {
+      border: solid 1px $main-base-color;
+      border-radius: 10upx;
+      padding: 5upx 10upx;
+      color: #ffffff;
+      background: $main-base-color;
+    }
+  }
+  .category-item {
+    padding: 18upx 30upx 18upx 70upx;
+    font-size: $uni-font-size-base;
+    color: #999999;
+    border-top: solid 1px #eee;
+    background:rgba(247,247,247,1);
+  }

@@ -139,7 +139,7 @@
 				}
 			}
 		},
-		{
+		/* {
 			"path": "pages/indexIcon/majorDatabase/BKCCSchool",
 			"style": {
 				"navigationBarTitleText": "技工院校专业",
@@ -165,7 +165,7 @@
 					"bounce": "none"
 				}
 			}
-		},
+		}, */
 		{
 			"path": "pages/indexIcon/majorDatabase/ProfessionDesc",
 			"style": {

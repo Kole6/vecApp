@@ -1,232 +1,154 @@
-<!-- 院校库 -->
+<!-- 专业库 -->
 <template>
-	<view>
-		<view class="nav">
-			<navigator url="/pages/indexIcon/majorDatabase/GZGZSchool">
-				<view class="nav-item nav-item-1"><text>高职<br />高专院校</text></view>
-			</navigator>
-			<navigator url="/pages/indexIcon/majorDatabase/ZDZYSchool">
-				<view class="nav-item nav-item-2"><text>中等<br />职业学校</text></view>
-			</navigator>
-			<navigator url="/pages/indexIcon/majorDatabase/BKCCSchool">
-				<view class="nav-item nav-item-3"><text>技工<br />院校专业</text></view>
-			</navigator>
-		</view>
-		<view class="list-title">
-			<view class="hot">热门专业</view>
-			<image class="hot-img" src="/static/indexIcon/hot.png" mode="aspectFit"></image>
-		</view>
-		<load-more ref="scroll" @onPullDown="onPullDown" @onLoadMore="onLoadMore" :styleObj="{ height: wrapperHeight }"
-		 :loadStatus="loadStatus">
-			<view class="school-list">
-				<school-list :showType="4" :is-special="true" :listArr="dataArr" :handleTaped="false" @taped="handleListTaped" />
-			</view>
-		</load-more>
-	</view>
+  <view>
+    <view class="content">
+      <view class="page-body">
+        <scroll-view class="nav-left" scroll-y :style="'height:' + height + 'px'">
+          <view
+            class="nav-left-item"
+            :key="index"
+            :class="index == categoryActive ? 'active' : ''"
+			@click="level1Click(item, index)"
+            v-for="(item, index) in level1"
+          >{{ item.name }}</view>
+        </scroll-view>
+        <scroll-view
+          class="nav-right"
+          scroll-y
+          :scroll-top="scrollTop"
+          :style="'height:' + height + 'px'"
+		  @scroll="scroll"
+          scroll-with-animation
+        >
+          <uni-collapse>
+            <uni-collapse-item
+              v-for="(list,index) in level2"
+              @taped="level2Click(list,index)"
+              :key="list.code"
+              :title="list.name"
+              :show-animation="true"
+              :open="list.open"
+            >
+              <view
+                class="category-item"
+                v-for="(item,i) in level3"
+                :key="i"
+                @tap="handleItemTap(item)"
+              >{{item.name}}</view>
+            </uni-collapse-item>
+          </uni-collapse>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
 </template>
 
 <script>
-	import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue';
-	import schoolList from '@/components/vec-school-list/vec-school-list.vue';
-	import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
-	import {
-		professionData
-	} from '../mockData.js';
-	import loadMore from '@/components/loadMore/you-scroll.vue';
-	export default {
-		components: {
-			uniSearchBar,
-			schoolList,
-			uniNavBar,
-			loadMore
-		},
-		data() {
-			return {
-				page: {
-					pageIndex: 1,
-					pageSize: 10
-				},
-				systemInfo: uni.getSystemInfoSync(),
-				wrapperHeight: 'auto',
-				loadStatus: 'more',
-				dataArr: []
-			};
-		},
-		onNavigationBarSearchInputClicked() {},
-		mounted() {
-			// 限制列表高度
-			let query = uni.createSelectorQuery().in(this);
-			query
-				.select('.school-list')
-				.boundingClientRect(data => {
-					this.wrapperHeight = this.systemInfo.screenHeight - data.top - 74 + 'px';
-					// #ifdef H5
-					this.wrapperHeight = this.systemInfo.screenHeight - data.top - 44 + 'px';
-					// #endif
-				})
-				.exec();
-			this.onPullDown();
-		},
-		methods: {
-			onPullDown(done) {
-				this.page.pageIndex = 1;
-				this.getData(true)
-					.then(isLastPage => {
-						if (isLastPage) {
-							this.loadStatus = 'noMore';
-						} else {
-							this.loadStatus = 'more';
-						}
-					})
-					.finally(() => {
-						done && done();
-					});
-			},
-			onLoadMore() {
-				this.loadStatus = 'loading';
-				this.getData().then(isLastPage => {
-					if (isLastPage) {
-						this.loadStatus = 'noMore';
-					} else {
-						this.loadStatus = 'more';
-					}
-				});
-			},
-			getData(isRefresh) {
-				return new Promise((resolve, reject) => {
-					this.$HTTP({
-						url: '/zjq/College/GetMajors',
-						header: 'form',
-						data: {
-							token: uni.getStorageSync('token'),
-							pageIndex: this.page.pageIndex,
-							pageSize: this.page.pageSize
-						}
-					}).then(res => {
-						if (res.code == 0) {
-							let data = res.data.list.map(item => {
-								return {
-									...item,
-									title: item.majorname,
-									tags: [{
-											name: '专业大类',
-											value: item.zydl || ''
-										},
-										{
-											name: '代码',
-											value: item.majorcode
-										}
-									],
-									cards: [{
-											name: '学历层次',
-											value: item.xlcc == 1 ? '高职' : (item.xlcc == 2 ? '中职' : (item.xlcc || ''))
-										},
-										{
-											name: '专业年限',
-											value: item.xynx || ''
-										}
-									]
-								};
-							});
-							if (isRefresh) {
-								this.dataArr = data;
-								this.page.pageIndex = 1;
-							} else {
-								this.dataArr.push(...data);
-								this.page.pageIndex++;
-							}
-							resolve(res.data.lastPage);
-						} else {
-							uni.showToast({
-								title: res.message,
-								icon: 'none'
-							});
-							reject();
-						}
-					});
-				});
-			},
-			handleListTaped({
-				item,
-				index
-			}) {
-				uni.navigateTo({
-					url: `./ProfessionDesc?id=${item.code}&name=${item.name}&type=${item.type}`
-				})
-			},
-			handleBack() {
-				uni.navigateBack();
-			},
-			handleSearchTap() {
-				uni.navigateTo({
-					url: './SearchResult'
-				});
-			}
-		}
-	};
+import uniCollapse from "@/components/uni-collapse/uni-collapse.vue";
+import uniCollapseItem from "@/components/uni-collapse-item/uni-collapse-item.vue";
+export default {
+  components: { uniCollapse, uniCollapseItem },
+  data() {
+    return {
+      categoryList: [],
+      subCategoryList: [],
+      level1: [],
+      level2: [],
+      level2Open: 0,
+      level3: [],
+      height: 0,
+      categoryActive: 0, //当前分类选中index值
+      //滚动视图
+      scrollTop: 0,
+      scrollHeight: 0,
+      isShowAll: false //全部展开控制量
+    };
+  },
+  onLoad: function() {
+    // 设置分类栏高度，保持在一屏内
+	this.height = uni.getSystemInfoSync().windowHeight;
+	this.initData();
+  },
+  methods: {
+	/* 点击level1 */
+    level1Click(categroy, index) {
+      this.categoryActive = index;
+      this.scrollTop = -this.scrollHeight * index;
+      this.initData(categroy.code);
+	},
+	/* 点击level2 */
+    level2Click(item, index) {
+      let level2Data = this.$API.apiGetDict(this,{
+        type: "zyfl",
+        pid: item.code,
+        schoolType: "1"
+      })
+        .then(data => {
+          if (data.length) {
+            this.level2[this.level2Open].open = false;
+            this.level2Open = index;
+            item.open = true;
+            this.level3 = data;
+          } else {
+            this.level3 = [];
+          }
+        })
+        .catch(err => {
+          uni.showToast({
+            title: err,
+            icon: "none"
+          });
+        });
+	},
+	/* 获取基础数据 */
+    async initData(majorId = "") {
+      let level1Data = [];
+      if (!majorId) {
+        level1Data = await this.$API.apiGetDict(this,{
+          type: "zyfl",
+          pid: majorId,
+          schoolType: "1"
+        });
+		this.level1 = level1Data;
+        if (!level1Data.length) {
+          this.level2 = this.level3 = [];
+          return;
+        }
+	  }
+      let level2Data = await this.$API.apiGetDict(this,{
+        type: "zyfl",
+        pid: majorId || level1Data[0].code,
+        schoolType: "1"
+      });
+      if (level2Data.length) {
+        level2Data[0].open = true;
+        this.level2Open = 0;
+        this.level2 = level2Data;
+      } else {
+        this.level3 = [];
+        return;
+      }
+      let level3Data = await this.$API.apiGetDict(this,{
+        type: "zyfl",
+        pid: level2Data[0].code,
+        schoolType: "1"
+      });
+      this.level3 = level3Data;
+    },
+    /* 监听scrollview的滚动事件，在切换时置顶 */
+    scroll(e) {
+      this.scrollHeight = e.detail.scrollHeight;
+	},
+	/* 进入专业详情 */
+    handleItemTap(target, targetIndex) {
+      uni.navigateTo({
+        url: `./ProfessionDesc?id=${target.code}&name=${target.name}&type=1`
+      });
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-	.nav {
-		display: flex;
-		justify-content: space-around;
-		padding: 35upx 0;
-		background: #ffffff;
-	}
-
-	.nav-item {
-		box-sizing: border-box;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 220upx;
-		text-align: center;
-		box-sizing: border-box;
-		padding: 20upx 40upx;
-		color: #fff;
-		border-radius: 20upx;
-		font-size: $uni-font-size-lg;
-		background: $main-base-color;
-		height: 180upx;
-		box-shadow: 5upx 10upx 10upx rgba($color: #000000, $alpha: 0.1);
-	}
-
-	@for $i from 1 through 3 {
-		.nav-item-#{$i} {
-			background: url('../../../static/indexIcon/bg'+$i+'.png');
-			background-size: 100% 100%;
-		}
-	}
-
-	.list-title {
-		padding: 10upx;
-		margin-top: 20upx;
-		background: #ffffff;
-		border-bottom: solid 1upx $main-dividing-line1;
-
-		image {
-			width: 60upx;
-			height: 60upx;
-			vertical-align: middle;
-		}
-
-		.hot {
-			font-size: $uni-font-size-lg;
-			display: inline-block;
-			margin-left: 20upx;
-			font-weight: bold;
-			color: #333333;
-		}
-
-		.hot-img {
-			width: 28upx;
-			height: 28upx;
-			vertical-align: middle;
-		}
-	}
-
-	.school-list {
-		background: #ffffff;
-		overflow: auto;
-	}
+@import './majorDatabase.scss';
 </style>
