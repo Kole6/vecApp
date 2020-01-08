@@ -21,7 +21,7 @@ const http = (options) => {
 				},
 				success: res => {
 					//全局处理权限问题
-					if(res.data.message =="token不能为空"){
+					if(res.data.message =="token不能为空" || res.data.message =="用户不能为空，请先登录"){
 						uni.showModal({
 						    content: '登录之后才可以查看!',
 						    success: function (res) {

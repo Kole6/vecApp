@@ -35,7 +35,7 @@
 					url:'/zjq/College/GetYxsl',
 					header:'form',
 					data:{
-						token:'d05902562e544db29bbe777954d43bb0',
+						token: uni.getStorageSync('token'),
 						region:'',
 						pageIndex:1,
 						pageSize:100,

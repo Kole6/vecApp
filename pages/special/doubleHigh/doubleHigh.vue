@@ -37,7 +37,7 @@ export default {
 				pageSize: 10
 			},
 			currentSearch:{
-				token: 'd05902562e544db29bbe777954d43bb0'
+				token: uni.getStorageSync('token')
 			},
 			loadStatus:'more',
 			systemInfo: uni.getSystemInfoSync(),
@@ -378,7 +378,7 @@ export default {
 				provinceId: result.key_1,
 				cityId: result.key_2,
 				schoolType: result.key_3,
-				token: 'd05902562e544db29bbe777954d43bb0'
+				token: uni.getStorageSync('token')
 			};
 			this.onPullDown();
 		},

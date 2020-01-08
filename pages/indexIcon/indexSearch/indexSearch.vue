@@ -20,7 +20,7 @@
 							<p>专业</p>
 						</view>
 						<view class="school-list">
-							<school-list :showType="4" :is-special="true" :listArr="dataArr" :handleTaped="false" @taped="handleListTaped" />
+							<school-list :showType="4" :is-special="true" :listArr="dataArr2" :handleTaped="false" @taped="handleListTaped" />
 						</view>
 					</scroll-view>
 				</swiper-item>
@@ -54,8 +54,8 @@
 			schoolList
 		},
 		onLoad() {
-			this.apiGetSchools();
-			this.apiGetMajors();
+			this.apiGetSchoolSearchList('');
+			this.apiGetMajors('');
 		},
 		data() {
 			return {
@@ -80,13 +80,16 @@
 					content: '搜索：' + res.value,
 					showCancel: false
 				}) */
-				this.apiGetSchools()
-				this.apiGetMajors()
+				this.apiGetSchoolSearchList(res.value)
+				this.apiGetMajors(res.value)
 			},
-			apiGetSchools() {
+			apiGetSchoolSearchList(key) {
 				this.$HTTP({
-					url: '/zjq/College/GetSchools',
-					data: {},
+					url: '/zjq/College/GetSchoolSearchList',
+					data: {
+						token: uni.getStorageSync('token'),
+						key
+					},
 					load: true,
 					header: 'form'
 				}).then((res) => {
@@ -119,10 +122,13 @@
 					}
 				})
 			},
-			apiGetMajors() {
+			apiGetMajors(key) {
 				this.$HTTP({
 					url: '/zjq/College/GetMajors',
-					data: {},
+					data: {
+						token: uni.getStorageSync('token'),
+						key
+					},
 					header: 'form'
 				}).then((res) => {
 					if (res.code == 0) {

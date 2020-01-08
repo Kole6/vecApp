@@ -111,7 +111,7 @@ export default {
 						'content-type':'application/x-www-form-urlencoded'
 					},
 					data:{
-						token:'d05902562e544db29bbe777954d43bb0',
+						token: uni.getStorageSync('token'),
 						pageIndex:'1',
 						pageSize:'10',
 						key:'浙江'

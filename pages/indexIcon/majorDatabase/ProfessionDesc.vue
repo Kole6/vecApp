@@ -184,7 +184,7 @@ export default {
 				header:'form',
 				data:{
 					type:'2',
-					token:'d05902562e544db29bbe777954d43bb0'
+					token: uni.getStorageSync('token'),
 				}
 			}).then((res)=>{
 				if(res.code==0){
@@ -201,7 +201,7 @@ export default {
 					pageIndex:1,
 					pageSize:1000,
 					type:'2',
-					token:'d05902562e544db29bbe777954d43bb0'
+					token: uni.getStorageSync('token'),
 				}
 			}).then(res=>{
 				if(res.code == 0){
@@ -262,7 +262,7 @@ export default {
 				url:'/zjq/User/GetUser',
 				header:'form',
 				data:{
-					token:'d05902562e544db29bbe777954d43bb0',
+					token: uni.getStorageSync('token'),
 				}
 			}).then((res)=>{
 				if(res.code == 0){
@@ -278,7 +278,7 @@ export default {
 				url: '/zjq/User/FavoriteZy',
 				header: 'form',
 				data: {
-					token:'d05902562e544db29bbe777954d43bb0',
+					token: uni.getStorageSync('token'),
 					zyid: this.params.id,
 					type: this.hasSC ? '2' : '1'
 				}

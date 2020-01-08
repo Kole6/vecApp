@@ -119,7 +119,7 @@
 					url: '/zjq/mainpage/GetFile',
 					header: 'form',
 					data: {
-						token: 'd05902562e544db29bbe777954d43bb0'
+						token: uni.getStorageSync('token')
 					}
 				}).then(res => {
 					if (res.code == 0) {

@@ -1,18 +1,15 @@
 <!-- 院校库 -->
 <template>
 	<view>
-		<!-- #ifdef APP-PLUS -->
-		<view class="" style="height: 35px;background: #FFFFFF;"></view>
-		<!-- #endif -->
 		<view class="nav">
-			<navigator url="/pages/indexIcon/majorDatabase/BKCCSchool">
-				<view class="nav-item nav-item-1"><text>本科层次职业教育</text></view>
-			</navigator>
 			<navigator url="/pages/indexIcon/majorDatabase/GZGZSchool">
-				<view class="nav-item nav-item-2"><text>高职<br />高专院校</text></view>
+				<view class="nav-item nav-item-1"><text>高职<br />高专院校</text></view>
 			</navigator>
 			<navigator url="/pages/indexIcon/majorDatabase/ZDZYSchool">
-				<view class="nav-item nav-item-3"><text>中等<br />职业学校</text></view>
+				<view class="nav-item nav-item-2"><text>中等<br />职业学校</text></view>
+			</navigator>
+			<navigator url="/pages/indexIcon/majorDatabase/BKCCSchool">
+				<view class="nav-item nav-item-3"><text>技工<br />院校专业</text></view>
 			</navigator>
 		</view>
 		<view class="list-title">

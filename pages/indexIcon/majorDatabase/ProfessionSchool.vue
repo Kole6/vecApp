@@ -31,7 +31,7 @@ export default {
 				pageSize:10,
 			},
 			currentSearch:{
-				token: 'd05902562e544db29bbe777954d43bb0'
+				token: uni.getStorageSync('token')
 			},
 			provinceArr:[],
 			cityArr:[],

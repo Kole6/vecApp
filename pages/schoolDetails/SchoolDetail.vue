@@ -272,7 +272,7 @@
 					header: 'form',
 					data: {
 						type: '1',
-						token: 'd05902562e544db29bbe777954d43bb0'
+						token: uni.getStorageSync('token')
 					}
 				}).then((res) => {
 					if (res.code == 0) {
@@ -304,7 +304,7 @@
 						pageIndex: 1,
 						pageSize: 1000,
 						type: '1',
-						token: 'd05902562e544db29bbe777954d43bb0'
+						token: uni.getStorageSync('token')
 					}
 				}).then(res => {
 					if (res.code == 0) {

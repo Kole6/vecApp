@@ -32,7 +32,7 @@ export default {
 				pageSize: 10
 			},
 			currentSearch: {
-				token: 'd05902562e544db29bbe777954d43bb0'
+				token: uni.getStorageSync('token')
 			},
 			topFixedHeight: '44px',
 			dataArr: [],
@@ -287,7 +287,7 @@ export default {
 				cityId: result.key_2,
 				schoolType: result.key_3,
 				exampleSchool: result.key_4,
-				token: 'd05902562e544db29bbe777954d43bb0'
+				token: uni.getStorageSync('token')
 			};
 			this.onPullDown();
 		},

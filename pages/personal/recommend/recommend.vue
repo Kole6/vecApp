@@ -10,7 +10,7 @@
 					<p>普通用户</p>
 				</view>
 				<view class="tou-name">
-					<p>王一涵</p>
+					<p>{{userInfo.nickname || userInfo.username}}</p>
 				</view>
 			</view>
 		</view>
@@ -80,6 +80,9 @@
 			return {
 					
 			}
+		},
+		onShow() {
+			this.userInfo = uni.getStorageSync('userInfo');
 		},
 		computed: {
 			scrollH() {

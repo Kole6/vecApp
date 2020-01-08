@@ -142,7 +142,7 @@
 		{
 			"path": "pages/indexIcon/majorDatabase/BKCCSchool",
 			"style": {
-				"navigationBarTitleText": "本科层次职业教育",
+				"navigationBarTitleText": "技工院校专业",
 				"app-plus": {
 					"bounce": "none"
 				}
