@@ -383,16 +383,6 @@ export default {
 			.t-th:nth-of-type(even) {
 				background-color: #f3f7ff;
 			}
-			.t-td:last-child,
-			.t-th:last-child {
-				// border-right: solid 1px $border-color;
-			}
-		}
-		.t-row:last-child {
-			.t-td,
-			.t-th {
-				// border-bottom: solid 1px $border-color;
-			}
 		}
 	}
 }

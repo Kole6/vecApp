@@ -14,9 +14,9 @@
 								<view class="td">表彰日期</view>
 							</view>
 							<view class="table-tr" v-for="(item,i) of listArr.y2018" :key="i">
-								<view class="td">{{item.columns.projectName}}</view>
-								<view class="td">{{item.columns.level}}</view>
-								<view class="td">{{item.columns.date}}</view>
+								<view class="td">{{item.projectname}}</view>
+								<view class="td">{{item.level}}</view>
+								<view class="td">{{item.date}}</view>
 							</view>
 							<view class="table-null" v-show="listArr.y2018.length==0">无数据</view>
 						</view>
@@ -31,9 +31,9 @@
 								<view class="td">表彰日期</view>
 							</view>
 							<view class="table-tr" v-for="(item,i) of listArr.y2017" :key="i">
-								<view class="td">{{item.columns.projectName}}</view>
-								<view class="td">{{item.columns.level}}</view>
-								<view class="td">{{item.columns.date}}</view>
+								<view class="td">{{item.projectname}}</view>
+								<view class="td">{{item.level}}</view>
+								<view class="td">{{item.date}}</view>
 							</view>
 							<view class="table-null" v-show="listArr.y2017.length==0">无数据</view>
 						</view>
@@ -48,9 +48,9 @@
 								<view class="td">表彰日期</view>
 							</view>
 							<view class="table-tr" v-for="(item,i) of listArr.y2016" :key="i">
-								<view class="td">{{item.columns.projectName}}</view>
-								<view class="td">{{item.columns.level}}</view>
-								<view class="td">{{item.columns.date}}</view>
+								<view class="td">{{item.projectname}}</view>
+								<view class="td">{{item.level}}</view>
+								<view class="td">{{item.date}}</view>
 							</view>
 							<view class="table-null" v-show="listArr.y2016.length==0">无数据</view>
 						</view>

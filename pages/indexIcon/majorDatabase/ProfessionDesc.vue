@@ -1,10 +1,5 @@
 <template>
 	<view>
-		<!-- 专业信息-专业介绍 -->
-		<!-- <view class="top">
-			<view class="top-btn active">专业介绍</view>
-			<view class="top-btn" @tap="handleRouter({ url: './ProfessionSchool' }, true)">开设学校</view>
-		</view> -->
 		<!-- #ifdef APP-PLUS -->
 		<view class="" style="height: 35px;background: #FFFFFF;"></view>
 		<!-- #endif -->
@@ -194,26 +189,7 @@ export default {
 		},
 		// 是否已收藏专业
 		judgeHasSC(){
-			this.$HTTP({
-				url:'/zjq/User/GetFavoriteList',
-				header:'form',
-				data:{
-					pageIndex:1,
-					pageSize:1000,
-					type:'2',
-					token: uni.getStorageSync('token'),
-				}
-			}).then(res=>{
-				if(res.code == 0){
-					
-					let hasSC = res.data.list.some((item)=>{
-						return item.majorcode == this.params.id
-					})
-					if(hasSC){
-						this.hasSC = true;
-					}
-				}
-			})
+			this.$API.apiGetFavoriteList(this,'2',this.params.id);
 		},
 		//TODO 查询相似的学校，有问题，无响应
 		getSimilarSchool(){
@@ -274,25 +250,7 @@ export default {
 			})
 		},
 		handleSC() {
-			this.$HTTP({
-				url: '/zjq/User/FavoriteZy',
-				header: 'form',
-				data: {
-					token: uni.getStorageSync('token'),
-					zyid: this.params.id,
-					type: this.hasSC ? '2' : '1'
-				}
-			}).then(res => {
-				setTimeout(() => {
-					uni.showToast({
-						title: res.message,
-						icon: 'none',
-						duration: 1000
-					});
-				}, 200);
-
-				this.hasSC = !this.hasSC;
-			});
+			this.$API.apiFavoriteZy(this, this.params.id)
 		},
 		handleToSchool() {
 			uni.navigateTo({

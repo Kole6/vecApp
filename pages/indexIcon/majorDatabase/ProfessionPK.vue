@@ -58,17 +58,7 @@ export default {
 	},
 	methods: {
 		addProfession(string) {
-			this.$HTTP({
-				url: '/zjq/User/MyComparison',
-				header: 'form',
-				data: {
-					token: uni.getStorageSync('token'),
-					type: '2',
-					optype: 'A',
-					majorCode: string
-				}
-			}).then(res => {
-			});
+
 		},
 		handleQuit() {
 			uni.navigateBack();

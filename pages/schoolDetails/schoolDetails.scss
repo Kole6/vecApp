@@ -61,7 +61,8 @@
 			}
 		}
 		.f-site {
-			@include flexstyle(center, center) box-sizing: border-box;
+			@include flexstyle(center, center);
+			box-sizing: border-box;
 			position: absolute;
 			top: 30upx;
 			right: 61upx;
@@ -113,6 +114,7 @@
 	color: $main-text-color;
 	font-weight: bold;
 	background: #ffffff;
+	border-bottom: 1px solid $main-dividing-line1;
 }
 .m-pk {
 	background: #ffffff;
@@ -133,6 +135,7 @@
 	.right {
 		z-index: 3;
 		color: #ffffff;
+		
 	}
 	.bg1 {
 		position: absolute;
@@ -148,7 +151,7 @@
 	}
 }
 .m-school_list {
-	@include flexstyle(space-between, center) padding: 28upx 31upx;
+	@include flexstyle(space-between, center); padding: 28upx 31upx;
 	font-size: $uni-font-size-lg;
 	color: $main-text-color;
 	font-weight: bold;
@@ -157,7 +160,7 @@
 	margin-bottom: 20upx;
 }
 .s-school_list {
-	@include flexstyle(space-between, center) font-size: $uni-font-size-lg;
+	@include flexstyle(space-between, center); font-size: $uni-font-size-lg;
 	color: $main-text-color;
 	font-weight: bold;
 	background: #ffffff;
@@ -182,7 +185,7 @@
 	background: #ffffff;
 	margin-bottom: 20upx;
 	.title.f-link {
-		@include flexstyle(space-between, center) padding: 28upx 31upx;
+		@include flexstyle(space-between, center); padding: 28upx 31upx;
 		font-weight: bold;
 		font-size: $uni-font-size-lg;
 		border-bottom: solid 1upx $main-dividing-line1;

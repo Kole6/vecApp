@@ -49,8 +49,8 @@
 
 		<!-- 底部按钮 -->
 		<view class="m-bottom">
-			<view class="left">退出</view>
-			<view class="right"  @tap="handleRouter">开始对比</view>
+			<view class="left" @tap="handleBack">退出</view>
+			<view class="right"  @tap="handleRouter">确认添加</view>
 		</view>
 	</view>
 </template>
@@ -112,7 +112,7 @@ export default {
 		onPullDown(done){
 			setTimeout(()=>{
 				done();
-			},2000)
+			},1000)
 		},
 		onScroll(){
 		},
@@ -193,6 +193,11 @@ export default {
 				url:'./SchoolPk'
 			})
 		},
+		handleBack(){
+				uni.navigateBack({
+					delta: 2
+				});
+			},
 		change(index){
 			this.current = index;
 		},

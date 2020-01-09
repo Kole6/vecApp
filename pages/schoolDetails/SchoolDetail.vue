@@ -40,16 +40,19 @@
 			</view>
 			<view class="line"></view>
 			<!-- 对比列表 -->
-			<view class="m-tip">{{ tipMessage }}</view>
-			<view class="m-pk" @tap="handlePK">
-				<view class="left">
-					<!-- /static/indexIcon/delete.png -->
+			<view class="m-tip">您还可以进行专业对比哦!您已经添加 {{numberDB}} 个学校</view>
+			<view class="m-pk">
+				<view class="left" v-if="hasDB" @tap="apiMyComparison('D')">
+					<image src="/static/indexIcon/delete.png" mode="aspectFit" style="width: 40upx;height: 40upx;"></image>
+					<text>在对比列表中删除本学校</text>
+				</view>
+				<view class="left" v-else  @tap="apiMyComparison('A')">
 					<image src="/static/indexIcon/add.png" mode="aspectFit" style="width: 40upx;height: 40upx;"></image>
 					<text>添加本学校到对比列表</text>
 				</view>
-				<view class="right"><text>对比</text></view>
-				<image class="bg1" src="/static/indexIcon/colorGroup.png" mode="aspectFit" style="width: 300upx;height: 100upx;"></image>
-				<image class="bg2" src="/static/indexIcon/vszong.png" mode="aspectFit" style="width: 70upx;height: 70upx;"></image>
+				<view class="right" @tap="handlePK"><text>对比</text></view>
+				<image class="bg1" @tap="handlePK" src="/static/indexIcon/colorGroup.png" mode="aspectFit" style="width: 300upx;height: 100upx;"></image>
+				<image class="bg2" @tap="handlePK" src="/static/indexIcon/vszong.png" mode="aspectFit" style="width: 70upx;height: 70upx;"></image>
 			</view>
 
 			<view class="m-info">
@@ -133,9 +136,10 @@
 					baike: 'https://baike.baidu.com/item/北京电子科技职业学院',
 				},
 				showModal: false, //模态框显示
-				tipMessage: '您还可以进行学校对比哦!您已经添加0个学校',
 				hasDZ: false, //是否点赞
-				hasSC: false,
+				hasSC: false, //是否关注
+				hasDB: false, //是否对比
+				numberDB: 0, 
 				wrapperHeight: 'auto',
 				systemInfo: uni.getSystemInfoSync(),
 				newList:[],
@@ -266,19 +270,16 @@
 			this.newList = uni.getStorageSync('hotNewsList')
 		},
 		methods: {
-			getCompareInfo() {
-				this.$HTTP({
-					url: '/zjq/User/GetComparison',
-					header: 'form',
-					data: {
-						type: '1',
-						token: uni.getStorageSync('token')
-					}
-				}).then((res) => {
-					if (res.code == 0) {
-						this.tipMessage = `您还可以进行专业对比哦!您已经添加${res.data.length}个学校`
-					}
+			async getCompareInfo() {
+				let list = await this.$API.apiGetComparison(this,1);
+				this.numberDB = list.length;
+				this.hasDB = list.some((item) => {
+					return item.schoolno == this.params.schoolno
 				})
+			},
+			apiMyComparison(optype){
+				this.$API.apiMyComparison(this, optype, 1, this.params.schoolno);
+				this.hasDB =!this.hasDB;
 			},
 			getChance() {
 				this.$HTTP({
@@ -297,25 +298,7 @@
 				})
 			},
 			judgeHasSC() {
-				this.$HTTP({
-					url: '/zjq/User/GetFavoriteList',
-					header: 'form',
-					data: {
-						pageIndex: 1,
-						pageSize: 1000,
-						type: '1',
-						token: uni.getStorageSync('token')
-					}
-				}).then(res => {
-					if (res.code == 0) {
-						let hasSC = res.data.list.some((item) => {
-							return item.majorcode == this.params.schoolno
-						})
-						if (hasSC) {
-							this.hasSC = true;
-						}
-					}
-				})
+				this.$API.apiGetFavoriteList(this,'1',this.params.schoolno);
 			},
 			getDetail() {
 				this.$HTTP({
@@ -350,26 +333,7 @@
 				})
 			},
 			handleSC() {
-				this.$HTTP({
-					url: '/zjq/User/Favorite',
-					header: 'form',
-					data: {
-						token: uni.getStorageSync('token'),
-						sid: this.schoolInfo.schoolno,
-						type: this.hasSC ? '2' : '1'
-					}
-				}).then(res => {
-					console.log(res, 'res')
-					setTimeout(() => {
-						uni.showToast({
-							title: res.message,
-							icon: 'none',
-							duration: 1000
-						});
-					}, 200)
-
-					this.hasSC = !this.hasSC;
-				});
+				this.$API.apiFavorite(this,this.schoolInfo.schoolno)
 			},
 			modalChange() {},
 			handleLogoTaped() {
@@ -389,8 +353,11 @@
 				uni.navigateBack();
 			},
 			handlePK() {
+				uni.navigateTo({
+							url: './SchoolPk/SchoolPk'
+						});
 				// 进行用户验证/VIP验证
-				const value = uni.getStorageSync('freeChance');
+				/* const value = uni.getStorageSync('freeChance');
 				if (this.permission.sjbdcs || this.permission.isVip) {
 					if (this.permission.isVip) {
 						uni.navigateTo({
@@ -422,7 +389,7 @@
 							}
 						}
 					});
-				}
+				} */
 			},
 			toWebsite() {
 				if (!this.schoolInfo.website) return;
