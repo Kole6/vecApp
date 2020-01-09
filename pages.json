@@ -1,11 +1,10 @@
 {
-	"pages": [
-		{
+	"pages": [{
 			"path": "pages/tabBar/index/init",
 			"style": {
 				"navigationBarTitleText": "入口页"
 			}
-		}, 
+		},
 		{
 			"path": "pages/tabBar/index/index",
 			"style": {
@@ -135,6 +134,28 @@
 			"style": {
 				"navigationBarTitleText": "专业库",
 				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"searchInput": {
+							"autoFocus":false,
+							"align": "center",
+							"placeholder": "搜索专业",
+							"borderRadius": "50upx",
+							"backgroundColor": "#f8faff",
+							"placeholderColor":"#AAA",
+							"border":"1px solid red",
+							"disabled":true
+						}
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/indexIcon/majorDatabase/SearchResult",
+			"style": {
+				"navigationBarTitleText": "搜索专业",
+				"app-plus": {
+					"titleNView": false,
 					"bounce": "none"
 				}
 			}

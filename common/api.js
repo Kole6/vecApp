@@ -6,7 +6,7 @@ export default {
             that.$HTTP({
                 url: "/zjq/mainpage/GetDict",
                 header: "form",
-                load:true,
+                // load:true,
                 data
             }).then(res => {
                 if (res.code == 0) {

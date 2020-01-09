@@ -6,6 +6,13 @@
     padding: 15px 0;
     border-bottom: solid 1px $main-dividing-line1;
   }
+  .content{
+    border-top: 1px solid rgba(238,238,238,1);
+    .swiper-item{
+        display: flex;
+    }
+  }
+  
   /* 分类 */
   .page-body {
     display: flex;
@@ -75,6 +82,6 @@
     padding: 18upx 30upx 18upx 70upx;
     font-size: $uni-font-size-base;
     color: #999999;
-    border-top: solid 1px #eee;
+    border-top:1px solid rgba(240,240,240,0.6);
     background:rgba(247,247,247,1);
   }

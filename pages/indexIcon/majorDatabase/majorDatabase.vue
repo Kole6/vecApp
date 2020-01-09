@@ -1,23 +1,38 @@
 <!-- 专业库 -->
 <template>
-  <view>
-    <view class="content">
-      <view class="page-body">
-        <scroll-view class="nav-left" scroll-y :style="'height:' + height + 'px'">
+  <view class="content">
+    <QSTabs
+      ref="tabs"
+      :current="current"
+      :tabs="tabs"
+      width="250"
+      swiperWidth="750"
+      activeColor="#6451FC"
+      backgroundColor="#fff"
+      @change="change($event)"
+    />
+    <swiper
+      :style="{height:`${scrollH - 85}upx`,borderTop: '1upx solid rgba(238, 238, 238, 0.3)'}"
+      :current="current"
+      @change="swiperChange"
+      @transition="transition"
+      @animationfinish="animationfinish"
+    >
+      <swiper-item class="swiper-item" v-for="(item,i) of 3" :key="i">
+        <scroll-view class="nav-left" scroll-y style="height: 100%;">
           <view
             class="nav-left-item"
             :key="index"
             :class="index == categoryActive ? 'active' : ''"
-			@click="level1Click(item, index)"
+            @click="level1Click(item, index)"
             v-for="(item, index) in level1"
           >{{ item.name }}</view>
         </scroll-view>
         <scroll-view
           class="nav-right"
           scroll-y
-          :scroll-top="scrollTop"
-          :style="'height:' + height + 'px'"
-		  @scroll="scroll"
+          style="height: 100%;"
+          @scroll="scroll"
           scroll-with-animation
         >
           <uni-collapse>
@@ -38,51 +53,65 @@
             </uni-collapse-item>
           </uni-collapse>
         </scroll-view>
-      </view>
-    </view>
+      </swiper-item>
+    </swiper>
   </view>
 </template>
 
 <script>
 import uniCollapse from "@/components/uni-collapse/uni-collapse.vue";
 import uniCollapseItem from "@/components/uni-collapse-item/uni-collapse-item.vue";
+import QSTabs from "@/components/QS-tabs/QS-tabs.vue";
 export default {
-  components: { uniCollapse, uniCollapseItem },
+  onNavigationBarSearchInputClicked() {
+    // console.log("点击了");
+	uni.navigateTo({
+		url:'/pages/indexIcon/majorDatabase/SearchResult'
+	})
+  },
+  onLoad() {
+    // 设置分类栏高度，保持在一屏内
+    this.height = uni.getSystemInfoSync().windowHeight;
+    this.initData();
+  },
+  components: { uniCollapse, uniCollapseItem, QSTabs },
   data() {
     return {
-      categoryList: [],
-      subCategoryList: [],
+      tabs: ["高职院校专业", "中职学校专业", "技工院校专业"],
+      current: 0,
       level1: [],
       level2: [],
       level2Open: 0,
       level3: [],
       height: 0,
       categoryActive: 0, //当前分类选中index值
-      //滚动视图
-      scrollTop: 0,
-      scrollHeight: 0,
       isShowAll: false //全部展开控制量
     };
   },
-  onLoad: function() {
-    // 设置分类栏高度，保持在一屏内
-	this.height = uni.getSystemInfoSync().windowHeight;
-	this.initData();
+
+  computed: {
+    scrollH() {
+      let sys = uni.getSystemInfoSync();
+      let winWidth = sys.windowWidth;
+      let winrate = 750 / winWidth;
+      let winHeight = parseInt(sys.windowHeight * winrate);
+      return winHeight;
+    }
   },
   methods: {
-	/* 点击level1 */
+    /* 点击level1 */
     level1Click(categroy, index) {
       this.categoryActive = index;
-      this.scrollTop = -this.scrollHeight * index;
       this.initData(categroy.code);
-	},
-	/* 点击level2 */
+    },
+    /* 点击level2 */
     level2Click(item, index) {
-      let level2Data = this.$API.apiGetDict(this,{
-        type: "zyfl",
-        pid: item.code,
-        schoolType: "1"
-      })
+      let level2Data = this.$API
+        .apiGetDict(this, {
+          type: "zyfl",
+          pid: item.code,
+          schoolType: this.current+1
+        })
         .then(data => {
           if (data.length) {
             this.level2[this.level2Open].open = false;
@@ -99,26 +128,28 @@ export default {
             icon: "none"
           });
         });
-	},
-	/* 获取基础数据 */
+    },
+    /* 获取基础数据 */
     async initData(majorId = "") {
+      uni.showLoading({ title: "加载中...", mask: true });
       let level1Data = [];
       if (!majorId) {
-        level1Data = await this.$API.apiGetDict(this,{
+        level1Data = await this.$API.apiGetDict(this, {
           type: "zyfl",
           pid: majorId,
-          schoolType: "1"
+          schoolType: this.current+1
         });
-		this.level1 = level1Data;
+        this.level1 = level1Data;
         if (!level1Data.length) {
-          this.level2 = this.level3 = [];
+		  this.level2 = this.level3 = [];
+		  uni.hideLoading();
           return;
         }
-	  }
-      let level2Data = await this.$API.apiGetDict(this,{
+      }
+      let level2Data = await this.$API.apiGetDict(this, {
         type: "zyfl",
         pid: majorId || level1Data[0].code,
-        schoolType: "1"
+        schoolType: this.current+1
       });
       if (level2Data.length) {
         level2Data[0].open = true;
@@ -128,27 +159,39 @@ export default {
         this.level3 = [];
         return;
       }
-      let level3Data = await this.$API.apiGetDict(this,{
+      let level3Data = await this.$API.apiGetDict(this, {
         type: "zyfl",
         pid: level2Data[0].code,
-        schoolType: "1"
+        schoolType: this.current+1
       });
       this.level3 = level3Data;
+      uni.hideLoading();
     },
-    /* 监听scrollview的滚动事件，在切换时置顶 */
-    scroll(e) {
-      this.scrollHeight = e.detail.scrollHeight;
-	},
-	/* 进入专业详情 */
+    /* 进入专业详情 */
     handleItemTap(target, targetIndex) {
       uni.navigateTo({
         url: `./ProfessionDesc?id=${target.code}&name=${target.name}&type=1`
       });
+    },
+
+    change(index) {
+      this.current = index;
+    },
+    swiperChange({ detail: { current } }) {
+      this.current = current;
+      this.initData();
+      this.categoryActive = 0;
+    },
+    transition({ detail: { dx } }) {
+      this.$refs.tabs.setDx(dx);
+    },
+    animationfinish({ detail: { current } }) {
+      this.$refs.tabs.setFinishCurrent(current);
     }
   }
 };
 </script>
 
 <style scoped lang="scss">
-@import './majorDatabase.scss';
+@import "./majorDatabase.scss";
 </style>
