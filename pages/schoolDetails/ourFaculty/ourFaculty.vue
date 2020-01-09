@@ -55,11 +55,11 @@
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;">
 						<view class="m-list" v-for="(item,index) in dataArr" :key="index">
-							<view class="avatar">{{item.teachername.substr(0,1)}}</view>
-							<view class="name">{{item.teachername}}</view>
+							<view class="avatar">{{item.name.substr(0,1)}}</view>
+							<view class="name">{{item.name}}</view>
 							<view class="position">
-								<text v-for="(tag,i) in item.tags" :key="i">
-									{{tag}}
+								<text>
+									{{item.position}}
 								</text>
 							</view>
 						</view>
@@ -85,6 +85,7 @@
 			this.cWidth = uni.upx2px(750);
 			this.cHeight = uni.upx2px(500);
 			this.apiGetTeacherInfo();
+			this.apiGetGgjs()
 		},
 		components: {
 			QSTabs
@@ -108,19 +109,7 @@
 						"value": 43.00
 					}
 				],
-				dataArr: [{
-						teachername: '时志福',
-						tags: ['国家级名师']
-					},
-					{
-						teachername: '潘宏义',
-						tags: ['国家级名师']
-					},
-					{
-						teachername: '杨道德',
-						tags: ['副校长', '国家级名师']
-					}
-				]
+				dataArr: []
 			}
 		},
 		computed: {
@@ -137,8 +126,9 @@
 				this.$HTTP({
 					url: '/zjq/College/GetTeacherInfo',
 					header: 'form',
+					load:true,
 					data: {
-						sid: '4151012965',
+						sid: this.sid,
 						token: uni.getStorageSync('token')
 					}
 				}).then(res => {
@@ -174,6 +164,26 @@
 						});
 					}
 				})
+			},
+			/* 查询学校骨干教师 */
+			apiGetGgjs() {
+				this.$HTTP({
+						url: "/zjq/College/GetGgjs",
+						header: "form",
+						data: {
+						sid: this.sid,
+							token: uni.getStorageSync('token')
+						}
+					}).then(res => {
+						if (res.code == 0) {
+							this.dataArr = res.data
+						} else {
+							uni.showToast({
+								title: res.message,
+								icon: "none"
+							});
+						}
+					});
 			},
 			getSeries(content) {
 				let o = []

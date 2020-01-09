@@ -121,16 +121,7 @@
 		},
 		methods: {
 			handleDownload() {
-				this.$HTTP({
-					url: '/zjq/mainpage/GetFileDown',
-					header: 'form',
-					data: {
-						token: uni.getStorageSync('token'),
-						fileid: this.fileId
-					}
-				}).then((res => {
-					console.log(res, 'res')
-				}))
+				this.$API.apiGetFileDown(this,this.fileId);
 			},
 			getDetailInfo() {
 				this.$HTTP({

@@ -61,5 +61,54 @@ export default {
                 that.categoryArr = data;
             }
         })
-    }
+    },
+    /* 下载文件 */
+    apiGetFileDown(that, fileId) {
+        let userInfo = uni.getStorageSync('userInfo');
+        if (userInfo.email) {
+            uni.showModal({
+                content: '是否确认下载文件!',
+                success: function (res) {
+                    if (res.confirm) {
+                        that.$HTTP({
+                            url: '/zjq/mainpage/GetFileDown',
+                            header: 'form',
+                            data: {
+                                token: uni.getStorageSync('token'),
+                                fileid: fileId
+                            }
+                        }).then((res => {
+                            if (res.code == 0) {
+                                uni.showToast({
+                                    title: '文件已发送至您的邮箱，请注意查收！',
+                                    icon: "none"
+                                });
+                            } else {
+                                uni.showToast({
+                                    title: res.message,
+                                    icon: "none"
+                                });
+                            }
+                        }))
+                    }else{
+                        uni.showToast({
+                            title: '已取消',
+                            icon: "none"
+                        });
+                    }
+                }
+            });
+        } else {
+            uni.showModal({
+                content: '请绑定邮箱进行下载!',
+                success: function (res) {
+                    if (res.confirm) {
+                        uni.navigateTo({
+                            url: '/pages/personal/account/account'
+                        })
+                    }
+                }
+            });
+        }
+    },
 }

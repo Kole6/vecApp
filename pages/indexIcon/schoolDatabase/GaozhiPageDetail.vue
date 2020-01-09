@@ -120,16 +120,14 @@ export default {
         this.cityArr = this.transformData(cityData);
         // 获取学校属性
         let xxsx = await this.$API.apiGetDict(this, {
-          type: "xxsx",
-          pid: "0",
-          schoolType: this.params.schoolType
+          type: "xxsx_gz",
+          pid: "0"
         });
         this.menuList[2].detailList = this.transformData(xxsx);
         // 获取性质类别
         let xxxz = await this.$API.apiGetDict(this, {
-          type: "xxxz",
-          pid: "0",
-          schoolType: this.params.schoolType
+          type: "xxlx_gz",
+          pid: "0"
         });
         this.menuList[3].detailList = this.transformData(xxxz);
         this.$nextTick(() => {
@@ -246,8 +244,8 @@ export default {
       para = {
         provinceId: result.key_1,
         cityId: result.key_2,
-        schoolType: this.params.schoolType,
-        exampleSchool: result.key_4
+        property:result.key_4,
+        exampleSchool: result.key_3
       };
       this.currentSearch = para;
       this.onPullDown();
