@@ -210,15 +210,22 @@ export default {
             type,
             token: uni.getStorageSync('token')
         }
-        that.$HTTP({
-            url: '/zjq/User/MyComparison',
-            header: 'form',
-            data:param,
-            load:true
-        }).then(res => {
-            uni.showToast({
-                title: res.message,
-                icon: 'none'
+        return new Promise((resolve, reject) => {
+            that.$HTTP({
+                url: '/zjq/User/MyComparison',
+                header: 'form',
+                data: param,
+                load: true
+            }).then(res => {
+                uni.showToast({
+                    title: res.message,
+                    icon: 'none'
+                });
+                if (res.code == 0) {
+                    resolve(res.data);
+                } else {
+                    reject();
+                }
             });
         });
     },

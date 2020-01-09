@@ -32,17 +32,20 @@
 					<text>{{ dzNumber }}</text>
 				</view>
 			</view>
-			<!-- 已添加的对比专业 -->
-			<view class="m-tip">{{ tipMessage }}</view>
+			<view class="m-tip">您还可以进行专业对比哦!您已经添加 {{numberDB}} 个专业</view>
 			<!-- 对比列表 -->
-			<view class="m-pk" @tap="handlePK">
-				<view class="left">
-					<image src="/static/indexIcon/add.png" mode="aspectFit" style="width: 40upx;height: 40upx;"></image>
-					<text>添加本专业到对比列表</text>
+			<view class="m-pk">
+				<view class="left" v-if="hasDB" @tap="apiMyComparison('D')">
+					<image src="/static/indexIcon/delete.png" mode="aspectFit" style="width: 40upx;height: 40upx;"></image>
+					<text>在对比列表中删除本学校</text>
 				</view>
-				<view class="right"><text>对比</text></view>
-				<image class="bg1" src="/static/indexIcon/colorGroup2.png" mode="aspectFit" style="width: 300upx;height: 100upx;"></image>
-				<image class="bg2" src="/static/indexIcon/vszong.png" mode="aspectFit" style="width: 70upx;height: 70upx;"></image>
+				<view class="left" v-else  @tap="apiMyComparison('A')">
+					<image src="/static/indexIcon/add.png" mode="aspectFit" style="width: 40upx;height: 40upx;"></image>
+					<text>添加本学校到对比列表</text>
+				</view>
+				<view class="right" @tap="handlePK"><text>对比</text></view>
+				<image class="bg1" @tap="handlePK" src="/static/indexIcon/colorGroup2.png" mode="aspectFit" style="width: 300upx;height: 100upx;"></image>
+				<image class="bg2" @tap="handlePK" src="/static/indexIcon/vszong.png" mode="aspectFit" style="width: 70upx;height: 70upx;"></image>
 			</view>
 			<!-- 专业解读 -->
 			<view class="m-pro">
@@ -94,7 +97,6 @@
 <script>
 import schoolList from '@/components/vec-school-list/vec-school-list.vue';
 import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
-// 防止在点击的时候因为图片加载出现闪烁
 import sc1 from '@/static/indexIcon/sc1.png';
 import sc2 from '@/static/indexIcon/sc2.png';
 export default {
@@ -111,11 +113,12 @@ export default {
 				sjbdcs:0,
 				ckzlcs:0,
 			},
-			hasSC: false, //是否添加收藏
 			hasDZ: false, //是否点赞
+			hasSC: false, //是否关注
+			hasDB: false, //是否对比
+			numberDB: 0, 
 			hasSaved: false, //是否已收藏
 			dzNumber: '',
-			tipMessage: '您还可以进行专业对比哦!您已经添加0个专业',
 			wrapperHeight: 'auto',
 			systemInfo: uni.getSystemInfoSync(),
 			styleObj: {
@@ -134,7 +137,7 @@ export default {
 			list1: [],
 			list2: [],
 			dataArr: [
-				{
+				/* {
 					title: '汽车运用与维护',
 					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
 					cards: [{ name: '学历层次', value: '高职' }, { name: '专业年限', value: '3年' }]
@@ -143,7 +146,7 @@ export default {
 					title: '汽车运用与维护',
 					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
 					cards: [{ name: '学历层次', value: '高职' }, { name: '专业年限', value: '3年' }]
-				}
+				} */
 			]
 		};
 	},
@@ -158,11 +161,7 @@ export default {
 	},
 	onLoad(Option) {
 		uni.setStorageSync('freeChance', 1);
-		// 测试用
-		// Option.id = '520907'
-		// Option.type = '1'
 		this.params = Option
-		console.log(this.params.id)
 		this.getDetailData({
 			zyid:Option.id,
 			schoolType:Option.type
@@ -173,19 +172,24 @@ export default {
 		this.getCompareInfo();
 	},
 	methods: {
-		getCompareInfo(){
-			this.$HTTP({
-				url:'/zjq/User/GetComparison',
-				header:'form',
-				data:{
-					type:'2',
-					token: uni.getStorageSync('token'),
-				}
-			}).then((res)=>{
-				if(res.code==0){
-					this.tipMessage=`您还可以进行专业对比哦!您已经添加${res.data.length}个专业`
-				}
+		async getCompareInfo() {
+			let list = await this.$API.apiGetComparison(this,2);
+			this.numberDB = list.length;
+			this.hasDB = list.some((item) => {
+				return item.majorcode == this.params.id
 			})
+		},
+		async apiMyComparison(optype){
+			if(this.numberDB>=4){
+				uni.showToast({
+                    title: '最多添加4个对比',
+                    icon: 'none'
+				});
+				return;
+			}
+			await this.$API.apiMyComparison(this, optype, 2, this.params.id);
+			this.hasDB =!this.hasDB;
+			this.getCompareInfo();
 		},
 		// 是否已收藏专业
 		judgeHasSC(){
@@ -262,8 +266,11 @@ export default {
 			uni.navigateBack();
 		},
 		handlePK() {
+			uni.navigateTo({
+				url: './ProfessionPK'
+			});
 			// 进行用户验证/VIP验证
-			if (this.permission.sjbdcs || this.permission.isVip) {
+			/* if (this.permission.sjbdcs || this.permission.isVip) {
 				if(this.permission.isVip){
 					uni.navigateTo({
 						url: './ProfessionPK'
@@ -296,7 +303,7 @@ export default {
 					},
 					complete: () => {}
 				});
-			}
+			} */
 		},
 		handleDownload() {
 			const downloadTask = uni.downloadFile({

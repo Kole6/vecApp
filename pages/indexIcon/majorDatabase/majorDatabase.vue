@@ -32,7 +32,6 @@
           class="nav-right"
           scroll-y
           style="height: 100%;"
-          @scroll="scroll"
           scroll-with-animation
         >
           <uni-collapse>

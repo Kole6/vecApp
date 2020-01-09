@@ -277,9 +277,10 @@
 					return item.schoolno == this.params.schoolno
 				})
 			},
-			apiMyComparison(optype){
-				this.$API.apiMyComparison(this, optype, 1, this.params.schoolno);
+			async apiMyComparison(optype){
+				await this.$API.apiMyComparison(this, optype, 1, this.params.schoolno);
 				this.hasDB =!this.hasDB;
+				this.getCompareInfo();
 			},
 			getChance() {
 				this.$HTTP({
