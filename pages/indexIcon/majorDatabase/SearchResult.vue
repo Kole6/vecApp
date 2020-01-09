@@ -25,7 +25,8 @@
           :loadStatus="loadStatus"
         >
           <view class="list">
-			  <school-list class="" :isText="true" :showType="4" :listArr="dataArr"></school-list>
+			  <!-- <school-list class="" :isText="true" :showType="4" :listArr="dataArr"></school-list> -->
+        <school-list :showType="4" :is-special="true" :listArr="dataArr" :handleTaped="false" @taped="handleListTaped" />
             <!-- <school-list showType="4" :listArr="dataArr" /> -->
           </view>
         </load-more>
@@ -120,10 +121,9 @@ export default {
     getData(isRefresh) {
       return new Promise((resolve, reject) => {
         this.$HTTP({
-          url: "/zjq/College/GetSchoolSearchList",
+          url: "/zjq/College/GetMajors",
           header: "form",
           data: {
-            type: "",
             token: uni.getStorageSync("token"),
             pageIndex: this.page.pageIndex,
             pageSize: this.page.pageSize,
@@ -133,34 +133,32 @@ export default {
           if (res.code == 0) {
             let data = res.data.list.map(item => {
               item.tags = item.tags + "";
-              let string = item.schoolname.replace(
+              let string = item.majorname.replace(
                 this.searchValue,
                 `<span style="color:#6451FC">${this.searchValue}</span>`
               );
               return {
-                ...item,
-                title: string,
-                cards: item.tags.split(",").map(item => {
-                  return {
-                    name: item
-                  };
-                }),
-                tags: [
-                  {
-                    name: "地区",
-                    value: item.area
-                  },
-                  {
-                    name: "层次",
-                    value:
-                      item.level == 1
-                        ? "高职"
-                        : item.level == 2
-                        ? "中职"
-                        : item.level
-                  }
-                ]
-              };
+								...item,
+								title: string,
+								cards: [{
+										name: '学历层次',
+										value: item.xlcc || ''
+									},
+									{
+										name: '专业年限',
+										value: item.xynx || ''
+									}
+								],
+								tags: [{
+										name: '专业大类',
+										value: item.zydl || ''
+									},
+									{
+										name: '代码',
+										value: item.majorcode
+									}
+								]
+							};
             });
             if (isRefresh) {
               this.searchResultMessage = `一共${res.data.totalRow}条搜索数据`;
@@ -197,7 +195,15 @@ export default {
       this.searchValue = value;
       this.page.pageIndex = 1;
       this.onPullDown();
-    }
+    },
+    handleListTaped({
+				item,
+				index
+			}) {
+				uni.navigateTo({
+					url: `/pages/indexIcon/majorDatabase/ProfessionDesc?id=${item.code}&name=${item.name}&type=${item.type}`
+				})
+			},
   }
 };
 </script>
