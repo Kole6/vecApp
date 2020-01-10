@@ -77,7 +77,7 @@
 				 * 向本地存储中设置launchFlag的值，即启动标识；
 				 */
 				uni.setStorage({
-					key: 'launchFlag1010',
+					key: 'launchFlag110',
 					data: true,
 				});
 				uni.switchTab({

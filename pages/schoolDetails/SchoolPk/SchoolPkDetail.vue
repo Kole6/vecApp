@@ -177,7 +177,7 @@ export default {
     },
     getServerData() {
       let categories = [
-		"本科以上占比",
+		"本科教师占比",
         "双型教师占比",
 		"高讲教师占比",
 		"兼职教师占比",

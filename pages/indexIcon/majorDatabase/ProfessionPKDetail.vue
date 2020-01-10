@@ -22,7 +22,7 @@
     </view>
 
     <view class="m-btn">
-      <text>发送至邮箱</text>
+      <text @tap="toEmail">发送至邮箱</text>
     </view>
   </view>
 </template>
@@ -47,7 +47,13 @@ export default {
     async getData(zyids) {
       this.bodyList = await this.$api.apiMyZydb(this, zyids);
       console.log("this.bodyList", this.bodyList);
-    }
+	},
+	toEmail() {
+      uni.showToast({
+        title: "暂未开通",
+        icon: "none"
+      });
+    },
   }
 };
 </script>
