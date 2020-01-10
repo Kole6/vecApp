@@ -88,7 +88,7 @@ export default {
 		    return new Promise((resolve, reject) => {
 		        this.$http({
 		            url: '/zjq/mainpage/GetHotCollege',
-		            header: 'form',
+					header: 'form',
 		            data: {
 		                type: '2',
 		                token: uni.getStorageSync('token'),

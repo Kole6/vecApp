@@ -25,8 +25,14 @@
           :loadStatus="loadStatus"
         >
           <view class="list">
-			  <!-- <school-list class="" :isText="true" :showType="4" :listArr="dataArr"></school-list> -->
-        <school-list :showType="4" :is-special="true" :listArr="dataArr" :handleTaped="false" @taped="handleListTaped" />
+            <!-- <school-list class="" :isText="true" :showType="4" :listArr="dataArr"></school-list> -->
+            <school-list
+              :showType="4"
+              :is-special="true"
+              :listArr="dataArr"
+              :handleTaped="false"
+              @taped="handleListTaped"
+            />
             <!-- <school-list showType="4" :listArr="dataArr" /> -->
           </view>
         </load-more>
@@ -38,7 +44,7 @@
 <script>
 import uniNavBar from "@/components/uni-nav-bar/uni-nav-bar.vue";
 import uniSearchBar from "@/components/uni-search-bar/uni-search-bar.vue";
-import schoolList from '@/components/vec-school-list/vec-school-list.vue';
+import schoolList from "@/components/vec-school-list/vec-school-list.vue";
 import loadMore from "@/components/loadMore/you-scroll.vue";
 import messageInfo from "@/components/vec-message-info/vec-message-info.vue";
 export default {
@@ -138,27 +144,29 @@ export default {
                 `<span style="color:#6451FC">${this.searchValue}</span>`
               );
               return {
-								...item,
-								title: string,
-								cards: [{
-										name: '学历层次',
-										value: item.xlcc || ''
-									},
-									{
-										name: '专业年限',
-										value: item.xynx || ''
-									}
-								],
-								tags: [{
-										name: '专业大类',
-										value: item.zydl || ''
-									},
-									{
-										name: '代码',
-										value: item.majorcode
-									}
-								]
-							};
+                ...item,
+                title: string,
+                cards: [
+                  {
+                    name: "学历层次",
+                    value: item.xlcc || ""
+                  },
+                  {
+                    name: "专业年限",
+                    value: item.xynx || ""
+                  }
+                ],
+                tags: [
+                  {
+                    name: "专业大类",
+                    value: item.zydl || ""
+                  },
+                  {
+                    name: "代码",
+                    value: item.majorcode
+                  }
+                ]
+              };
             });
             if (isRefresh) {
               this.searchResultMessage = `一共${res.data.totalRow}条搜索数据`;
@@ -196,14 +204,11 @@ export default {
       this.page.pageIndex = 1;
       this.onPullDown();
     },
-    handleListTaped({
-				item,
-				index
-			}) {
-				uni.navigateTo({
-					url: `/pages/indexIcon/majorDatabase/ProfessionDesc?id=${item.majorcode}&name=${item.majorname}&type=1`
-				})
-			},
+    handleListTaped({ item, index }) {
+      this.$tool.toolistoolTiaoToken(
+        `/pages/indexIcon/majorDatabase/ProfessionDesc?id=${item.majorcode}&name=${item.majorname}&type=1`
+      );
+    }
   }
 };
 </script>

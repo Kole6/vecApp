@@ -66,9 +66,9 @@ export default {
         return;
       }
       if (this.item.schoolno) {
-        uni.navigateTo({
-          url: `/pages/schoolDetails/SchoolDetail?schoolno=${this.item.schoolno}`
-        });
+        this.$tool.toolistoolTiaoToken(
+          `/pages/schoolDetails/SchoolDetail?schoolno=${this.item.schoolno}`
+        );
       }
     },
     getFirst(item) {

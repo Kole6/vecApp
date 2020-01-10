@@ -168,9 +168,9 @@ export default {
     },
     /* 进入专业详情 */
     handleItemTap(target, targetIndex) {
-      uni.navigateTo({
-        url: `./ProfessionDesc?id=${target.code}&name=${target.name}&type=1`
-      });
+      this.$tool.toolistoolTiaoToken(
+        `./ProfessionDesc?id=${target.code}&name=${target.name}&type=1`
+      );
     },
 
     change(index) {

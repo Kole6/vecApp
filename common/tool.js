@@ -75,7 +75,7 @@ export default {
         });
     },
     /* 专业接口数据转换  pk */
-    toolMajorListPk(list,listPk) {
+    toolMajorListPk(list, listPk) {
         return list.map(item => {
             return {
                 ...item,
@@ -108,4 +108,24 @@ export default {
             return type == 1 ? item.schoolno : item.majorcode
         });
     },
+    /* 进入页面 - 优先判断登录 */
+    toolistoolTiaoToken(url) {
+        if (uni.getStorageSync('token')) {
+            uni.navigateTo({
+                url: url
+            });
+        } else {
+            uni.showModal({
+                content: '登录之后才可以查看哦!',
+                success: function (res) {
+                    if (res.confirm) {
+                        uni.reLaunch({
+                            url: '/pages/login/signIn/signIn'
+                        })
+                    }
+                }
+            });
+            return false;
+        }
+    }
 }

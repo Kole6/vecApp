@@ -21,18 +21,16 @@ const http = (options) => {
 				},
 				success: res => {
 					//全局处理权限问题
-					if(res.data.message =="token不能为空" || res.data.message =="用户不能为空，请先登录"){
+					if(res.data.message =="token不能为空" || res.data.message =="用户不能为空，请先登录" || res.data.message =="用户不能为空"){
 						uni.showModal({
-						    content: '登录之后才可以查看!',
+						    content: '登录之后才可以查看哦!',
 						    success: function (res) {
 						        if (res.confirm) {
-						            uni.navigateTo({
+						            uni.reLaunch({
 						            	url:'/pages/login/signIn/signIn'
 						            })
 						        } else if (res.cancel) {
-						            uni.switchTab({
-						            	url:'/pages/tabBar/index/index'
-						            })
+						            uni.navigateBack({ delta: 1 });
 						        }
 						    }
 						});
