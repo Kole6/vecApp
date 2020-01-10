@@ -85,7 +85,7 @@
 				this.apiSendSmsValidateCode();
 			},
 			apiSendSmsValidateCode() {
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/User/SendSmsValidateCode',
 					header: 'form',
 					data: {
@@ -108,7 +108,7 @@
 				})
 			},
 			apiRegister() {
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/User/Register',
 					header: 'form',
 					data: {

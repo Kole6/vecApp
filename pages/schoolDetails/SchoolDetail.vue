@@ -271,19 +271,26 @@
 		},
 		methods: {
 			async getCompareInfo() {
-				let list = await this.$API.apiGetComparison(this,1);
+				let list = await this.$api.apiGetComparison(this,1);
 				this.numberDB = list.length;
 				this.hasDB = list.some((item) => {
 					return item.schoolno == this.params.schoolno
 				})
 			},
 			async apiMyComparison(optype){
-				await this.$API.apiMyComparison(this, optype, 1, this.params.schoolno);
+				if(this.numberDB>=4){
+					uni.showToast({
+						title: '最多只能选取4所院校进行对比哦',
+						icon: 'none'
+					});
+					return;
+				}
+				await this.$api.apiMyComparison(this, optype, 1, this.params.schoolno);
 				this.hasDB =!this.hasDB;
 				this.getCompareInfo();
 			},
 			getChance() {
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/User/GetUser',
 					header: 'form',
 					data: {
@@ -299,10 +306,10 @@
 				})
 			},
 			judgeHasSC() {
-				this.$API.apiGetFavoriteList(this,'1',this.params.schoolno);
+				this.$api.apiGetFavoriteList(this,'1',this.params.schoolno);
 			},
 			getDetail() {
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/College/GetCollegeDetail',
 					header: 'form',
 					data: {
@@ -334,7 +341,7 @@
 				})
 			},
 			handleSC() {
-				this.$API.apiFavorite(this,this.schoolInfo.schoolno)
+				this.$api.apiFavorite(this,this.schoolInfo.schoolno)
 			},
 			modalChange() {},
 			handleLogoTaped() {

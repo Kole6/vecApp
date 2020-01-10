@@ -28,7 +28,7 @@
 		},
 		methods:{
 			apiGetSchoolarships(){
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/College/GetSchoolarships',
 					header: 'form',
 					data: {

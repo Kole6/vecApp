@@ -83,94 +83,20 @@
 				this.apiGetSchoolSearchList(res.value)
 				this.apiGetMajors(res.value)
 			},
-			apiGetSchoolSearchList(key) {
-				this.$HTTP({
-					url: '/zjq/College/GetSchoolSearchList',
-					data: {
-						token: uni.getStorageSync('token'),
-						key
-					},
-					load: true,
-					header: 'form'
-				}).then((res) => {
-					if (res.code == 0) {
-						let va = res.data.list.map(item => {
-							item.tags = item.tags + ''
-							return {
-								...item,
-								title: item.schoolname,
-								cards: item.tags.split(',').map(item => {
-									return {
-										name: item
-									};
-								}),
-								tags: [{
-									name: '地区',
-									value: item.area
-								}, {
-									name: '层次',
-									value: item.level==1?'高职':(item.level==2?'中职':item.level)
-								}]
-							};
-						});
-						this.dataArr = va
-					} else {
-						uni.showToast({
-							title: res.message,
-							icon: 'none'
-						});
-					}
-				})
+			async apiGetSchoolSearchList(key) {
+				let list = await this.$api.apiGetSchoolSearchList(this,key);
+				this.dataArr = this.$tool.toolSchoolList(list);
 			},
-			apiGetMajors(key) {
-				this.$HTTP({
-					url: '/zjq/College/GetMajors',
-					data: {
-						token: uni.getStorageSync('token'),
-						key
-					},
-					header: 'form'
-				}).then((res) => {
-					if (res.code == 0) {
-						let data = res.data.list.map(item => {
-							return {
-								...item,
-								title: item.majorname,
-								cards: [{
-										name: '学历层次',
-										value: item.xlcc || ''
-									},
-									{
-										name: '专业年限',
-										value: item.xynx || ''
-									}
-								],
-								tags: [{
-										name: '专业大类',
-										value: item.zydl || ''
-									},
-									{
-										name: '代码',
-										value: item.majorcode
-									}
-								]
-							};
-						});
-						this.dataArr2 = data
-					} else {
-						uni.showToast({
-							title: res.message,
-							icon: 'none'
-						});
-					}
-				})
+			async apiGetMajors(key) {
+				let list = await this.$api.apiGetMajors(this,key);
+				this.dataArr2 = this.$tool.toolMajorList(list);
 			},
 			handleListTaped({
 				item,
 				index
 			}) {
 				uni.navigateTo({
-					url: `/pages/indexIcon/majorDatabase/ProfessionDesc?id=${item.code}&name=${item.name}&type=${item.type}`
+					url: `/pages/indexIcon/majorDatabase/ProfessionDesc?id=${item.majorcode}&name=${item.majorname}&type=1`
 				})
 			},
 			change(index) {

@@ -143,7 +143,7 @@
 				if (this.swiperList.length != 0) {
 					return;
 				}
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/mainpage/GetMain',
 					data: {}
 				}).then((data) => {

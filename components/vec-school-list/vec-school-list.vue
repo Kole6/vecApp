@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import schoolListItem from "./SchoolListItem.vue";
+import schoolListItem from '@/components/vec-school-list/SchoolListItem.vue';
 export default {
   components: { schoolListItem },
   props: {

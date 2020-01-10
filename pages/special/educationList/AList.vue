@@ -16,7 +16,7 @@
 
 <script>
 import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue';
-import schoolListItem from '@/pages/indexIcon/schoolDatabase/SchoolListItem.vue';
+import schoolListItem from '@/components/vec-school-list/SchoolListItem.vue';
 import loadMore from '@/components/loadMore/you-scroll.vue'
 export default {
 	components: { uniSearchBar, schoolListItem ,loadMore},

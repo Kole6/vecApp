@@ -121,10 +121,10 @@
 		},
 		methods: {
 			handleDownload() {
-				this.$API.apiGetFileDown(this,this.fileId);
+				this.$api.apiGetFileDown(this,this.fileId);
 			},
 			getDetailInfo() {
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/mainpage/GetFileDetail',
 					header: 'form',
 					data: {

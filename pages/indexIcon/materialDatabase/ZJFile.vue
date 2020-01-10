@@ -80,7 +80,7 @@
 			},
 			getData(isRefresh) {
 			    return new Promise((resolve, reject) => {
-			        this.$HTTP({
+			        this.$http({
 			            url: '/zjq/mainpage/GetFile',
 			            header: 'form',
 			            data: {

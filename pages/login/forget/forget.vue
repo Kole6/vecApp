@@ -71,7 +71,7 @@
 				this.apiSendSmsValidateCode();
 			},
 			apiSendSmsValidateCode() {
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/User/SendSmsValidateCode',
 					header: 'form',
 					data: {

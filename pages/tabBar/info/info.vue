@@ -28,7 +28,7 @@ export default {
       this.apiGetNews(res.value,1);
     },
     apiGetNews(key,type) {
-      this.$API.apiGetNews(this, key,type);
+      this.$api.apiGetNews(this, key,type);
     }
   }
 };

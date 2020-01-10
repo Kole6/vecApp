@@ -3,7 +3,7 @@ export default {
     /* 获取字典数据  async await*/
     apiGetDict(that, data = {}) {
         return new Promise((resolve, reject) => {
-            that.$HTTP({
+            that.$http({
                 url: "/zjq/mainpage/GetDict",
                 header: "form",
                 data
@@ -25,7 +25,7 @@ export default {
         if (key == '' && that.newList.length != 0 && type == 0) { //缓存首次内容
             return;
         }
-        that.$HTTP({
+        that.$http({
             url: '/zjq/College/GetNews',
             header: 'form',
             data: {
@@ -37,7 +37,7 @@ export default {
     },
     /* 高职高专院校、中等职业学校区域学校数量 */
     apiGetYxsl(that) {
-        that.$HTTP({
+        that.$http({
             url: '/zjq/College/GetYxsl',
             header: 'form',
             data: {
@@ -69,7 +69,7 @@ export default {
                 content: '是否确认下载文件!',
                 success: function (res) {
                     if (res.confirm) {
-                        that.$HTTP({
+                        that.$http({
                             url: '/zjq/mainpage/GetFileDown',
                             header: 'form',
                             data: {
@@ -112,7 +112,7 @@ export default {
     },
     /* 院校 - 添加关注和取消关注 */
     apiFavorite(that, sid) {
-        that.$HTTP({
+        that.$http({
             url: '/zjq/User/Favorite',
             header: 'form',
             data: {
@@ -131,7 +131,7 @@ export default {
     },
     /* 专业 - 添加关注和取消关注 */
     apiFavoriteZy(that, zyid) {
-        that.$HTTP({
+        that.$http({
             url: '/zjq/User/FavoriteZy',
             header: 'form',
             data: {
@@ -150,7 +150,7 @@ export default {
     },
     /* 获取关注列表 @id 判断是否已关注 @type 关注类型（1：学校；2：专业） @key 搜索关键字*/
     apiGetFavoriteList(that, type, id) {
-        that.$HTTP({
+        that.$http({
             url: '/zjq/User/GetFavoriteList',
             header: 'form',
             data: {
@@ -180,10 +180,30 @@ export default {
             }
         });
     },
+    /* 查询关注列表  @type 类型 1:学校 2:专业 */
+    apiGetFavoriteListSearch(that, type, key) {
+        return new Promise((resolve, reject) => {
+            that.$http({
+                url: '/zjq/User/GetFavoriteList',
+                header: 'form',
+                data: {
+                    key,
+                    type,
+                    token: uni.getStorageSync('token')
+                }
+            }).then((res) => {
+                if (res.code == 0) {
+                    resolve(res.data.list);
+                } else {
+                    reject();
+                }
+            })
+        });
+    },
     /* 获取对比库  @type 类型 1:学校 2:专业 */
     apiGetComparison(that, type) {
         return new Promise((resolve, reject) => {
-            that.$HTTP({
+            that.$http({
                 url: '/zjq/User/GetComparison',
                 header: 'form',
                 data: {
@@ -211,7 +231,7 @@ export default {
             token: uni.getStorageSync('token')
         }
         return new Promise((resolve, reject) => {
-            that.$HTTP({
+            that.$http({
                 url: '/zjq/User/MyComparison',
                 header: 'form',
                 data: param,
@@ -227,6 +247,84 @@ export default {
                     reject();
                 }
             });
+        });
+    },
+    /* 获取院校  @key 关键字*/
+    apiGetSchoolSearchList(that, key) {
+        return new Promise((resolve, reject) => {
+            that.$http({
+                url: '/zjq/College/GetSchoolSearchList',
+                header: 'form',
+                data: {
+                    key,
+                    token: uni.getStorageSync('token')
+                },
+            }).then((res) => {
+                if (res.code == 0) {
+                    resolve(res.data.list);
+                } else {
+                    reject();
+                }
+            })
+        });
+    },
+    /* 获取专业  @key 关键字*/
+    apiGetMajors(that, key) {
+        let param = {}
+        if (key) {
+            param.key = key
+        }
+        param.token = uni.getStorageSync('token')
+        return new Promise((resolve, reject) => {
+            that.$http({
+                url: '/zjq/College/GetMajors',
+                header: 'form',
+                data: param,
+            }).then((res) => {
+                if (res.code == 0) {
+                    resolve(res.data.list);
+                } else {
+                    reject();
+                }
+            })
+        });
+    },
+    /* 学校对比结果  @sids 逗号隔开的id*/
+    apiMyXxdb(that, sids) {
+        return new Promise((resolve, reject) => {
+            that.$http({
+                url: '/zjq/User/MyXxdb',
+                header: 'form',
+                data: {
+                    sids,
+                    token: uni.getStorageSync('token')
+                },
+            }).then((res) => {
+                if (res.code == 0) {
+                    resolve(res.data);
+                } else {
+                    reject();
+                }
+            })
+        });
+    },
+    /* 专业对比结果  @sids 逗号隔开的id*/
+    apiMyZydb(that, zyids) {
+        return new Promise((resolve, reject) => {
+            that.$http({
+                url: '/zjq/User/MyZydb',
+                header: 'form',
+                data: {
+                    zyids,
+                    token: uni.getStorageSync('token')
+                },
+            }).then((res) => {
+                if (res.code == 0) {
+                    resolve(res.data);
+                } else {
+                    reject();
+                }
+            })
         });
     },
 }

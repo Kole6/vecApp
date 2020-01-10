@@ -76,8 +76,8 @@ export default {
   },
   methods: {
     getFavoriteList() {
-      this.$API.apiGetFavoriteList(this,'1');
-      this.$API.apiGetFavoriteList(this,'2');
+      this.$api.apiGetFavoriteList(this,'1');
+      this.$api.apiGetFavoriteList(this,'2');
     },
     change(index) {
       console.log("change", index);

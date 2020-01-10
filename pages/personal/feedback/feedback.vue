@@ -39,7 +39,7 @@
 		},
 		methods: {
 			toSubmission() {
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/User/FeedBack',
 					header: 'form',
 					data: {

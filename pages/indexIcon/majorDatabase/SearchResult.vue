@@ -40,7 +40,7 @@ import uniNavBar from "@/components/uni-nav-bar/uni-nav-bar.vue";
 import uniSearchBar from "@/components/uni-search-bar/uni-search-bar.vue";
 import schoolList from '@/components/vec-school-list/vec-school-list.vue';
 import loadMore from "@/components/loadMore/you-scroll.vue";
-import messageInfo from "@/pages/indexIcon/schoolDatabase/messageInfo.vue";
+import messageInfo from "@/components/vec-message-info/vec-message-info.vue";
 export default {
   components: { uniNavBar, uniSearchBar, schoolList, loadMore, messageInfo },
   data() {
@@ -120,7 +120,7 @@ export default {
     },
     getData(isRefresh) {
       return new Promise((resolve, reject) => {
-        this.$HTTP({
+        this.$http({
           url: "/zjq/College/GetMajors",
           header: "form",
           data: {
@@ -201,7 +201,7 @@ export default {
 				index
 			}) {
 				uni.navigateTo({
-					url: `/pages/indexIcon/majorDatabase/ProfessionDesc?id=${item.code}&name=${item.name}&type=${item.type}`
+					url: `/pages/indexIcon/majorDatabase/ProfessionDesc?id=${item.majorcode}&name=${item.majorname}&type=1`
 				})
 			},
   }

@@ -103,7 +103,7 @@ export default {
     async initSearch() {
       try {
         // 获取省
-        let provinceData = await this.$API.apiGetDict(this, {
+        let provinceData = await this.$api.apiGetDict(this, {
           type: "xzqh",
           schoolType: this.params.schoolType,
           pid: "0"
@@ -111,7 +111,7 @@ export default {
         if (!provinceData.length) return;
         this.provinceArr = this.transformData(provinceData);
         // 获取市
-        let cityData = await this.$API.apiGetDict(this, {
+        let cityData = await this.$api.apiGetDict(this, {
           type: "xzqh",
           schoolType: this.params.schoolType,
           pid: provinceData[0].code
@@ -119,13 +119,13 @@ export default {
         if (!cityData.length) return;
         this.cityArr = this.transformData(cityData);
         // 获取学校属性
-        let xxsx = await this.$API.apiGetDict(this, {
+        let xxsx = await this.$api.apiGetDict(this, {
           type: "xxsx_gz",
           pid: "0"
         });
         this.menuList[2].detailList = this.transformData(xxsx);
         // 获取性质类别
-        let xxxz = await this.$API.apiGetDict(this, {
+        let xxxz = await this.$api.apiGetDict(this, {
           type: "xxlx_gz",
           pid: "0"
         });
@@ -142,7 +142,7 @@ export default {
     /* 查询数据api */
     getData(isRefresh = false) {
       return new Promise((resolve, reject) => {
-        this.$HTTP({
+        this.$http({
           url: "/zjq/College/GetSchoolSearchList",
           header: "form",
           data: {
@@ -154,30 +154,7 @@ export default {
           }
         }).then(res => {
           if (res.code == 0) {
-            let data = res.data.list.map(item => {
-              item.tags = item.tags + "";
-              return {
-                ...item,
-                title: item.schoolname,
-                tags: [
-                  { name: "地区", value: item.area },
-                  {
-                    name: "层次",
-                    value:
-                      item.level == 1
-                        ? "高职"
-                        : item.level == 2
-                        ? "中职"
-                        : item.level
-                  }
-                ],
-                cards: item.tags.split(",").map(k => {
-                  return {
-                    name: k
-                  };
-                })
-              };
-            });
+            let data = this.$tool.toolSchoolList(res.data.list)
             if (isRefresh) {
               this.page.pageIndex = 1;
               this.dataArr = data;
@@ -211,7 +188,7 @@ export default {
         });
       data[0].detailList = provinceArr;
       if (provinceId) {
-        this.$API
+        this.$api
           .apiGetDict(this, {
             type: "xzqh",
             schoolType: this.params.schoolType,

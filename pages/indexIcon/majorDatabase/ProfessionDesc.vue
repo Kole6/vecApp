@@ -173,7 +173,7 @@ export default {
 	},
 	methods: {
 		async getCompareInfo() {
-			let list = await this.$API.apiGetComparison(this,2);
+			let list = await this.$api.apiGetComparison(this,2);
 			this.numberDB = list.length;
 			this.hasDB = list.some((item) => {
 				return item.majorcode == this.params.id
@@ -182,22 +182,22 @@ export default {
 		async apiMyComparison(optype){
 			if(this.numberDB>=4){
 				uni.showToast({
-                    title: '最多添加4个对比',
+                    title: '最多只能选取4个专业进行对比哦',
                     icon: 'none'
 				});
 				return;
 			}
-			await this.$API.apiMyComparison(this, optype, 2, this.params.id);
+			await this.$api.apiMyComparison(this, optype, 2, this.params.id);
 			this.hasDB =!this.hasDB;
 			this.getCompareInfo();
 		},
 		// 是否已收藏专业
 		judgeHasSC(){
-			this.$API.apiGetFavoriteList(this,'2',this.params.id);
+			this.$api.apiGetFavoriteList(this,'2',this.params.id);
 		},
 		//TODO 查询相似的学校，有问题，无响应
 		getSimilarSchool(){
-			// this.$HTTP({
+			// this.$http({
 			// 	url:'/zjq/mainpage/GetMajorInfo',
 			// 	header:'form',
 			// 	data:{
@@ -208,7 +208,7 @@ export default {
 			// })
 		},
 		getDetailData(data){
-			this.$HTTP({
+			this.$http({
 				url:'/zjq/mainpage/GetMajorInfo',
 				header:'form',
 				data,
@@ -238,7 +238,7 @@ export default {
 			})
 		},
 		getChance(){
-			this.$HTTP({
+			this.$http({
 				url:'/zjq/User/GetUser',
 				header:'form',
 				data:{
@@ -254,7 +254,7 @@ export default {
 			})
 		},
 		handleSC() {
-			this.$API.apiFavoriteZy(this, this.params.id)
+			this.$api.apiFavoriteZy(this, this.params.id)
 		},
 		handleToSchool() {
 			uni.navigateTo({

@@ -21,7 +21,7 @@
 		},
 		methods: {
 			getData() {
-				this.$API.apiGetYxsl(this);
+				this.$api.apiGetYxsl(this);
 			},
 		}
 	}

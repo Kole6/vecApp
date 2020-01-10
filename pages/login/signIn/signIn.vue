@@ -115,7 +115,7 @@
 			},
 			toLogin() {
 				if (this.isPhoneSign) { //短信验证码登录
-					this.$HTTP({
+					this.$http({
 						url: '/zjq/User/LoginCode',
 						header: 'form',
 						data: {
@@ -135,7 +135,7 @@
 						console.log(err)
 					})
 				} else { //账号密码登录
-					this.$HTTP({
+					this.$http({
 						url: '/zjq/User/Login',
 						header: 'form',
 						data: {
@@ -194,7 +194,7 @@
 				this.apiSendSmsValidateCode();
 			},
 			apiSendSmsValidateCode() {
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/User/SendSmsValidateCode',
 					header: 'form',
 					data: {
@@ -217,7 +217,7 @@
 				})
 			},
 			apiGetUser(token) {
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/User/GetUser',
 					header: 'form',
 					load:true,
@@ -247,7 +247,7 @@
 			},
 			apiLoginQQWeChat(type, sessionid, nickname, photo) {
 				console.log('apiLoginQQWeChat',type, sessionid, nickname, photo);
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/User/LoginQQWeChat',
 					data: {
 						type,
@@ -280,7 +280,7 @@
 							uni.login({
 								provider: 'weixin',
 								success: function(loginRes) {
-									vm.$HTTP({
+									vm.$http({
 										method: 'GET',
 										baseURL: 'https://api.weixin.qq.com/sns/userinfo',
 										url: '',
@@ -323,7 +323,7 @@
 								provider: 'qq',
 								success: function(loginRes) {
 									console.log('loginRes', loginRes)
-									vm.$HTTP({
+									vm.$http({
 										method: 'GET',
 										baseURL: 'https://graph.qq.com/user/get_user_info',
 										url: '',

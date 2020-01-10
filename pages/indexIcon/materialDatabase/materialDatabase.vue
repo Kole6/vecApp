@@ -115,7 +115,7 @@
 				}, 1000);
 			},
 			getData() {
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/mainpage/GetFile',
 					header: 'form',
 					data: {

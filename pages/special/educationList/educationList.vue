@@ -29,7 +29,7 @@
 
 <script>
 	import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue';
-	import schoolListItem from '@/pages/indexIcon/schoolDatabase/SchoolListItem.vue';
+	import schoolListItem from '@/components/vec-school-list/SchoolListItem.vue';
 	import loadMore from '@/components/loadMore/you-scroll.vue'
 	export default {
 		components: {
@@ -96,7 +96,7 @@
 			},
 			getData(isRefresh) {
 				return new Promise((resolve, reject) => {
-					this.$HTTP({
+					this.$http({
 						url: '/zjq/College/GetSchoolSearchList',
 						header: 'form',
 						data: {
@@ -108,25 +108,7 @@
 					}).then(res => {
 						console.log('result==', res);
 						if (res.code == 0) {
-							let data = res.data.list.map(item => {
-								item.tags = item.tags + ''
-								return {
-									...item,
-									title: item.schoolname,
-									cards: item.tags.split(',').map(item => {
-										return {
-											name: item
-										};
-									}),
-									tags: [{
-										name: '地区',
-										value: item.area
-									}, {
-										name: '层次',
-										value: item.level==1?'高职':(item.level==2?'中职':item.level)
-									}]
-								};
-							});
+							let data = this.$tool.toolSchoolList(res.data.list)
 							if (isRefresh) {
 								this.dataArr = data
 								this.page.pageIndex = 1;

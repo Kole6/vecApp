@@ -97,7 +97,7 @@
 		},
 		methods: {
 			apiGetSchoolAwards(year) {
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/College/GetSchoolAwards',
 					header: 'form',
 					data: {

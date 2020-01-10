@@ -71,7 +71,7 @@
 				this.apiSendSmsValidateCode();
 			},
 			apiSendSmsValidateCode() {
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/User/SendSmsValidateCode',
 					header: 'form',
 					data: {
@@ -95,7 +95,7 @@
 				})
 			},
 			apiBindPhone() {
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/User/BindPhone',
 					header: 'form',
 					data: {

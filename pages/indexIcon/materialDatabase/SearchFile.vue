@@ -19,7 +19,7 @@
 <script>
 import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue';
 import fileList from './FileList.vue';
-import messageInfo from '@/pages/indexIcon/schoolDatabase/messageInfo.vue';
+import messageInfo from "@/components/vec-message-info/vec-message-info.vue";
 import loadMore from '@/components/loadMore/you-scroll.vue'
 import docx from '@/static/indexIcon/word.jpg'
 import xlsx from '@/static/indexIcon/xlsx.jpg'
@@ -78,7 +78,7 @@ export default {
 		},
 		getData(isRefresh) {
 			return new Promise((resolve, reject) => {
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/mainpage/GetFile',
 					header: 'form',
 					data: {

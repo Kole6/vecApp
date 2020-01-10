@@ -105,7 +105,7 @@ export default {
     },
     /* 点击level2 */
     level2Click(item, index) {
-      let level2Data = this.$API
+      let level2Data = this.$api
         .apiGetDict(this, {
           type: "zyfl",
           pid: item.code,
@@ -133,7 +133,7 @@ export default {
       uni.showLoading({ title: "加载中...", mask: true });
       let level1Data = [];
       if (!majorId) {
-        level1Data = await this.$API.apiGetDict(this, {
+        level1Data = await this.$api.apiGetDict(this, {
           type: "zyfl",
           pid: majorId,
           schoolType: this.current+1
@@ -145,7 +145,7 @@ export default {
           return;
         }
       }
-      let level2Data = await this.$API.apiGetDict(this, {
+      let level2Data = await this.$api.apiGetDict(this, {
         type: "zyfl",
         pid: majorId || level1Data[0].code,
         schoolType: this.current+1
@@ -158,7 +158,7 @@ export default {
         this.level3 = [];
         return;
       }
-      let level3Data = await this.$API.apiGetDict(this, {
+      let level3Data = await this.$api.apiGetDict(this, {
         type: "zyfl",
         pid: level2Data[0].code,
         schoolType: this.current+1

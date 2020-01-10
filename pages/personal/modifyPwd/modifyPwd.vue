@@ -44,7 +44,7 @@
 				this.showPassword2 = !this.showPassword2
 			},
 			apiResetPassword(){
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/User/ResetPassword',
 					header: 'form',
 					data: {

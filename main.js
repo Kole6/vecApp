@@ -3,9 +3,11 @@ import App from './App'
 import store from './store'
 import http from './common/http.js'
 import api from './common/api.js'
+import tool from './common/tool.js'
 
-Vue.prototype.$HTTP = http
-Vue.prototype.$API = api
+Vue.prototype.$http = http
+Vue.prototype.$api = api
+Vue.prototype.$tool = tool
 Vue.prototype.$store = store;
 Vue.config.productionTip = false
 

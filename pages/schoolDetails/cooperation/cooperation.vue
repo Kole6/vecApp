@@ -36,7 +36,7 @@
 		},
 		methods:{
 			apiGetCooperation(){
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/College/GetCooperation',
 					header: 'form',
 					data: {

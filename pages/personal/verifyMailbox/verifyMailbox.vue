@@ -79,7 +79,7 @@
 				this.apiSendEmailCode();
 			},
 			apiSendEmailCode() { //获取邮箱验证码
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/User/SendEmailCode',
 					data: {
 						email: this.mailno
@@ -101,7 +101,7 @@
 				})
 			},
 			apiModiUser() { //修改邮箱
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/User/ModiUser',
 					data: {
 						token: uni.getStorageSync('token'),

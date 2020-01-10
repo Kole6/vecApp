@@ -77,7 +77,7 @@ export default http
 
 // 调用例子
 /*
-this.$HTTP({
+this.$http({
   method: 'GET',
   url: '/api/news',
   data: {},

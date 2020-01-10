@@ -52,7 +52,7 @@ export default {
 		},
 		getData() {
 			return new Promise((resolve, reject) => {
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/College/GetLeaderInfo',
 					method: 'POST',
 					data: {

@@ -24,7 +24,7 @@
 		},
 		methods: {
 			apiGetCooperation() {
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/College/GetFjxx',
 					header: 'form',
 					data: {
@@ -33,26 +33,7 @@
 					}
 				}).then(res => {
 					if (res.code == 0) {
-						let va = res.data.map(item => {
-							item.tags = item.tags + ''
-							return {
-								...item,
-								title: item.schoolname,
-								cards: item.tags.split(',').map(item => {
-									return {
-										name: item
-									};
-								}),
-								tags: [{
-									name: '地区',
-									value: item.area
-								}, {
-									name: '层次',
-									value: item.level == 1 ? '高职' : (item.level == 2 ? '中职' : item.level)
-								}]
-							};
-						});
-						this.dataArr = va
+						this.dataArr = this.$tool.toolSchoolList(res.data)
 					} else {
 						uni.showToast({
 							title: res.message,

@@ -46,7 +46,7 @@
 					})
 					return;
 				}
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/User/QuickRegister?phone=' + formdata.phone + '&userName=' + formdata.name + '&schoolName=' + formdata.school
 				}).then((data) => {
 					console.log(data);

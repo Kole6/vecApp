@@ -78,7 +78,7 @@
 				});
 			},
 			apiModifyNickName(nickname, token) {
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/User/ModifyNickName',
 					header: 'form',
 					data: {

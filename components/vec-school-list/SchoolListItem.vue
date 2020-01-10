@@ -71,10 +71,8 @@ export default {
         uni.navigateTo({
           url: `/pages/schoolDetails/SchoolDetail?schoolno=${this.item.schoolno}`
         });
-      } else {
-      }
-    }
-  }
+      } 
+    }}
 };
 </script>
 

@@ -123,7 +123,7 @@
 		},
 		methods: {
 			apiGetTeacherInfo() {
-				this.$HTTP({
+				this.$http({
 					url: '/zjq/College/GetTeacherInfo',
 					header: 'form',
 					load:true,
@@ -167,7 +167,7 @@
 			},
 			/* 查询学校骨干教师 */
 			apiGetGgjs() {
-				this.$HTTP({
+				this.$http({
 						url: "/zjq/College/GetGgjs",
 						header: "form",
 						data: {

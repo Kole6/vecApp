@@ -14,7 +14,7 @@
 
 			try {
 				// 引导页，从本地缓存中同步获取指定 key 对应的内容，用于判断是否是第一次打开应用
-				if (uni.getStorageSync('launchFlag2')) {
+				if (uni.getStorageSync('launchFlag1010')) {
 					uni.switchTab({
 						url: './index'
 					});
