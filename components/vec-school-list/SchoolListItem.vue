@@ -1,8 +1,6 @@
 <template>
   <view class="list-content" :class="{'has':showBorder}" @tap="handleTap">
-    <view
-      class="left"
-    >{{item.schoolname?item.schoolname.substr(0,1):(item.majorname?item.majorname.substr(0,1):item.title.substr(0,1))}}</view>
+    <view class="left">{{getFirst(item)}}</view>
     <view class="right">
       <!-- 1 仅显示文字描述 2 : 仅显示tags标签  3: 仅显示cards标签  4: 全部显示 -->
       <rich-text class="title" :nodes="item.title"></rich-text>
@@ -71,8 +69,16 @@ export default {
         uni.navigateTo({
           url: `/pages/schoolDetails/SchoolDetail?schoolno=${this.item.schoolno}`
         });
-      } 
-    }}
+      }
+    },
+    getFirst(item) {
+      return item.schoolname
+        ? item.schoolname.substr(0, 1)
+        : item.majorname
+        ? item.majorname.substr(0, 1)
+        : item.title.substr(0, 1);
+    }
+  }
 };
 </script>
 

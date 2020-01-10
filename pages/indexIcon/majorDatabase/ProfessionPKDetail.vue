@@ -6,7 +6,9 @@
         <view class="left">
           <view class="item" v-for="(item,index) in bodyList" :key="index">{{item.majorname}}</view>
         </view>
-        <view class="right"><image src="../../../static/indexIcon/pk-vs.png" mode="aspectFit" style="width: 183upx; height: 106upx;"></image></view>
+        <view class="right">
+          <image src="/static/indexIcon/pk-vs.png" mode="aspectFit" style="width: 183upx; height: 106upx;"></image>
+        </view>
       </view>
     </view>
     <view class="m-title">
@@ -20,7 +22,6 @@
         :bodyList="bodyList"
       ></table-show>
     </view>
-
     <view class="m-btn">
       <text @tap="toEmail">发送至邮箱</text>
     </view>
@@ -39,8 +40,7 @@ export default {
     };
   },
   onLoad(e) {
-    this.tableHeight =
-      uni.getSystemInfoSync().windowHeight - uni.upx2px(750) + "px";
+    this.tableHeight = uni.getSystemInfoSync().windowHeight - uni.upx2px(750) + "px";
     this.getData(e.ids);
   },
   methods: {

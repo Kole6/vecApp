@@ -9,7 +9,6 @@
         <view class="t-row" v-for="(row, index) in keyList" :key="index">
           <view class="t-td">{{row.name}}</view>
           <view class="t-td" v-for="(item, i) in bodyList" :key="i">{{item[row.value]}}</view>
-          <!-- <view class="t-td">{{row.name}}</view> -->
         </view>
       </view>
     </view>
