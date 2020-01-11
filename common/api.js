@@ -289,6 +289,26 @@ export default {
             })
         });
     },
+    /* 获取热门专业和学校  type 1:专业，2：学校（默认2）*/
+    apiGetHotCollege(that, type, param={}) {
+        return new Promise((resolve, reject) => {
+            that.$http({
+                url: '/zjq/mainpage/GetHotCollege',
+                header: 'form',
+                data: {
+                    ...param,
+                    type,
+                    token: uni.getStorageSync('token')
+                },
+            }).then((res) => {
+                if (res.code == 0) {
+                    resolve(res.data);
+                } else {
+                    reject();
+                }
+            })
+        });
+    },
     /* 学校对比结果  @sids 逗号隔开的id*/
     apiMyXxdb(that, sids) {
         return new Promise((resolve, reject) => {
