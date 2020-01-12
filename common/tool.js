@@ -13,7 +13,7 @@ export default {
                 }),
                 tags: [{
                         name: "地区",
-                        value: item.area
+                        value: zhixia(item.area)
                     },
                     {
                         name: "层次",
@@ -102,6 +102,20 @@ export default {
             };
         });
     },
+    /* 专业接口数据转换 专业小类*/
+    toolMajorListXiao(list) {
+        return list.map(item => {
+            return {
+                ...item,
+                title: item.majorname,
+                cards: [],
+                tags: [{
+                    name: '代码',
+                    value: item.majorcode
+                }]
+            };
+        });
+    },
     /* 对比接口数据转换 */
     toolPkList(list, type) {
         return list.map(item => {
@@ -127,5 +141,15 @@ export default {
             });
             return false;
         }
+    }
+}
+
+/* 四个直辖市替换 */
+function zhixia(str) {
+    const zhi = ["北京北京市", "天津天津市", "上海上海市", "重庆重庆市"]
+    if (zhi.includes(str)) {
+        return str.slice(2, 5)
+    } else {
+        return str
     }
 }

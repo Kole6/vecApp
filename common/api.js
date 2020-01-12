@@ -289,8 +289,8 @@ export default {
             })
         });
     },
-    /* 获取热门专业和学校  type 1:专业，2：学校（默认2）*/
-    apiGetHotCollege(that, type, param={}) {
+    /* 获取热门专业和学校  @type 1:专业，2：学校（默认2）*/
+    apiGetHotCollege(that, type, param = {}) {
         return new Promise((resolve, reject) => {
             that.$http({
                 url: '/zjq/mainpage/GetHotCollege',
@@ -303,6 +303,27 @@ export default {
             }).then((res) => {
                 if (res.code == 0) {
                     resolve(res.data);
+                } else {
+                    reject();
+                }
+            })
+        });
+    },
+    /* 学校/专业搜索 @type 1:专业，2：学校（默认2） @key 关键字*/
+    apiGetSchoolMajorHighLightSearchList(that, type = 2, key, param = {}) {
+        return new Promise((resolve, reject) => {
+            that.$http({
+                url: '/zjq/College/GetSchoolMajorHighLightSearchList',
+                header: 'form',
+                data: {
+                    ...param,
+                    key,
+                    type,
+                    token: uni.getStorageSync('token')
+                },
+            }).then((res) => {
+                if (res.code == 0) {
+                    resolve(res.data.list);
                 } else {
                     reject();
                 }

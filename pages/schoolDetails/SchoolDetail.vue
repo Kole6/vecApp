@@ -22,7 +22,7 @@
 							<text>{{schoolInfo.birth}}</text>
 							<text>{{schoolInfo.schoolType}}</text>
 						</view>
-						<view class="num"><text>学校标示码：{{schoolInfo.schoolno}}</text></view>
+						<view class="num"><text>学校标识码：{{schoolInfo.schoolno}}</text></view>
 					</view>
 					<view class="f-site" @tap="toWebsite">官网</view>
 					<view class="f-dz" @tap="hasDZ = !hasDZ">
@@ -40,7 +40,7 @@
 			</view>
 			<view class="line"></view>
 			<!-- 对比列表 -->
-			<view class="m-tip">您还可以进行专业对比哦!您已经添加 {{numberDB}} 个学校</view>
+			<view class="m-tip">您还可以进行专业对比哦！ 您已经添加 {{numberDB}} 个学校</view>
 			<view class="m-pk">
 				<view class="left" v-if="hasDB" @tap="apiMyComparison('D')">
 					<image src="/static/indexIcon/delete.png" mode="aspectFit" style="width: 40upx;height: 40upx;"></image>

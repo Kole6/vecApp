@@ -106,10 +106,6 @@ export default {
   },
   methods: {
     search(res) {
-      /* uni.showModal({
-					content: '搜索：' + res.value,
-					showCancel: false
-				}) */
       this.apiGetSchoolSearchList(res.value);
       this.apiGetMajors(res.value);
     },
@@ -118,8 +114,8 @@ export default {
       this.dataArr = this.$tool.toolSchoolList(list);
     },
     async apiGetMajors(key) {
-      let list = await this.$api.apiGetMajors(this, key);
-      this.dataArr2 = this.$tool.toolMajorList(list);
+      let list = await this.$api.apiGetSchoolMajorHighLightSearchList(this, 1, key);
+      this.dataArr2 = this.$tool.toolMajorListXiao(list);
     },
     handleListTaped({ item, index }) {
       this.$tool.toolistoolTiaoToken(
