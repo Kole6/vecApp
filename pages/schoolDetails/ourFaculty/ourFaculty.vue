@@ -93,7 +93,7 @@
 		data() {
 			return {
 				haveData: true,
-				tabs: ["教师分类", "骨干名师"],
+				tabs: ["专任教师", "骨干名师"],
 				current: 0,
 				cWidth: '',
 				cHeight: '',

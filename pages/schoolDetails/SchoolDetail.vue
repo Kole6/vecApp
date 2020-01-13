@@ -361,8 +361,8 @@
 				uni.navigateBack();
 			},
 			handleDZ(){
-				console.log('54',)
 				this.hasDZ  = !this.hasDZ
+				this.schoolInfo.dzNumber = this.hasDZ? this.schoolInfo.dzNumber+1:this.schoolInfo.dzNumber-1;
 			},
 			handlePK() {
 				uni.navigateTo({

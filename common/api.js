@@ -330,7 +330,6 @@ export default {
             })
         });
     },
-
     /* 学校对比结果  @sids 逗号隔开的id*/
     apiMyXxdb(that, sids) {
         return new Promise((resolve, reject) => {

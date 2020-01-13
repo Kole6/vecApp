@@ -37,7 +37,7 @@ export default {
                 }),
                 tags: [{
                         name: "地区",
-                        value: item.area
+                        value: zhixia(item.area)
                     },
                     {
                         name: "层次",
