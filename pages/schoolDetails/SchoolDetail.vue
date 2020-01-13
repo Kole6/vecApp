@@ -404,7 +404,14 @@
 				} */
 			},
 			toWebsite() {
-				if (!this.schoolInfo.website) return;
+				if (!this.schoolInfo.website){
+					uni.showToast({
+						title: '没有找到本学校官网！',
+						duration: 2000,
+						icon:'none'
+					});
+					return;
+				};
 				uni.navigateTo({
 					url: `./schoolProfile?website=${this.schoolInfo.website}`
 				});
