@@ -330,6 +330,7 @@ export default {
             })
         });
     },
+
     /* 学校对比结果  @sids 逗号隔开的id*/
     apiMyXxdb(that, sids) {
         return new Promise((resolve, reject) => {
@@ -357,6 +358,26 @@ export default {
                 header: 'form',
                 data: {
                     zyids,
+                    token: uni.getStorageSync('token')
+                },
+            }).then((res) => {
+                if (res.code == 0) {
+                    resolve(res.data);
+                } else {
+                    reject();
+                }
+            })
+        });
+    },
+    /* 点赞  @keyid 学校代码或专业代码 @type 1学校，2专业*/
+    apiLikeit(that, type, keyid) {
+        return new Promise((resolve, reject) => {
+            that.$http({
+                url: '/zjq/User/likeit',
+                header: 'form',
+                data: {
+                    keyid,
+                    type,
                     token: uni.getStorageSync('token')
                 },
             }).then((res) => {

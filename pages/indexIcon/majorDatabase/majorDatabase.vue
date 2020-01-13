@@ -18,7 +18,7 @@
       @transition="transition"
       @animationfinish="animationfinish"
     >
-      <swiper-item class="swiper-item" v-for="(item,i) of 3" :key="i">
+      <swiper-item class="swiper-item">
         <scroll-view class="nav-left" scroll-y style="height: 100%;">
           <view
             class="nav-left-item"
@@ -52,6 +52,50 @@
             </uni-collapse-item>
           </uni-collapse>
         </scroll-view>
+      </swiper-item>
+      <swiper-item class="swiper-item">
+        <scroll-view class="nav-left" scroll-y style="height: 100%;">
+          <view
+            class="nav-left-item"
+            :key="index"
+            :class="index == categoryActive ? 'active' : ''"
+            @click="level1Click(item, index)"
+            v-for="(item, index) in level1"
+          >{{ item.name }}</view>
+        </scroll-view>
+        <scroll-view
+          class="nav-right"
+          scroll-y
+          style="height: 100%;"
+          scroll-with-animation
+        >
+        <view
+                class="category-item"
+                v-for="(item,i) in level2"
+                :key="i"
+                @tap="handleItemTap(item)"
+              >{{item.name}}</view>
+          <!-- <uni-collapse>
+            <uni-collapse-item
+              v-for="(list,index) in level2"
+              @taped="level2Click(list,index)"
+              :key="list.code"
+              :title="list.name"
+              :show-animation="true"
+              :open="list.open"
+            >
+              <view
+                class="category-item"
+                v-for="(item,i) in level3"
+                :key="i"
+                @tap="handleItemTap(item)"
+              >{{item.name}}</view>
+            </uni-collapse-item>
+          </uni-collapse> -->
+        </scroll-view>
+      </swiper-item>
+      <swiper-item class="swiper-item">
+        <view>暂无数据</view>
       </swiper-item>
     </swiper>
   </view>

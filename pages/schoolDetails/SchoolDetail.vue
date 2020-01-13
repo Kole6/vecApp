@@ -25,13 +25,13 @@
 						<view class="num"><text>学校标识码：{{schoolInfo.schoolno}}</text></view>
 					</view>
 					<view class="f-site" @tap="toWebsite">官网</view>
-					<view class="f-dz" @tap="hasDZ = !hasDZ">
-						<image :src="hasDZ ? '/static/indexIcon/dz.png' : '/static/indexIcon/dz.png'" mode="aspectFit" style="width: 40upx; height: 40upx;"></image>
+					<view class="f-dz" @tap="handleDZ">
+						<image :src="hasDZ ? '/static/indexIcon/dzs.png' : '/static/indexIcon/dz.png'" mode="aspectFit" style="width: 40upx; height: 40upx;"></image>
 						<text>{{ schoolInfo.dzNumber }}</text>
 					</view>
 				</view>
 				<view class="tags">
-					<view class="item" v-for="(item,index) in schoolInfo.schoolTags" :key="index">{{item}}</view>
+					<!-- <view class="item" v-for="(item,index) in schoolInfo.schoolTags" :key="index">{{item}}</view> -->
 				</view>
 				<view class="address">
 					<text>地址：</text>
@@ -359,6 +359,10 @@
 			},
 			handleBack() {
 				uni.navigateBack();
+			},
+			handleDZ(){
+				console.log('54',)
+				this.hasDZ  = !this.hasDZ
 			},
 			handlePK() {
 				uni.navigateTo({
