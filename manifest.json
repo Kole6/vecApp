@@ -2,8 +2,8 @@
     "name" : "职教圈",
     "appid" : "__UNI__90F3DA1",
     "description" : "真实的职教 精准的圈子",
-    "versionName" : "1.1.1",
-    "versionCode" : 111,
+    "versionName" : "1.1.2",
+    "versionCode" : 112,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {

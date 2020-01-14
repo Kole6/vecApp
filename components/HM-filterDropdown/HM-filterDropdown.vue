@@ -403,7 +403,7 @@
 		flex-wrap: nowrap;
 		display: flex;
 		flex-direction: row;
-		top: var(--window-top);
+		// top: var(--window-top);
 		left:0;
 		view {
 			display: flex;

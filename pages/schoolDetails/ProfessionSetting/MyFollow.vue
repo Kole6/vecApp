@@ -1,150 +1,137 @@
 <template>
-  <view class>
-    <sl-filter
-      ref="filter"
-      :topFixed="true"
-      :menuListArr="menuList"
-      :topFixedHeight="topFixedHeight"
-      @result="handleSearch"
-      @conditionTap="handleConditionTap"
-    ></sl-filter>
-    <view class="m-content">
-      <load-more
-        ref="scroll"
-        @onPullDown="onPullDown"
-        @onLoadMore="onLoadMore"
-        :styleObj="{ height: wrapperHeight }"
-        :loadStatus="loadStatus"
-      >
-        <school-list :isText="true" :showType="4" :isSpecial="true" :listArr="dataArr"></school-list>
-      </load-more>
+  <view class="h-top">
+    <HMfilterDropdown
+      :filterData="filterData"
+      :defaultSelected="defaultSelected"
+      :updateMenuName="true"
+      @confirm="confirm"
+    ></HMfilterDropdown>
+    <!-- 占位 -->
+    <view class="place"></view>
+    <!-- 商品列表 -->
+    <view class="goods-list">
+      <school-list
+        :showType="4"
+        :is-special="true"
+        :listArr="listArr"
+        :handleTaped="false"
+        @taped="handleListTaped"
+      />
     </view>
   </view>
 </template>
 
 <script>
-import slFilter from "@/components/sl-filter/sl-filter.vue";
+import HMfilterDropdown from "@/components/HM-filterDropdown/HM-filterDropdown.vue";
 import schoolList from "@/components/vec-school-list/vec-school-list.vue";
-import { professionData } from "@/pages/indexIcon/mockData.js";
-import loadMore from "@/components/loadMore/you-scroll.vue";
 export default {
-  components: { slFilter, schoolList, loadMore },
+  components: {
+    HMfilterDropdown,
+    schoolList
+  },
   data() {
     return {
-      loadStatus: "more",
-      wrapperHeight: "auto",
-      systemInfo: uni.getSystemInfoSync(),
-      topFixedHeight: "",
-      menuList: [
+      indexArr: "",
+      valueArr: "",
+      loadingText: "正在加载...",
+      filterDropdownValue: [],
+      defaultSelected: [],
+      listArr: [],
+      filterData: [
         {
-          title: "重点专业",
-          isMutiple: false,
-          key: "key_1",
-          detailList: [
+          name: "重点专业",
+          type: "hierarchy",
+          submenu: [
             {
-              title: "全部",
-              value: "0"
-            },
-            {
-              title: "航天航空",
-              value: "1"
-            },
-            {
-              title: "医药护理",
-              value: "2"
-            }
-          ]
-        },
-        {
-          title: "产业大类",
-          key: "key_2",
-          isMutiple: false,
-          detailList: [
-            {
-              title: "全部",
+              name: "全部",
               value: ""
             },
             {
-              title: "农林牧渔",
+              name: "国家级",
               value: "1"
+            },
+            {
+              name: "省级",
+              value: "2"
             }
           ]
         },
         {
-          title: "专业年份",
-          key: "key_3",
-          isMutiple: false,
-          detailList: [
+          name: "产业大类",
+          type: "hierarchy",
+          submenu: [
             {
-              title: "全部",
-              value: "0"
+              name: "全部",
+              value: ""
             },
             {
-              title: "2019",
+              name: "一类",
               value: "1"
             },
             {
-              title: "2018",
+              name: "二类",
               value: "2"
             },
             {
-              title: "2017",
+              name: "三类",
               value: "3"
+            }
+          ]
+        },
+        {
+          name: "修业年限",
+          type: "hierarchy",
+          submenu: [
+            {
+              name: "全部",
+              value: ""
             },
             {
-              title: "2016",
-              value: "4"
+              name: "1年",
+              value: "1"
+            },
+            {
+              name: "2年",
+              value: "2"
+            },
+            {
+              name: "3年",
+              value: "3"
             }
           ]
         }
-      ],
-      dataArr: professionData
+      ]
     };
   },
+  filters: {
+    outData(value) {
+      return JSON.stringify(value);
+    }
+  },
   mounted() {
-    let query = uni.createSelectorQuery().in(this);
-    query
-      .select(".m-content")
-      .boundingClientRect(data => {
-        let height = "";
-        // #ifdef APP-PLUS
-        height = this.systemInfo.screenHeight - data.top - 94 + "px";
-        // #endif
-        // #ifdef H5
-        height = this.systemInfo.screenHeight - data.top - 50 + "px";
-        // #endif
-        if (height) {
-          this.wrapperHeight = height;
-        }
-      })
-      .exec();
-    // 75475
+	  this.apiGetMajors("");
+  },
+  //上拉加载，需要自己在page.json文件中配置"onReachBottomDistance"
+  onReachBottom() {
+    uni.showToast({ title: "触发上拉加载" });
   },
   methods: {
-    /* 下拉刷新 */
-    onPullDown(done) {
-      done();
+    async apiGetMajors(key) {
+      let list = await this.$api.apiGetCollegeMajorSetting(this, '4114013697');
+      this.listArr = this.$tool.toolMajorList(list);
     },
-    /* 上拉加载 */
-    onLoadMore() {
-      this.loadStatus = "loading";
-      setTimeout(() => {
-        this.loadStatus = "more";
-      }, 1000);
-	},
-	/* 选项点击 */
-    handleConditionTap({ key, list, index }) {
-		console.log('点击{ key, list, index }',{ key, list, index })
+    confirm(e) {
+      this.indexArr = e.index;
+      this.valueArr = e.value;
     },
-    /* 查询数据 */
-    handleSearch() {}
+    handleListTaped() {
+      console.log("点击");
+    }
   }
 };
 </script>
-
-<style scoped lang="scss">
-.m-content {
-  overflow: auto;
-  background: #ffffff;
+<style lang="scss">
+.place {
+  height: 44px;
 }
 </style>
