@@ -41,7 +41,7 @@
       </swiper>
     </view>
     <!-- <view class="no-data">
-			<image src="/static/no_data.png" mode="aspectFill"></image>
+			<image src="/static/no_data.png" mode="aspectFill" />
 			<p>你目前还没有关注的学校哦～</p>
     </view>-->
   </view>

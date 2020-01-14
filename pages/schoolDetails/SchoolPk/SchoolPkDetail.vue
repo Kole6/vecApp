@@ -5,7 +5,7 @@
         <view class="left">
           <view class="item" v-for='(item,i) of bodyList' :key='i'>{{ item.schoolname }}</view>
         </view>
-        <view class="right"><image src="../../../static/indexIcon/pk-vs.png" mode="aspectFit" style="width: 183upx; height: 106upx;"></image></view>
+        <view class="right"><image src="../../../static/indexIcon/pk-vs.png" mode="aspectFit" style="width: 183upx; height: 106upx;" /></view>
       </view>
     </view>
     <view class="m-title">

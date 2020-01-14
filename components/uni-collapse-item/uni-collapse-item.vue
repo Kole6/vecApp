@@ -10,7 +10,7 @@
 				<view class="uni-collapse-cell__title-text">{{ title }}</view>
 			</view>
 			<view :class="{ 'uni-active': isOpen, 'uni-collapse-cell--animation': showAnimation === true }" class="uni-collapse-cell__title-arrow">
-				<image :src="isOpen ? '/static/indexIcon/uparrow.png' : '/static/indexIcon/downarrow.png'" mode="aspectFit" style="height: 12px;width: 12px;"></image>
+				<image :src="isOpen ? '/static/indexIcon/uparrow.png' : '/static/indexIcon/downarrow.png'" mode="aspectFit" style="height: 12px;width: 12px;" />
 				<!-- <uni-icons
           :color="isOpen?'#fff':'#bbb'"
           size="20"

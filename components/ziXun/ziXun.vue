@@ -6,7 +6,7 @@
 				<p class="left-text">{{`时间：${item.createtime}  来源：${item.source}`}}</p> 
 			</view>
 			<view class="z-right">
-				<image mode="aspectFill" :src="item.picurl" class="image1"></image>
+				<image mode="aspectFill" :src="item.picurl" class="image1" />
 			</view>
 		</view>
 	</view>

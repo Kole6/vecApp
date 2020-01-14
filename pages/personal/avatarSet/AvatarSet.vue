@@ -3,7 +3,7 @@
 		<!-- 头像设置 -->
 		<!-- <view class="">{{imageSrc}}</view> -->
 		<!-- <view class="m-c">
-			<image :src="imageSrc" mode="aspectFit" class="image"></image>
+			<image :src="imageSrc" mode="aspectFit" class="image" />
 		</view> -->
 		<view class="m-c">
 			<upload-file  selWidth="300upx" selHeight="300upx" @upload="myUpload" :avatarSrc="url"

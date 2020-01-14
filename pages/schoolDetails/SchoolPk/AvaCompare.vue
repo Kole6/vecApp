@@ -1,6 +1,6 @@
 <template>
 	<view class="m-w">
-		<image src="/static/no-ava.png" mode="aspectFill"></image>
+		<image src="/static/no-ava.png" mode="aspectFill" />
 		<view class="tip">
 			<text>暂时无法提供预览，请下载后查看~</text>
 		</view>

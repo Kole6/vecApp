@@ -4,7 +4,7 @@
 		<view class="" style="height: 35px;background: #FFFFFF;"></view>
 		<!-- #endif -->
 		<uni-nav-bar @click-left="handleBack" left-icon="arrowleft" :shadow="false" :border="false" title="专业信息">
-			<view class="f-sc" slot="right" @tap="handleSC"><image :src="hasSC ? assets.sc2 : assets.sc1" mode="aspectFit" style="height: 40upx; width: 40upx;"></image></view>
+			<view class="f-sc" slot="right" @tap="handleSC"><image :src="hasSC ? assets.sc2 : assets.sc1" mode="aspectFit" style="height: 40upx; width: 40upx;" /></view>
 		</uni-nav-bar>
 
 		<view class="content-wrapper" :style="{ height: wrapperHeight }">
@@ -28,7 +28,7 @@
 					<text class="value">{{ professionInfo.xynx }}</text>
 				</view>
 				<view :class="['f-base', hasDZ ? 'yes' : 'no']" @tap="hasDZ = !hasDZ">
-					<image :src="hasDZ ? '/static/indexIcon/dz.png' : '/static/indexIcon/dz.png'" mode="aspectFit" style="width: 40upx; height: 40upx;"></image>
+					<image :src="hasDZ ? '/static/indexIcon/dz.png' : '/static/indexIcon/dz.png'" mode="aspectFit" style="width: 40upx; height: 40upx;" />
 					<text>{{ dzNumber }}</text>
 				</view>
 			</view>
@@ -36,16 +36,16 @@
 			<!-- 对比列表 -->
 			<view class="m-pk">
 				<view class="left" v-if="hasDB" @tap="apiMyComparison('D')">
-					<image src="/static/indexIcon/delete.png" mode="aspectFit" style="width: 40upx;height: 40upx;"></image>
+					<image src="/static/indexIcon/delete.png" mode="aspectFit" style="width: 40upx;height: 40upx;" />
 					<text>在对比列表中删除本学校</text>
 				</view>
 				<view class="left" v-else  @tap="apiMyComparison('A')">
-					<image src="/static/indexIcon/add.png" mode="aspectFit" style="width: 40upx;height: 40upx;"></image>
+					<image src="/static/indexIcon/add.png" mode="aspectFit" style="width: 40upx;height: 40upx;" />
 					<text>添加本学校到对比列表</text>
 				</view>
 				<view class="right" @tap="handlePK"><text>对比</text></view>
-				<image class="bg1" @tap="handlePK" src="/static/indexIcon/colorGroup2.png" mode="aspectFit" style="width: 300upx;height: 100upx;"></image>
-				<image class="bg2" @tap="handlePK" src="/static/indexIcon/vszong.png" mode="aspectFit" style="width: 70upx;height: 70upx;"></image>
+				<image class="bg1" @tap="handlePK" src="/static/indexIcon/colorGroup2.png" mode="aspectFit" style="width: 300upx;height: 100upx;" />
+				<image class="bg2" @tap="handlePK" src="/static/indexIcon/vszong.png" mode="aspectFit" style="width: 70upx;height: 70upx;" />
 			</view>
 			<!-- 专业解读 -->
 			<view class="m-pro">
@@ -76,7 +76,7 @@
 			<!-- 开设学校 -->
 			<view class="m-school" @tap="handleToSchool">
 				<text class="title">开设学校</text>
-				<image src="/static/indexIcon/more.png" mode="aspectFit" style="height: 40upx; width: 40upx;"></image>
+				<image src="/static/indexIcon/more.png" mode="aspectFit" style="height: 40upx; width: 40upx;" />
 			</view>
 			<view class="line"></view>
 			<!-- 相近专业 -->

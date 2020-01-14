@@ -2,7 +2,7 @@
 	<view>
 		<view class="ziXun" hover-class="navigator-hover" v-for="(item,index) in newList" :key="index" @tap="openInfo(item)">
 			<view class="z-left">
-				<image mode="aspectFill" :src="item.picurl" class="image1"></image>
+				<image mode="aspectFill" :src="item.picurl" class="image1" />
 			</view>
 			<view class="z-right">
 				<p class="left-title">{{item.newstitle}}</p>

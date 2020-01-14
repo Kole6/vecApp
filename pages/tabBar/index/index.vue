@@ -3,7 +3,7 @@
 		<!-- 搜索框 -->
 		<nav-bar>
 			<view slot="left" class="address_select">
-				<image src="/static/logo-img.png" mode="aspectFill"></image>
+				<image src="/static/logo-img.png" mode="aspectFill" />
 			</view>
 			<view slot="right" class="search_box" @touchstart="confirm()">
 				<text class="icon_search"></text>
@@ -14,7 +14,7 @@
 		<view class="swiper-view">
 			<swiper class="swiper" indicator-dots="true" autoplay="true" circular="true" indicator-active-color="#ffffff">
 				<swiper-item v-for="(swiper,index) in swiperList" :key="index" @tap="toSwiper(swiper)">
-					<image mode="aspectFill" :src="swiper.imageUrl"></image>
+					<image mode="aspectFill" :src="swiper.imageUrl" />
 				</swiper-item>
 			</swiper>
 		</view>
@@ -40,7 +40,7 @@
 							<p class="left-text">Double high <br> plan</p>
 						</view>
 						<view class="z-right">
-							<image mode="aspectFill" src="/static/p303.png" class="image1"></image>
+							<image mode="aspectFill" src="/static/p303.png" class="image1" />
 						</view>
 					</view>
 				</navigator>
@@ -51,7 +51,7 @@
 							<p class="left-text">International <br>  co-operation</p>
 						</view>
 						<view class="z-right">
-							<image mode="aspectFill" src="/static/p301.png" class="image1"></image>
+							<image mode="aspectFill" src="/static/p301.png" class="image1" />
 						</view>
 					</view>
 				</navigator>
@@ -62,7 +62,7 @@
 							<p class="left-text">Vocational Education list</p>
 						</view>
 						<view class="z-right">
-							<image mode="aspectFill" src="/static/p304.png" class="image1"></image>
+							<image mode="aspectFill" src="/static/p304.png" class="image1" />
 						</view>
 					</view>
 				</navigator>
@@ -73,7 +73,7 @@
 							<p class="left-text">Service <br> Centre</p>
 						</view>
 						<view class="z-right">
-							<image mode="aspectFill" src="/static/p302.png" class="image1"></image>
+							<image mode="aspectFill" src="/static/p302.png" class="image1" />
 						</view>
 					</view>
 				</navigator>

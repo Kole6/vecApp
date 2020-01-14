@@ -15,11 +15,11 @@
 								<view class="qiun-charts">
 									<view class="charts-man">
 										<view class="male">
-											<image src="../../../static/p602.png" mode="aspectFill"></image>
+											<image src="../../../static/p602.png" mode="aspectFill" />
 											<p>{{teacherPec[0].name}}教师 <span class="persent">{{teacherPec[0].value}}%</span></p>
 										</view>
 										<view class="female">
-											<image src="../../../static/p603.png" mode="aspectFill"></image>
+											<image src="../../../static/p603.png" mode="aspectFill" />
 											<p>{{teacherPec[1].name}}教师 <span class="persent">{{teacherPec[1].value}}%</span></p>
 										</view>
 									</view>

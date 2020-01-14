@@ -7,7 +7,7 @@
           <view class="item" v-for="(item,index) in bodyList" :key="index">{{item.majorname}}</view>
         </view>
         <view class="right">
-          <image src="/static/indexIcon/pk-vs.png" mode="aspectFit" style="width: 183upx; height: 106upx;"></image>
+          <image src="/static/indexIcon/pk-vs.png" mode="aspectFit" style="width: 183upx; height: 106upx;" />
         </view>
       </view>
     </view>

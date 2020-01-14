@@ -2,7 +2,7 @@
 	<view>
 		<view class="logo">
 			<p>
-				<image src="/static/1024.png" mode="aspectFill"></image>
+				<image src="/static/1024.png" mode="aspectFill" />
 			</p>
 			<p>真实的职教，精准的圈子</p>
 			<p>v1.0 (当前版本)</p>

@@ -12,7 +12,7 @@
             <view class="selecting"></view>
           </block>
           <block v-else>
-            <image src="/static/indexIcon/selected.png" mode="aspectFit" style="height: 36upx; width:36upx"></image>
+            <image src="/static/indexIcon/selected.png" mode="aspectFit" style="height: 36upx; width:36upx" />
           </block>
         </view>
         <school-list-item
@@ -25,7 +25,7 @@
     </view>
     <view class="line"></view>
     <view class="m-tips" @tap="toAdd">
-      <image src="/static/indexIcon/add.png" mode="aspectFit" style="width: 40upx; height: 40upx;"></image>
+      <image src="/static/indexIcon/add.png" mode="aspectFit" style="width: 40upx; height: 40upx;" />
       <text>继续添加对比{{key1}},最多添加四个</text>
     </view>
     <!-- 底部按钮 -->

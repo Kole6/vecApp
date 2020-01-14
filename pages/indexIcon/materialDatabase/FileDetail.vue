@@ -39,15 +39,15 @@
 				<text class="tips">(部分)</text>
 			</view>
 			<view class="content">
-				<image class="image" :src="fileInfo.fileImg" mode="aspectFit"></image>
+				<image class="image" :src="fileInfo.fileImg" mode="aspectFit" />
 			</view>
 		</view>
 		<view class="m-btn-group">
 			<view class="u-btn down" @tap="handleDownload">
-				<image class="img" src="/static/indexIcon/down.png" mode="aspectFit"></image> 下载文件
+				<image class="img" src="/static/indexIcon/down.png" mode="aspectFit" /> 下载文件
 			</view>
 			<view class="u-btn share" @tap="handleShare">
-				<image class="img" src="/static/indexIcon/share.png" mode="aspectFit"></image>分享给好友
+				<image class="img" src="/static/indexIcon/share.png" mode="aspectFit" />分享给好友
 			</view>
 		</view>
 		<uni-popup ref="share" :type="type" :custom="true" @change="change">

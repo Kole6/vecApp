@@ -12,7 +12,7 @@
 		</view>
 		<view class="list-title">
 			<view class="hot">热门学校</view>
-			<image class="hot-img" src="/static/indexIcon/hot.png" mode="aspectFit"></image>
+			<image class="hot-img" src="/static/indexIcon/hot.png" mode="aspectFit" />
 		</view>
 		<load-more ref="scroll" @onPullDown="onPullDown" @onLoadMore="onLoadMore" :styleObj="{ height:wrapperHeight}"
 		 :loadStatus="loadStatus">

@@ -2,7 +2,7 @@
 <template>
 	<view class="content" :style={height}>
 		<view class="kong1"></view>
-		<image src="/static/indexIcon/fwzx.png" mode="widthFix"></image>
+		<image src="/static/indexIcon/fwzx.png" mode="widthFix" />
 		<view class="kong2"></view>
 	</view>
 </template>

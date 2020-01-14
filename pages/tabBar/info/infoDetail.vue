@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<view class="png">
-			<image :src="selectNews.picurl" mode="aspectFill"></image>
+			<image :src="selectNews.picurl" mode="aspectFill" />
 		</view>
 		<view class="info-art">
 			<text class="art-title">{{selectNews.newstitle}}</text>
@@ -14,7 +14,7 @@
 			</view>
 			<scroll-view class="scroll-view_H" scroll-x="true" scroll-left="0">
 				<view class="scroll-view-item_H uni-bg-red" v-for="(item,index) of hotNewsList" :key="index"  @tap="openInfo(item)">
-					<image :src="item.picurl" mode="aspectFill"></image>
+					<image :src="item.picurl" mode="aspectFill" />
 					<p class="ex-title">{{item.newstitle}}</p>
 					<p class="ex-time">{{item.createtime}}</p>
 				</view>

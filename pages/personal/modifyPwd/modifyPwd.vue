@@ -10,7 +10,7 @@
           placeholder="请输入新密码"
           :password="!showPassword"
         />
-        <image class="img" :src="showPassword?'/static/p702.png':'/static/p701.png'" @tap="display"></image>
+        <image class="img" :src="showPassword?'/static/p702.png':'/static/p701.png'" @tap="display" />
       </view>
       <view class="list-call">
         <input
@@ -21,7 +21,7 @@
           placeholder="确认新密码"
           :password="!showPassword2"
         />
-        <image class="img" :src="showPassword2?'/static/p702.png':'/static/p701.png'" @tap="display2"></image>
+        <image class="img" :src="showPassword2?'/static/p702.png':'/static/p701.png'" @tap="display2" />
       </view>
     </view>
     <view class="jieshi">

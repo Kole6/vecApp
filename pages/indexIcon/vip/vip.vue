@@ -4,7 +4,7 @@
 		<view class="vip-content">
 			<view class="vip-card">
 				<view class="vip-l">
-					<image src="../../../static/p106.png" mode="aspectFill"></image>
+					<image src="../../../static/p106.png" mode="aspectFill" />
 				</view>
 				<view class="vip-r">
 					<p>{{userInfo?userInfo.name:'昵称'}}</p>

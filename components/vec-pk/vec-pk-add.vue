@@ -34,7 +34,7 @@
             <view class="list-item" v-for="(item, index) in listArr" :key="index">
               <view class="flag" @click="handleListTaped(item)">
                 <block v-if="item.hasSelected">
-                    <image src="/static/indexIcon/selected.png" mode="aspectFit" style="height: 36upx; width:36upx" ></image>
+                    <image src="/static/indexIcon/selected.png" mode="aspectFit" style="height: 36upx; width:36upx"  />
                 </block>
                 <block v-else>
                     <view class="selecting"></view>
@@ -56,7 +56,7 @@
             <view class="list-item" v-for="(item, index) in listArr2" :key="index">
               <view class="flag" @click="handleListTaped(item)">
                 <block v-if="item.hasSelected">
-                    <image src="/static/indexIcon/selected.png" mode="aspectFit" style="height: 36upx; width:36upx" ></image>
+                    <image src="/static/indexIcon/selected.png" mode="aspectFit" style="height: 36upx; width:36upx"  />
                 </block>
                 <block v-else>
                     <view class="selecting"></view>

@@ -5,7 +5,7 @@
 		<!-- #endif -->
 		<uni-nav-bar @click-left="handleBack" left-icon="arrowleft" :shadow="false" :border="false" title="学校详情">
 			<view class="f-sc" slot="right" @tap="handleSC">
-				<image :src=" `/static/indexIcon/${hasSC ? 'sc2' : 'sc1'}.png`" mode="aspectFit" style="height: 40upx; width: 40upx;"></image>
+				<image :src=" `/static/indexIcon/${hasSC ? 'sc2' : 'sc1'}.png`" mode="aspectFit" style="height: 40upx; width: 40upx;" />
 			</view>
 		</uni-nav-bar>
 		<view class="m-wrapper" :style="{ height: wrapperHeight, overflow: 'auto' }">
@@ -13,7 +13,7 @@
 				<view class="base">
 					<view class="left" @tap="handleLogoTaped">
 						<image :src="schoolInfo.logo || 'https://gitee.com/wy333/kole/raw/master/img/20200102.png'" mode="aspectFill"
-						 style="width: 100%; height: 100%;"></image>
+						 style="width: 100%; height: 100%;" />
 					</view>
 					<view class="right">
 						<view class="title">{{schoolInfo.name}}</view>
@@ -26,7 +26,7 @@
 					</view>
 					<view class="f-site" @tap="toWebsite">官网</view>
 					<view class="f-dz" @tap="handleDZ">
-						<image :src="hasDZ ? '/static/indexIcon/dzs.png' : '/static/indexIcon/dz.png'" mode="aspectFit" style="width: 40upx; height: 40upx;"></image>
+						<image :src="hasDZ ? '/static/indexIcon/dzs.png' : '/static/indexIcon/dz.png'" mode="aspectFit" style="width: 40upx; height: 40upx;" />
 						<text>{{ schoolInfo.dzNumber }}</text>
 					</view>
 				</view>
@@ -43,16 +43,16 @@
 			<view class="m-tip">您还可以进行专业对比哦！ 您已经添加 {{numberDB}} 个学校</view>
 			<view class="m-pk">
 				<view class="left" v-if="hasDB" @tap="apiMyComparison('D')">
-					<image src="/static/indexIcon/delete.png" mode="aspectFit" style="width: 40upx;height: 40upx;"></image>
+					<image src="/static/indexIcon/delete.png" mode="aspectFit" style="width: 40upx;height: 40upx;" />
 					<text>在对比列表中删除本学校</text>
 				</view>
 				<view class="left" v-else  @tap="apiMyComparison('A')">
-					<image src="/static/indexIcon/add.png" mode="aspectFit" style="width: 40upx;height: 40upx;"></image>
+					<image src="/static/indexIcon/add.png" mode="aspectFit" style="width: 40upx;height: 40upx;" />
 					<text>添加本学校到对比列表</text>
 				</view>
 				<view class="right" @tap="handlePK"><text>对比</text></view>
-				<image class="bg1" @tap="handlePK" src="/static/indexIcon/colorGroup.png" mode="aspectFit" style="width: 300upx;height: 100upx;"></image>
-				<image class="bg2" @tap="handlePK" src="/static/indexIcon/vszong.png" mode="aspectFit" style="width: 70upx;height: 70upx;"></image>
+				<image class="bg1" @tap="handlePK" src="/static/indexIcon/colorGroup.png" mode="aspectFit" style="width: 300upx;height: 100upx;" />
+				<image class="bg2" @tap="handlePK" src="/static/indexIcon/vszong.png" mode="aspectFit" style="width: 70upx;height: 70upx;" />
 			</view>
 
 			<view class="m-info">
@@ -79,7 +79,7 @@
 				<text>拓扑图</text>
 				<uni-icons type="arrowright" size="24" class="list-right" />
 				<view class="tuopu">
-					<image src="/static/indexIcon/tpt.png" mode="aspectFit" style="width: 750upx; height:230upx;"></image>
+					<image src="/static/indexIcon/tpt.png" mode="aspectFit" style="width: 750upx; height:230upx;" />
 				</view>
 			</view>
 			<view class="m-school_list" @tap="handleRouter(`./NearbySchool/NearbySchoolList?sid=${schoolInfo.schoolno}`)">

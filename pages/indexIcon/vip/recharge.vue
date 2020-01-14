@@ -19,7 +19,7 @@
 				<span>选择支付方式：</span>
 			</view>
 			<view class="mode-pay" v-for="(item,index) in payList" :key="index" @tap="raTap(index)">
-				<image :src="item.icon" mode="aspectFill"></image>
+				<image :src="item.icon" mode="aspectFill" />
 				<text class="icon-text">{{item.name}}</text>
 				<radio :checked="index==payIndex" color="#6451FC" />
 			</view>

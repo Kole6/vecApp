@@ -3,7 +3,7 @@
 		<slot>
 			<view class="">{{ message ? message : '暂无信息' }}</view>
 		</slot>
-		<image class="img" src="/static/indexIcon/close.png" mode="aspectFit" @tap="handleTap"></image>
+		<image class="img" src="/static/indexIcon/close.png" mode="aspectFit" @tap="handleTap" />
 	</view>
 </template>
 

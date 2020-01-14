@@ -3,7 +3,7 @@
 		<view class="item" @tap="handleTap(item)" v-for="(item,index) in listArr" :key="index">
 			<view class="left">
 				<block v-if="item.src">
-					<image :src="item.src" mode="aspectFill"></image>
+					<image :src="item.src" mode="aspectFill" />
 				</block>
 				<block v-else>
 					item.src

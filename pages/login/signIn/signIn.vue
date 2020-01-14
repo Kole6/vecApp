@@ -1,10 +1,10 @@
 <template>
 	<view class="sign">
 		<view class="sign-x">
-			<image src="/static/p111.png" mode="aspectFill" @tap="toMe()"></image>
+			<image src="/static/p111.png" mode="aspectFill" @tap="toMe()" />
 		</view>
 		<view class="sign-logo">
-			<image src="/static/logo-img.png" mode="aspectFill"></image>
+			<image src="/static/logo-img.png" mode="aspectFill" />
 		</view>
 		<view class="sign-list" v-if="!isPhoneSign">
 			<view class="list-call">
@@ -12,7 +12,7 @@
 			</view>
 			<view class="list-call">
 				<input class="biaoti" v-model="password" type="text" maxlength="32" placeholder="请输入密码" :password="!showPassword" />
-				<image class="img" :src="showPassword?'/static/p702.png':'/static/p701.png'" @tap="display"></image>
+				<image class="img" :src="showPassword?'/static/p702.png':'/static/p701.png'" @tap="display" />
 			</view>
 		</view>
 		<view class="sign-list" v-else>
@@ -42,8 +42,8 @@
 			<text class="line"></text>
 		</view>
 		<view class="order-img">
-			<image @tap="login_qq()" src="/static/p108.png" mode="aspectFill"></image>
-			<image @tap="login_weixin()" src="/static/p109.png" mode="aspectFill"></image>
+			<image @tap="login_qq()" src="/static/p108.png" mode="aspectFill" />
+			<image @tap="login_weixin()" src="/static/p109.png" mode="aspectFill" />
 		</view>
 		<view class="sign-xieyi">
 			<text>登录即表示同意职教圈

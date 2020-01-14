@@ -4,7 +4,7 @@
 			<view class="menu_item" @tap="handleModifyAvatar">
 				<text class="menu_l">头像</text>
 				<view class="menu_r">
-					<image :src="picUrl" class="menu_r_png" mode="aspectFill"></image>
+					<image :src="picUrl" class="menu_r_png" mode="aspectFill" />
 				</view>
 			</view>
 			<view class="menu_item" @tap="toPhone(userInfo.phone)">

@@ -1,7 +1,7 @@
 <template>
 	<view class="category">
 		<view @tap="handleTap(item)" class="item" v-for="(item,index) in categoryArr" :key="index">
-			<image class="ipc" :src="item.IPC" mode="widthFix"></image>
+			<image class="ipc" :src="item.IPC" mode="widthFix" />
 			<view class="right">
 				<view class="item-name">{{item.name}}</view>
 				<view class="item-desc">{{item.desc}}</view>

@@ -4,10 +4,10 @@
 			<swiper-item>
 				<view class="swiper-item">
 					<view class="swiper-item-img1">
-						<image src="/static/guide/p002_1.png" mode="widthFix"></image>
+						<image src="/static/guide/p002_1.png" mode="widthFix" />
 					</view>
 					<view class="swiper-item-img2">
-						<image src="/static/guide/p002_2.png" mode="aspectFill"></image>
+						<image src="/static/guide/p002_2.png" mode="aspectFill" />
 					</view>
 					<view class="spot">
 						<view v-for="(item,index) in 4" :key="item" :class="[index==selIndex ? 'spot-s' : '','spot-t']"></view>
@@ -18,10 +18,10 @@
 			<swiper-item>
 				<view class="swiper-item">
 					<view class="swiper-item-img1">
-						<image src="/static/guide/p001_1.png" mode="widthFix"></image>
+						<image src="/static/guide/p001_1.png" mode="widthFix" />
 					</view>
 					<view class="swiper-item-img2">
-						<image src="/static/guide/p001_2.png" mode="aspectFill"></image>
+						<image src="/static/guide/p001_2.png" mode="aspectFill" />
 					</view>
 					<view class="spot">
 						<view v-for="(item,index) in 4" :key="item" :class="[index==selIndex ? 'spot-s' : '','spot-t']"></view>
@@ -32,10 +32,10 @@
 			<swiper-item>
 				<view class="swiper-item">
 					<view class="swiper-item-img1">
-						<image src="/static/guide/p004_1.png" mode="widthFix"></image>
+						<image src="/static/guide/p004_1.png" mode="widthFix" />
 					</view>
 					<view class="swiper-item-img2">
-						<image src="/static/guide/p004_2.png" mode="aspectFill"></image>
+						<image src="/static/guide/p004_2.png" mode="aspectFill" />
 					</view>
 					<view class="spot">
 						<view v-for="(item,index) in 4" :key="item" :class="[index==selIndex ? 'spot-s' : '','spot-t']"></view>
@@ -46,10 +46,10 @@
 			<swiper-item>
 				<view class="swiper-item">
 					<view class="swiper-item-img1">
-						<image src="/static/guide/p003_1.png" mode="widthFix"></image>
+						<image src="/static/guide/p003_1.png" mode="widthFix" />
 					</view>
 					<view class="swiper-item-img2">
-						<image src="/static/guide/p003_2.png" mode="aspectFill"></image>
+						<image src="/static/guide/p003_2.png" mode="aspectFill" />
 					</view>
 					<view class="spot">
 						<view class="experience" @tap="launchFlag()">{{experience}}</view>

@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<image class="logo" src="/static/u1.png" mode="aspectFill"></image>
+		<image class="logo" src="/static/u1.png" mode="aspectFill" />
 		<view class="text-area">
 			<form @submit="formSubmit">
 				<view class="uni-form-item uni-column">
