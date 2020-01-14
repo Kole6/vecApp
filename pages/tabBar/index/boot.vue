@@ -61,6 +61,9 @@
 </template>
 
 <script>
+import {
+	Edition
+} from '@/config'
 	export default {
 		data() {
 			return {
@@ -77,7 +80,7 @@
 				 * 向本地存储中设置launchFlag的值，即启动标识；
 				 */
 				uni.setStorage({
-					key: 'launchFlag112',
+					key: String('launchFlag'+Edition),
 					data: true,
 				});
 				uni.switchTab({
