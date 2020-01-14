@@ -9,7 +9,7 @@
 				<view class="yzm" :class="{ yzms: second>0 }" @tap="getcode">{{yanzhengma}}{{second>0?'s':''}}</view>
 			</view>
 			<view class="list-call">
-				<input class="biaoti" v-model="password" type="text" maxlength="32" placeholder="请设置密码" :password="!showPassword" />
+				<input class="biaoti" v-model="password" type="text" maxlength="20" placeholder="请设置密码" :password="!showPassword" />
 				<image class="img" :src="showPassword?'/static/p702.png':'/static/p701.png'" @tap="display"></image>
 			</view>
 			<view class="list-call">
@@ -29,7 +29,7 @@
 			tha = this;
 
 		},
-		onUnload() {
+		onShow(){
 			clearInterval(js)
 			this.second = 0;
 		},
@@ -123,7 +123,7 @@
 							title: res.message
 						});
 						setTimeout(() => {
-							uni.navigateTo({
+							uni.redirectTo({
 								url: '/pages/login/signIn/signIn'
 							});
 						}, 1000);
@@ -138,7 +138,15 @@
 				})
 			},
 			toIndex() {
-				this.apiRegister();
+				let pl = this.password.length;
+				if (pl > 5 && pl < 21) {
+					this.apiRegister();
+				} else {
+					uni.showModal({
+						content: "请设置6-20位密码！",
+						showCancel: false
+					});
+				}
 			},
 			bindLogin() {
 				if (this.xieyi == false) {

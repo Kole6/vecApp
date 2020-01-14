@@ -62,7 +62,7 @@
 			uni.removeStorageSync('token');
 			uni.removeStorageSync('userInfo');
 		},
-		onUnload() {
+		onShow() {
 			clearInterval(js)
 			this.second = 0;
 		},

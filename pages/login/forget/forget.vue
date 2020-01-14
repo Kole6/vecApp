@@ -21,7 +21,7 @@
 		onLoad() {
 			tha = this;
 		},
-		onUnload() {
+		onShow() {
 			clearInterval(js)
 			this.second = 0;
 		},

@@ -13,44 +13,64 @@
 		<block v-if="type=='select'">
 			<view class="select-view" @tap.stop>
 				<view v-for="(item,index) in mData" :key="index" class="select-box" @tap="tapConfirm(item)">
-					<view><image :src="item.icon" v-if="item.icon"></image>{{item.title}}</view>
-					<view class="content">{{item.content}}</view>
+					<view><image class="image" :src="item.icon" v-if="item.icon"></image>{{item.title}}</view>
+					<view class="select-content">{{item.content}}</view>
 				</view>
+			</view>
+		</block>
+		<block v-if="type=='multiSelect'">
+			<view class="select-view" @tap.stop>
+				<checkbox-group @change="checkboxChange">
+					<view v-for="(item,index) in mData" :key="index" class="select-box">
+						<view><image class="image" :src="item.icon" v-if="item.icon"></image>{{item.title}}</view>
+						<view class="select-content">
+							<checkbox :value="item.title" :color="item.radioColor?item.radioColor:'#001AFF'" :checked="item.flag"></checkbox>
+						</view>
+					</view>
+				</checkbox-group>
 			</view>
 		</block>
 		<block v-if="type=='advert'">
 			<view class="advert-view">
-				<image :src="mData.src" class="confirm" @tap.stop="tapConfirm" :style="{width:mData.width?mData.width:'500rpx',height:mData.height?mData.height:'700rpx'}"></image>
-				<image class="cancel" @tap.stop="tapCancel" src="../../static/chunLei-modal/close.png"></image>
+				<image :src="mData.src" class="image confirm" @tap.stop="tapConfirm" :style="{width:mData.width?mData.width:'500rpx',height:mData.height?mData.height:'700rpx'}"></image>
+				<image class="image cancel" @tap.stop="tapCancel" src="/static/shilu-login/close.png"></image>
+			</view>
+		</block>
+		<block v-if="type=='notify'">
+			<view class="notify-view">
+				<view class="title" v-if="mData.title">{{mData.title}}</view>
+				<image class="image" :src="mData.src" v-if="mData.src"></image>
+				<view class="content word-break">{{mData.content}}</view>
+				<view class="cancel" @tap="tapCancel" :style="{color:mData.cancelColor?mData.cancelColor:''}">{{mData.cancelText?mData.cancelText:'我知道了'}}</view>
 			</view>
 		</block>
 		<block v-if="type=='share'">
 			<view class="share-view" @tap.stop>
 				<view v-for="(item,index) in mData" :key="index" class="share-box" @tap="tapConfirm(item)">
-					<image :src="item.icon" v-if="item.icon"></image>{{item.title}}
+					<image class="image" :src="item.icon" v-if="item.icon"></image>{{item.title}}
 				</view>
 			</view>
 		</block>
-		<block v-if="type=='input'">
+		<block v-if="type=='input'&&value">
 			<view class="input-view" @tap.stop>
 				<view class="title">{{mData.title}}</view>
 				<view class="content">
 					<view v-for="(item,index) in mData.content" :key="index" class="input-box">
-						<view>{{item.title}}</view>
+						<view class="view">{{item.title}}</view>
 						<block v-if="item.type=='number'">
-							<input v-model="item.content" type="number" :password="item.type=='password'" :placeholder="item.placeholder"/>
+							<input class="input" v-model="item.content" type="number" :password="item.type=='password'" :placeholder="item.placeholder"/>
 						</block>
 						<block v-if="item.type=='password'">
-							<input v-model="item.content" :password="item.type=='password'" :placeholder="item.placeholder"/>
+							<input class="input" v-model="item.content" :password="item.type=='password'" :placeholder="item.placeholder"/>
 						</block>
 						<block v-if="item.type=='digit'">
-							<input v-model="item.content" type="digit" :password="item.type=='password'" :placeholder="item.placeholder"/>
+							<input class="input" v-model="item.content" type="digit" :password="item.type=='password'" :placeholder="item.placeholder"/>
 						</block>
 						<block v-if="item.type=='idcard'">
-							<input v-model="item.content" type="idcard" :password="item.type=='password'" :placeholder="item.placeholder"/>
+							<input class="input" v-model="item.content" type="idcard" :password="item.type=='password'" :placeholder="item.placeholder"/>
 						</block>
 						<block v-if="!item.type||item.type=='text'">
-							<input v-model="item.content" type="text" :password="item.type=='password'" :placeholder="item.placeholder"/>
+							<input class="input" v-model="item.content" type="text" :password="item.type=='password'" :placeholder="item.placeholder"/>
 						</block>
 					</view>
 				</view>
@@ -108,12 +128,25 @@
 			//#endif
 		},
 		methods:{
+			checkboxChange(e){
+				var items = this.mData,
+				values = e.detail.value;
+				for (var i = 0, lenI = items.length; i < lenI; ++i) {
+				    const item = items[i]
+				    if(values.includes(item.title)){
+				        this.$set(item,'flag',true)
+				    }else{
+                        this.$set(item,'flag',false)
+                    }
+				}
+				
+			},
 			inputConfirm(){
 				this.$emit('onConfirm',this.mData.content)
 				this.$emit('input',false)
 			},
 			tapCancel(){
-				this.$emit('onCancel')
+				this.$emit('cancel')
 				this.$emit('input',false)
 			},
 			tapConfirm(item){
@@ -122,7 +155,14 @@
 			},
 			tapMask(){
 				if(!this.maskEnable) return
+				if(this.type == 'multiSelect'){
+					this.$emit('onConfirm',this.mData)
+				}else{
+					this.$emit('cancel',this.mData)
+				}
+				
 				this.$emit('input',false)
+
 			},
 			creatPlusMask(navHeight,tabbarHeight,opacity){
 				for (let i = 1; i <= 10; i++) {
@@ -169,8 +209,8 @@
 					if(i==9){
 						clearInterval(temp)
 					}else{
-						this.navList[i].show()
-						this.tabbarList[i].show()
+						if (this.navList[i]) this.navList[i].show()
+						if (this.tabbarList[i]) this.tabbarList[i].show()
 						// if(i!=0) this.navList[i-1].hide()
 						// if(i!=0) this.tabbarList[i-1].hide()
 						i++
@@ -283,12 +323,12 @@
 			justify-content: space-between;
 			align-items: center;
 			border-bottom: 0.5px solid #ddd;
-			.content{
+			.select-content{
 				color: #aaa;
 				font-size: 12px;
 			}
 		}
-		image{
+		.image{
 			display: inline-block;
 			vertical-align: middle;
 			width: 40rpx;
@@ -298,6 +338,37 @@
 	}
 	.select-view .select-box:last-child{
 		border: none;
+	}
+	.notify-view{
+		width: 600rpx;
+		background-color: #fff;
+		border-radius: 6rpx;
+		.image{
+			width: 600rpx;
+			height: 150rpx;
+		}
+		.title{
+			height: 100rpx;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.content{
+			padding: 40rpx 48rpx;
+			min-height: 40px;
+			font-size: 15px;
+			line-height: 1.4;
+			color: #999;
+			text-align: center;
+		}
+		.cancel{
+			height: 100rpx;
+			display: flex;
+			flex: 1;
+			justify-content: center;
+			align-items: center;
+			border-top:1px solid #E7E7E7;
+		}
 	}
 	.advert-view{
 		overflow: hidden;
@@ -333,7 +404,7 @@
 			width: 33.33%;
 			padding: 40rpx 0;
 		}
-		image{
+		.image{
 			width: 80rpx;
 			height: 80rpx;
 			margin-bottom: 20rpx;
@@ -362,11 +433,11 @@
 		.input-box{
 			display: flex;
 			margin-bottom: 20rpx;
-			view{
+			.view{
 				margin-right: 20rpx;
 				min-width: 150rpx;
 			}
-			input{
+			.input{
 				
 				font-size: 18px;
 			}

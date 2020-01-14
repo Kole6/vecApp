@@ -4,7 +4,7 @@
 			<image src="/static/p406.png" mode="aspectFill"></image>
 			<view class="tou">
 				<view class="tou-img">
-					<image src="../../../static/p106.png" mode="aspectFill"></image>
+					<image :src="userInfo.photo || '/static/p106.png'" mode="aspectFill"></image>
 				</view>
 				<view class="tou-vip">
 					<p>普通用户</p>

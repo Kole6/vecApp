@@ -58,8 +58,6 @@
 				inputData: {
 					title: '修改昵称',
 					content: [{
-						// title: '修改昵称',
-						// type: 'number',
 						content: '',
 						placeholder: '请输入昵称'
 					}]
@@ -111,19 +109,15 @@
 			onConfirm(e) {
 				if (e[0].content) {
 					this.apiModifyNickName(e[0].content, uni.getStorageSync('token'))
-					e[0].content = '';
 				} else {
 					uni.showToast({
 						title: '昵称为空，修改失败',
 						icon: 'none'
 					})
 				}
+				e[0].content = '';
 			},
-			onCancel() {
-				/* uni.showToast({
-					title: '取消',
-					icon: 'none'
-				}) */
+			onCancel(e) {
 			},
 			toLogin() {
 				uni.navigateTo({
