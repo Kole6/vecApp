@@ -12,7 +12,11 @@
             <view class="selecting"></view>
           </block>
           <block v-else>
-            <image src="/static/indexIcon/selected.png" mode="aspectFit" style="height: 36upx; width:36upx" />
+            <image
+              src="/static/indexIcon/selected.png"
+              mode="aspectFit"
+              style="height: 36upx; width:36upx"
+            />
           </block>
         </view>
         <school-list-item
@@ -50,25 +54,15 @@ export default {
     key2: String,
     key3: String,
     key4: String,
-    key5: String
+    key5: String,
+    listPk: Array
   },
   data() {
     return {
-      isShowMessage: true,
-      listPk: []
+      isShowMessage: true
     };
   },
-  mounted() {
-    this.getCompareInfo();
-  },
   methods: {
-    async getCompareInfo() {
-      let list = await this.$api.apiGetComparison(this, this.type);
-      this.listPk =
-        this.type == 1
-          ? this.$tool.toolSchoolList(list)
-          : this.$tool.toolMajorList(list);
-    },
     async apiMyComparison(that, optype, type, id) {
       await this.$api.apiMyComparison(that, optype, type, id);
     },
@@ -79,7 +73,7 @@ export default {
         success: function(res) {
           if (res.confirm) {
             that.apiMyComparison(that, "D", that.type, item[that.key3]);
-            that.listPk.splice(i, 1);
+            that.$emit("pkSplice", i);
           }
         }
       });
@@ -88,19 +82,20 @@ export default {
       this.isShowMessage = false;
     },
     toAdd() {
-      if(this.listPk.length>=4){
+      if (this.listPk.length >= 4) {
         uni.showToast({
-          title: `最多只能选取${this.type==1?'4所院校':'4个专业'}进行对比哦`,
-          icon: 'none'
+          title: `最多只能选取${
+            this.type == 1 ? "4所院校" : "4个专业"
+          }进行对比哦`,
+          icon: "none"
         });
         return;
       }
       uni.navigateTo({ url: this.key4 });
     },
     toDetail() {
-      // uni.navigateTo({ url: this.key5 });
-      let arr = this.$tool.toolPkList(this.listPk, this.type)
-      uni.navigateTo({ url: `${this.key5}?ids=${arr.toString()}`  })
+      let arr = this.$tool.toolPkList(this.listPk, this.type);
+      uni.navigateTo({ url: `${this.key5}?ids=${arr.toString()}` });
     },
     toBack() {
       uni.navigateBack({ delta: 1 });

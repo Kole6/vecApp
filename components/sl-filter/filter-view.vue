@@ -2,35 +2,37 @@
 
 	<view>
 		<view style="padding: 0px 0px;">
-			<view class="filter-content" v-for="(item, index) in menuList" :key="index" v-if="menuIndex == index">
-				<view v-if="item.isSort">
-					<view class="filter-content-list">
-						<view v-for="(detailItem,idx) in selectDetailList" :key="idx" :class="detailItem.isSelected?'filter-content-list-item-active':'filter-content-list-item-default'"
-						 :style="{'color': detailItem.isSelected?themeColor:'#666666'}" @tap="sortTap(idx,selectDetailList,item.key)">
-							<text>{{detailItem.title}}</text>
+			<block v-for="(item, index) in menuList" :key="index">
+				<view class="filter-content"  v-if="menuIndex == index">
+					<view v-if="item.isSort">
+						<view class="filter-content-list">
+							<view v-for="(detailItem,idx) in selectDetailList" :key="idx" :class="detailItem.isSelected?'filter-content-list-item-active':'filter-content-list-item-default'"
+							:style="{'color': detailItem.isSelected?themeColor:'#666666'}" @tap="sortTap(idx,selectDetailList,item.key)">
+								<text>{{detailItem.title}}</text>
+							</view>
+						</view>
+					</view>
+					<view v-else>
+						<view class="filter-content-title" v-if="item.detailTitle && item.detailTitle.length">
+							<text>{{item.detailTitle}}</text>
+						</view>
+						<view class="filter-content-detail">
+							<text v-for="(detailItem,idx) in selectDetailList" :key="idx" class='filter-content-detail-item-default' :style="{'background-color':detailItem.isSelected?themeColor:'#FFFFFF','color':detailItem.isSelected?'#FFFFFF':'#666666'}"
+							@tap="itemTap(idx,selectDetailList,item.isMutiple,item.key)">
+								{{detailItem.title}}
+							</text>
+						</view>
+						<view class="filter-content-footer">
+							<!-- <view class="filter-content-footer-item" style="color: #777777; background-color: #FFFFFF;" @tap="resetClick(selectDetailList,item.key)">
+								<text>重置</text>
+							</view> -->
+							<view class="filter-content-footer-item" :style="{'color': '#FFFFFF', 'background-color': themeColor}" @tap="sureClick">
+								<text>确定</text>
+							</view>
 						</view>
 					</view>
 				</view>
-				<view v-else>
-					<view class="filter-content-title" v-if="item.detailTitle && item.detailTitle.length">
-						<text>{{item.detailTitle}}</text>
-					</view>
-					<view class="filter-content-detail">
-						<text v-for="(detailItem,idx) in selectDetailList" :key="idx" class='filter-content-detail-item-default' :style="{'background-color':detailItem.isSelected?themeColor:'#FFFFFF','color':detailItem.isSelected?'#FFFFFF':'#666666'}"
-						 @tap="itemTap(idx,selectDetailList,item.isMutiple,item.key)">
-							{{detailItem.title}}
-						</text>
-					</view>
-					<view class="filter-content-footer">
-						<!-- <view class="filter-content-footer-item" style="color: #777777; background-color: #FFFFFF;" @tap="resetClick(selectDetailList,item.key)">
-							<text>重置</text>
-						</view> -->
-						<view class="filter-content-footer-item" :style="{'color': '#FFFFFF', 'background-color': themeColor}" @tap="sureClick">
-							<text>确定</text>
-						</view>
-					</view>
-				</view>
-			</view>
+			</block>
 		</view>
 	</view>
 

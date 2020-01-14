@@ -388,4 +388,23 @@ export default {
             })
         });
     },
+    /* 创业就业率 */
+    apiGetJycy(that, sid) {
+        return new Promise((resolve, reject) => {
+            that.$http({
+                url: '/zjq/College/GetJycy',
+                header: 'form',
+                data: {
+                    sid,
+                    token: uni.getStorageSync('token')
+                },
+            }).then((res) => {
+                if (res.code == 0) {
+                    resolve(res.data);
+                } else {
+                    reject();
+                }
+            })
+        });
+    },
 }
