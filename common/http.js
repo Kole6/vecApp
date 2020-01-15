@@ -1,6 +1,6 @@
 // created by wangyong for uni-app request
 import {
-	baseURL
+	ConfigBaseURL
 } from '../config'
 const http = (options) => {
 	return new Promise((resolve, reject) => {
@@ -12,7 +12,7 @@ const http = (options) => {
 		}
 		try {
 			uni.request({
-				url: (options.baseURL || baseURL) + options.url,
+				url: (options.baseURL || ConfigBaseURL) + options.url,
 				method: options.method || 'POST', // 默认为POST请求
 				data: options.data, //请求超时在manifest.json配置
 				header: {
@@ -21,18 +21,20 @@ const http = (options) => {
 				},
 				success: res => {
 					//全局处理权限问题
-					if(res.data.message =="token不能为空" || res.data.message =="用户不能为空，请先登录" || res.data.message =="用户不能为空"){
+					if (res.data.message == "token不能为空" || res.data.message == "用户不能为空，请先登录" || res.data.message == "用户不能为空") {
 						uni.showModal({
-						    content: '登录之后才可以查看哦!',
-						    success: function (res) {
-						        if (res.confirm) {
-						            uni.reLaunch({
-						            	url:'/pages/login/signIn/signIn'
-						            })
-						        } else if (res.cancel) {
-						            uni.navigateBack({ delta: 1 });
-						        }
-						    }
+							content: '登录之后才可以查看哦!',
+							success: function (res) {
+								if (res.confirm) {
+									uni.reLaunch({
+										url: '/pages/login/signIn/signIn'
+									})
+								} else if (res.cancel) {
+									uni.navigateBack({
+										delta: 1
+									});
+								}
+							}
 						});
 					}
 					resolve(res.data)
@@ -54,13 +56,13 @@ const http = (options) => {
 					} */
 				},
 				complete: () => {
-					if (options.load){
+					if (options.load) {
 						uni.hideLoading();
 					}
 				}
 			});
 		} catch (e) {
-			if (options.load){
+			if (options.load) {
 				uni.hideLoading();
 			}
 			uni.showToast({
@@ -70,17 +72,4 @@ const http = (options) => {
 		}
 	})
 }
-
 export default http
-
-// 调用例子
-/*
-this.$http({
-  method: 'GET',
-  url: '/api/news',
-  data: {},
-  header:'form'
-}).then((res) =>{
-  console.log(res)
-})
- */

@@ -34,10 +34,14 @@
             <view class="list-item" v-for="(item, index) in listArr" :key="index">
               <view class="flag" @click="handleListTaped(item)">
                 <block v-if="item.hasSelected">
-                    <image src="/static/indexIcon/selected.png" mode="aspectFit" style="height: 36upx; width:36upx"  />
+                  <image
+                    src="/static/indexIcon/selected.png"
+                    mode="aspectFit"
+                    style="height: 36upx; width:36upx"
+                  />
                 </block>
                 <block v-else>
-                    <view class="selecting"></view>
+                  <view class="selecting"></view>
                 </block>
               </view>
               <school-list-item
@@ -56,10 +60,14 @@
             <view class="list-item" v-for="(item, index) in listArr2" :key="index">
               <view class="flag" @click="handleListTaped(item)">
                 <block v-if="item.hasSelected">
-                    <image src="/static/indexIcon/selected.png" mode="aspectFit" style="height: 36upx; width:36upx"  />
+                  <image
+                    src="/static/indexIcon/selected.png"
+                    mode="aspectFit"
+                    style="height: 36upx; width:36upx"
+                  />
                 </block>
                 <block v-else>
-                    <view class="selecting"></view>
+                  <view class="selecting"></view>
                 </block>
               </view>
               <school-list-item
@@ -87,6 +95,7 @@ import uniSearchBar from "@/components/uni-search-bar/uni-search-bar.vue";
 import messageInfo from "@/components/vec-message-info/vec-message-info.vue";
 import QSTabs from "@/components/QS-tabs/QS-tabs.vue";
 import loadMore from "@/components/loadMore/you-scroll.vue";
+import { ConfigContrast } from "@/config";
 export default {
   components: {
     schoolListItem,
@@ -135,17 +144,17 @@ export default {
       let list = await this.$api.apiGetComparison(this, this.type);
       this.listPk = this.$tool.toolPkList(list, this.type);
       if (this.type == 1) {
-        this.tabs= ["我的关注", "热门学校"]
+        this.tabs = ["我的关注", "热门学校"];
         let l = await this.$api.apiGetFavoriteListSearch(this, this.type, key);
-        this.listArr = this.$tool.toolSchoolListPk(l,this.listPk);
+        this.listArr = this.$tool.toolSchoolListPk(l, this.listPk);
         let list = await this.$api.apiGetSchoolSearchList(this, key);
-        this.listArr2 = this.$tool.toolSchoolListPk(list,this.listPk);
+        this.listArr2 = this.$tool.toolSchoolListPk(list, this.listPk);
       } else {
-        this.tabs= ["我的关注", "热门专业"]
+        this.tabs = ["我的关注", "热门专业"];
         let l = await this.$api.apiGetFavoriteListSearch(this, this.type, key);
-        this.listArr = this.$tool.toolMajorListPk(l,this.listPk);
+        this.listArr = this.$tool.toolMajorListPk(l, this.listPk);
         let list = await this.$api.apiGetMajors(this, key);
-        this.listArr2 = this.$tool.toolMajorListPk(list,this.listPk);
+        this.listArr2 = this.$tool.toolMajorListPk(list, this.listPk);
       }
     },
     search({ value }) {
@@ -153,24 +162,31 @@ export default {
     },
     /* 点击增删对比库 */
     async handleListTaped(item) {
-      if(item.hasSelected){ 
-        this.$api.apiMyComparison(this,'D', this.type,item[this.key3])
-        this.listPk.splice(this.listPk.findIndex(t => t === item[this.key3]), 1)
+      if (item.hasSelected) {
+        this.$api.apiMyComparison(this, "D", this.type, item[this.key3]);
+        this.listPk.splice(
+          this.listPk.findIndex(t => t === item[this.key3]),
+          1
+        );
         item.hasSelected = !item.hasSelected;
-      }else{ 
-        if (this.listPk.length >= 4) {
-            uni.showToast({
-                title: `最多只能选取${this.type == 1 ? "4所院校" : "4个专业"}进行对比哦`,
-                icon: "none"
-            });
-            return;
-        }else{
-            this.$api.apiMyComparison(this,'A', this.type,item[this.key3])
-            this.listPk.push(item[this.key3])
-            item.hasSelected = !item.hasSelected;
+      } else {
+        if (this.listPk.length >= ConfigContrast) {
+          uni.showToast({
+            title: `最多只能选取 ${
+              this.type == 1
+                ? ` ${ConfigContrast} 所院校`
+                : ` ${ConfigContrast} 个专业`
+            } 进行对比哦`,
+            icon: "none"
+          });
+          return;
+        } else {
+          this.$api.apiMyComparison(this, "A", this.type, item[this.key3]);
+          this.listPk.push(item[this.key3]);
+          item.hasSelected = !item.hasSelected;
         }
       }
-      console.log(' this.listPk', this.listPk)
+      console.log(" this.listPk", this.listPk);
     },
     handleMessageClose() {
       this.isShowMessage = false;
@@ -180,7 +196,7 @@ export default {
       this.$set(item, "checked", !item.checked);
     },
     toDetail() {
-      uni.navigateTo({ url: `${this.key4}?ids=${this.listPk.toString()}`  });
+      uni.navigateTo({ url: `${this.key4}?ids=${this.listPk.toString()}` });
     },
     toBack() {
       uni.navigateBack({ delta: 2 });

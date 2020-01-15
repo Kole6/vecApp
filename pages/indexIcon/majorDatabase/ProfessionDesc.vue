@@ -148,6 +148,7 @@ import schoolList from "@/components/vec-school-list/vec-school-list.vue";
 import uniNavBar from "@/components/uni-nav-bar/uni-nav-bar.vue";
 import sc1 from "@/static/indexIcon/sc1.png";
 import sc2 from "@/static/indexIcon/sc2.png";
+import { ConfigContrast } from "@/config";
 export default {
   components: { schoolList, uniNavBar },
   data() {
@@ -231,9 +232,9 @@ export default {
       });
     },
     async apiMyComparison(optype) {
-      if (this.numberDB >= 4 && optype == "A") {
+      if (this.numberDB >= ConfigContrast && optype == "A") {
         uni.showToast({
-          title: "最多只能选取4个专业进行对比哦!",
+          title: `最多只能选取 ${ConfigContrast} 个专业进行对比哦！`,
           icon: "none"
         });
         return;

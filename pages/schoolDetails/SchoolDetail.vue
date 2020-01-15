@@ -21,13 +21,15 @@
     <view class="m-wrapper" :style="{ height: wrapperHeight, overflow: 'auto' }">
       <view class="m-top">
         <view class="base">
-          <view class="left" @tap="handleLogoTaped">
-            <image
-              :src="schoolInfo.logo || 'https://gitee.com/wy333/kole/raw/master/img/20200102.png'"
-              mode="aspectFill"
-              style="width: 100%; height: 100%;"
-            />
+          <view class="left" v-if="schoolInfo.logo" @tap="handleLogoTaped">
+            <image :src="schoolInfo.logo" mode="aspectFill" style="width: 100%; height: 100%;" />
           </view>
+          <view
+            class="left"
+            v-else
+            @tap="handleLogoTaped"
+            style="border: solid 1upx #6451FC;"
+          >{{getFirst(schoolInfo.name)}}</view>
           <view class="right">
             <view class="title">{{schoolInfo.name}}</view>
             <view class="info">
@@ -172,6 +174,7 @@ import uniNavBar from "@/components/uni-nav-bar/uni-nav-bar.vue";
 import uniIcons from "@/components/uni-icons/uni-icons";
 import ziXun from "@/components/ziXun/ziXunLeft.vue";
 import uniPopup from "@/components/uni-popup/uni-popup.vue";
+import { ConfigContrast } from "@/config";
 export default {
   components: {
     uniNavBar,
@@ -361,9 +364,9 @@ export default {
       });
     },
     async apiMyComparison(optype) {
-      if (this.numberDB >= 4 && optype == "A") {
+      if (this.numberDB >= ConfigContrast && optype == "A") {
         uni.showToast({
-          title: "最多只能选取4所院校进行对比哦",
+          title: `最多只能选取 ${ConfigContrast} 所院校进行对比哦！`,
           icon: "none"
         });
         return;
@@ -487,6 +490,9 @@ export default {
 				}
 			});
 		} */
+    },
+    getFirst(name) {
+      return name.substr(0, 1);
     },
     toWebsite() {
       if (!this.schoolInfo.website) {

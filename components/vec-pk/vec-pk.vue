@@ -43,6 +43,7 @@
 <script>
 import messageInfo from "@/components/vec-message-info/vec-message-info.vue";
 import schoolListItem from "@/components/vec-school-list/SchoolListItem.vue";
+import { ConfigContrast } from "@/config";
 export default {
   components: {
     schoolListItem,
@@ -82,11 +83,13 @@ export default {
       this.isShowMessage = false;
     },
     toAdd() {
-      if (this.listPk.length >= 4) {
+      if (this.listPk.length >= ConfigContrast) {
         uni.showToast({
-          title: `最多只能选取${
-            this.type == 1 ? "4所院校" : "4个专业"
-          }进行对比哦`,
+          title: `最多只能选取 ${
+            this.type == 1
+              ? ` ${ConfigContrast} 所院校`
+              : ` ${ConfigContrast} 个专业`
+          } 进行对比哦`,
           icon: "none"
         });
         return;

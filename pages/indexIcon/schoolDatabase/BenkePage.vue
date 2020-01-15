@@ -1,30 +1,18 @@
 <template>
-  <view class>
-    <load-more
-      ref="scroll"
-      @onPullDown="onPullDown"
-      @onLoadMore="onLoadMore"
-      :styleObj="{ height: systemInfo.screenHeight - 80 + 'px' }"
-      :loadStatus="loadStatus"
-    >
-      <view class="list">
-        <school-list showType="4" :listArr="dataArr" />
-      </view>
-    </load-more>
+  <view>
+    <school-list :showType="4" :listArr="dataArr" :handleTaped="false"></school-list>
   </view>
 </template>
 
 <script>
-import schoolList from '@/components/vec-school-list/vec-school-list.vue';
-import { schoolData } from "../mockData.js";
-import loadMore from "@/components/loadMore/you-scroll.vue";
+import schoolList from "@/components/vec-school-list/vec-school-list.vue";
 export default {
-  components: { schoolList, loadMore },
+  components: {
+    schoolList
+  },
   data() {
     return {
       dataArr: [],
-      loadStatus: "more",
-      systemInfo: uni.getSystemInfoSync(),
       page: {
         pageIndex: "1",
         pageSize: "10"
@@ -32,57 +20,15 @@ export default {
     };
   },
   mounted() {
-    this.onLoadMore();
+    this.apiGet();
   },
   methods: {
-    testData() {},
-    onPullDown(done) {
-      this.page.pageIndex = 1;
-      this.getData(true).finally(() => {
-        done();
+    async apiGet(key) {
+      let list = await this.$api.apiGetSchoolSearchList(this, "", {
+        sfbkcc: 1, //是否是本科院校
+        pageSize: 1000
       });
-    },
-    onScroll() {},
-    onLoadMore() {
-      this.loadStatus = "loading";
-      this.getData().then(isLastPage => {
-        if (isLastPage) {
-          this.loadStatus = "noMore";
-        } else {
-          this.loadStatus = "more";
-        }
-      });
-    },
-    getData(refresh = false) {
-      return new Promise((resolve, reject) => {
-        this.$http({
-          url: "/zjq/College/GetSchoolSearchList",
-          header: "form",
-          data: {
-            token: uni.getStorageSync("token"),
-            key: "",
-            pageIndex: this.page.pageIndex,
-            pageSize: this.page.pageSize,
-            sfbkcc: "1" //是否是本科院校
-          }
-        })
-          .then(res => {
-            if (res.code == 0) {
-              let data = this.$tool.toolSchoolList(res.data.list)
-              if (refresh) {
-                this.dataArr = data;
-                this.page.pageIndex = "1";
-              } else {
-                this.dataArr.push(...data);
-                this.page.pageIndex = res.data.pageNumber + 1 + "";
-              }
-            }
-            resolve(res.data.lastPage);
-          })
-          .catch(err => {
-            reject(err);
-          });
-      });
+      this.dataArr = this.$tool.toolSchoolList(list);
     }
   }
 };

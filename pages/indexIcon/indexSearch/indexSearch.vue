@@ -32,7 +32,7 @@
               <p>院校</p>
             </view>
             <view class="school-list">
-              <school-list class :isText="true" :showType="4" :listArr="dataArr"></school-list>
+              <school-list :isText="true" :showType="4" :listArr="dataArr"></school-list>
             </view>
             <view class="list-title">
               <p>专业</p>

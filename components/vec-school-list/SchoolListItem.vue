@@ -24,7 +24,7 @@
           </view>
         </block>
         <block v-else>
-          <view v-show="item.cards[0].name!='null'" style="display: flex;align-items: center;">
+          <view style="display: flex;align-items: center;">
             <view class="card" v-for="(card,index) in item.cards" :key="index">
               <text>{{card.name}}</text>
             </view>
@@ -55,7 +55,7 @@ export default {
     handleTaped: Boolean,
     url: String,
     isSpecial: {
-      type: Boolean, // 是否特殊显示cards
+      type: Boolean, // 是否特殊显示cards，第二行有两种显示方式，专业true:[{name:value}] 院校false: [name]
       default: false
     }
   },

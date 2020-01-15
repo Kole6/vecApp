@@ -6,14 +6,10 @@ export default {
             return {
                 ...item,
                 title: item.schoolname,
-                cards: (item.tags + "").split(",").map(item => {
-                    return {
-                        name: item
-                    };
-                }),
+                cards: fixTags(item.tags),
                 tags: [{
                         name: "地区",
-                        value: zhixia(item.area)
+                        value: fixZhixia(item.area)
                     },
                     {
                         name: "层次",
@@ -30,14 +26,10 @@ export default {
                 ...item,
                 hasSelected: listPk.includes(item.schoolno),
                 title: item.schoolname,
-                cards: (item.tags + "").split(",").map(item => {
-                    return {
-                        name: item
-                    };
-                }),
+                cards: fixTags(item.tags),
                 tags: [{
                         name: "地区",
-                        value: zhixia(item.area)
+                        value: fixZhixia(item.area)
                     },
                     {
                         name: "层次",
@@ -145,11 +137,26 @@ export default {
 }
 
 /* 四个直辖市替换 */
-function zhixia(str) {
+function fixZhixia(str) {
     const zhi = ["北京北京市", "天津天津市", "上海上海市", "重庆重庆市"]
     if (zhi.includes(str)) {
         return str.slice(2, 5)
     } else {
         return str
     }
+}
+
+/* tags数据处理 */
+function fixTags(str) {
+    let k = []
+    if (str) {
+        for (let i of str.split(',')) {
+            if (i) {
+                k.push({
+                    name: i
+                })
+            }
+        }
+    }
+    return k
 }
