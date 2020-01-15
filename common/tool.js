@@ -19,6 +19,25 @@ export default {
             };
         });
     },
+    /* 学校接口数据转换 search*/
+    toolSchoolListSearch(list, search) {
+        return list.map(item => {
+            return {
+                ...item,
+                title: item.schoolname.replace(search, `<span style="color:#6451FC">${search}</span>`),
+                cards: fixTags(item.tags),
+                tags: [{
+                        name: "地区",
+                        value: fixZhixia(item.area)
+                    },
+                    {
+                        name: "层次",
+                        value: item.level
+                    }
+                ]
+            };
+        });
+    },
     /* 学校接口数据转换 PK*/
     toolSchoolListPk(list, listPk) {
         return list.map(item => {
@@ -45,6 +64,15 @@ export default {
             return {
                 ...item,
                 title: item.majorname,
+                tags: [{
+                        name: '专业大类',
+                        value: item.zydl || ''
+                    },
+                    {
+                        name: '代码',
+                        value: item.majorcode
+                    }
+                ],
                 cards: [{
                         name: '学历层次',
                         value: item.xlcc || ''
@@ -53,7 +81,16 @@ export default {
                         name: '专业年限',
                         value: item.xynx || ''
                     }
-                ],
+                ]
+            };
+        });
+    },
+    /* 专业接口数据转换 search*/
+    toolMajorListSearch(list, search) {
+        return list.map(item => {
+            return {
+                ...item,
+                title: item.majorname.replace(search, `<span style="color:#6451FC">${search}</span>`),
                 tags: [{
                         name: '专业大类',
                         value: item.zydl || ''
@@ -61,6 +98,15 @@ export default {
                     {
                         name: '代码',
                         value: item.majorcode
+                    }
+                ],
+                cards: [{
+                        name: '学历层次',
+                        value: item.xlcc || ''
+                    },
+                    {
+                        name: '专业年限',
+                        value: item.xynx || ''
                     }
                 ]
             };
@@ -73,15 +119,6 @@ export default {
                 ...item,
                 hasSelected: listPk.includes(item.majorcode),
                 title: item.majorname,
-                cards: [{
-                        name: '学历层次',
-                        value: item.xlcc || ''
-                    },
-                    {
-                        name: '专业年限',
-                        value: item.xynx || ''
-                    }
-                ],
                 tags: [{
                         name: '专业大类',
                         value: item.zydl || ''
@@ -89,6 +126,15 @@ export default {
                     {
                         name: '代码',
                         value: item.majorcode
+                    }
+                ],
+                cards: [{
+                        name: '学历层次',
+                        value: item.xlcc || ''
+                    },
+                    {
+                        name: '专业年限',
+                        value: item.xynx || ''
                     }
                 ]
             };
@@ -108,7 +154,7 @@ export default {
             };
         });
     },
-    /* 对比接口数据转换 */
+    /* 对比接口数据转换 数据提出*/
     toolPkList(list, type) {
         return list.map(item => {
             return type == 1 ? item.schoolno : item.majorcode
@@ -145,11 +191,10 @@ function fixZhixia(str) {
         return str
     }
 }
-
 /* tags数据处理 */
 function fixTags(str) {
-    let k = []
     if (str) {
+        let k = []
         for (let i of str.split(',')) {
             if (i) {
                 k.push({
@@ -157,6 +202,7 @@ function fixTags(str) {
                 })
             }
         }
+        return k
     }
-    return k
+    return []
 }

@@ -137,37 +137,10 @@ export default {
           }
         }).then(res => {
           if (res.code == 0) {
-            let data = res.data.list.map(item => {
-              item.tags = item.tags + "";
-              let string = item.majorname.replace(
-                this.searchValue,
-                `<span style="color:#6451FC">${this.searchValue}</span>`
-              );
-              return {
-                ...item,
-                title: string,
-                cards: [
-                  {
-                    name: "学历层次",
-                    value: item.xlcc || ""
-                  },
-                  {
-                    name: "专业年限",
-                    value: item.xynx || ""
-                  }
-                ],
-                tags: [
-                  {
-                    name: "专业大类",
-                    value: item.zydl || ""
-                  },
-                  {
-                    name: "代码",
-                    value: item.majorcode
-                  }
-                ]
-              };
-            });
+            let data = this.$tool.toolMajorListSearch(
+              res.data.list,
+              this.searchValue
+            );
             if (isRefresh) {
               this.searchResultMessage = `一共${res.data.totalRow}条搜索数据`;
               this.dataArr = data;

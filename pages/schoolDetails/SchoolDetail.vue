@@ -34,7 +34,7 @@
             <view class="title">{{schoolInfo.name}}</view>
             <view class="info">
               <text>{{schoolInfo.city}}</text>
-              <text>{{schoolInfo.birth}}</text>
+              <text v-show="schoolInfo.establishdate">{{schoolInfo.establishdate}}</text>
               <text>{{schoolInfo.schoolType}}</text>
             </view>
             <view class="num">
@@ -188,7 +188,7 @@ export default {
       schoolInfo: {
         name: "学校名称",
         city: "-",
-        birth: "-",
+        establishdate: "-",
         schoolType: "-",
         schoolTags: [],
         dzNumber: 0,
@@ -409,7 +409,7 @@ export default {
             ...data,
             name: data.schoolname,
             city: data.city,
-            birth: data.establishdate,
+            establishdate: data.establishdate,
             schoolType: data.organizer,
             schoolTags: data.schoolTags,
             dzNumber: data.hitscount,

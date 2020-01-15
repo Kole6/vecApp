@@ -25,8 +25,7 @@
           :loadStatus="loadStatus"
         >
           <view class="list">
-			  <school-list class="" :isText="true" :showType="4" :listArr="dataArr"></school-list>
-            <!-- <school-list showType="4" :listArr="dataArr" /> -->
+            <school-list :showType="4" :listArr="dataArr"></school-list>
           </view>
         </load-more>
       </block>
@@ -37,7 +36,7 @@
 <script>
 import uniNavBar from "@/components/uni-nav-bar/uni-nav-bar.vue";
 import uniSearchBar from "@/components/uni-search-bar/uni-search-bar.vue";
-import schoolList from '@/components/vec-school-list/vec-school-list.vue';
+import schoolList from "@/components/vec-school-list/vec-school-list.vue";
 import loadMore from "@/components/loadMore/you-scroll.vue";
 import messageInfo from "@/components/vec-message-info/vec-message-info.vue";
 export default {
@@ -131,37 +130,10 @@ export default {
           }
         }).then(res => {
           if (res.code == 0) {
-            let data = res.data.list.map(item => {
-              item.tags = item.tags + "";
-              let string = item.schoolname.replace(
-                this.searchValue,
-                `<span style="color:#6451FC">${this.searchValue}</span>`
-              );
-              return {
-                ...item,
-                title: string,
-                cards: item.tags.split(",").map(item => {
-                  return {
-                    name: item
-                  };
-                }),
-                tags: [
-                  {
-                    name: "地区",
-                    value: item.area
-                  },
-                  {
-                    name: "层次",
-                    value:
-                      item.level == 1
-                        ? "高职"
-                        : item.level == 2
-                        ? "中职"
-                        : item.level
-                  }
-                ]
-              };
-            });
+            let data = this.$tool.toolSchoolListSearch(
+              res.data.list,
+              this.searchValue
+            );
             if (isRefresh) {
               this.searchResultMessage = `一共${res.data.totalRow}条搜索数据`;
               this.dataArr = data;
