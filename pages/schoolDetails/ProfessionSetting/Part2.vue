@@ -62,51 +62,35 @@ export default {
   methods: {
     /* 获取专业学生分布数据 取前七位 */
     async apiData() {
-	  let list = await this.$api.apiGetXxzyfb(this, this.sid);
-	  if(list.length>7){
-		  list = list.slice(0,7)
-	  }
-	  /* {
-            "majorname": "旅游管理",
-            "majorcode": "640101",
-            "zyzb": 17.6136
-        },
-        {
-            "majorname": "会计",
-            "majorcode": "630302",
-            "zyzb": 9.4025
-		}, */
-	
-	  console.log('list',list,'this.sid',this.sid)
-		let categories = []
-
-	  this.fillData()
-    },
-    fillData(data) {
-      let categories = [
-        "计算机网络",
-        "室内设计",
-        "建筑室内设计",
-        "食品生物工艺",
-        "工业分析与检验",
-        "汽车运用与维修",
-        "化工品制作与检验"
+      let list = await this.$api.apiGetXxzyfb(this, this.sid);
+      if (list.length > 7) {
+        list = list.slice(0, 7);
+      }
+      let categories = list.map(t => {
+        return t.majorname;
+      });
+      let color = [
+        "#68BCF5",
+        "#67A6F9",
+        "#69F5C7",
+        "#68F5E4",
+        "#6D68F6",
+        "#FF750F",
+        "#E08972"
       ];
+      let sd = list.map((t, i) => {
+        return { value: Math.floor(t.zyzb * 100) / 100, color: color[i] };
+      });
+      this.fillData(categories, sd);
+    },
+    fillData(categories, sd) {
       let series = [
         {
           legendShape: "rect",
           pointShape: "circle",
           show: true,
           type: "column",
-          data: [
-            { color: "#68BCF5", value: 17 },
-            { color: "#67A6F9", value: 12.5 },
-            { color: "#69F5C7", value: 10 },
-            { color: "#68F5E4", value: 10 },
-            { color: "#6D68F6", value: 9 },
-            { color: "#FF750F", value: 7 },
-            { color: "#E08972", value: 5 }
-          ]
+          data: sd
         }
       ];
       let Column = {
@@ -130,14 +114,13 @@ export default {
         animation: true,
         categories: chartData.categories,
         series: chartData.series,
-        // enableScroll: true,//开启图表拖拽功能
         xAxis: {
           disableGrid: true,
           rotateLabel: true
-          // itemCount:4,
-          // scrollShow:true,
         },
         yAxis: {
+          min: 0,
+          // max: 100,
           format: val => {
             return val.toFixed(0) + "%";
           }

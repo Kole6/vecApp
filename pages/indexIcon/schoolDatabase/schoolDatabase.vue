@@ -7,9 +7,9 @@
     <uni-nav-bar @click-left="toBack" left-icon="arrowleft" :shadow="false" :border="false">
       <uni-search-bar
         style="width: 100%;"
+        clearButton="always"
         :radius="100"
         :isDisabled="true"
-        clearButton="always"
         @searchClick="toSearch"
       />
     </uni-nav-bar>
@@ -151,7 +151,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-
   width: 220upx;
   text-align: center;
   box-sizing: border-box;

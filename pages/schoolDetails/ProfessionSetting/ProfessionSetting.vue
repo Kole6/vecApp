@@ -17,12 +17,13 @@
       @transition="transition"
       @animationfinish="animationfinish"
     >
+      <!-- 学校专业 -->
       <swiper-item>
         <scroll-view scroll-y style="height: 100%;">
           <my-follow />
         </scroll-view>
       </swiper-item>
-
+      <!-- 专业学生分布 -->
       <swiper-item>
         <profession-student :sid="sid" />
       </swiper-item>

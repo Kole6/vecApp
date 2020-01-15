@@ -48,8 +48,8 @@ export default {
     border-bottom: solid 1upx #eeeeee;
 
     .ipc {
-      width: 125upx;
-      height: 125upx;
+      width: 122upx;
+      height: 122upx;
       display: inline-block;
       vertical-align: middle;
     }
@@ -57,15 +57,19 @@ export default {
     .right {
       display: inline-block;
       vertical-align: middle;
-      padding-left: 10upx;
+      padding-left: 15upx;
 
       .item-name {
         font-size: 40upx;
+        color: #333;
+        font-size: 34upx;
+        font-weight: 600;
       }
 
       .item-desc {
-        font-size: 35upx;
-        margin-top: 20upx;
+        font-size: 30upx;
+        margin-top: 18upx;
+        color: #666;
       }
     }
   }
