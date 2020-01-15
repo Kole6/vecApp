@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import schoolListItem from '@/components/vec-school-list/SchoolListItem.vue';
+import schoolListItem from "@/components/vec-school-list/SchoolListItem.vue";
 export default {
   components: { schoolListItem },
   props: {
@@ -23,18 +23,17 @@ export default {
       type: Array,
       required: true
     },
-    // 显示类型：1 仅显示文字描述 2 : 仅显示name:value值  3: 仅显示tag标签  4: 全部显示
     showType: {
-      type: [Number, String],
+      type: [Number, String], // 显示类型：1 仅显示文字描述 2 : 仅显示name:value值  3: 仅显示tag标签  4: 全部显示
       default: "1"
     },
     url: String,
     isSpecial: {
-      type: Boolean,
+      type: Boolean, // 是否特殊显示cards，第二行有两种显示方式，专业true:[{name:value}] 院校false: [name]
       default: false
     },
     handleTaped: {
-      type: Boolean,
+      type: Boolean, //true:直接走学校详情； false：走@taped方法
       default: true
     }
   },

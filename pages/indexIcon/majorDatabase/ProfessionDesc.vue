@@ -18,7 +18,6 @@
         />
       </view>
     </uni-nav-bar>
-
     <view class="content-wrapper" :style="{ height: wrapperHeight }">
       <!-- 基本信息 -->
       <view class="m-base">
@@ -39,14 +38,22 @@
           <text class="name">修业年限</text>
           <text class="value">{{ professionInfo.xynx }}</text>
         </view>
-        <view :class="['f-base', hasDZ ? 'yes' : 'no']" @tap="hasDZ = !hasDZ">
+        <view class="f-base" @tap="handleDZ">
+          <image
+            :src="hasDZ ? '/static/indexIcon/dzs.png' : '/static/indexIcon/dz.png'"
+            mode="aspectFit"
+            style="width: 40upx; height: 40upx;"
+          />
+          <text>{{ dzNumber }}</text>
+        </view>
+        <!-- <view :class="['f-base', hasDZ ? 'yes' : 'no']" @tap="hasDZ = !hasDZ">
           <image
             :src="hasDZ ? '/static/indexIcon/dz.png' : '/static/indexIcon/dz.png'"
             mode="aspectFit"
             style="width: 40upx; height: 40upx;"
           />
           <text>{{ dzNumber }}</text>
-        </view>
+        </view>-->
       </view>
       <view class="m-tip">您还可以进行专业对比哦!您已经添加 {{numberDB}} 个专业</view>
       <!-- 对比列表 -->
@@ -126,7 +133,6 @@
         <view class="title">相近专业</view>
         <block v-if="dataArr.length">
           <school-list
-            :isText="true"
             :showType="4"
             :is-special="true"
             :listArr="dataArr"
@@ -168,7 +174,7 @@ export default {
       hasDB: false, //是否对比
       numberDB: 0,
       hasSaved: false, //是否已收藏
-      dzNumber: "",
+      dzNumber: 0,
       wrapperHeight: "auto",
       systemInfo: uni.getSystemInfoSync(),
       styleObj: {
@@ -186,18 +192,7 @@ export default {
       downloadLink: "",
       list1: [],
       list2: [],
-      dataArr: [
-        /* {
-					title: '汽车运用与维护',
-					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards: [{ name: '学历层次', value: '高职' }, { name: '专业年限', value: '3年' }]
-				},
-				{
-					title: '汽车运用与维护',
-					tags: [{ name: '专业大类', value: '交通运输类' }, { name: '代码', value: '0825001234' }],
-					cards: [{ name: '学历层次', value: '高职' }, { name: '专业年限', value: '3年' }]
-				} */
-      ]
+      dataArr: [] //相近专业
     };
   },
   mounted() {
@@ -217,7 +212,8 @@ export default {
     this.params = Option;
     this.getDetailData({
       zyid: Option.id,
-      schoolType: Option.type
+      schoolType: Option.type,
+      token: uni.getStorageSync("token")
     });
     this.getChance();
     this.getSimilarSchool();
@@ -249,15 +245,7 @@ export default {
     },
     //TODO 查询相似的学校，有问题，无响应
     getSimilarSchool() {
-      // this.$http({
-      // 	url:'/zjq/mainpage/GetMajorInfo',
-      // 	header:'form',
-      // 	data:{
-      // 		zyid:this.params.id
-      // 	}
-      // }).then((res)=>{
-      // 	console.log('similar == >',res)
-      // })
+      // /zjq/mainpage/GetMajorInfo
     },
     getDetailData(data) {
       this.$http({
@@ -274,8 +262,7 @@ export default {
           this.professionInfo.xynx = data.xynx;
           this.dzNumber = data.likenum;
           this.downloadLink = data.downloadlink;
-          // 相近专业数值问题
-          // this.dataArr = data.list
+          this.dataArr = this.$tool.toolMajorList(data.list);
           this.list1 = data.mainzylx.split("；").map(name => {
             return {
               name
@@ -308,12 +295,20 @@ export default {
     handleSC() {
       this.$api.apiFavoriteZy(this, this.params.id);
     },
+    handleDZ() {
+      this.hasDZ = !this.hasDZ;
+      this.dzNumber = this.hasDZ ? this.dzNumber + 1 : this.dzNumber - 1;
+    },
     handleToSchool() {
       uni.navigateTo({
         url: `./ProfessionSchool?schoolType=${this.params.type}&zyid=${this.params.id}&name=${this.professionInfo.name}`
       });
     },
-    handleListTaped(item) {},
+    handleListTaped({ item, index }) {
+      this.$tool.toolistoolTiaoToken(
+        `/pages/indexIcon/majorDatabase/ProfessionDesc?id=${item.majorcode}&name=${item.majorname}&type=1`
+      );
+    },
     handleBack() {
       uni.navigateBack();
     },
