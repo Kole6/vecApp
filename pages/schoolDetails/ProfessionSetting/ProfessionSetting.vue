@@ -24,7 +24,7 @@
       </swiper-item>
 
       <swiper-item>
-        <profession-student />
+        <profession-student :sid="sid" />
       </swiper-item>
     </swiper>
   </view>
@@ -39,8 +39,12 @@ export default {
   data() {
     return {
       tabs: ["学校专业", "专业学生分布"],
-      current: 0
+      current: 0,
+      sid: ""
     };
+  },
+  onLoad(e) {
+    this.sid = e.sid;
   },
   computed: {
     scrollH() {

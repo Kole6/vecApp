@@ -18,7 +18,7 @@
 								<view class="td">{{item.level}}</view>
 								<view class="td">{{item.date}}</view>
 							</view>
-							<view class="table-null" v-show="listArr.y2018.length==0">无数据</view>
+							<view class="table-null" v-show="isShowNo(listArr.y2018)">无数据</view>
 						</view>
 					</scroll-view>
 				</swiper-item>
@@ -35,7 +35,7 @@
 								<view class="td">{{item.level}}</view>
 								<view class="td">{{item.date}}</view>
 							</view>
-							<view class="table-null" v-show="listArr.y2017.length==0">无数据</view>
+							<view class="table-null" v-show="isShowNo(listArr.y2017)">无数据</view>
 						</view>
 					</scroll-view>
 				</swiper-item>
@@ -52,7 +52,7 @@
 								<view class="td">{{item.level}}</view>
 								<view class="td">{{item.date}}</view>
 							</view>
-							<view class="table-null" v-show="listArr.y2016.length==0">无数据</view>
+							<view class="table-null"  v-show="isShowNo(listArr.y2016)">无数据</view>
 						</view>
 					</scroll-view>
 				</swiper-item>
@@ -115,6 +115,13 @@
 						});
 					}
 				})
+			},
+			isShowNo(d){
+				if(d.length){
+					return false
+				}else{
+					return true
+				}
 			},
 			change(index) {
 				this.current = index;

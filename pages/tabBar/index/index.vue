@@ -158,9 +158,7 @@
 				})
 			},
 			confirm() {
-				uni.navigateTo({
-					url: '/pages/indexIcon/indexSearch/indexSearch'
-				});
+				this.$tool.toolistoolTiaoToken('/pages/indexIcon/indexSearch/indexSearch')
 			},
 			toSwiper(swiper) {
 				// console.log(swiper.sid);

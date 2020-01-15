@@ -290,6 +290,26 @@ export default {
             })
         });
     },
+    /* 获取热门专业和学校  @type 1:专业，2：学校（默认2）*/
+    apiGetHotCollege(that, type, param = {}) {
+        return new Promise((resolve, reject) => {
+            that.$http({
+                url: '/zjq/mainpage/GetHotCollege',
+                header: 'form',
+                data: {
+                    ...param,
+                    type,
+                    token: uni.getStorageSync('token')
+                },
+            }).then((res) => {
+                if (res.code == 0) {
+                    resolve(res.data);
+                } else {
+                    reject();
+                }
+            })
+        });
+    },
     /* 专业设置 - 获取专业 */
     apiGetCollegeMajorSetting(that, sid, param = {}) {
         return new Promise((resolve, reject) => {
@@ -310,15 +330,14 @@ export default {
             })
         });
     },
-    /* 获取热门专业和学校  @type 1:专业，2：学校（默认2）*/
-    apiGetHotCollege(that, type, param = {}) {
+    /* 专业设置 - 获取院校专业学生分布 */
+    apiGetXxzyfb(that, sid) {
         return new Promise((resolve, reject) => {
             that.$http({
-                url: '/zjq/mainpage/GetHotCollege',
+                url: '/zjq/College/GetXxzyfb',
                 header: 'form',
                 data: {
-                    ...param,
-                    type,
+                    sid,
                     token: uni.getStorageSync('token')
                 },
             }).then((res) => {
