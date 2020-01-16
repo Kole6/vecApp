@@ -26,13 +26,13 @@
       </navigator>
       <navigator url="/pages/indexIcon/schoolDatabase/ZhongzhiPage">
         <view class="nav-item nav-item-3">
-          <text>中等职业学校</text>
+          <text>中等职业技术学校</text>
         </view>
       </navigator>
     </view>
     <view class="list-title">
       <view class="hot">热门学校</view>
-      <!-- <image class="hot-img" src="/static/indexIcon/hot.png" mode="aspectFit" /> -->
+      <image class="hot-img" src="/static/indexIcon/hot.png" mode="aspectFit" />
     </view>
     <load-more
       ref="scroll"
@@ -157,10 +157,11 @@ export default {
   padding: 20upx 40upx;
   color: #fff;
   border-radius: 20upx;
-  font-size: $uni-font-size-lg;
+  font-size: 34upx;
+  font-weight:500;
   background: $main-base-color;
   height: 180upx;
-  box-shadow: 5upx 10upx 10upx rgba($color: #000000, $alpha: 0.1);
+  box-shadow: 5upx 10upx 10upx rgba($color: #7494ff, $alpha: 0.1);
 }
 @for $i from 1 through 3 {
   .nav-item-#{$i} {
@@ -169,7 +170,7 @@ export default {
   }
 }
 .list-title {
-  padding: 10upx;
+  padding: 15upx 10upx;
   margin-top: 20upx;
   background: #ffffff;
   border-bottom: solid 1upx $main-dividing-line1;
@@ -186,8 +187,9 @@ export default {
     color: #333333;
   }
   .hot-img {
+    padding-left: 10upx;
     width: 28upx;
-    height: 28upx;
+    height: 29upx;
     vertical-align: middle;
   }
 }

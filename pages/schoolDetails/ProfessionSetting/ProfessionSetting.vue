@@ -1,5 +1,5 @@
 <template>
-  <view class>
+  <view>
     <QSTabs
       ref="tabs"
       :current="current"
@@ -11,7 +11,7 @@
       @change="change($event)"
     />
     <swiper
-      :style="{height:`${scrollH-85}upx`,borderTop: '1upx solid rgba(238, 238, 238, 0.3)'}"
+      :style="{height:`${scrollH-85}upx`,borderTop: '1px solid rgba(238, 238, 238, 0.3)'}"
       :current="current"
       @change="swiperChange"
       @transition="transition"
@@ -19,14 +19,9 @@
     >
       <!-- 学校专业 -->
       <swiper-item>
-        <scroll-view
-          scroll-y
-          style="height: 100%;"
-          @scrolltoupper="startFn('scrolltoupper')"
-          @scrolltolower="startFn('scrolltolower')"
-          @scroll="startFn('scroll')"
-        >
-          <my-follow />
+        <scroll-view scroll-y style="height: 100%;" @scrolltolower="onLoadMore">
+          <my-follow :listArr="listArr" />
+          <uni-load-more :status="more"></uni-load-more>
         </scroll-view>
       </swiper-item>
       <!-- 专业学生分布 -->
@@ -41,17 +36,24 @@
 import myFollow from "./MyFollow.vue";
 import professionStudent from "./Part2.vue";
 import QSTabs from "@/components/QS-tabs/QS-tabs.vue";
+import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue";
 export default {
-  components: { myFollow, professionStudent, QSTabs },
+  components: { myFollow, professionStudent, QSTabs, uniLoadMore },
   data() {
     return {
       tabs: ["学校专业", "专业学生分布"],
       current: 0,
-      sid: ""
+      sid: "",
+      testList: 30,
+
+      pageIndex: 1,
+      more: "more",
+      listArr: []
     };
   },
   onLoad(e) {
     this.sid = e.sid;
+    this.apiGetMajors();
   },
   computed: {
     scrollH() {
@@ -63,8 +65,24 @@ export default {
     }
   },
   methods: {
-    startFn(key) {
-      console.log("key", key);
+    onLoadMore() {
+      if (this.more == "more") {
+        this.more = "loading";
+        this.apiGetMajors();
+      }
+    },
+    async apiGetMajors() {
+      let list = await this.$api.apiGetCollegeMajorSetting(this, {
+        sid: this.sid,
+        pageIndex: this.pageIndex
+      });
+      if (list.length) {
+        this.listArr.push(...this.$tool.toolMajorList(list));
+        this.pageIndex += 1;
+        this.more = "more";
+      } else {
+        this.more = "noMore";
+      }
     },
     change(index) {
       this.current = index;

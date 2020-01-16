@@ -29,6 +29,15 @@ export default {
     HMfilterDropdown,
     schoolList
   },
+  props: {
+    sid: String,
+    listArr: {
+      type: Array,
+      default: () => {
+        return [];
+      }
+    }
+  },
   data() {
     return {
       indexArr: "",
@@ -36,7 +45,7 @@ export default {
       loadingText: "正在加载...",
       filterDropdownValue: [],
       defaultSelected: [],
-      listArr: [],
+      // listArr: [],
       filterData: [
         {
           name: "重点专业",
@@ -108,18 +117,7 @@ export default {
       return JSON.stringify(value);
     }
   },
-  mounted() {
-	  this.apiGetMajors("");
-  },
-  //上拉加载，需要自己在page.json文件中配置"onReachBottomDistance"
-  onReachBottom() {
-    uni.showToast({ title: "触发上拉加载" });
-  },
   methods: {
-    async apiGetMajors(key) {
-      let list = await this.$api.apiGetCollegeMajorSetting(this, '4114013697');
-      this.listArr = this.$tool.toolMajorList(list);
-    },
     confirm(e) {
       this.indexArr = e.index;
       this.valueArr = e.value;

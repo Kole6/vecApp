@@ -310,15 +310,14 @@ export default {
             })
         });
     },
-    /* 专业设置 - 获取专业 */
-    apiGetCollegeMajorSetting(that, sid, param = {}) {
+    /* 专业设置 - 获取专业 @pageIndex 页数, @pageSize 每页多少条*/
+    apiGetCollegeMajorSetting(that, param = {}) {
         return new Promise((resolve, reject) => {
             that.$http({
                 url: '/zjq/College/GetCollegeMajorSetting',
                 header: 'form',
                 data: {
                     ...param,
-                    sid,
                     token: uni.getStorageSync('token')
                 },
             }).then((res) => {

@@ -28,7 +28,7 @@ var config = {
   pixelRatio: 1,
   rotate: false,
   columePadding: 3,
-  fontSize: 13,
+  fontSize: 11,
   //dataPointShape: ['diamond', 'circle', 'triangle', 'rect'],
   dataPointShape: ['circle', 'circle', 'circle', 'circle'],
   colors: ['#1890ff', '#2fc25b', '#facc14', '#f04864', '#8543e0', '#90ed7d'],

@@ -1,5 +1,6 @@
 <template>
   <view class="m-bar">
+    <view class="table-null" v-show="cans">无数据</view>
     <canvas
       canvas-id="canvasColumn"
       id="canvasColumn"
@@ -34,7 +35,8 @@ export default {
         itemCount: 30, //x轴单屏数据密度
         sliderMax: 50
       },
-      column: ""
+      column: "",
+      cans: false
     };
   },
   mounted() {
@@ -68,6 +70,7 @@ export default {
       }
       let categories = list.map(t => {
         return t.majorname;
+        // return '5646<br />64'
       });
       let color = [
         "#68BCF5",
@@ -81,7 +84,11 @@ export default {
       let sd = list.map((t, i) => {
         return { value: Math.floor(t.zyzb * 100) / 100, color: color[i] };
       });
-      this.fillData(categories, sd);
+      if (categories.length) {
+        this.fillData(categories, sd);
+      } else {
+        this.cans = true;
+      }
     },
     fillData(categories, sd) {
       let series = [
@@ -114,8 +121,11 @@ export default {
         animation: true,
         categories: chartData.categories,
         series: chartData.series,
+        // rotate:true,
+        // enableScroll:true,
+        padding: [15, 20, 5, 32],
         xAxis: {
-          disableGrid: true,
+          disableGrid: false,
           rotateLabel: true
         },
         yAxis: {
@@ -145,11 +155,6 @@ export default {
       column.showToolTip(e, {
         format: function(item, category) {
           return category + ":" + item.data.value + "%";
-          // if (typeof item.data === 'object') {
-          // 	return category + ' ' + item.name + ':' + item.data.value;
-          // } else {
-          // 	return category + ' ' + item.name + ':' + item.data;
-          // }
         }
       });
     }
