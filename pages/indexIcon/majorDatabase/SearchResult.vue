@@ -25,7 +25,6 @@
           :loadStatus="loadStatus"
         >
           <view class="list">
-            <!-- <school-list class="" :isText="true" :showType="4" :listArr="dataArr"></school-list> -->
             <school-list
               :showType="4"
               :is-special="true"
@@ -33,7 +32,6 @@
               :handleTaped="false"
               @taped="handleListTaped"
             />
-            <!-- <school-list showType="4" :listArr="dataArr" /> -->
           </view>
         </load-more>
       </block>

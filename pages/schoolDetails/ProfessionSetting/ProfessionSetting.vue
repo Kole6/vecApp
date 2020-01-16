@@ -19,7 +19,13 @@
     >
       <!-- 学校专业 -->
       <swiper-item>
-        <scroll-view scroll-y style="height: 100%;">
+        <scroll-view
+          scroll-y
+          style="height: 100%;"
+          @scrolltoupper="startFn('scrolltoupper')"
+          @scrolltolower="startFn('scrolltolower')"
+          @scroll="startFn('scroll')"
+        >
           <my-follow />
         </scroll-view>
       </swiper-item>
@@ -57,6 +63,9 @@ export default {
     }
   },
   methods: {
+    startFn(key) {
+      console.log("key", key);
+    },
     change(index) {
       this.current = index;
     },
