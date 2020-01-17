@@ -122,8 +122,10 @@ export default {
       this.indexArr = e.index;
       this.valueArr = e.value;
     },
-    handleListTaped() {
-      console.log("点击");
+    handleListTaped({ item, index }) {
+      this.$tool.toolistoolTiaoToken(
+        `/pages/indexIcon/majorDatabase/ProfessionDesc?id=${item.majorcode}&name=${item.majorname}&type=${item.xlcc == "中职" ? 2 : 1}`
+      );
     }
   }
 };

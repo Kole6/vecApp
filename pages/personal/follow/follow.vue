@@ -76,8 +76,8 @@ export default {
   },
   methods: {
     getFavoriteList() {
-      this.$api.apiGetFavoriteList(this,'1');
-      this.$api.apiGetFavoriteList(this,'2');
+      this.$api.apiGetFavoriteList(this, "1");
+      this.$api.apiGetFavoriteList(this, "2");
     },
     change(index) {
       console.log("change", index);
@@ -92,9 +92,11 @@ export default {
         url: `../../schoolDetails/SchoolDetail?schoolno=${ite.schoolno}`
       });
     },
-    toProfessionDesc(ite) {
+    toProfessionDesc(item) {
       uni.navigateTo({
-        url: `../../indexIcon/majorDatabase/ProfessionDesc?id=${ite.majorcode}&name=${ite.majorname}&type=1`
+        url: `../../indexIcon/majorDatabase/ProfessionDesc?id=${
+          item.majorcode
+        }&name=${item.majorname}&type=${item.xlcc == "中职" ? 2 : 1}`
       });
     }
   }

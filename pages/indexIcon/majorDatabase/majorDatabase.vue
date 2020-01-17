@@ -28,12 +28,7 @@
             v-for="(item, index) in level1"
           >{{ item.name }}</view>
         </scroll-view>
-        <scroll-view
-          class="nav-right"
-          scroll-y
-          style="height: 100%;"
-          scroll-with-animation
-        >
+        <scroll-view class="nav-right" scroll-y style="height: 100%;" scroll-with-animation>
           <uni-collapse>
             <uni-collapse-item
               v-for="(list,index) in level2"
@@ -63,18 +58,13 @@
             v-for="(item, index) in level1"
           >{{ item.name }}</view>
         </scroll-view>
-        <scroll-view
-          class="nav-right"
-          scroll-y
-          style="height: 100%;"
-          scroll-with-animation
-        >
-        <view
-                class="category-item"
-                v-for="(item,i) in level2"
-                :key="i"
-                @tap="handleItemTap(item)"
-              >{{item.name}}</view>
+        <scroll-view class="nav-right" scroll-y style="height: 100%;" scroll-with-animation>
+          <view
+            class="category-item"
+            v-for="(item,i) in level2"
+            :key="i"
+            @tap="handleItemTap(item)"
+          >{{item.name}}</view>
           <!-- <uni-collapse>
             <uni-collapse-item
               v-for="(list,index) in level2"
@@ -91,7 +81,7 @@
                 @tap="handleItemTap(item)"
               >{{item.name}}</view>
             </uni-collapse-item>
-          </uni-collapse> -->
+          </uni-collapse>-->
         </scroll-view>
       </swiper-item>
       <swiper-item class="swiper-item">
@@ -108,9 +98,9 @@ import QSTabs from "@/components/QS-tabs/QS-tabs.vue";
 export default {
   onNavigationBarSearchInputClicked() {
     // console.log("点击了");
-	uni.navigateTo({
-		url:'/pages/indexIcon/majorDatabase/SearchResult'
-	})
+    uni.navigateTo({
+      url: "/pages/indexIcon/majorDatabase/SearchResult"
+    });
   },
   onLoad() {
     // 设置分类栏高度，保持在一屏内
@@ -153,7 +143,7 @@ export default {
         .apiGetDict(this, {
           type: "zyfl",
           pid: item.code,
-          schoolType: this.current+1
+          schoolType: this.current + 1
         })
         .then(data => {
           if (data.length) {
@@ -180,19 +170,19 @@ export default {
         level1Data = await this.$api.apiGetDict(this, {
           type: "zyfl",
           pid: majorId,
-          schoolType: this.current+1
+          schoolType: this.current + 1
         });
         this.level1 = level1Data;
         if (!level1Data.length) {
-		  this.level2 = this.level3 = [];
-		  uni.hideLoading();
+          this.level2 = this.level3 = [];
+          uni.hideLoading();
           return;
         }
       }
       let level2Data = await this.$api.apiGetDict(this, {
         type: "zyfl",
         pid: majorId || level1Data[0].code,
-        schoolType: this.current+1
+        schoolType: this.current + 1
       });
       if (level2Data.length) {
         level2Data[0].open = true;
@@ -205,18 +195,18 @@ export default {
       let level3Data = await this.$api.apiGetDict(this, {
         type: "zyfl",
         pid: level2Data[0].code,
-        schoolType: this.current+1
+        schoolType: this.current + 1
       });
       this.level3 = level3Data;
       uni.hideLoading();
     },
     /* 进入专业详情 */
-    handleItemTap(target, targetIndex) {
+    handleItemTap(item) {
       this.$tool.toolistoolTiaoToken(
-        `./ProfessionDesc?id=${target.code}&name=${target.name}&type=1`
+        `./ProfessionDesc?id=${item.code}&name=${item.name}&type=${this
+          .current + 1}`
       );
     },
-
     change(index) {
       this.current = index;
     },

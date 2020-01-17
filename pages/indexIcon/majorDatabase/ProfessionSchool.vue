@@ -4,15 +4,15 @@
 		<view class="f-filter">
 			<sl-filter ref="filter" @conditionTap="handleConditionTap" :menuListArr="menuList" :topFixed="true" :topFixedHeight="topFixedHeight" @result="handleSearch"></sl-filter>
 		</view>
-		<load-more ref="scroll" @onPullDown="onPullDown"  @onLoadMore="onLoadMore" :styleObj="{ height: '400px' }" :loadStatus="loadStatus">
+		<load-more ref="scroll" @onPullDown="onPullDown"  @onLoadMore="onLoadMore"  :loadStatus="loadStatus">
 			<view class="m-result"><school-list :isText="true" :showType="4" :listArr="dataArr"></school-list></view>
 		</load-more>
 
-		<view class="line"></view>
+		<!-- <view class="line"></view>
 		<view class="m-simi"><view class="title">相近专业</view></view>
 		<view class="list-simi" :style="{ height: wrapperHeight }">
 			<school-list :isText="true" :showType="4" :is-special="true" :listArr="listArr" :handleTaped="false"></school-list>
-		</view>
+		</view> -->
 	</view>
 </template>
 

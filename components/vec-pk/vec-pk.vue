@@ -30,7 +30,7 @@
     <view class="line"></view>
     <view class="m-tips" @tap="toAdd">
       <image src="/static/indexIcon/add.png" mode="aspectFit" style="width: 40upx; height: 40upx;" />
-      <text>继续添加对比{{key1}},最多添加四个</text>
+      <text>{{text}}</text>
     </view>
     <!-- 底部按钮 -->
     <view class="m-bottom">
@@ -60,8 +60,12 @@ export default {
   },
   data() {
     return {
-      isShowMessage: true
+      isShowMessage: true,
+      text: ""
     };
+  },
+  mounted() {
+    this.text = `继续添加对比${this.key1},最多添加 ${ConfigContrast} 个`;
   },
   methods: {
     async apiMyComparison(that, optype, type, id) {

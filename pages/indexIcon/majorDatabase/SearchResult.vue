@@ -177,7 +177,7 @@ export default {
     },
     handleListTaped({ item, index }) {
       this.$tool.toolistoolTiaoToken(
-        `/pages/indexIcon/majorDatabase/ProfessionDesc?id=${item.majorcode}&name=${item.majorname}&type=1`
+        `/pages/indexIcon/majorDatabase/ProfessionDesc?id=${item.majorcode}&name=${item.majorname}&type=${item.xlcc == "中职" ? 2 : 1}`
       );
     }
   }

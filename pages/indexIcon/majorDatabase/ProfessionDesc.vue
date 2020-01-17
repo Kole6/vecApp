@@ -10,12 +10,8 @@
       :border="false"
       title="专业信息"
     >
-      <view class="f-sc" slot="right" @tap="handleSC">
-        <image
-          :src="hasSC ? assets.sc2 : assets.sc1"
-          mode="aspectFit"
-          style="height: 40upx; width: 40upx;"
-        />
+       <view class="f-sc" slot="right" @tap="handleSC">
+        <image :src="hasSC ? assets.sc2 : assets.sc1" mode="aspectFit" style="height: 40upx; width: 40upx;" />
       </view>
     </uni-nav-bar>
     <view class="content-wrapper" :style="{ height: wrapperHeight }">
@@ -25,6 +21,10 @@
         <view class="item">
           <text class="name">专业大类</text>
           <text class="value">{{ professionInfo.zydl }}</text>
+        </view>
+        <view class="item" v-if="params.type==1">
+          <text class="name" style="padding: 6upx 32upx;">专业类</text>
+          <text class="value"></text>
         </view>
         <view class="item">
           <text class="name">专业代码</text>
@@ -38,22 +38,14 @@
           <text class="name">修业年限</text>
           <text class="value">{{ professionInfo.xynx }}</text>
         </view>
-        <view class="f-base" @tap="handleDZ">
+        <!-- <view class="f-base" @tap="handleDZ">
           <image
             :src="hasDZ ? '/static/indexIcon/dzs.png' : '/static/indexIcon/dz.png'"
             mode="aspectFit"
             style="width: 40upx; height: 40upx;"
           />
           <text>{{ dzNumber }}</text>
-        </view>
-        <!-- <view :class="['f-base', hasDZ ? 'yes' : 'no']" @tap="hasDZ = !hasDZ">
-          <image
-            :src="hasDZ ? '/static/indexIcon/dz.png' : '/static/indexIcon/dz.png'"
-            mode="aspectFit"
-            style="width: 40upx; height: 40upx;"
-          />
-          <text>{{ dzNumber }}</text>
-        </view>-->
+        </view> -->
       </view>
       <view class="m-tip">您还可以进行专业对比哦!您已经添加 {{numberDB}} 个专业</view>
       <!-- 对比列表 -->
@@ -100,8 +92,12 @@
           <view class="item" v-for="(item, index) in list1" :key="index">{{ item.name }}</view>
         </view>
         <view class="list list2">
-          <view class="list-title">衔接高职专业举例</view>
+          <view class="list-title">衔接{{params.type==1?'本科':'高职'}}专业举例</view>
           <view class="item" v-for="(item, index) in list2" :key="index">{{ item.name }}</view>
+        </view>
+        <view class="list list2" v-if="params.type==1">
+          <view class="list-title">衔接中职专业举例</view>
+          <!-- <view class="item" v-for="(item, index) in list2" :key="index">{{ item.name }}</view> -->
         </view>
       </view>
       <!-- 下载 -->
@@ -306,7 +302,7 @@ export default {
     },
     handleListTaped({ item, index }) {
       this.$tool.toolistoolTiaoToken(
-        `/pages/indexIcon/majorDatabase/ProfessionDesc?id=${item.majorcode}&name=${item.majorname}&type=1`
+        `/pages/indexIcon/majorDatabase/ProfessionDesc?id=${item.majorcode}&name=${item.majorname}&type=${item.xlcc == "中职" ? 2 : 1}`
       );
     },
     handleBack() {

@@ -1,15 +1,20 @@
 <template>
   <view>
-    <view>
-      <view class="t-table" :style="{ height: tableHeight, width: tableWidth }">
-        <view class="t-row t-title">
-          <view class="t-th">专业名称</view>
-          <view class="t-th" v-for="(item, index) in bodyList" :key="index">{{ item.majorname }}</view>
-        </view>
-        <view class="t-row" v-for="(row, index) in keyList" :key="index">
-          <view class="t-td">{{row.name}}</view>
-          <view class="t-td" v-for="(item, i) in bodyList" :key="i">{{item[row.value]}}</view>
-        </view>
+    <view class="t-table" :style="{ maxHeight: tableHeight, width: tableWidth }">
+      <view class="t-row t-title">
+        <view class="t-th">专业名称</view>
+        <view class="t-th" v-for="(item, index) in bodyList" :key="index">{{ item.majorname }}</view>
+      </view>
+      <view class="t-row" v-for="(row, index) in keyList" :key="index">
+        <view class="t-td">{{row.name}}</view>
+        <view
+          class="t-td"
+          v-for="(item, i) in bodyList"
+          :key="i"
+        >{{row.value=='x1'?'-': (item[row.value] || '-')}}</view>
+      </view>
+      <view class="m-btn">
+        <button class="vec-btn" type="primary" @tap="toEmail()">下载对比报告</button>
       </view>
     </view>
   </view>
@@ -36,7 +41,11 @@ export default {
         { name: "修业年限", value: "zynx" },
         { name: "学校开设数量", value: "xxkszs" },
         { name: "主要对应职业类型", value: "mainzylx" },
-        { name: "衔接高职专业举例", value: "xjgz" }
+        { name: "衔接高职专业举例", value: "xjgz" },
+        { name: "当年招生人数", value: "x1" },
+        { name: "当年在校生人数", value: "x1" },
+        { name: "当年毕业生人数", value: "x1" },
+        { name: "本专业教师总数", value: "x1" }
       ]
     };
   },
@@ -45,6 +54,12 @@ export default {
       this.show = false;
       this.$nextTick(() => {
         this.show = true;
+      });
+    },
+    toEmail() {
+      uni.showToast({
+        title: "暂未开通",
+        icon: "none"
       });
     }
   }
@@ -55,7 +70,7 @@ export default {
 .t-table {
   box-sizing: border-box;
   width: 100%;
-  padding: 0 10upx;
+  padding: 0 0upx;
   overflow: auto;
   $border-color: #fff;
   .t-title {
@@ -65,6 +80,16 @@ export default {
     z-index: 10;
     padding: 0;
     color: #666666;
+    .t-th {
+      font-weight: 600;
+    }
+  }
+  .m-btn {
+    position: sticky;
+    bottom: 0;
+    background: #f6f8fe;
+    z-index: 10;
+    padding: 35upx 0 25upx 0;
   }
   .t-row {
     display: flex;
@@ -81,26 +106,17 @@ export default {
       justify-content: center;
       align-items: center;
       text-align: center;
-      // border-top: solid 1px $border-color;
-      // border-left: solid 1px $border-color;
     }
     .t-td:nth-of-type(even),
     .t-th:nth-of-type(even) {
-      background-color: #f3f7ff;
+      background-color: #eaeff8;
     }
-    .t-td:last-child,
-    .t-th:last-child {
-      // border-right: solid 1px $border-color;
-    }
-  }
-  .t-row:last-child {
-    .t-td,
-    .t-th {
-      // border-bottom: solid 1px $border-color;
+    .t-td {
+      padding: 20upx 10upx;
     }
   }
-}
-.wrap {
-  margin: 20upx;
+  .wrap {
+    margin: 20upx;
+  }
 }
 </style>

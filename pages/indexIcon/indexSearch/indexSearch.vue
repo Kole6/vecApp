@@ -118,6 +118,7 @@ export default {
       this.dataArr2 = this.$tool.toolMajorListXiao(list);
     },
     handleListTaped({ item, index }) {
+      //:todo 这个地方只能看到高职专业
       this.$tool.toolistoolTiaoToken(
         `/pages/indexIcon/majorDatabase/ProfessionDesc?id=${item.majorcode}&name=${item.majorname}&type=1`
       );

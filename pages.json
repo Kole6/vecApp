@@ -195,14 +195,11 @@
 		{
 			"path": "pages/indexIcon/majorDatabase/ProfessionPKDetail",
 			"style": {
-				"navigationBarTitleText": "专业信息",
+				"navigationBarTitleText": "专业对比",
 				"navigationBarTextStyle": "white",
-				"transparentTitle": "always",
-				"app-plus": {
-					"bounce": "none"
-				}
+				"navigationBarBackgroundColor":"#6451FC"
 			}
-		},
+		}, 
 		{
 			"path": "pages/indexIcon/materialDatabase/materialDatabase",
 			"style": {
@@ -428,7 +425,8 @@
 			"style": {
 				"navigationBarTitleText": "手机验证"
 			}
-		}, {
+		},
+		{
 			"path": "pages/schoolDetails/SchoolPk/SchoolPk",
 			"style": {
 				"navigationBarTitleText": "学校对比",
@@ -447,12 +445,9 @@
 		}, {
 			"path": "pages/schoolDetails/SchoolPk/SchoolPkDetail",
 			"style": {
-				"navigationBarTitleText": "学校对比详情",
+				"navigationBarTitleText": "学校对比",
 				"navigationBarTextStyle": "white",
-				"transparentTitle": "always",
-				"app-plus": {
-					"bounce": "none"
-				}
+				"navigationBarBackgroundColor":"#6451FC"
 			}
 		}, {
 			"path": "pages/schoolDetails/ourFaculty/ourFaculty",
