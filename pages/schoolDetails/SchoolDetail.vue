@@ -35,7 +35,7 @@
             <view class="info">
               <text>{{schoolInfo.city}}</text>
               <text v-show="schoolInfo.establishdate">{{schoolInfo.establishdate}}</text>
-              <text>{{schoolInfo.schoolType}}</text>
+              <text v-show="schoolInfo.schoolType">{{schoolInfo.schoolType}}</text>
             </view>
             <view class="num">
               <text>学校标识码：{{schoolInfo.schoolno}}</text>
@@ -61,7 +61,7 @@
       </view>
       <view class="line"></view>
       <!-- 对比列表 -->
-      <view class="m-tip">您还可以进行专业对比哦！ 您已经添加 {{numberDB}} 个学校</view>
+      <view class="m-tip">您还可以进行院校对比哦！ 您已经添加 {{numberDB}} 个学校</view>
       <view class="m-pk">
         <view class="left" v-if="hasDB" @tap="apiMyComparison('D')">
           <image
@@ -410,7 +410,7 @@ export default {
             name: data.schoolname,
             city: data.city,
             establishdate: data.establishdate,
-            schoolType: data.organizer,
+            schoolType: data.organizernature,
             schoolTags: data.schoolTags,
             dzNumber: data.hitscount,
             schoolno: data.schoolno,

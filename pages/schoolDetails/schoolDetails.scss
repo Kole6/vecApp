@@ -48,8 +48,11 @@
 				font-size: $uni-font-size-lg;
 				color: $main-text-color;
 				font-weight: bold;
+				width: 420upx;
 			}
 			.info {
+				padding-top: 5upx;
+				width: 420upx;
 				text {
 					padding: 0 15upx;
 					border-left: solid 1upx #666666;
@@ -65,7 +68,7 @@
 			box-sizing: border-box;
 			position: absolute;
 			top: 30upx;
-			right: 61upx;
+			right: 45upx;
 			width: 90upx;
 			height: 45upx;
 			font-size: $uni-font-size-base;
