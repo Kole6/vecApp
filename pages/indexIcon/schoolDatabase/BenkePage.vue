@@ -33,7 +33,11 @@ export default {
   }
 };
 </script>
-
+<style>
+page{
+  background-color: #fff;
+}
+</style>
 <style scoped lang="scss">
 .search {
   padding: 5upx 30upx;

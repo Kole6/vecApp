@@ -169,6 +169,7 @@ export default {
     },
     /* 获取基础数据 */
     async initData(majorId = "") {
+      this.level2 = [];
       uni.showLoading({ title: "加载中...", mask: true });
       let level1Data = [];
       if (!majorId) {

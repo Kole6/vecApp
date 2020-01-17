@@ -184,10 +184,18 @@ export default {
         }
     },
     /* 统一跳转外链接 - webview  @src 外链接地址 :todo*/
-    toolWeb(title) {
-        uni.navigateTo({
-            url: `/pages/public/webview/webview?src=${src}`
-        });
+    toolWeb(title,param) {
+        switch (title) {
+            case '拓扑图':
+                console.log('拓扑图',param)
+                break;
+        
+            default:
+                break;
+        }
+        // uni.navigateTo({
+        //     url: `/pages/public/webview/webview?src=${src}`
+        // });
     },
     /* 加载更多 loadmore  more（loading前）、loading（loading中）、noMore（没有更多了）*/
     toolLoad() {}
