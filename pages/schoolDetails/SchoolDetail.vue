@@ -209,11 +209,11 @@ export default {
       styleObj: {
         top: "250px"
       },
+      // params  从schoolInfo中获取数据拼接到参数中
       schoolInfo1: [
         {
           name: "学校简介",
           url: "./schoolProfile",
-          // params  从schoolInfo中获取数据拼接到参数中
           params: [
             {
               key: "baike",

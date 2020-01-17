@@ -1,7 +1,7 @@
 <template>
-	<view class="">
-		<view class="frame-wrapper">
-			<web-view :src="src" class="iframe" style="width:100%;border:none"></web-view>
+	<view>
+		<view>
+			<web-view :src="src"></web-view>
 		</view>
 	</view>
 </template>
@@ -18,13 +18,3 @@
 		}
 	};
 </script>
-
-<style lang="scss" scoped>
-	.frame-wrapper {
-		// height: 600px;
-	}
-
-	body {
-		margin: 0;
-	}
-</style>

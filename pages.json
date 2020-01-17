@@ -539,8 +539,12 @@
 					"bounce": "none"
 				}
 			}
-		}
-	],
+		},
+		{
+            "path" : "pages/public/webview/webview",
+            "style" : {}
+        }
+    ],
 	"tabBar": {
 		"color": "#7a7e83",
 		"selectedColor": "#6451FC",

@@ -43,7 +43,6 @@ export default {
     };
   },
   onLoad(e) {
-    // this.tableHeight = uni.getSystemInfoSync().windowHeight - uni.upx2px(750) + "px";
     this.tableHeight = uni.getSystemInfoSync().windowHeight+"px";
     this.getData(e.ids);
   },

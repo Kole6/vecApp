@@ -14,9 +14,9 @@ export default {
     if (option.schoolName) {
       this.src = `https://baike.baidu.com/item/${option.schoolName}`;
     } else if (option.website) {
-      uni.setNavigationBarTitle({
+      /* uni.setNavigationBarTitle({
         title: "学校官网"
-      });
+      }); */
       if (option.website.includes("http")) {
         this.src = option.website;
       } else {

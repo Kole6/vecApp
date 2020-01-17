@@ -85,3 +85,16 @@
     border-top:1px solid rgba(240,240,240,0.6);
     background:rgba(247,247,247,1);
   }
+  .m-w{
+		image{
+			padding: 150upx 184upx 50upx 184upx;
+			width: 382upx;
+			height: 318upx;
+    }
+    .tip{
+      color: #999999;
+      text-align: center;
+      font-size: $uni-font-size-base;
+    }
+	}
+	

@@ -114,13 +114,14 @@ export default {
       this.dataArr = this.$tool.toolSchoolList(list);
     },
     async apiGetMajors(key) {
-      let list = await this.$api.apiGetSchoolMajorHighLightSearchList(this, 1, key);
-      this.dataArr2 = this.$tool.toolMajorListXiao(list);
+      let list = await this.$api.apiGetMajors(this, key);
+      this.dataArr2 = this.$tool.toolMajorList(list);
     },
     handleListTaped({ item, index }) {
-      //:todo 这个地方只能看到高职专业
       this.$tool.toolistoolTiaoToken(
-        `/pages/indexIcon/majorDatabase/ProfessionDesc?id=${item.majorcode}&name=${item.majorname}&type=1`
+        `/pages/indexIcon/majorDatabase/ProfessionDesc?id=${
+          item.majorcode
+        }&name=${item.majorname}&type=${item.xlcc == "中职" ? 2 : 1}`
       );
     },
     change(index) {

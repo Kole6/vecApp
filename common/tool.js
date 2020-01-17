@@ -1,4 +1,7 @@
 /*公用tool数据处理*/
+import {
+    ConfigWeb
+} from '../config'
 export default {
     /* 学校接口数据转换 */
     toolSchoolList(list) {
@@ -180,10 +183,14 @@ export default {
             return false;
         }
     },
+    /* 统一跳转外链接 - webview  @src 外链接地址 :todo*/
+    toolWeb(title) {
+        uni.navigateTo({
+            url: `/pages/public/webview/webview?src=${src}`
+        });
+    },
     /* 加载更多 loadmore  more（loading前）、loading（loading中）、noMore（没有更多了）*/
-    toolLoad() {
-        
-    }
+    toolLoad() {}
 }
 
 /* 四个直辖市替换 */

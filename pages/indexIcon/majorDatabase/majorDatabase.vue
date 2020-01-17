@@ -85,7 +85,12 @@
         </scroll-view>
       </swiper-item>
       <swiper-item class="swiper-item">
-        <view>暂无数据</view>
+        <view class="m-w">
+          <image src="/static/no-ava.png" mode="aspectFill" />
+          <view class="tip">
+            <text>抱歉！数据正在整理中～</text>
+          </view>
+        </view>
       </swiper-item>
     </swiper>
   </view>

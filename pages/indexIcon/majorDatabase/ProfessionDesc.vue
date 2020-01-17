@@ -103,7 +103,7 @@
           <view class="list-title">衔接高职职专业举例</view>
           <view class="item" v-for="(item, index) in list3" :key="index">{{ item }}</view>
         </view>
-        <view class="list list2" v-if="params.type==1">
+        <view class="list list2">
           <view class="list-title">衔接本科专业举例</view>
           <view class="item" v-for="(item, index) in list4" :key="index">{{ item }}</view>
         </view>
@@ -271,7 +271,7 @@ export default {
           this.downloadLink = data.downloadlink;
           this.dataArr = this.$tool.toolMajorList(data.list);
           this.list1 = (data.mainzylx + "").split("；");
-          this.list2 = (data.xjzz + "").split("、");
+          this.list2 = (data.xjzgz + "").split("、");
           this.list3 = (data.xjgz + "").split("、");
           this.list4 = (data.xjbk + "").split("、");
         }
