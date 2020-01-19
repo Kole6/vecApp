@@ -177,7 +177,7 @@
 		{
 			"path": "pages/indexIcon/majorDatabase/ProfessionPK",
 			"style": {
-				"navigationBarTitleText": "专业信息",
+				"navigationBarTitleText": "专业对比",
 				"app-plus": {
 					"bounce": "none"
 				}
@@ -197,7 +197,12 @@
 			"style": {
 				"navigationBarTitleText": "专业对比",
 				"navigationBarTextStyle": "white",
-				"navigationBarBackgroundColor":"#6451FC"
+				"navigationBarBackgroundColor":"#6451FC",
+				"app-plus": {
+					"titleNView": {
+						"type":"float"
+					}
+				}
 			}
 		}, 
 		{
@@ -447,7 +452,12 @@
 			"style": {
 				"navigationBarTitleText": "学校对比",
 				"navigationBarTextStyle": "white",
-				"navigationBarBackgroundColor":"#6451FC"
+				"navigationBarBackgroundColor":"#6451FC",
+				"app-plus": {
+					"titleNView": {
+						"type":"float"
+					}
+				}
 			}
 		}, {
 			"path": "pages/schoolDetails/ourFaculty/ourFaculty",

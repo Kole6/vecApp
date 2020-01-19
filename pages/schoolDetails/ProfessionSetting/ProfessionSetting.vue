@@ -45,7 +45,6 @@ export default {
       current: 0,
       sid: "",
       testList: 30,
-
       pageIndex: 1,
       more: "more",
       listArr: []

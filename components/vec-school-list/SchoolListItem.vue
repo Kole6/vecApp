@@ -2,35 +2,33 @@
   <view class="list-content" :class="{'has':showBorder}" @tap="handleTap">
     <view class="left">{{getFirst(item)}}</view>
     <view class="right">
-      <!-- 1 仅显示文字描述 2 : 仅显示tags标签  3: 仅显示cards标签  4: 全部显示 -->
+      <!-- 1: 仅显示文字描述 2 : 仅显示tags标签  3: 仅显示cards标签  4: 全部显示 -->
       <rich-text class="title" :nodes="item.title"></rich-text>
-      <scroll-view
-        v-if="showType == 2 || showType ==4"
-        scroll-x="true"
-        style="white-space: nowrap;display: flex;align-items: center;padding: 15upx 0;"
-      >
-        <view class="tag tag-text" v-for="(tag,i) in item.tags" :key="i">
-          <text>{{ tag.name}}：{{tag.value}}</text>
+      <view v-if="showType == 2 || showType ==4" class="right-tag">
+        <view>
+          <text
+            :key="i"
+            :class="{'tag-text':i==0}"
+            v-for="(tag,i) in item.tags"
+          >{{ tag.name}}：{{tag.value}}</text>
         </view>
-      </scroll-view>
-      <scroll-view
-        v-if="showType == 3 || showType == 4"
-        scroll-x="true"
-        style="white-space: nowrap;display: flex;align-items: center;"
-      >
+      </view>
+      <view v-if="showType == 3 || showType == 4" class="right-tag">
         <block v-if="isSpecial">
-          <view class="tag tag-text" v-for="(card,index) in item.cards" :key="index">
-            <text>{{card.name}}：{{card.value}}</text>
+          <view>
+            <text
+              :key="i"
+              :class="{'tag-text':i==0}"
+              v-for="(card,i) in item.cards"
+            >{{ card.name}}：{{card.value}}</text>
           </view>
         </block>
         <block v-else>
-          <view style="display: flex;align-items: center;">
-            <view class="card" v-for="(card,index) in item.cards" :key="index">
-              <text>{{card.name}}</text>
-            </view>
+          <view class="right-card">
+            <text v-for="(card,index) in item.cards" :key="index" class="card">{{card.name}}</text>
           </view>
         </block>
-      </scroll-view>
+      </view>
     </view>
   </view>
 </template>
@@ -66,8 +64,13 @@ export default {
         return;
       }
       if (this.item.schoolno) {
+        let card = this.item.cards.map(k => {
+          return k.name;
+        });
         this.$tool.toolistoolTiaoToken(
-          `/pages/schoolDetails/SchoolDetail?schoolno=${this.item.schoolno}`
+          `/pages/schoolDetails/SchoolDetail?schoolno=${
+            this.item.schoolno
+          }&cards=${card.join(",")}`
         );
       }
     },
@@ -98,7 +101,7 @@ export default {
     display: inline-flex;
     width: 120upx;
     height: 120upx;
-    border-radius: 60upx;
+    border-radius: 120upx;
     background: #ffffff;
     border: solid 1px $main-base-color;
     vertical-align: middle;
@@ -118,44 +121,28 @@ export default {
     .title {
       color: #333333;
     }
-
-    .tag,
-    .card {
-      display: inline-flex;
-      font-size: $uni-font-size-base;
-      padding: 5upx 10upx;
-      border-radius: 10upx;
-      border: solid 1px #ff750f;
-      color: #666666;
-      margin: 0 10upx 0 10upx;
-      justify-content: center;
+    .right-tag {
+      display: flex;
       align-items: center;
-
-      &:first-child {
-        margin-left: 0;
+      padding: 15upx 0 5upx 0;
+      font-size: $uni-font-size-base;
+      color: #666666;
+      .tag-text {
+        border-right: solid 1px $uni-border-color;
+        margin-right: 10upx;
+        padding-right: 10upx;
       }
     }
-
-    .card {
-      color: #ff750f;
+    .right-card {
+      width: 550upx;
     }
-
-    .tag.tag-text {
-      // display: inline-block;
+    .card {
+      border: solid 1px #ff750f;
+      border-radius: 10upx;
+      margin-right: 15upx;
       font-size: $uni-font-size-base;
       padding: 0 10upx;
-      margin: 0;
-      border-radius: 0;
-      border: none;
-      border-right: solid 1px $uni-border-color;
-
-      &:first-child {
-        padding-left: 0;
-      }
-    }
-
-    .tag.tag-text:last-child {
-      border: none;
+      color: #ff750f;
     }
   }
 }

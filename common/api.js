@@ -250,7 +250,7 @@ export default {
         });
     },
     /* 获取院校  @key 关键字*/
-    apiGetSchoolSearchList(that, key,param={}) {
+    apiGetSchoolSearchList(that, key, param = {}) {
         return new Promise((resolve, reject) => {
             that.$http({
                 url: '/zjq/College/GetSchoolSearchList',
@@ -270,17 +270,16 @@ export default {
         });
     },
     /* 获取专业  @key 关键字*/
-    apiGetMajors(that, key) {
-        let param = {}
-        if (key) {
-            param.key = key
-        }
-        param.token = uni.getStorageSync('token')
+    apiGetMajors(that, key, param = {}) {
         return new Promise((resolve, reject) => {
             that.$http({
                 url: '/zjq/College/GetMajors',
                 header: 'form',
-                data: param,
+                data: {
+                    ...param,
+                    key: key || '',
+                    token: uni.getStorageSync('token')
+                },
             }).then((res) => {
                 if (res.code == 0) {
                     resolve(res.data.list);

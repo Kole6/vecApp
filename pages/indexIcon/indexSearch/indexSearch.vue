@@ -49,23 +49,20 @@
           </scroll-view>
         </swiper-item>
         <swiper-item class="swiper-item">
-          <scroll-view scroll-y style="height: 100%;">
-            <view class="school-list">
-              <school-list class :isText="true" :showType="4" :listArr="dataArr"></school-list>
-            </view>
+          <scroll-view scroll-y style="height: 100%;" @scrolltolower="onLoadMore">
+            <school-list :showType="4" :listArr="dataArr"></school-list>
+            <uni-load-more :status="more"></uni-load-more>
           </scroll-view>
         </swiper-item>
         <swiper-item class="swiper-item">
-          <scroll-view scroll-y style="height: 100%;">
-            <view class="school-list">
-              <school-list
-                :showType="4"
-                :is-special="true"
-                :listArr="dataArr2"
-                :handleTaped="false"
-                @taped="handleListTaped"
-              />
-            </view>
+          <scroll-view scroll-y style="height: 100%;" @scrolltolower="onLoadMore2">
+            <school-list
+              :showType="4"
+              :is-special="true"
+              :listArr="dataArr2"
+              @taped="handleListTaped"
+            />
+            <uni-load-more :status="more2"></uni-load-more>
           </scroll-view>
         </swiper-item>
       </swiper>
@@ -77,11 +74,13 @@
 import uniSearchBar from "@/components/uni-search-bar/uni-search-bar.vue";
 import QSTabs from "@/components/QS-tabs/QS-tabs.vue";
 import schoolList from "@/components/vec-school-list/vec-school-list.vue";
+import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue";
 export default {
   components: {
     uniSearchBar,
     QSTabs,
-    schoolList
+    schoolList,
+    uniLoadMore
   },
   onLoad() {
     this.apiGetSchoolSearchList("");
@@ -92,7 +91,12 @@ export default {
       tabs: ["全部", "院校", "专业"],
       current: 0,
       dataArr: [],
-      dataArr2: []
+      dataArr2: [],
+      pageIndex: 2,
+      more: "more",
+      pageIndex2: 2,
+      more2: "more",
+      searchValue: ""
     };
   },
   computed: {
@@ -105,17 +109,57 @@ export default {
     }
   },
   methods: {
+    onLoadMore() {
+      if (this.more == "more") {
+        this.more = "loading";
+        this.apiGetSchoolSearchListMore();
+      }
+    },
+    onLoadMore2() {
+      if (this.more2 == "more") {
+        this.more2 = "loading";
+        this.apiGetMajorsMore();
+      }
+    },
     search(res) {
       this.apiGetSchoolSearchList(res.value);
       this.apiGetMajors(res.value);
+      this.searchValue = res.value;
+      this.pageIndex = this.pageIndex2 = 2;
     },
     async apiGetSchoolSearchList(key) {
       let list = await this.$api.apiGetSchoolSearchList(this, key);
       this.dataArr = this.$tool.toolSchoolList(list);
     },
+    async apiGetSchoolSearchListMore() {
+      let list = await this.$api.apiGetSchoolSearchList(
+        this,
+        this.searchValue,
+        { pageIndex: this.pageIndex }
+      );
+      if (list.length) {
+        this.dataArr.push(...this.$tool.toolSchoolList(list));
+        this.pageIndex += 1;
+        this.more = "more";
+      } else {
+        this.more = "noMore";
+      }
+    },
     async apiGetMajors(key) {
       let list = await this.$api.apiGetMajors(this, key);
       this.dataArr2 = this.$tool.toolMajorList(list);
+    },
+    async apiGetMajorsMore() {
+      let list = await this.$api.apiGetMajors(this, this.searchValue, {
+        pageIndex: this.pageIndex2
+      });
+      if (list.length) {
+        this.dataArr2.push(...this.$tool.toolMajorList(list));
+        this.pageIndex2 += 1;
+        this.more2 = "more";
+      } else {
+        this.more2 = "noMore";
+      }
     },
     handleListTaped({ item, index }) {
       this.$tool.toolistoolTiaoToken(

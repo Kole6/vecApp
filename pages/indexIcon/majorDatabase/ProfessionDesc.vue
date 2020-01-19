@@ -60,7 +60,7 @@
             mode="aspectFit"
             style="width: 40upx;height: 40upx;"
           />
-          <text>在对比列表中删除本专业</text>
+          <text>在比对列表中删除本专业</text>
         </view>
         <view class="left" v-else @tap="apiMyComparison('A')">
           <image
@@ -68,10 +68,10 @@
             mode="aspectFit"
             style="width: 40upx;height: 40upx;"
           />
-          <text>添加本专业到对比列表</text>
+          <text>添加本专业到比对列表</text>
         </view>
         <view class="right" @tap="handlePK">
-          <text>对比</text>
+          <text>比对</text>
         </view>
         <image
           class="bg1"

@@ -5,7 +5,12 @@
 	align-items: $alip;
 }
 .f-sc {
-	padding-left: 30upx;
+	// padding-left: 30upx;
+	color: #4021DF;
+	font-size: 24upx;
+	// border: 1px solid red;
+	width: 300upx;
+	height:90upx;
 }
 .line {
 	height: 20upx;
@@ -31,11 +36,20 @@
 			margin: 15upx 0;
 			width: 120upx;
 			height: 120upx;
-			// border: solid 1upx $main-base-color;
+			border: 1px solid  $main-base-color;
 			color: $main-base-color;
-			border-radius: 60upx;
+			border-radius: 120upx;
 			font-size: 48upx;
 			overflow: hidden;
+			margin-bottom: 40upx;
+		}
+		.left-tag {
+			position: absolute;
+			color: #6451FC;
+			font-size:24upx;
+			margin-top: 150upx;
+			margin-left: -6upx;
+			// margin-left: ;
 		}
 		.right {
 			display: flex;
@@ -43,7 +57,7 @@
 			justify-content: space-between;
 			font-size: $uni-font-size-base;
 			color: #666666;
-			padding-left: 20upx;
+			padding-left: 30upx;
 			.title {
 				font-size: $uni-font-size-lg;
 				color: $main-text-color;
@@ -51,7 +65,7 @@
 				width: 420upx;
 			}
 			.info {
-				padding-top: 5upx;
+				padding: 14upx 0;
 				width: 420upx;
 				text {
 					padding: 0 15upx;
@@ -77,12 +91,17 @@
 			border: solid 1upx $main-base-color;
 		}
 		.f-dz {
-			@include flexstyle(flex-start, center) ;
 			position: absolute;
-			top: 135upx;
-			right: 61upx;
+			top: 105upx;
+			right: 48upx;
 			font-size: $uni-font-size-base;
 			color: #999999;
+			.dz-s{
+				margin-bottom: 30upx;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
 		}
 	}
 	.image {
@@ -91,17 +110,17 @@
 			width: 100%;
 		}
 	}
-	.tags {
+	.tags-car {
 		padding-left: 32upx;
 		padding-top: 20upx;
 		.item {
 			display: inline-block;
 			box-sizing: border-box;
-			font-size: $uni-font-size-base;
-			padding: 5upx 10upx;
+			font-size:24upx;
+			padding: 5upx 12upx;
 			border: solid 1upx #ff750f;
 			color: #ff750f;
-			border-radius: 5upx;
+			border-radius: 7upx;
 			margin-right: 20upx;
 		}
 	}

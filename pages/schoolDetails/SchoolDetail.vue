@@ -10,12 +10,8 @@
       :border="false"
       title="学校详情"
     >
-      <view class="f-sc" slot="right" @tap="handleSC">
-        <image
-          :src=" `/static/indexIcon/${hasSC ? 'sc2' : 'sc1'}.png`"
-          mode="aspectFit"
-          style="height: 40upx; width: 40upx;"
-        />
+      <view class="f-sc" slot="right" @tap="handlePkOne">
+        <text>秒懂学校</text>
       </view>
     </uni-nav-bar>
     <view class="m-wrapper" :style="{ height: wrapperHeight, overflow: 'auto' }">
@@ -24,12 +20,8 @@
           <view class="left" v-if="schoolInfo.logo" @tap="handleLogoTaped">
             <image :src="schoolInfo.logo" mode="aspectFill" style="width: 100%; height: 100%;" />
           </view>
-          <view
-            class="left"
-            v-else
-            @tap="handleLogoTaped"
-            style="border: solid 1upx #6451FC;"
-          >{{getFirst(schoolInfo.name)}}</view>
+          <view class="left" v-else @tap="handleLogoTaped">{{getFirst(schoolInfo.name)}}</view>
+          <view class="left-tag"><text>学校标签画像</text></view>
           <view class="right">
             <view class="title">{{schoolInfo.name}}</view>
             <view class="info">
@@ -42,17 +34,25 @@
             </view>
           </view>
           <view class="f-site" @tap="toWebsite">官网</view>
-          <view class="f-dz" @tap="handleDZ">
+          <view class="f-dz">
+            <view class="dz-s" @tap="handleDZ">
+              <image
+                :src="hasDZ ? '/static/indexIcon/dzs.png' : '/static/indexIcon/dz.png'"
+                mode="aspectFit"
+                style="width: 40upx; height: 40upx;"
+              />
+              <text>{{ schoolInfo.dzNumber }}</text>
+            </view>
             <image
-              :src="hasDZ ? '/static/indexIcon/dzs.png' : '/static/indexIcon/dz.png'"
+              @tap="handleSC"
+              :src=" `/static/indexIcon/${hasSC ? 'sc2' : 'sc1'}.png`"
               mode="aspectFit"
-              style="width: 40upx; height: 40upx;"
+              style="height: 30upx; width: 30upx;padding-left:4upx"
             />
-            <text>{{ schoolInfo.dzNumber }}</text>
           </view>
         </view>
-        <view class="tags">
-          <!-- <view class="item" v-for="(item,index) in schoolInfo.schoolTags" :key="index">{{item}}</view> -->
+        <view class="tags-car">
+          <view class="item" v-for="(item,index) in params.cards" :key="index">{{item}}</view>
         </view>
         <view class="address">
           <text>地址：</text>
@@ -69,7 +69,7 @@
             mode="aspectFit"
             style="width: 40upx;height: 40upx;"
           />
-          <text>在对比列表中删除本学校</text>
+          <text>在比对列表中删除本学校</text>
         </view>
         <view class="left" v-else @tap="apiMyComparison('A')">
           <image
@@ -77,10 +77,10 @@
             mode="aspectFit"
             style="width: 40upx;height: 40upx;"
           />
-          <text>添加本学校到对比列表</text>
+          <text>添加本学校到比对列表</text>
         </view>
         <view class="right" @tap="handlePK">
-          <text>对比</text>
+          <text>比对</text>
         </view>
         <image
           class="bg1"
@@ -350,6 +350,7 @@ export default {
   },
   onLoad(params) {
     this.params = params;
+    this.params.cards = this.params.cards ? this.params.cards.split(",") : [];
     this.getDetail();
     this.judgeHasSC();
     this.getChance();
@@ -451,6 +452,11 @@ export default {
       this.schoolInfo.dzNumber = this.hasDZ
         ? this.schoolInfo.dzNumber + 1
         : this.schoolInfo.dzNumber - 1;
+    },
+    handlePkOne() {
+      uni.navigateTo({
+        url: `/pages/schoolDetails/SchoolPk/SchoolPkDetail?ids=${this.schoolInfo.schoolno}`
+      });
     },
     handlePK() {
       uni.navigateTo({
