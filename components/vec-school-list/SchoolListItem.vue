@@ -4,7 +4,7 @@
     <view class="right">
       <!-- 1: 仅显示文字描述 2 : 仅显示tags标签  3: 仅显示cards标签  4: 全部显示 -->
       <rich-text class="title" :nodes="item.title"></rich-text>
-      <view v-if="showType == 2 || showType ==4" class="right-tag">
+      <view class="right-tag tag1">
         <view>
           <text
             :key="i"
@@ -13,21 +13,17 @@
           >{{ tag.name}}：{{tag.value}}</text>
         </view>
       </view>
-      <view v-if="showType == 3 || showType == 4" class="right-tag">
-        <block v-if="isSpecial">
-          <view>
-            <text
-              :key="i"
-              :class="{'tag-text':i==0}"
-              v-for="(card,i) in item.cards"
-            >{{ card.name}}：{{card.value}}</text>
-          </view>
-        </block>
-        <block v-else>
-          <view class="right-card">
-            <text v-for="(card,index) in item.cards" :key="index" class="card">{{card.name}}</text>
-          </view>
-        </block>
+      <view class="right-tag">
+        <view v-if="isSpecial">
+          <text
+            :key="i"
+            :class="{'tag-text':i==0}"
+            v-for="(card,i) in item.cards"
+          >{{ card.name}}：{{card.value}}</text>
+        </view>
+        <view class="right-card" v-else>
+          <text v-for="(card,index) in item.cards" :key="index" class="card">{{ card.name}}</text>
+        </view>
       </view>
     </view>
   </view>
@@ -59,6 +55,7 @@ export default {
   },
   methods: {
     handleTap() {
+      console.log("this.handleTaped", this.handleTaped);
       if (!this.handleTaped) {
         this.$emit("taped", this.item); //不走学校详情，走其它url或者其它点击效果
         return;
@@ -124,25 +121,41 @@ export default {
     .right-tag {
       display: flex;
       align-items: center;
-      padding: 15upx 0 5upx 0;
+      padding-top: 10upx;
       font-size: $uni-font-size-base;
       color: #666666;
+      // #ifdef APP-PLUS
+      padding-top: 0upx;
+      // #endif
       .tag-text {
         border-right: solid 1px $uni-border-color;
         margin-right: 10upx;
         padding-right: 10upx;
       }
     }
+    .tag1 {
+      padding-top: 20upx;
+    }
     .right-card {
       width: 550upx;
-    }
-    .card {
-      border: solid 1px #ff750f;
-      border-radius: 10upx;
-      margin-right: 15upx;
-      font-size: $uni-font-size-base;
-      padding: 0 10upx;
-      color: #ff750f;
+      margin-top: 5upx;
+      // #ifdef APP-PLUS
+      padding-top: 15upx;
+      // #endif
+      .card {
+        position: relative;
+        border: 1px solid #ff750f;
+        border-radius: 7upx;
+        margin-right: 15upx;
+        font-size: 28upx;
+        padding: 0upx 10upx;
+        color: #ff750f;
+        height: 34upx;
+        line-height: 34upx;
+        // #ifdef APP-PLUS
+        padding: 6upx 10upx 4upx 10upx;
+        // #endif
+      }
     }
   }
 }

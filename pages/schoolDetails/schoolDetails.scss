@@ -111,21 +111,23 @@
 		}
 	}
 	.tags-car {
-		padding-left: 32upx;
-		padding-top: 20upx;
-		.item {
+		padding-left: 28upx;
+		padding-top: 18upx;
+		.car {
 			display: inline-block;
 			box-sizing: border-box;
 			font-size:24upx;
-			padding: 5upx 12upx;
+			padding: 0upx 12upx;
+			height: 40upx;
+			line-height: 38upx;
 			border: solid 1upx #ff750f;
 			color: #ff750f;
 			border-radius: 7upx;
-			margin-right: 20upx;
+			margin-right: 18upx;
 		}
 	}
 	.address {
-		padding: 20upx 0 20upx 32upx;
+		padding: 20upx 0 20upx 28upx;
 		font-size: $uni-font-size-base;
 		color: #999999;
 	}
@@ -241,30 +243,60 @@
 		}
 	}
 }
+
 /* 提示窗口 */
 .uni-tip {
-	padding: 15px;
-	width: 400upx;
-	background: #fff;
-	box-sizing: border-box;
-	border-radius: 10px;
-	.tip-list {
-		.item {
-			text-align: center;
-			padding: 40upx 0;
-			font-size: $uni-font-size-base;
-			color: $main-text-color;
+	width:600upx;
+	min-height:700upx;
+	background:linear-gradient(180deg,rgba(255,250,229,1) 0%,rgba(254,242,198,1) 100%);
+	box-shadow:0px 2px 4px 0px rgba(0,0,0,0.5);
+	border-radius:20upx;
+	.guang{
+		position: absolute;
+		width: 750upx;
+		margin-top: -600upx;
+		margin-left: -75upx;
+		image{
+			width: 750upx;
+			height: 780upx;
+		}
+		z-index: -2;
+	}
+	.pai{
+		position: absolute;
+		width: 600upx;
+		text-align: center;
+		margin-top: -90upx;
+		image{
+			width: 358upx;
+		}
+		z-index: 2;
+	}
+	.close{
+		z-index: 10;
+		position: absolute;
+		margin-top: -50upx;
+		margin-left: 600upx;
+		image{
+			width: 38upx;
+			height: 38upx;
 		}
 	}
-	.close {
-		text-align: center;
-		text {
-			@include flexstyle(center, center);
-			display: inline-flex;
-			padding: 0 10upx 5upx 10upx;
-			font-size: 34upx;
-			color: #ffffff;
-			background: $main-base-color;
+	.bu{
+		height: 200upx;
+	}
+	.tip-list {
+		padding:0 32upx 100upx 32upx;
+		.list {
+			background-color: #ffffff;
+			color: #C77F44;
+			text-align: center;
+			font-size:28upx;
+			line-height: 78upx;
+			margin-top: 20upx;
+			box-shadow:0px 2px 4px 0px rgba(255,230,142,1);
+			border-radius:20upx;
+			letter-spacing:1px;
 		}
 	}
 }

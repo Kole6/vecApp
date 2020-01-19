@@ -60,6 +60,7 @@
               :showType="4"
               :is-special="true"
               :listArr="dataArr2"
+              :handleTaped="false"
               @taped="handleListTaped"
             />
             <uni-load-more :status="more2"></uni-load-more>

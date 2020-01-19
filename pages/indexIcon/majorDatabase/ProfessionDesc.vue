@@ -94,18 +94,22 @@
         <view class="list list1">
           <view class="list-title">主要对应职业类型</view>
           <view class="item" v-for="(item, index) in list1" :key="index">{{ item }}</view>
+          <view class="item" v-if="toPankong(list1)">暂无</view>
         </view>
         <view class="list list2" v-if="params.type==1">
           <view class="list-title">衔接中职专业举例</view>
           <view class="item" v-for="(item, index) in list2" :key="index">{{ item }}</view>
+          <view class="item" v-show="toPankong(list2)">暂无</view>
         </view>
         <view class="list list2" v-if="params.type==2">
           <view class="list-title">衔接高职职专业举例</view>
           <view class="item" v-for="(item, index) in list3" :key="index">{{ item }}</view>
+          <view class="item" v-show="toPankong(list3)">暂无</view>
         </view>
         <view class="list list2">
           <view class="list-title">衔接本科专业举例</view>
           <view class="item" v-for="(item, index) in list4" :key="index">{{ item }}</view>
+          <view class="item" v-show="toPankong(list4)">暂无</view>
         </view>
       </view>
       <!-- 下载 -->
@@ -292,6 +296,12 @@ export default {
           this.permission.sjbdcs = res.data.sjbdcs;
         }
       });
+    },
+    toPankong(list){
+      if(list.length){
+        return true
+      }
+      return false
     },
     handleSC() {
       this.$api.apiFavoriteZy(this, this.params.id);

@@ -21,7 +21,9 @@
             <image :src="schoolInfo.logo" mode="aspectFill" style="width: 100%; height: 100%;" />
           </view>
           <view class="left" v-else @tap="handleLogoTaped">{{getFirst(schoolInfo.name)}}</view>
-          <view class="left-tag"><text>学校标签画像</text></view>
+          <view class="left-tag" @tap="handleLogoTaped">
+            <text>学校标签画像</text>
+          </view>
           <view class="right">
             <view class="title">{{schoolInfo.name}}</view>
             <view class="info">
@@ -52,7 +54,7 @@
           </view>
         </view>
         <view class="tags-car">
-          <view class="item" v-for="(item,index) in params.cards" :key="index">{{item}}</view>
+          <view class="car" v-for="(item,index) in params.cards" :key="index">{{item}}</view>
         </view>
         <view class="address">
           <text>地址：</text>
@@ -147,22 +149,24 @@
         <zi-xun :newList="newList" />
       </view>
     </view>
-    <uni-popup
-      :show="showModal"
-      type="center"
-      :custom="true"
-      :mask-click="false"
-      @change="modalChange"
-    >
+    <uni-popup :show="showModal" type="center" :custom="true" :mask-click="false">
       <view class="uni-tip">
-        <view class="tip-list">
-          <view class="item">现代学徒制</view>
-          <view class="item">现代学徒制</view>
-          <view class="item">现代学徒制</view>
-          <view class="item">现代学徒制</view>
+        <view class="pai">
+          <image src="/static/p801.png" mode="widthFix" />
+        </view>
+        <view class="guang">
+          <image src="/static/p803.png" />
         </view>
         <view class="close">
-          <text @tap="showModal = false">x</text>
+          <image @tap="showModal = false" src="/static/p802.png" />
+        </view>
+        <view class="bu"></view>
+        <view class="tip-list">
+          <view class="list">985学校</view>
+          <view class="list">全国继续院校</view>
+          <view class="list">现代学徒制</view>
+          <view class="list">现代学徒制</view>
+          <view class="list">现代学徒制</view>
         </view>
       </view>
     </uni-popup>
@@ -432,7 +436,7 @@ export default {
     },
     modalChange() {},
     handleLogoTaped() {
-      // this.showModal = true;
+      this.showModal = true;
     },
     handleRouter(url) {
       uni.navigateTo({
