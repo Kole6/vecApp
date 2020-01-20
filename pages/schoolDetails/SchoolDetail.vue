@@ -21,9 +21,9 @@
             <image :src="schoolInfo.logo" mode="aspectFill" style="width: 100%; height: 100%;" />
           </view>
           <view class="left" v-else @tap="handleLogoTaped">{{getFirst(schoolInfo.name)}}</view>
-          <view class="left-tag" @tap="handleLogoTaped">
+          <!-- <view class="left-tag" @tap="handleLogoTaped">
             <text>学校标签画像</text>
-          </view>
+          </view> -->
           <view class="right">
             <view class="title">{{schoolInfo.name}}</view>
             <view class="info">
@@ -52,6 +52,9 @@
               style="height: 30upx; width: 30upx;padding-left:4upx"
             />
           </view>
+        </view>
+        <view class="left-tag" @tap="handleLogoTaped">
+            <text>学校标签画像</text>
         </view>
         <view class="tags-car">
           <view class="car" v-for="(item,index) in params.cards" :key="index">{{item}}</view>

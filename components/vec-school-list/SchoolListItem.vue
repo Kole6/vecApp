@@ -125,7 +125,7 @@ export default {
       font-size: $uni-font-size-base;
       color: #666666;
       // #ifdef APP-PLUS
-      padding-top: 0upx;
+      // padding-top: 0upx;
       // #endif
       .tag-text {
         border-right: solid 1px $uni-border-color;
@@ -134,18 +134,18 @@ export default {
       }
     }
     .tag1 {
-      padding-top: 20upx;
+      padding-top: 15upx;
     }
     .right-card {
       width: 550upx;
       margin-top: 5upx;
       // #ifdef APP-PLUS
-      padding-top: 15upx;
+      // padding-top: 15upx;
       // #endif
       .card {
         position: relative;
         border: 1px solid #ff750f;
-        border-radius: 7upx;
+        border-radius: 10upx;
         margin-right: 15upx;
         font-size: 28upx;
         padding: 0upx 10upx;
@@ -153,7 +153,7 @@ export default {
         height: 34upx;
         line-height: 34upx;
         // #ifdef APP-PLUS
-        padding: 6upx 10upx 4upx 10upx;
+        // padding: 6upx 10upx 4upx 10upx;
         // #endif
       }
     }
