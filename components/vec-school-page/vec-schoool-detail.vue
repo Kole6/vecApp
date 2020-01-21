@@ -218,15 +218,12 @@ export default {
     /* 点击查询 */
     handleSearch(result) {
       let para = {};
+      para.attribute = result.key_3; //学校属性
+      para.provinceId = result.key_1; //省
       if (result.key_2) {
-        para.cityId = result.key_2;
+        para.cityId = result.key_2; //市
       }
-      para = {
-        provinceId: result.key_1,
-        cityId: result.key_2,
-        property: result.key_4,
-        exampleSchool: result.key_3
-      };
+      para.property = result.key_4; //学校类别
       this.currentSearch = para;
       this.onPullDown();
     },

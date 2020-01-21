@@ -48,7 +48,7 @@
 		<view class="sign-xieyi">
 			<text>登录即表示同意职教圈
 				<text class="xieyi" @tap="toUserAgree()">《用户协议》</text>及
-				<text class="xieyi" @tap="toUserAgree()">《隐私政策》</text>
+				<text class="xieyi" @tap="toUserAgree2()">《隐私政策》</text>
 			</text>
 		</view>
 	</view>
@@ -104,9 +104,10 @@
 				this.isPhoneSign = !this.isPhoneSign;
 			},
 			toUserAgree() {
-				uni.navigateTo({
-					url: "../userAgreement/userAgreement"
-				})
+				this.$tool.toolWeb('用户协议')
+			},
+			toUserAgree2() {
+				this.$tool.toolWeb('隐私政策')
 			},
 			toMe() {
 				uni.switchTab({

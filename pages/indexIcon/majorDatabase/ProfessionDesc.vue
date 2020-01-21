@@ -299,9 +299,9 @@ export default {
     },
     toPankong(list){
       if(list.length){
-        return true
+        return false
       }
-      return false
+      return true
     },
     handleSC() {
       this.$api.apiFavoriteZy(this, this.params.id);

@@ -71,13 +71,7 @@
 						desc: 'Basics Course syllabus'
 					}
 				],
-				fileListArr: [{
-					name: '2018-2019中国大学排名800强完整榜单(校友会最新版)',
-					hasDownloaded: '263',
-					fileSize: '582.5KB',
-					other: '-50',
-					src: '/static/indexIcon/p1.png'
-				}]
+				fileListArr: []
 			};
 		},
 		mounted() {

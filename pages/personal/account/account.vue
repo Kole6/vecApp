@@ -1,12 +1,12 @@
 <template>
 	<view>
 		<view class="center_menu" hover-class="center_menu--hover">
-			<view class="menu_item" @tap="handleModifyAvatar">
+			<!-- <view class="menu_item" @tap="handleModifyAvatar">
 				<text class="menu_l">头像</text>
 				<view class="menu_r">
 					<image :src="picUrl" class="menu_r_png" mode="aspectFill" />
 				</view>
-			</view>
+			</view> -->
 			<view class="menu_item" @tap="toPhone(userInfo.phone)">
 				<text class="menu_l">手机</text>
 				<view class="menu_r" v-if="userInfo.phone"><text class="menu_r_text">{{userInfo.phone}}</text></view>
@@ -25,10 +25,10 @@
 				<view class="menu_r" v-if="userInfo.email"><text class="menu_r_text">{{userInfo.email}}</text></view>
 				<view class="menu_r" v-else><text class="menu_r_text">未绑定</text></view>
 			</view>
-			<view class="menu_item" @tap="clickYao()">
+			<!-- <view class="menu_item" @tap="clickYao()">
 				<text class="menu_l">我的邀请码</text>
 				<text class="menu_r"><text class="menu_r_text">9967</text></text>
-			</view>
+			</view> -->
 		</view>
 		<view class="outSign">
 			<button class="vec-btn" type="primary" @tap="toRecharge()">退出登录</button>

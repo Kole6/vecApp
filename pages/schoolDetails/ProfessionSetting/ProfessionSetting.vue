@@ -20,7 +20,7 @@
       <!-- 学校专业 -->
       <swiper-item>
         <scroll-view scroll-y style="height: 100%;" @scrolltolower="onLoadMore">
-          <my-follow :listArr="listArr" />
+          <my-follow :listArr="listArr" @searchSetting="searchSetting" />
           <uni-load-more :status="more"></uni-load-more>
         </scroll-view>
       </swiper-item>
@@ -47,7 +47,8 @@ export default {
       testList: 30,
       pageIndex: 1,
       more: "more",
-      listArr: []
+      listArr: [],
+      resList:["","",""]
     };
   },
   onLoad(e) {
@@ -73,15 +74,23 @@ export default {
     async apiGetMajors() {
       let list = await this.$api.apiGetCollegeMajorSetting(this, {
         sid: this.sid,
-        pageIndex: this.pageIndex
+        pageIndex: this.pageIndex,
+        keySpecialty: this.resList[0], // 重点专业
+        bigclass: this.resList[1], // 产业大类
+        xyyear: this.resList[2] // 修业年限
       });
       if (list.length) {
-        this.listArr.push(...this.$tool.toolMajorList(list));
+        this.listArr.push(...this.$tool.toolMajorListSetting(list));
         this.pageIndex += 1;
         this.more = "more";
       } else {
         this.more = "noMore";
       }
+    },
+    searchSetting(res) {
+      this.pageIndex = 1
+      this.resList = res
+      this.apiGetMajors()
     },
     change(index) {
       this.current = index;

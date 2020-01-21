@@ -552,7 +552,11 @@
 		},
 		{
             "path" : "pages/public/webview/webview",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor":"#6451FC"
+			}
         }
     ],
 	"tabBar": {

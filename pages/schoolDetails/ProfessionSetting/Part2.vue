@@ -7,7 +7,7 @@
       class="charts"
       @touchstart="touchIt($event, 'canvasColumn')"
     ></canvas>
-    <view class="m-tips">百分比为专业学生占全校学生的占比</view>
+    <view class="m-tips">百分比为专业学生占全校学生的占比，此处只展示前7个专业</view>
   </view>
 </template>
 
@@ -175,7 +175,7 @@ export default {
 .m-tips {
   padding: 20upx;
   text-align: center;
-  font-size: 30upx;
+  font-size: 26upx;
   color: #666666;
   margin-top: 40upx;
   background: #ffffff;

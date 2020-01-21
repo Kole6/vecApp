@@ -8,7 +8,7 @@
     ></HMfilterDropdown>
     <!-- 占位 -->
     <view class="place"></view>
-    <!-- 商品列表 -->
+    <!-- 列表 -->
     <view class="goods-list">
       <school-list
         :showType="4"
@@ -45,10 +45,9 @@ export default {
       loadingText: "正在加载...",
       filterDropdownValue: [],
       defaultSelected: [],
-      // listArr: [],
       filterData: [
         {
-          name: "重点专业",
+          name: "重点专业", //type:zdzy
           type: "hierarchy",
           submenu: [
             {
@@ -66,7 +65,7 @@ export default {
           ]
         },
         {
-          name: "产业大类",
+          name: "产业大类", //type:cydl
           type: "hierarchy",
           submenu: [
             {
@@ -74,21 +73,21 @@ export default {
               value: ""
             },
             {
-              name: "一类",
+              name: "一产",
               value: "1"
             },
             {
-              name: "二类",
+              name: "二产",
               value: "2"
             },
             {
-              name: "三类",
+              name: "三产",
               value: "3"
             }
           ]
         },
         {
-          name: "修业年限",
+          name: "专业年限", //这个前端定义
           type: "hierarchy",
           submenu: [
             {
@@ -106,25 +105,36 @@ export default {
             {
               name: "3年",
               value: "3"
+            },
+            {
+              name: "4年",
+              value: "4"
+            },
+            {
+              name: "5年",
+              value: "5"
             }
           ]
         }
       ]
     };
   },
-  filters: {
+  /* filters: {
     outData(value) {
       return JSON.stringify(value);
     }
-  },
+  }, */
   methods: {
     confirm(e) {
-      this.indexArr = e.index;
-      this.valueArr = e.value;
+      // this.indexArr = e.index;
+      // this.valueArr = e.value;
+      this.$emit('searchSetting',e.value)
     },
     handleListTaped({ item, index }) {
       this.$tool.toolistoolTiaoToken(
-        `/pages/indexIcon/majorDatabase/ProfessionDesc?id=${item.majorcode}&name=${item.majorname}&type=${item.xlcc == "中职" ? 2 : 1}`
+        `/pages/indexIcon/majorDatabase/ProfessionDesc?id=${
+          item.majorcode
+        }&name=${item.majorname}&type=${item.xlcc == "中职" ? 2 : 1}`
       );
     }
   }

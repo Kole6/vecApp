@@ -206,6 +206,7 @@ export default {
             that.$http({
                 url: '/zjq/User/GetComparison',
                 header: 'form',
+                load:true,
                 data: {
                     type,
                     token: uni.getStorageSync('token')
@@ -302,7 +303,7 @@ export default {
                 },
             }).then((res) => {
                 if (res.code == 0) {
-                    resolve(res.data);
+                    resolve(res.data.list);
                 } else {
                     reject();
                 }
@@ -434,6 +435,25 @@ export default {
                 header: 'form',
                 data: {
                     sid,
+                    token: uni.getStorageSync('token')
+                },
+            }).then((res) => {
+                if (res.code == 0) {
+                    resolve(res.data);
+                } else {
+                    reject();
+                }
+            })
+        });
+    },
+    /* 学校技能大赛情况 */
+    apiGetSkillList(that, param={}) {
+        return new Promise((resolve, reject) => {
+            that.$http({
+                url: '/zjq/College/GetSkillList',
+                header: 'form',
+                data: {
+                    ...param,
                     token: uni.getStorageSync('token')
                 },
             }).then((res) => {

@@ -16,7 +16,7 @@ export default {
                     },
                     {
                         name: "层次",
-                        value: item.level
+                        value: item.level || ''
                     }
                 ]
             };
@@ -35,7 +35,7 @@ export default {
                     },
                     {
                         name: "层次",
-                        value: item.level
+                        value: item.level || ''
                     }
                 ]
             };
@@ -55,7 +55,7 @@ export default {
                     },
                     {
                         name: "层次",
-                        value: item.level
+                        value: item.level || ''
                     }
                 ]
             };
@@ -83,6 +83,33 @@ export default {
                     {
                         name: '专业年限',
                         value: item.xynx || ''
+                    }
+                ]
+            };
+        });
+    },
+    /* 专业接口数据转换 setting*/
+    toolMajorListSetting(list) {
+        return list.map(item => {
+            return {
+                ...item,
+                title: item.majorname,
+                tags: [{
+                        name: '专业大类',
+                        value: item.zydl || ''
+                    },
+                    {
+                        name: '代码',
+                        value: item.majorcode
+                    }
+                ],
+                cards: [{
+                        name: '学历层次',
+                        value: item.xlcc || ''
+                    },
+                    {
+                        name: '专业年限',
+                        value: item.numberofyearsofschooling?item.numberofyearsofschooling+'年':''
                     }
                 ]
             };
@@ -184,18 +211,24 @@ export default {
         }
     },
     /* 统一跳转外链接 - webview  @src 外链接地址 :todo*/
-    toolWeb(title,param) {
-        switch (title) {
-            case '拓扑图':
-                console.log('拓扑图',param)
+    toolWeb(title, param = {}) {
+        let src = ConfigWeb[title]
+        let list = []
+        for (let i in param) {
+            list.push(`${i}=${param[i] || ''}`)
+        }
+        let query = list.join('***')
+        // console.log('src', src, 'title', title, 'list', list, 'query', query)
+        /* switch (title) {
+            case '学校简介':
+                console.log('学校简介',param)
                 break;
-        
             default:
                 break;
-        }
-        // uni.navigateTo({
-        //     url: `/pages/public/webview/webview?src=${src}`
-        // });
+        } */
+        uni.navigateTo({
+            url: `/pages/public/webview/webview?src=${src}&title=${title}&query=${query}`
+        });
     },
     /* 加载更多 loadmore  more（loading前）、loading（loading中）、noMore（没有更多了）*/
     toolLoad() {}

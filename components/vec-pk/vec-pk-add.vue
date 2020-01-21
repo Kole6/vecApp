@@ -55,7 +55,7 @@
         </scroll-view>
       </swiper-item>
       <swiper-item>
-        <scroll-view scroll-y style="height: 100%;">
+        <scroll-view scroll-y style="height: 100%;" @scrolltolower="onLoadMore">
           <view class="wrapper">
             <view class="list-item" v-for="(item, index) in listArr2" :key="index">
               <view class="flag" @click="handleListTaped(item)">
@@ -78,6 +78,7 @@
               ></school-list-item>
             </view>
           </view>
+          <uni-load-more :status="more"></uni-load-more>
         </scroll-view>
       </swiper-item>
     </swiper>
@@ -94,15 +95,16 @@ import schoolListItem from "@/components/vec-school-list/SchoolListItem.vue";
 import uniSearchBar from "@/components/uni-search-bar/uni-search-bar.vue";
 import messageInfo from "@/components/vec-message-info/vec-message-info.vue";
 import QSTabs from "@/components/QS-tabs/QS-tabs.vue";
-import loadMore from "@/components/loadMore/you-scroll.vue";
+// import loadMore from "@/components/loadMore/you-scroll.vue";
 import { ConfigContrast } from "@/config";
+import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue";
 export default {
   components: {
     schoolListItem,
     uniSearchBar,
     messageInfo,
     QSTabs,
-    loadMore
+    uniLoadMore
   },
   props: {
     type: Number,
@@ -123,7 +125,10 @@ export default {
       firstHeight: "0",
       listArr2: [],
       listArr: [],
-      listPk: []
+      listPk: [],
+      pageIndex: 1,
+      more: "more",
+      searchValue: ""
     };
   },
   computed: {
@@ -137,28 +142,47 @@ export default {
   },
   mounted() {
     this.calcScrollHeight(true);
-    this.getSwp("");
+    this.init();
+    this.getSwp();
   },
   methods: {
-    async getSwp(key) {
-      let list = await this.$api.apiGetComparison(this, this.type);
-      this.listPk = this.$tool.toolPkList(list, this.type);
+    async init() {
       if (this.type == 1) {
         this.tabs = ["我的关注", "热门学校"];
-        let l = await this.$api.apiGetFavoriteListSearch(this, this.type, key);
+      } else {
+        this.tabs = ["我的关注", "相关专业"];
+      }
+      let list = await this.$api.apiGetComparison(this, this.type);
+      this.listPk = this.$tool.toolPkList(list, this.type);
+    },
+    async getSwp() {
+      this.pageIndex = 1;
+      let l = await this.$api.apiGetFavoriteListSearch(
+        this,
+        this.type,
+        this.searchValue
+      );
+      if (this.type == 1) {
         this.listArr = this.$tool.toolSchoolListPk(l, this.listPk);
-        let list = await this.$api.apiGetSchoolSearchList(this, key);
+        let list = await this.$api.apiGetSchoolSearchList(
+          this,
+          this.searchValue,
+          {
+            pageIndex: this.pageIndex
+          }
+        );
         this.listArr2 = this.$tool.toolSchoolListPk(list, this.listPk);
       } else {
-        this.tabs = ["我的关注", "热门专业"];
-        let l = await this.$api.apiGetFavoriteListSearch(this, this.type, key);
         this.listArr = this.$tool.toolMajorListPk(l, this.listPk);
-        let list = await this.$api.apiGetMajors(this, key);
+        let list = await this.$api.apiGetMajors(this, this.searchValue, {
+          pageIndex: this.pageIndex
+        });
         this.listArr2 = this.$tool.toolMajorListPk(list, this.listPk);
       }
     },
     search({ value }) {
-      this.getSwp(value);
+      this.searchValue = value;
+      this.getSwp();
     },
     /* 点击增删对比库 */
     async handleListTaped(item) {
@@ -187,6 +211,39 @@ export default {
         }
       }
       console.log(" this.listPk", this.listPk);
+    },
+    async onLoadMore() {
+      if (this.more == "more") {
+        this.more = "loading";
+        this.pageIndex += 1;
+        if (this.type == 1) {
+          let list = await this.$api.apiGetSchoolSearchList(
+            this,
+            this.searchValue,
+            { pageIndex: this.pageIndex }
+          );
+          if (list.length) {
+            this.listArr2.push(
+              ...this.$tool.toolSchoolListPk(list, this.listPk)
+            );
+            this.more = "more";
+          } else {
+            this.more = "noMore";
+          }
+        } else {
+          let list = await this.$api.apiGetMajors(this, this.searchValue, {
+            pageIndex: this.pageIndex
+          });
+          if (list.length) {
+            this.listArr2.push(
+              ...this.$tool.toolMajorListPk(list, this.listPk)
+            );
+            this.more = "more";
+          } else {
+            this.more = "noMore";
+          }
+        }
+      }
     },
     handleMessageClose() {
       this.isShowMessage = false;

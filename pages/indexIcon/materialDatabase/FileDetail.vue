@@ -42,15 +42,15 @@
 				<image class="image" :src="fileInfo.fileImg" mode="aspectFit" />
 			</view>
 		</view>
-		<view class="m-btn-group">
+		<!-- <view class="m-btn-group">
 			<view class="u-btn down" @tap="handleDownload">
 				<image class="img" src="/static/indexIcon/down.png" mode="aspectFit" /> 下载文件
 			</view>
 			<view class="u-btn share" @tap="handleShare">
 				<image class="img" src="/static/indexIcon/share.png" mode="aspectFit" />分享给好友
 			</view>
-		</view>
-		<uni-popup ref="share" :type="type" :custom="true" @change="change">
+		</view> -->
+		<!-- <uni-popup ref="share" :type="type" :custom="true" @change="change">
 			<view class="uni-share">
 				<view class="uni-share-title">分享到</view>
 				<view class="uni-share-content">
@@ -63,7 +63,7 @@
 				</view>
 				<view class="uni-share-btn" @click="cancel('share')">取消分享</view>
 			</view>
-		</uni-popup>
+		</uni-popup> -->
 	</view>
 </template>
 

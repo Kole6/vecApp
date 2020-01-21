@@ -5,13 +5,13 @@
         <image src="/static/1024.png" mode="aspectFill" />
       </p>
       <p>真实的职教，精准的圈子</p>
-      <p>android v1.1</p>
+      <p>android v1.2</p>
     </view>
     <view class="center_menu">
       <view class="menu_item" @tap="toYijian()" hover-class="navigator-hover">
         <text class="menu_l">意见反馈</text>
       </view>
-      <view class="menu_item" @tap="toXin()"  hover-class="navigator-hover">
+      <view class="menu_item" @tap="toXin()" hover-class="navigator-hover">
         <text class="menu_l">检查新版本</text>
       </view>
       <!-- <view class="menu_item" @tap="toIntroduce()" hover-class="navigator-hover">
@@ -24,13 +24,14 @@
 				<text class="menu_l">联系我们</text>
       </view>-->
     </view>
-    <view class="box" :style="{height:`${scrollH - 690}upx`}">
+    <view class="box" :style="{height:`${scrollH - 580}upx`}">
       <view class="inner">
-        <p @tap="toUserAgree()">
-          用户协议
-          <span class="mail">|</span>隐私政策
+        <p>
+          <span @tap="toUserAgree()">用户协议</span>
+          <span class="mail">|</span>
+          <span @tap="toUserAgree2()">隐私政策</span>
         </p>
-        <p class="mail">公司邮箱：3420612413.qq.com</p>
+        <p class="mail">公司邮箱：zhijiaoquan123@163.com</p>
       </view>
     </view>
   </view>
@@ -81,20 +82,21 @@ export default {
       });
     },
     toUserAgree() {
-      uni.navigateTo({
-        url: "/pages/login/userAgreement/userAgreement"
-      });
+      this.$tool.toolWeb("用户协议");
+    },
+    toUserAgree2() {
+      this.$tool.toolWeb("隐私政策");
     },
     toYijian() {
       uni.navigateTo({
         url: "/pages/personal/feedback/feedback"
       });
-	},
-	toXin() {
+    },
+    toXin() {
       uni.showToast({
-		  title: '当前已经是最新的版本！',
-		  icon:'none'
-	  });
+        title: "当前已经是最新的版本！",
+        icon: "none"
+      });
     }
   }
 };

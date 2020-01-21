@@ -39,10 +39,10 @@
 					<image src="/static/p505.png" mode="aspectFill" />
 					<text>关于我们</text>
 				</view>
-				<view class="menu_item" @tap="toRecommend()">
+				<!-- <view class="menu_item" @tap="toRecommend()">
 					<image src="/static/p506.png" mode="aspectFill" />
 					<text>推荐给朋友</text>
-				</view>
+				</view> -->
 			</view>
 		</view>
 	</view>

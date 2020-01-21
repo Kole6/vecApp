@@ -112,7 +112,7 @@
 			return {
 				swiperList: [],
 				iconList: [{
-						url: '/static/home_icon5.png',
+						url: '/static/home_icon6.png',
 						text: '院校库',
 						page: '/pages/indexIcon/schoolDatabase/schoolDatabase'
 					},
@@ -122,12 +122,12 @@
 						page: '/pages/indexIcon/majorDatabase/majorDatabase'
 					},
 					{
-						url: '/static/home_icon6.png',
+						url: '/static/home_icon8.png',
 						text: '资料库',
 						page: '/pages/indexIcon/materialDatabase/materialDatabase'
 					},
 					{
-						url: '/static/home_icon8.png',
+						url: '/static/home_icon5.png',
 						text: 'VIP',
 						page: '/pages/indexIcon/vip/vip'
 					}

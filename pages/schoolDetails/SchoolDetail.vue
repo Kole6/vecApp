@@ -21,9 +21,6 @@
             <image :src="schoolInfo.logo" mode="aspectFill" style="width: 100%; height: 100%;" />
           </view>
           <view class="left" v-else @tap="handleLogoTaped">{{getFirst(schoolInfo.name)}}</view>
-          <!-- <view class="left-tag" @tap="handleLogoTaped">
-            <text>学校标签画像</text>
-          </view> -->
           <view class="right">
             <view class="title">{{schoolInfo.name}}</view>
             <view class="info">
@@ -49,12 +46,12 @@
               @tap="handleSC"
               :src=" `/static/indexIcon/${hasSC ? 'sc2' : 'sc1'}.png`"
               mode="aspectFit"
-              style="height: 30upx; width: 30upx;padding-left:4upx"
+              style="height: 34upx; width: 34upx;padding-left:4upx"
             />
           </view>
         </view>
         <view class="left-tag" @tap="handleLogoTaped">
-            <text>学校标签画像</text>
+          <text>学校标签画像</text>
         </view>
         <view class="tags-car">
           <view class="car" v-for="(item,index) in params.cards" :key="index">{{item}}</view>
@@ -223,8 +220,8 @@ export default {
           url: "./schoolProfile",
           params: [
             {
-              key: "baike",
-              value: "baike"
+              key: "schoolName",
+              value: "name"
             }
           ]
         },
@@ -461,9 +458,13 @@ export default {
         : this.schoolInfo.dzNumber - 1;
     },
     handlePkOne() {
-      uni.navigateTo({
-        url: `/pages/schoolDetails/SchoolPk/SchoolPkDetail?ids=${this.schoolInfo.schoolno}`
+      uni.showToast({
+        title: "数据正在准备中~",
+        icon: "none"
       });
+      /* uni.navigateTo({
+        url: `/pages/schoolDetails/SchoolPk/SchoolPkDetail?ids=${this.schoolInfo.schoolno}`
+      }); */
     },
     handlePK() {
       uni.navigateTo({
@@ -521,6 +522,21 @@ export default {
       });
     },
     handleTap(item, index) {
+      //中职的暂时都不让进入
+      if (item.name != "学校简介" && this.schoolInfo.schooltype == 2) {
+        uni.showToast({
+          title: "暂无数据",
+          icon: "none"
+        });
+        return;
+      }
+      if (item.name == "质量年报" || item.name == "奖助学金") {
+        uni.showToast({
+          title: "暂无数据",
+          icon: "none"
+        });
+        return;
+      }
       if (item.url) {
         let stringArr = [];
         if (item.params) {

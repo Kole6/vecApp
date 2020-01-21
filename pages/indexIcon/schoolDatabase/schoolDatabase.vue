@@ -69,7 +69,7 @@ export default {
     };
   },
   mounted() {
-    let query = uni.createSelectorQuery().in(this);// 限制列表高度
+    let query = uni.createSelectorQuery().in(this); // 限制列表高度
     query
       .select(".school-list")
       .boundingClientRect(data => {
@@ -81,48 +81,24 @@ export default {
   },
   methods: {
     onPullDown(done) {
-      console.log("下拉");
+      this.getData(1);
+      done();
     },
     onLoadMore() {
-      console.log("上拉");
-    //   this.loadStatus = "loading";
-    //   this.getData().then(() => {});
-    //   setTimeout(() => {
-    //     this.dataArr = [...this.dataArr, ...schoolData];
-    //     this.loadStatus = "more";
-    //   }, 1000);
+      this.getData();
     },
-    getData(isRefresh) {
-      return new Promise((resolve, reject) => {
-        this.$http({
-          url: "/zjq/mainpage/GetHotCollege",
-          header: "form",
-          data: {
-            type: "2",
-            token: uni.getStorageSync("token"),
-            pageIndex: this.page.pageIndex,
-            pageSize: this.page.pageSize
-          }
-        }).then(res => {
-          if (res.code == 0) {
-            let data = this.$tool.toolSchoolList(res.data.list);
-            if (isRefresh) {
-              this.dataArr = data;
-              this.page.pageIndex = 1;
-            } else {
-              this.dataArr.push(...data);
-              this.page.pageIndex++;
-            }
-            resolve(res.data.lastPage);
-          } else {
-            uni.showToast({
-              title: res.message,
-              icon: "none"
-            });
-            reject();
-          }
-        });
+    async getData(index) {
+      this.loadStatus = "loading";
+      let list = await this.$api.apiGetHotCollege(this, 2, {
+        pageIndex: index || this.page.pageIndex
       });
+      if (list.length) {
+        this.dataArr.push(...this.$tool.toolSchoolList(list));
+        this.page.pageIndex = index ? index + 1 : this.page.pageIndex + 1;
+        this.loadStatus = "more";
+      } else {
+        this.loadStatus = "noMore";
+      }
     },
     toBack() {
       uni.navigateBack();
@@ -158,7 +134,7 @@ export default {
   color: #fff;
   border-radius: 20upx;
   font-size: 34upx;
-  font-weight:500;
+  font-weight: 500;
   background: $main-base-color;
   height: 180upx;
   box-shadow: 5upx 10upx 10upx rgba($color: #7494ff, $alpha: 0.1);
