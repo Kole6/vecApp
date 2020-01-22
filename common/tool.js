@@ -109,7 +109,7 @@ export default {
                     },
                     {
                         name: '专业年限',
-                        value: item.numberofyearsofschooling?item.numberofyearsofschooling+'年':''
+                        value: item.numberofyearsofschooling ? item.numberofyearsofschooling + '年' : ''
                     }
                 ]
             };
@@ -190,9 +190,32 @@ export default {
             return type == 1 ? item.schoolno : item.majorcode
         });
     },
-    /* 进入页面 - 优先判断登录 */
-    toolistoolTiaoToken(url) {
-        if (uni.getStorageSync('token')) {
+    /* 首次进入页面 - 判断是nomore还是more @listArr 表单名称  @more 提示名称*/
+    toolMore(that, listArr, more, pageIndex, list) {
+        let index = 1
+        if (pageIndex == 1) {
+            if (list.length) {
+                that[listArr] = list;
+                index += 1;
+                that[more] = "more";
+            } else {
+                that[listArr] = [];
+                that[more] = "noMore";
+            }
+        } else {
+            if (list.length) {
+                that[listArr].push(...list);
+                index += 1;
+                that[more] = "more";
+            } else {
+                that[more] = "noMore";
+            }
+        }
+        return index
+    },
+    /* 进入页面 - 优先判断登录 @kou kou存在判断token*/
+    toolistoolTiaoToken(url, kou) {
+        if (!kou || uni.getStorageSync('token')) {
             uni.navigateTo({
                 url: url
             });

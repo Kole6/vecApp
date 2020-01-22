@@ -121,12 +121,14 @@ export default {
                 type: that.hasSC ? '2' : '1'
             }
         }).then(res => {
+            if (res.code == 0) {
+                that.hasSC = !that.hasSC;
+            }
             uni.showToast({
                 title: res.message,
                 icon: 'none',
-                duration: 1000
+                duration: 200
             });
-            that.hasSC = !that.hasSC;
         });
     },
     /* 专业 - 添加关注和取消关注 */
@@ -140,12 +142,14 @@ export default {
                 type: that.hasSC ? '2' : '1'
             }
         }).then(res => {
+            if (res.code == 0) {
+                that.hasSC = !that.hasSC;
+            }
             uni.showToast({
                 title: res.message,
                 icon: 'none',
-                duration: 1000
+                duration: 200
             });
-            that.hasSC = !that.hasSC;
         });
     },
     /* 获取关注列表 @id 判断是否已关注 @type 关注类型（1：学校；2：专业） @key 搜索关键字*/
@@ -173,10 +177,10 @@ export default {
                     that[name] = res.data.list
                 }
             } else {
-                uni.showToast({
+                /* uni.showToast({
                     title: res.message,
                     icon: 'none'
-                });
+                }); */
             }
         });
     },
@@ -206,7 +210,7 @@ export default {
             that.$http({
                 url: '/zjq/User/GetComparison',
                 header: 'form',
-                load:true,
+                load: true,
                 data: {
                     type,
                     token: uni.getStorageSync('token')
@@ -447,7 +451,7 @@ export default {
         });
     },
     /* 学校技能大赛情况 */
-    apiGetSkillList(that, param={}) {
+    apiGetSkillList(that, param = {}) {
         return new Promise((resolve, reject) => {
             that.$http({
                 url: '/zjq/College/GetSkillList',

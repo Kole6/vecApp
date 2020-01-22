@@ -48,7 +48,7 @@ export default {
       pageIndex: 1,
       more: "more",
       listArr: [],
-      resList:["","",""]
+      resList: ["", "", ""]
     };
   },
   onLoad(e) {
@@ -77,20 +77,20 @@ export default {
         pageIndex: this.pageIndex,
         keySpecialty: this.resList[0], // 重点专业
         bigclass: this.resList[1], // 产业大类
-        xyyear: this.resList[2] // 修业年限
+        type: this.resList[2] // 修业年限
       });
-      if (list.length) {
-        this.listArr.push(...this.$tool.toolMajorListSetting(list));
-        this.pageIndex += 1;
-        this.more = "more";
-      } else {
-        this.more = "noMore";
-      }
+      this.pageIndex = this.$tool.toolMore(
+        this,
+        "listArr",
+        "more",
+        this.pageIndex,
+        this.$tool.toolMajorListSetting(list)
+      );
     },
     searchSetting(res) {
-      this.pageIndex = 1
-      this.resList = res
-      this.apiGetMajors()
+      this.pageIndex = 1;
+      this.resList = res;
+      this.apiGetMajors();
     },
     change(index) {
       this.current = index;

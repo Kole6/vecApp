@@ -29,32 +29,6 @@
       @animationfinish="animationfinish"
     >
       <swiper-item>
-        <scroll-view scroll-y style="height: 100%;">
-          <view class="wrapper">
-            <view class="list-item" v-for="(item, index) in listArr" :key="index">
-              <view class="flag" @click="handleListTaped(item)">
-                <block v-if="item.hasSelected">
-                  <image
-                    src="/static/indexIcon/selected.png"
-                    mode="aspectFit"
-                    style="height: 36upx; width:36upx"
-                  />
-                </block>
-                <block v-else>
-                  <view class="selecting"></view>
-                </block>
-              </view>
-              <school-list-item
-                :item="item"
-                :showType="4"
-                :handleTaped="false"
-                @taped="handleListTaped(item)"
-              ></school-list-item>
-            </view>
-          </view>
-        </scroll-view>
-      </swiper-item>
-      <swiper-item>
         <scroll-view scroll-y style="height: 100%;" @scrolltolower="onLoadMore">
           <view class="wrapper">
             <view class="list-item" v-for="(item, index) in listArr2" :key="index">
@@ -75,10 +49,38 @@
                 :showType="4"
                 :handleTaped="false"
                 @taped="handleListTaped(item)"
+                :isSpecial="type!=1"
               ></school-list-item>
             </view>
           </view>
           <uni-load-more :status="more"></uni-load-more>
+        </scroll-view>
+      </swiper-item>
+      <swiper-item>
+        <scroll-view scroll-y style="height: 100%;">
+          <view class="wrapper">
+            <view class="list-item" v-for="(item, index) in listArr" :key="index">
+              <view class="flag" @click="handleListTaped(item)">
+                <block v-if="item.hasSelected">
+                  <image
+                    src="/static/indexIcon/selected.png"
+                    mode="aspectFit"
+                    style="height: 36upx; width:36upx"
+                  />
+                </block>
+                <block v-else>
+                  <view class="selecting"></view>
+                </block>
+              </view>
+              <school-list-item
+                :item="item"
+                :showType="4"
+                :handleTaped="false"
+                @taped="handleListTaped(item)"
+                :isSpecial="type!=1"
+              ></school-list-item>
+            </view>
+          </view>
         </scroll-view>
       </swiper-item>
     </swiper>
@@ -120,12 +122,13 @@ export default {
       wrapperHeight: "auto",
       systemInfo: uni.getSystemInfoSync(),
       activeIndex: 1,
-      tabs: ["我的关注", "热门"],
+      tabs: ["热门", "我的关注"],
       current: 0,
       firstHeight: "0",
       listArr2: [],
       listArr: [],
       listPk: [],
+      arrPk: [],
       pageIndex: 1,
       more: "more",
       searchValue: ""
@@ -148,12 +151,17 @@ export default {
   methods: {
     async init() {
       if (this.type == 1) {
-        this.tabs = ["我的关注", "热门学校"];
+        this.tabs = ["热门学校", "我的关注"];
       } else {
-        this.tabs = ["我的关注", "相关专业"];
+        this.tabs = ["相关专业", "我的关注"];
       }
       let list = await this.$api.apiGetComparison(this, this.type);
       this.listPk = this.$tool.toolPkList(list, this.type);
+      if (this.type == 2) {
+        this.arrPk = list.map(k => {
+          return k.xlcc;
+        });
+      }
     },
     async getSwp() {
       this.pageIndex = 1;
@@ -193,6 +201,12 @@ export default {
           1
         );
         item.hasSelected = !item.hasSelected;
+        if (this.type == 2) {
+          this.arrPk.splice(
+            this.listPk.findIndex(t => t === item.xlcc),
+            1
+          );
+        }
       } else {
         if (this.listPk.length >= ConfigContrast) {
           uni.showToast({
@@ -203,14 +217,13 @@ export default {
             } 进行对比哦`,
             icon: "none"
           });
-          return;
         } else {
           this.$api.apiMyComparison(this, "A", this.type, item[this.key3]);
           this.listPk.push(item[this.key3]);
           item.hasSelected = !item.hasSelected;
+          this.arrPk.push(item.xlcc);
         }
       }
-      console.log(" this.listPk", this.listPk);
     },
     async onLoadMore() {
       if (this.more == "more") {
@@ -253,7 +266,22 @@ export default {
       this.$set(item, "checked", !item.checked);
     },
     toDetail() {
-      uni.navigateTo({ url: `${this.key4}?ids=${this.listPk.toString()}` });
+      if (this.listPk.length < 2) {
+        let t = `请选择2${this.type == 1 ? "所" : "个"}${
+          this.key1
+        }学校进行对比！`;
+        uni.showToast({
+          title: t,
+          icon: "none"
+        });
+      } else if (this.type == 2 && this.arrPk[0] != this.arrPk[1]) {
+        uni.showToast({
+          title: "不同学历层次专业不能进行对比!",
+          icon: "none"
+        });
+      } else {
+        uni.navigateTo({ url: `${this.key4}?ids=${this.listPk.toString()}` });
+      }
     },
     toBack() {
       uni.navigateBack({ delta: 2 });

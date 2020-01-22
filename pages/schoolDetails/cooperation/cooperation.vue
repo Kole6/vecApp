@@ -5,15 +5,15 @@
       <view class="txt">
         <view class="txt-box">
           <p>产学合作总数</p>
-          <p>{{listObj.totalNum}}</p>
+          <p>{{listObj.totalNum || ''}}</p>
         </view>
         <view class="txt-box">
           <p>订单培养数</p>
-          <p>{{listObj.orderNum}}</p>
+          <p>{{listObj.orderNum || ''}}</p>
         </view>
         <view class="txt-box">
           <p>共同开发课程</p>
-          <p>{{listObj.course}}</p>
+          <p>{{listObj.course || ''}}</p>
         </view>
       </view>
     </view>

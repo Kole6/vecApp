@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>拓扑图</title>
+		<script type="text/javascript" src="https://js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.1.5.2.js"></script>
+		<link rel="stylesheet" href="./css/jsmind.css">
+		<style>
+			html {
+				width: 100%;
+				height: 100vh;
+			}
+
+			body {
+				margin: 0;
+				height: 100%;
+			}
+
+			#jsmind_container {
+				width: 100vw;
+				height: 100%;
+				/* background: #f4f4f4; */
+			}
+			jmnode {
+				padding: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="jsmind_container"></div>
+		<script src="./js/jsmind.js"></script>
+		<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+		<script>
+			var mind = {
+				meta: {
+					name: 'vec',
+					author: 'hizzgdev@163.com',
+					version: '0.2'
+				},
+				format: 'node_array',
+				data: []
+			};
+			var options = {
+				container: 'jsmind_container',
+				editable: true,
+				theme: 'warning'
+			};
+			var sid = getRoute('sid') || '3633000526';
+			var token = getRoute('token') || '28d3efdcbb484c789d81d783fed3f6ef';
+			$.ajax({
+				url: "http://47.103.69.156:18089/zjq/College/GetZyTpt",
+				type: "POST",
+				data: {
+					sid: sid,
+					token: token
+				},
+				success: function(res) {
+					console.log('res', res);
+					mind.data = res.data;
+					window.jm = jsMind.show(options, mind);
+				},
+				error: function(e) {
+					console.log(e);
+					alert('网络失败，请刷新页面后重试');
+				}
+			});
+
+			// window.jm = jsMind.show(options, mind);
+			/* jm.add_node('sub2', 'sub23', 'new node', {'background-color': 'red'});
+			jm.set_node_color('sub21', 'green', '#ccc');
+			document.addEventListener('UniAppJSBridgeReady', function() {
+				uni.postMessage({
+					data: {
+						action: 'message'
+					}
+				});
+				uni.getEnv(function(res) {
+					console.log('当前环境：' + JSON.stringify(res));
+					console.log('sid',getRoute('sid'))
+				});
+			}); */
+
+			function getRoute(name) {
+				// 正则：[找寻'&' + 'url参数名字' = '值' + '&']（'&'可以不存在）
+				let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+				let r = window.location.search.substr(1).match(reg);
+				if (r != null) {
+					// 对参数值进行解码
+					return unescape(r[2]);
+				}
+				return null;
+			}
+		</script>
+	</body>
+
+</html>

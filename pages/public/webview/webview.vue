@@ -2,7 +2,9 @@
   <web-view :src="src"></web-view>
 </template>
 <script>
+import uniNavBar from "@/components/uni-nav-bar/uni-nav-bar.vue";
 export default {
+  components: { uniNavBar },
   data() {
     return {
       src: ""
@@ -15,6 +17,16 @@ export default {
       uni.setNavigationBarTitle({
         title: e.title
       });
+    }
+  },
+  mounted() {
+    uni.setNavigationBarTitle({
+      title: this.title
+    });
+  },
+  methods: {
+    handleBack() {
+      uni.navigateBack();
     }
   }
 };

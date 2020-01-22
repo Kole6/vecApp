@@ -24,6 +24,7 @@
           :showType="4"
           :handleTaped="false"
           @taped="handleListTaped(index,item)"
+          :isSpecial="type!=1"
         ></school-list-item>
       </view>
     </view>
@@ -100,9 +101,28 @@ export default {
       }
       uni.navigateTo({ url: this.key4 });
     },
-    toDetail() {
+    /* toDetail() {
       let arr = this.$tool.toolPkList(this.listPk, this.type);
       uni.navigateTo({ url: `${this.key5}?ids=${arr.toString()}` });
+    }, */
+    toDetail() {
+      if (this.listPk.length < 2) {
+        let t = `请选择2${this.type == 1 ? "所" : "个"}${
+          this.key1
+        }学校进行对比！`;
+        uni.showToast({
+          title: t,
+          icon: "none"
+        });
+      } else if (this.type == 2 && this.listPk[0].xlcc != this.listPk[1].xlcc) {
+        uni.showToast({
+          title: "不同学历层次专业不能进行对比!",
+          icon: "none"
+        });
+      } else {
+        let arr = this.$tool.toolPkList(this.listPk, this.type);
+        uni.navigateTo({ url: `${this.key5}?ids=${arr.toString()}` });
+      }
     },
     toBack() {
       uni.navigateBack({ delta: 1 });

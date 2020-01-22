@@ -326,9 +326,7 @@ export default {
       uni.navigateBack();
     },
     handlePK() {
-      uni.navigateTo({
-        url: "./ProfessionPK"
-      });
+      this.$tool.toolistoolTiaoToken("./ProfessionPK", 1);
       // 进行用户验证/VIP验证
       /* if (this.permission.sjbdcs || this.permission.isVip) {
 				if(this.permission.isVip){

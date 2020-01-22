@@ -87,7 +87,7 @@ export default {
           ]
         },
         {
-          name: "专业年限", //这个前端定义
+          name: "院校类型", //这个前端定义
           type: "hierarchy",
           submenu: [
             {
@@ -95,24 +95,12 @@ export default {
               value: ""
             },
             {
-              name: "1年",
+              name: "高职",
               value: "1"
             },
             {
-              name: "2年",
+              name: "中职",
               value: "2"
-            },
-            {
-              name: "3年",
-              value: "3"
-            },
-            {
-              name: "4年",
-              value: "4"
-            },
-            {
-              name: "5年",
-              value: "5"
             }
           ]
         }

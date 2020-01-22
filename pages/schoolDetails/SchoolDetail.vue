@@ -50,8 +50,8 @@
             />
           </view>
         </view>
-        <view class="left-tag" @tap="handleLogoTaped">
-          <text>学校标签画像</text>
+        <view class="left-tag">
+          <text @tap="handleLogoTaped">学校标签画像</text>
         </view>
         <view class="tags-car">
           <view class="car" v-for="(item,index) in params.cards" :key="index">{{item}}</view>
@@ -467,9 +467,7 @@ export default {
       }); */
     },
     handlePK() {
-      uni.navigateTo({
-        url: "./SchoolPk/SchoolPk"
-      });
+      this.$tool.toolistoolTiaoToken("./SchoolPk/SchoolPk", 1);
       // 进行用户验证/VIP验证
       /* const value = uni.getStorageSync('freeChance');
 		if (this.permission.sjbdcs || this.permission.isVip) {

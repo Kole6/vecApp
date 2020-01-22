@@ -8,7 +8,7 @@
       <scroll-view scroll-y class="t-body">
         <view class="t-row" v-for="(row, index) in keyList" :key="index">
           <view class="t-td">{{row.name}}</view>
-          <view class="t-td" v-for="(item, i) in bodyList" :key="i">{{item[row.value]}}</view>
+          <view class="t-td" v-for="(item, i) in bodyList" :key="i">{{item[row.value] || '-'}}</view>
         </view>
       </scroll-view>
       <view class="m-btn">
@@ -23,8 +23,7 @@ export default {
   props: {
     tableHeight: String,
     tableWidth: String,
-    bodyList: Array,
-    showType: [String, Number]
+    bodyList: Array
   },
   watch: {
     tableHeight() {
@@ -70,63 +69,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.t-table {
-  box-sizing: border-box;
-  width: 100%;
-  overflow: auto;
-  $border-color: #fff;
-  .t-title {
-    position: fixed;
-    top: 0;
-    background: #ffffff;
-    z-index: 10;
-    padding: 0;
-    width: 750upx;
-    border-bottom: 1px solid #eee;
-    border-top: 1px solid #eee;
-    color: #666666;
-    .t-th {
-      font-weight: 600;
-    }
-  }
-  .t-body {
-    padding-top: 45upx;
-    padding-bottom: 120upx;
-  }
-  .t-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    color: #666666;
-    .t-td,
-    .t-th {
-      box-sizing: border-box;
-      flex: 1;
-      padding: 35upx 10upx;
-      font-size: $uni-font-size-base;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-    .t-td:nth-of-type(even),
-    .t-th:nth-of-type(even) {
-      background-color: #f6f8fe;
-    }
-    .t-td {
-      padding: 30upx 10upx;
-    }
-  }
-  .m-btn {
-    position: fixed;
-    bottom: 0;
-    background: #ffffff;
-    z-index: 10;
-    padding: 25upx 0;
-    width: 750upx;
-  }
-  .wrap {
-    margin: 20upx;
-  }
-}
+@import "./tableShow.scss";
 </style>

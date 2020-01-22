@@ -17,7 +17,7 @@
     <view class="m-title">
       <text>学校对比信息</text>
     </view>
-    <view class="m-radar">
+    <view class="m-radar" v-if="radar">
       <canvas
         canvas-id="canvasRadar"
         id="canvasRadar"
@@ -45,15 +45,15 @@
       >
         <swiper-item>
           <view class="swiper1">
-            <table-show
-              showType="1"
-              :tableHeight="tableHeight"
-              :tableWidth="tableWidth"
-              :bodyList="bodyList"
-            ></table-show>
+            <table-show :tableHeight="tableHeight" :tableWidth="tableWidth" :bodyList="bodyList"></table-show>
           </view>
         </swiper-item>
         <swiper-item>
+          <!-- <table-show-photo
+              :tableHeight="tableHeight"
+              :tableWidth="tableWidth"
+              :bodyList="bodyList"
+          ></table-show-photo>-->
           <ava-compare></ava-compare>
         </swiper-item>
       </swiper>
@@ -63,24 +63,27 @@
 
 <script>
 import uCharts from "@/components/u-charts/u-charts.js";
-import tableShow from "./table-show.vue";
+import tableShow from "./table-show-school.vue";
+import tableShowPhoto from "./table-show-photo.vue";
 import QSTabs from "@/components/QS-tabs/QS-tabs.vue";
 import avaCompare from "./AvaCompare.vue";
 var canvaRadar = null;
 var _self;
 export default {
-  components: { QSTabs, avaCompare, tableShow },
+  components: { QSTabs, avaCompare, tableShow, tableShowPhoto },
   data() {
     return {
       current: 0,
       systemInfo: uni.getSystemInfoSync(),
       tabs: ["信息对比", "画像对比"],
       bodyList: [],
+      radar: true,
       tableHeight: "0",
       tableWidth: "750upx",
       serverData: "",
-      tips: "",
+      schooltype: "",
       sliderMax: "",
+      xlcc: 1,
       chartsInfo: {
         cWidth: "",
         cHeight: "",
@@ -89,6 +92,22 @@ export default {
         serverData: "",
         itemCount: 30, //x轴单屏数据密度
         sliderMax: 200
+      },
+      cate: {
+        高职: [
+          "生均教学设备值",
+          "专任教师总数",
+          "在校生总数",
+          "专业设置数",
+          "技术服务到款额"
+        ],
+        中职: [
+          "生均教学设备值",
+          "专任教师总数",
+          "在校生总数",
+          "专业设置数",
+          "当年巩固率"
+        ]
       }
     };
   },
@@ -106,14 +125,17 @@ export default {
     this.chartsInfo.cWidth = uni.upx2px(750);
     this.chartsInfo.cHeight = uni.upx2px(700);
     this.tableHeight = uni.getSystemInfoSync().windowHeight + "px";
-    // console.log('uni.getSystemInfoSync().windowHeight',uni.getSystemInfoSync().windowHeight)
     this.getData(e.ids);
   },
   methods: {
     async getData(sids) {
       this.bodyList = await this.$api.apiMyXxdb(this, sids);
-      this.getServerData();
-      console.log("this.bodyList", this.bodyList);
+      if (this.bodyList[0].schooltype != this.bodyList[1].schooltype) {
+        this.radar = false;
+      } else {
+        this.schooltype = this.bodyList[0].schooltype;
+        this.getServerData();
+      }
     },
     change(index) {
       this.current = index;
@@ -155,7 +177,7 @@ export default {
         height: _self.chartsInfo.cHeight * _self.chartsInfo.pixelRatio,
         extra: {
           radar: {
-            max: 200 //雷达数值的最大值
+            max: 100 //雷达数值的最大值
           }
         }
       });
@@ -167,13 +189,7 @@ export default {
       });
     },
     getServerData() {
-      let categories = [
-        "本科教师占比",
-        "双型教师占比",
-        "高讲教师占比",
-        "兼职教师占比",
-        "就业率"
-      ];
+      let categories = this.cate[this.schooltype]
       let sd = [];
       let k = new Array(this.bodyList.length).fill(0);
       for (let i of this.bodyList) {
@@ -182,24 +198,24 @@ export default {
           data: k
         });
       }
-      //   let series= [
-      //       {
-      //         name: "上海信息学校",
-      //         data: [190, 210, 105, 21, 27]
-      //       },
-      //       {
-      //         name: "天津第一商业学校",
-      //         data: [190, 210, 105, 35, 27]
-      //       },
-      //       {
-      //         name: "天津第一商业学校",
-      //         data: [50, 40, 55, 80, 33]
-      //       },
-      //       {
-      //         name: "天津第一商业学校",
-      //         data: [70, 100, 30, 150, 80]
-      //       }
-      // 	]
+      /*   let series= [
+            {
+              name: "上海信息学校",
+              data: [190, 210, 105, 21, 27]
+            },
+            {
+              name: "天津第一商业学校",
+              data: [190, 210, 105, 35, 27]
+            },
+            {
+              name: "天津第一商业学校",
+              data: [50, 40, 55, 80, 33]
+            },
+            {
+              name: "天津第一商业学校",
+              data: [70, 100, 30, 150, 80]
+            }
+      	] */
       let Radar = {};
       Radar.categories = categories;
       Radar.series = sd;
