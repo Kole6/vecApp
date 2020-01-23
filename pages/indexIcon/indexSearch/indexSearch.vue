@@ -84,8 +84,8 @@ export default {
     uniLoadMore
   },
   onLoad() {
-    this.apiGetSchoolSearchList("");
-    this.apiGetMajors("");
+    this.apiGetSchoolSearchListMore("");
+    this.apiGetMajorsMore("");
   },
   data() {
     return {
@@ -93,9 +93,9 @@ export default {
       current: 0,
       dataArr: [],
       dataArr2: [],
-      pageIndex: 2,
+      pageIndex: 1,
       more: "more",
-      pageIndex2: 2,
+      pageIndex2: 1,
       more2: "more",
       searchValue: ""
     };
@@ -123,14 +123,11 @@ export default {
       }
     },
     search(res) {
-      this.apiGetSchoolSearchList(res.value);
-      this.apiGetMajors(res.value);
+      this.pageIndex = 1;
+      this.pageIndex2 = 1;
       this.searchValue = res.value;
-      this.pageIndex = this.pageIndex2 = 2;
-    },
-    async apiGetSchoolSearchList(key) {
-      let list = await this.$api.apiGetSchoolSearchList(this, key);
-      this.dataArr = this.$tool.toolSchoolList(list);
+      this.apiGetSchoolSearchListMore(res.value);
+      this.apiGetMajorsMore(res.value);
     },
     async apiGetSchoolSearchListMore() {
       let list = await this.$api.apiGetSchoolSearchList(
@@ -138,29 +135,39 @@ export default {
         this.searchValue,
         { pageIndex: this.pageIndex }
       );
-      if (list.length) {
+      this.pageIndex = this.$tool.toolMore(
+        this,
+        "dataArr",
+        "more",
+        this.pageIndex,
+        this.$tool.toolSchoolList(list)
+      );
+      /* if (list.length) {
         this.dataArr.push(...this.$tool.toolSchoolList(list));
         this.pageIndex += 1;
         this.more = "more";
       } else {
         this.more = "noMore";
-      }
-    },
-    async apiGetMajors(key) {
-      let list = await this.$api.apiGetMajors(this, key);
-      this.dataArr2 = this.$tool.toolMajorList(list);
+      } */
     },
     async apiGetMajorsMore() {
       let list = await this.$api.apiGetMajors(this, this.searchValue, {
         pageIndex: this.pageIndex2
       });
-      if (list.length) {
+      this.pageIndex2 = this.$tool.toolMore(
+        this,
+        "dataArr2",
+        "more2",
+        this.pageIndex2,
+        this.$tool.toolMajorList(list)
+      );
+      /* if (list.length) {
         this.dataArr2.push(...this.$tool.toolMajorList(list));
         this.pageIndex2 += 1;
         this.more2 = "more";
       } else {
         this.more2 = "noMore";
-      }
+      } */
     },
     handleListTaped({ item, index }) {
       this.$tool.toolistoolTiaoToken(

@@ -194,13 +194,17 @@ export default {
     toolMore(that, listArr, more, pageIndex, list) {
         let index = 1
         if (pageIndex == 1) {
-            if (list.length) {
+            if (!list.length) {
+                that[listArr] = [];
+                that[more] = "noMore";
+            } else if (list.length < 10) {
+                that[listArr] = list;
+                index += 1;
+                that[more] = "noMore";
+            } else {
                 that[listArr] = list;
                 index += 1;
                 that[more] = "more";
-            } else {
-                that[listArr] = [];
-                that[more] = "noMore";
             }
         } else {
             if (list.length) {
