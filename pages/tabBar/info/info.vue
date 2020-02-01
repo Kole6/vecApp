@@ -3,6 +3,7 @@
     <view class="search">
       <uni-search-bar radius="100" clearButton="left" @confirm="search" />
     </view>
+    <view class="cai"></view>
     <zi-xun :newList="newList" />
     <uni-load-more :status="more"></uni-load-more>
   </view>
@@ -60,7 +61,15 @@ export default {
 </script>
 <style scoped lang="scss">
 .search {
+  width: 690upx;
   border-top: 1px solid rgb(238, 238, 238);
-  padding: 0 32upx;
+  padding: 0 30upx;
+  position: fixed;
+  z-index: 100;
+  background-color: #f6f8fe;
+
+}
+.cai{
+  height: 50px;
 }
 </style>
