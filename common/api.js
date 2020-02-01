@@ -20,20 +20,23 @@ export default {
             });
         });
     },
-    /* 获取新闻资讯 */
-    apiGetNews(that, key, type) {
-        if (key == '' && that.newList.length != 0 && type == 0) { //缓存首次内容
-            return;
-        }
-        that.$http({
-            url: '/zjq/College/GetNews',
-            header: 'form',
-            data: {
-                key,
-            }
-        }).then((res) => {
-            that.newList = [...res.data.list]
-        })
+    /* 获取新闻资讯  @key 关键字*/
+    apiGetNews(that, param = {}) {
+        return new Promise((resolve, reject) => {
+            that.$http({
+                url: '/zjq/College/GetNews',
+                header: 'form',
+                data: {
+                    ...param
+                },
+            }).then((res) => {
+                if (res.code == 0) {
+                    resolve(res.data.list);
+                } else {
+                    reject();
+                }
+            })
+        });
     },
     /* 高职高专院校、中等职业学校区域学校数量 */
     apiGetYxsl(that) {

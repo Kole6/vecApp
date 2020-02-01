@@ -4,31 +4,56 @@
       <uni-search-bar radius="100" clearButton="left" @confirm="search" />
     </view>
     <zi-xun :newList="newList" />
+    <uni-load-more :status="more"></uni-load-more>
   </view>
 </template>
 
 <script>
 import ziXun from "@/components/ziXun/ziXunLeft.vue";
+import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue";
 import uniSearchBar from "@/components/uni-search-bar/uni-search-bar.vue";
 export default {
   components: {
     ziXun,
+    uniLoadMore,
     uniSearchBar
   },
   data() {
     return {
-      newList: []
+      newList: [],
+      pageIndex: 1,
+      more: "more",
+      resValue: ""
     };
   },
-  onShow() {
-    this.apiGetNews("",0);
+  onLoad() {
+    this.apiGetNews();
+  },
+  onReachBottom() {
+    if (this.more == "more") {
+      this.more = "loading";
+      this.apiGetNews();
+    }
   },
   methods: {
     search(res) {
-      this.apiGetNews(res.value,1);
+      this.resValue = res.value;
+      this.pageIndex = 1;
+      this.more = "loading"
+      this.apiGetNews();
     },
-    apiGetNews(key,type) {
-      this.$api.apiGetNews(this, key,type);
+    async apiGetNews() {
+      let list = await this.$api.apiGetNews(this, {
+        pageIndex: this.pageIndex,
+        key: this.resValue
+      });
+      this.pageIndex = this.$tool.toolMore(
+        this,
+        "newList",
+        "more",
+        this.pageIndex,
+        list
+      );
     }
   }
 };

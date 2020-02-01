@@ -192,8 +192,8 @@ export default {
     },
     /* 首次进入页面 - 判断是nomore还是more @listArr 表单名称  @more 提示名称*/
     toolMore(that, listArr, more, pageIndex, list) {
-        let index = 1
-        if (pageIndex == 1) {
+        let index = pageIndex
+        if (index == 1) {
             if (!list.length) {
                 that[listArr] = [];
                 that[more] = "noMore";
