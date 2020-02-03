@@ -1,7 +1,7 @@
 <template>
   <view class="content">
     <view class="search">
-      <uni-search-bar radius="100" clearButton="left" @confirm="search" />
+      <uni-search-bar placeholder="搜索" radius="100" @input="input" @confirm="search" />
     </view>
     <view class="cai"></view>
     <zi-xun :newList="newList" />
@@ -30,24 +30,33 @@ export default {
   onLoad() {
     this.apiGetNews();
   },
+  /* 上拉 */
   onReachBottom() {
     if (this.more == "more") {
       this.more = "loading";
       this.apiGetNews();
     }
   },
+  /* 下拉 */
+  onPullDownRefresh() {
+    this.pageIndex = 1;
+    this.apiGetNews();
+  },
   methods: {
     search(res) {
-      this.resValue = res.value;
       this.pageIndex = 1;
-      this.more = "loading"
+      this.more = "loading";
       this.apiGetNews();
+    },
+    input(res) {
+      this.resValue = res.value;
     },
     async apiGetNews() {
       let list = await this.$api.apiGetNews(this, {
         pageIndex: this.pageIndex,
         key: this.resValue
       });
+      uni.stopPullDownRefresh();
       this.pageIndex = this.$tool.toolMore(
         this,
         "newList",
@@ -67,9 +76,8 @@ export default {
   position: fixed;
   z-index: 100;
   background-color: #f6f8fe;
-
 }
-.cai{
+.cai {
   height: 50px;
 }
 </style>

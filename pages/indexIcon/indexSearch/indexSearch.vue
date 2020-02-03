@@ -1,12 +1,7 @@
 <template>
   <view class="content">
     <view class="search">
-      <uni-search-bar
-        radius="100"
-        clearButton="left"
-        @confirm="search"
-        placeholder=" 学校 / 人名 / 专业 "
-      />
+      <uni-search-bar radius="100" @confirm="search" placeholder=" 学校 / 专业 " />
     </view>
     <view class="have-data">
       <QSTabs

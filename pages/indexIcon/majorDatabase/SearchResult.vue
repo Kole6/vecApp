@@ -8,6 +8,7 @@
         ref="search"
         style="width: 100%;"
         radius="100"
+        placeholder="搜索专业"
         clearButton="auto"
         @confirm="search"
       />

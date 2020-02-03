@@ -8,7 +8,7 @@
         ref="search"
         style="width: 100%;"
         radius="100"
-        clearButton="auto"
+        placeholder="搜索院校"
         @confirm="search"
       />
     </uni-nav-bar>

@@ -37,7 +37,8 @@
 		{
 			"path": "pages/tabBar/info/info",
 			"style": {
-				"navigationBarTitleText": "新闻资讯"
+				"navigationBarTitleText": "新闻资讯",
+				"enablePullDownRefresh":true
 			}
 		},
 		{
@@ -109,9 +110,21 @@
 		{
 			"path": "pages/indexIcon/schoolDatabase/schoolDatabase",
 			"style": {
+				"navigationBarTitleText": "院校库",
 				"app-plus": {
-					"titleNView": false,
-					"bounce": "none"
+					"bounce": "none",
+					"titleNView": {
+						"searchInput": {
+							"autoFocus":false,
+							"align": "center",
+							"placeholder": "搜索院校",
+							"borderRadius": "50upx",
+							"backgroundColor": "#f8faff",
+							"placeholderColor":"#AAA",
+							"border":"1px solid red",
+							"disabled":true
+						}
+					}
 				}
 			}
 		},

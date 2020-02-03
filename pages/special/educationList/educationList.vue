@@ -1,7 +1,6 @@
 <!--国际交流合作-->
 <template>
   <view>
-    <!-- <view class="m-search"><uni-search-bar :radius="100" @confirm="search" /></view> -->
     <view class style="height: 20upx;"></view>
     <view class="nav">
       <navigator url="./AList">

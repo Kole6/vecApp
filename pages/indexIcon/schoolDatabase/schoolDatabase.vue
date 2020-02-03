@@ -2,9 +2,9 @@
 <template>
   <view>
     <!-- #ifdef APP-PLUS -->
-    <view class style="height: 35px;background: #FFFFFF;"></view>
+    <!-- <view class style="height: 35px;background: #FFFFFF;"></view> -->
     <!-- #endif -->
-    <uni-nav-bar @click-left="toBack" left-icon="arrowleft" :shadow="false" :border="false">
+    <!-- <uni-nav-bar @click-left="toBack" left-icon="arrowleft" :shadow="false" :border="false">
       <uni-search-bar
         style="width: 100%;"
         clearButton="always"
@@ -12,7 +12,7 @@
         :isDisabled="true"
         @searchClick="toSearch"
       />
-    </uni-nav-bar>
+    </uni-nav-bar>-->
     <view class="nav">
       <navigator url="/pages/indexIcon/schoolDatabase/BenkePage">
         <view class="nav-item nav-item-1">
@@ -79,6 +79,11 @@ export default {
       .exec();
     this.getData(1);
   },
+  onNavigationBarSearchInputClicked() {
+    uni.navigateTo({
+      url: "./SearchResult"
+    });
+  },
   methods: {
     onPullDown(done) {
       this.getData(1);
@@ -103,11 +108,7 @@ export default {
     toBack() {
       uni.navigateBack();
     },
-    toSearch() {
-      uni.navigateTo({
-        url: "./SearchResult"
-      });
-    }
+    toSearch() {}
   }
 };
 </script>
