@@ -1,246 +1,115 @@
-<!--国际交流合作-->
+<!--职教榜单-->
 <template>
   <view>
-    <view class style="height: 20upx;"></view>
     <view class="nav">
-      <navigator url="./AList">
-        <view class="nav-item nav-item-1">
-          <text>A榜单</text>
-        </view>
-      </navigator>
-      <navigator url="./LikeList">
-        <view class="nav-item nav-item-2">
-          <text>人气榜</text>
-        </view>
-      </navigator>
-    </view>
-    <!-- <view class="list-title">
-			<view class="hot">热门专业</view>
-			<image class="hot-img" src="/static/indexIcon/hot.png" mode="aspectFit" />
-    </view>-->
-    <load-more
-      ref="scroll"
-      @onPullDown="onPullDown"
-      @onLoadMore="onLoadMore"
-      :styleObj="{ height:wrapperHeight}"
-      :loadStatus="loadStatus"
-    >
-      <view class="school-list">
-        <view class="list-item" v-for="(item, index) in dataArr" :key="index">
-          <view :class="['rank', 'rank' + (index + 1)]">{{ index + 1 }}</view>
-          <school-list-item :showBorder="false" class="content" showType="4" :item="item" />
-        </view>
+      <view @tap="navto(item.url)" class="nav-l" v-for="(item,i) of bangList" :key="i">
+        <image :src="item.img" mode="aspectFill" />
+        <view class="tiao"></view>
+        <view class="biao1">{{item.biao1}}</view>
+        <view class="biao2">{{item.biao2}}</view>
       </view>
-    </load-more>
+    </view>
   </view>
 </template>
-
 <script>
-import uniSearchBar from "@/components/uni-search-bar/uni-search-bar.vue";
-import schoolListItem from "@/components/vec-school-list/SchoolListItem.vue";
-import loadMore from "@/components/loadMore/you-scroll.vue";
 export default {
-  components: {
-    uniSearchBar,
-    schoolListItem,
-    loadMore
-  },
   data() {
     return {
-      page: {
-        pageIndex: 1,
-        pageSize: 10
-      },
-      loadStatus: "more",
-      systemInfo: uni.getSystemInfoSync(),
-      wrapperHeight: "auto",
-      dataArr: []
+      bangList: [
+        {
+          img: "/static/p901.png",
+          biao1: "2018年高等职业院校",
+          biao2: "育人成效50强"
+        },
+        {
+          img: "/static/p902.png",
+          biao1: "2018年高等职业院校",
+          biao2: "教学资源50强"
+        },
+        {
+          img: "/static/p903.png",
+          biao1: "2018年高等职业院校",
+          biao2: "国际影响力50强"
+        },
+        {
+          img: "/static/p904.png",
+          biao1: "2018年高等职业院校",
+          biao2: "服务贡献50强"
+        },
+        {
+          img: "/static/p905.png",
+          biao1: "全国职业院校",
+          biao2: "教学管理50强"
+        },
+        {
+          img: "/static/p906.png",
+          biao1: "全国职业院校",
+          biao2: "学生管理50强"
+        },
+        {
+          img: "/static/p907.png",
+          biao1: "全国职业院校",
+          biao2: "实习管理50强"
+        },
+        {
+          img: "/static/p908.png",
+          biao1: "",
+          biao2: "人气榜",
+          url: "/pages/special/educationList/LikeList"
+        }
+      ]
     };
   },
-  mounted() {
-    // 限制列表高度
-    let query = uni.createSelectorQuery().in(this);
-    query
-      .select(".school-list")
-      .boundingClientRect(data => {
-        let height = "";
-        // #ifdef APP-PLUS
-        height = this.systemInfo.screenHeight - data.top - 84 + "px";
-        // #endif
-        // #ifdef H5
-        height = this.systemInfo.screenHeight - data.top - 50 + "px";
-        // #endif
-        if (height) {
-          this.wrapperHeight = height;
-        }
-      })
-      .exec();
-    this.onPullDown();
-  },
   methods: {
-    onPullDown(done) {
-      this.page.pageIndex = 1;
-      this.getData(true)
-        .then(isLastPage => {
-          if (isLastPage) {
-            this.loadStatus = "noMore";
-          } else {
-            this.loadStatus = "more";
-          }
-        })
-        .finally(() => {
-          done && done();
+    navto(url) {
+      if (!url) {
+        uni.showToast({
+          title: "暂未开通~",
+          icon: "none"
         });
-    },
-    onLoadMore() {
-      this.loadStatus = "loading";
-      this.getData().then(isLastPage => {
-        if (isLastPage) {
-          this.loadStatus = "noMore";
-        } else {
-          this.loadStatus = "more";
-        }
-      });
-    },
-    getData(isRefresh) {
-      return new Promise((resolve, reject) => {
-        this.$http({
-          url: "/zjq/College/GetSchoolSearchList",
-          header: "form",
-          data: {
-            token: uni.getStorageSync("token"),
-            pageIndex: this.page.pageIndex,
-            pageSize: this.page.pageSize,
-            zjbdpm: "1"
-          }
-        }).then(res => {
-          console.log("result==", res);
-          if (res.code == 0) {
-            let data = this.$tool.toolSchoolList(res.data.list);
-            if (isRefresh) {
-              this.dataArr = data;
-              this.page.pageIndex = 1;
-            } else {
-              this.dataArr.push(...data);
-              this.page.pageIndex++;
-            }
-            resolve(res.data.lastPage);
-          } else {
-            uni.showToast({
-              title: res.message,
-              icon: "none"
-            });
-            reject();
-          }
-        });
+        return;
+      }
+      uni.navigateTo({
+        url
       });
     }
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.m-search {
-  padding: 0 40upx;
-}
-
+<style lang='scss' scoped>
 .nav {
-  display: flex;
-  justify-content: space-around;
-  padding: 30upx 0;
-  background-color: #fff;
-}
-
-.nav-item {
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  box-sizing: border-box;
-  color: #fff;
-  border-radius: 20upx;
-  font-size: $uni-font-size-lg;
-  background: $main-base-color;
-  box-shadow: 5upx 10upx 10upx rgba($color: #000000, $alpha: 0.1);
-  width: 333upx;
-  height: 180upx;
-  font-size: 42upx;
-  font-weight: 600;
-}
-
-@for $i from 1 through 2 {
-  .nav-item-#{$i} {
-    background: url("../../../static/indexIcon/bd-bg"+$i+".png");
-    background-size: 100% 100%;
-  }
-}
-
-.list-title {
-  padding: 10upx;
-  margin-top: 20upx;
-  background: #eaeaea;
-  background: #ffffff;
-
-  image {
-    width: 60upx;
-    height: 60upx;
-    vertical-align: middle;
-  }
-
-  .hot {
-    font-size: $uni-font-size-lg;
+  width: 750upx;
+  margin-bottom: 40upx;
+  .nav-l {
     display: inline-block;
-    margin-left: 20upx;
-    font-weight: bold;
-    color: #333333;
-  }
-
-  .hot-img {
-    width: 28upx;
-    height: 28upx;
-    vertical-align: middle;
-    margin-left: 10upx;
-  }
-}
-
-.school-list {
-  box-sizing: border-box;
-  background: #ffffff;
-}
-
-.list-item {
-  display: flex;
-  position: relative;
-  align-items: center;
-  padding: 0 30upx;
-  border-bottom: solid 1px $main-dividing-line1;
-
-  &:first-child {
-    border-top: solid 1px $main-dividing-line1;
-  }
-
-  .rank {
-    position: absolute;
-    top: 45upx;
-    left: 145upx;
-    box-sizing: border-box;
-    width: 36upx;
-    height: 36upx;
-    padding: 2upx;
-    font-size: $uni-font-size-base;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    // border: solid 1upx $main-dividing-line1;
-    // background: $main-base-color;
-    background: url(../../../static/indexIcon/rank.png) no-repeat;
-    background-size: 100% 100%;
-    color: #ffffff;
-  }
-  .content {
-    box-sizing: border-box;
-    width: calc(100% - 100upx);
+    vertical-align: top;
+    width: 312upx;
+    height: 320upx;
+    margin-top: 40upx;
+    margin-left: 42upx;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 5px 5px 10px 0px rgba(1, 149, 255, 0.02);
+    border-radius: 20px;
+    text-align: center;
+    image {
+      width: 90upx;
+      height: 90upx;
+      margin-top: 65upx;
+    }
+    .tiao {
+      height: 38upx;
+    }
+    .biao1 {
+      font-size: 26upx;
+      font-weight: 400;
+      color: rgba(153, 153, 153, 1);
+    }
+    .biao2 {
+      font-size: 26upx;
+      font-weight: 400;
+      color: #333;
+      line-height: 60upx;
+    }
   }
 }
 </style>

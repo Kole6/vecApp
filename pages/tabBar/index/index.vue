@@ -69,7 +69,7 @@
             </view>
           </view>
         </view>
-        <view @tap="navto()" hover-class="none">
+        <view @tap="navto('/pages/special/educationList/educationList')" hover-class="none">
           <!--  url="/pages/special/educationList/educationList"  -->
           <view class="zhuan-btn">
             <view class="z-left">

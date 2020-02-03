@@ -1,18 +1,6 @@
 <!-- 院校库 -->
 <template>
   <view>
-    <!-- #ifdef APP-PLUS -->
-    <!-- <view class style="height: 35px;background: #FFFFFF;"></view> -->
-    <!-- #endif -->
-    <!-- <uni-nav-bar @click-left="toBack" left-icon="arrowleft" :shadow="false" :border="false">
-      <uni-search-bar
-        style="width: 100%;"
-        clearButton="always"
-        :radius="100"
-        :isDisabled="true"
-        @searchClick="toSearch"
-      />
-    </uni-nav-bar>-->
     <view class="nav">
       <navigator url="/pages/indexIcon/schoolDatabase/BenkePage">
         <view class="nav-item nav-item-1">

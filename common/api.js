@@ -38,6 +38,24 @@ export default {
             })
         });
     },
+    /* 获取人气榜学校  @key 关键字*/
+    apiGetRqbd(that, param = {}) {
+        return new Promise((resolve, reject) => {
+            that.$http({
+                url: '/zjq/mainpage/GetRqbd',
+                header: 'form',
+                data: {
+                    ...param
+                }
+            }).then((res) => {
+                if (res.code == 0) {
+                    resolve(res.data.list);
+                } else {
+                    reject();
+                }
+            })
+        });
+    },
     /* 高职高专院校、中等职业学校区域学校数量 */
     apiGetYxsl(that) {
         that.$http({

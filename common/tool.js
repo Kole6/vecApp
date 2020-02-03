@@ -217,7 +217,7 @@ export default {
         }
         return index
     },
-    /* 进入页面 - 优先判断登录 @kou kou存在判断token*/
+    /* 进入页面  @kou kou为1判断token*/
     toolistoolTiaoToken(url, kou) {
         if (!kou || uni.getStorageSync('token')) {
             uni.navigateTo({
@@ -256,9 +256,7 @@ export default {
         uni.navigateTo({
             url: `/pages/public/webview/webview?src=${src}&title=${title}&query=${query}`
         });
-    },
-    /* 加载更多 loadmore  more（loading前）、loading（loading中）、noMore（没有更多了）*/
-    toolLoad() {}
+    }
 }
 
 /* 四个直辖市替换 */
