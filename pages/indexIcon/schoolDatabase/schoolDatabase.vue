@@ -73,7 +73,7 @@ export default {
     query
       .select(".school-list")
       .boundingClientRect(data => {
-        let height = this.systemInfo.screenHeight - data.top;
+        let height = this.systemInfo.screenHeight - data.top - 45;
         this.wrapperHeight = height + "px";
       })
       .exec();
@@ -124,7 +124,6 @@ export default {
   background: #ffffff;
 }
 .nav-item {
-  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -4,16 +4,22 @@
       <view class="title">校企合作情况</view>
       <view class="txt">
         <view class="txt-box">
-          <p>产学合作总数</p>
-          <p>{{listObj.totalNum || ''}}</p>
+          <p>产学合作总数（个）</p>
+          <p>{{listObj.totalNum || '-'}}</p>
         </view>
         <view class="txt-box">
-          <p>订单培养数</p>
-          <p>{{listObj.orderNum || ''}}</p>
+          <p>订单培养数（人）</p>
+          <p>{{listObj.orderNum || '-'}}</p>
+        </view>
+      </view>
+      <view class="txt">
+        <view class="txt-box">
+          <p>共同开发课程（门）</p>
+          <p>{{listObj.course || '-'}}</p>
         </view>
         <view class="txt-box">
-          <p>共同开发课程</p>
-          <p>{{listObj.course || ''}}</p>
+          <p>共同开发教材（种）</p>
+          <p>{{listObj.gtkfjcNum || '-'}}</p>
         </view>
       </view>
     </view>
@@ -64,9 +70,9 @@ page {
 @import "./base64.scss";
 .box {
   width: 684upx;
-  height: 350upx;
+  height: 480upx;
   background: $cooperation_bg no-repeat;
-  background-size: 100%;
+  background-size: 100% 100%;
   box-shadow: 0px 0px 10px 0px rgba(100, 81, 252, 0.1);
   border-radius: 31upx;
   margin: 20upx auto;
@@ -92,7 +98,7 @@ page {
         font-size: 42upx;
         padding-top: 25upx;
       }
-      margin: 46upx 0;
+      margin: 28upx 0;
     }
   }
 }
