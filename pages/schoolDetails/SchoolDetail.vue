@@ -521,13 +521,13 @@ export default {
     },
     handleTap(item, index) {
       //中职的暂时都不让进入
-      if (item.name != "学校简介" && this.schoolInfo.schooltype == 2) {
+      /* if (item.name != "学校简介" && this.schoolInfo.schooltype == 2) {
         uni.showToast({
           title: "暂无数据",
           icon: "none"
         });
         return;
-      }
+      } */
       if (item.name == "质量年报" || item.name == "奖助学金") {
         uni.showToast({
           title: "暂无数据",
