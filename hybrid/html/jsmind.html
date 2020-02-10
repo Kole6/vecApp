@@ -2,12 +2,15 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=yes">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<title>拓扑图</title>
 		<script type="text/javascript" src="https://js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.1.5.2.js"></script>
 		<link rel="stylesheet" href="./css/jsmind.css">
 		<style>
+			*{
+				box-sizing: border-box;
+			}
 			html {
 				width: 100%;
 				height: 100vh;
@@ -19,18 +22,63 @@
 			}
 
 			#jsmind_container {
-				width: 100vw;
+				width: 100%;
 				height: 100%;
-				/* background: #f4f4f4; */
+				position: relative;
+				transform: rotate(90deg) translateY(-100%); 
+				transform-origin: 0 0;
 			}
 			jmnode {
 				padding: 10px;
+			}
+			#button-box{
+				position: absolute;
+				top: 20px;
+				left: 50%;
+				transform: translateX(-50%);
+				z-index: 100;
+				width: 200px;
+			}
+			.box{
+				width: 60px!important;
+				display: inline-block;
+				background-color: #dcdcdc;
+				font-size: 14px;
+				vertical-align: middle;
+				border-radius: 5px;
+				padding: 2px 5px;
+			}
+			.box.disabled{
+				background-color: #ff4d4d;
+				cursor: not-allowed;
+			}
+			.icon{
+				display: inline-block;
+				width: 16px;
+				height: 16px;
+				vertical-align: middle;
 			}
 		</style>
 	</head>
 
 	<body>
-		<div id="jsmind_container"></div>
+		<div id="jsmind_container">
+			<div id="button-box">
+				<div class="box" id="zoom-in-button" style="width:50px" onclick="zoomIn();">
+					<span class="icon">
+						<svg t="1581320083909" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4513" width="16" height="16"><path d="M871.722667 572.501333a19.968 19.968 0 0 0-23.381334 16.298667 320.64 320.64 0 0 1-316.16 264.533333C354.986667 853.333333 210.901333 709.290667 210.901333 532.138667A321.152 321.152 0 0 1 532.138667 210.944a321.066667 321.066667 0 0 1 316.202666 264.448 20.181333 20.181333 0 0 0 39.68-7.082667 357.504 357.504 0 0 0-56.192-138.368A361.301333 361.301333 0 0 0 532.138667 170.666667 361.386667 361.386667 0 0 0 170.666667 532.138667C170.666667 731.477333 332.842667 893.610667 532.138667 893.610667a360.917333 360.917333 0 0 0 355.882666-297.728 20.181333 20.181333 0 0 0-16.298666-23.381334" p-id="4514" fill="#f0ad4e"></path><path d="M531.712 784.341333a21.333333 21.333333 0 0 0 21.333333-21.333333v-209.493333h209.536a21.333333 21.333333 0 0 0 0-42.666667h-209.493333V301.226667a21.333333 21.333333 0 0 0-42.666667 0v209.578666H300.8a21.333333 21.333333 0 0 0 0 42.666667h209.578667v209.536a21.333333 21.333333 0 0 0 21.333333 21.333333" p-id="4515" fill="#f0ad4e"></path></svg>					
+					</span>
+					<span>放大</span>
+				</div>
+				<div class="box disabled" id="zoom-out-button" style="width:50px" onclick="zoomOut();">
+					<span class="icon">
+						<svg t="1581320121546" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4765" width="16" height="16"><path d="M830.08 554.794667a18.901333 18.901333 0 0 0-22.058667 15.402666 322.901333 322.901333 0 0 1-318.464 266.410667c-178.389333 0-323.498667-145.109333-323.498666-323.498667a323.413333 323.413333 0 0 1 591.701333-180.906666 319.829333 319.829333 0 0 1 50.261333 123.818666 19.072 19.072 0 0 0 37.461334-6.656A356.949333 356.949333 0 0 0 789.333333 310.912a361.301333 361.301333 0 0 0-299.733333-159.36A361.429333 361.429333 0 0 0 128 513.109333c0 199.381333 162.218667 361.557333 361.557333 361.557334a360.874667 360.874667 0 0 0 355.925334-297.770667 19.029333 19.029333 0 0 0-15.36-22.101333" p-id="4766" fill="#f0ad4e"></path><path d="M284.16 512a20.138667 20.138667 0 0 0 0 40.277333H720.213333a20.138667 20.138667 0 0 0 0-40.277333H284.16z" p-id="4767" fill="#f0ad4e"></path></svg>
+					</span>
+					<span>缩小</span>
+				</div>
+			</div>
+			
+		</div>
 		<script src="./js/jsmind.js"></script>
 		<script type="text/javascript" src="./js/jquery-1.11.1.min.js"></script>
 		<script>
@@ -45,7 +93,7 @@
 			};
 			var options = {
 				container: 'jsmind_container',
-				editable: true,
+				editable: false,
 				theme: 'warning'
 			};
 			var sid = getRoute('sid') || '3633000526';
@@ -58,31 +106,19 @@
 					token: token
 				},
 				success: function(res) {
-					console.log('res', res);
 					mind.data = res.data;
+					let dom = document.querySelector('#jsmind_container')
+					let initW = dom.offsetWidth,initH = dom.offsetHeight;
+					dom.style.width = initH + 'px'
+					dom.style.height = initW + 'px'
 					window.jm = jsMind.show(options, mind);
+					while(window.jm.view.zoomOut()){}
 				},
 				error: function(e) {
 					console.log(e);
 					alert('网络失败，请刷新页面后重试');
 				}
 			});
-
-			// window.jm = jsMind.show(options, mind);
-			/* jm.add_node('sub2', 'sub23', 'new node', {'background-color': 'red'});
-			jm.set_node_color('sub21', 'green', '#ccc');
-			document.addEventListener('UniAppJSBridgeReady', function() {
-				uni.postMessage({
-					data: {
-						action: 'message'
-					}
-				});
-				uni.getEnv(function(res) {
-					console.log('当前环境：' + JSON.stringify(res));
-					console.log('sid',getRoute('sid'))
-				});
-			}); */
-
 			function getRoute(name) {
 				// 正则：[找寻'&' + 'url参数名字' = '值' + '&']（'&'可以不存在）
 				let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -93,6 +129,23 @@
 				}
 				return null;
 			}
+			function zoomIn() {
+				if (window.jm.view.zoomIn()) {
+					$('#zoom-out-button').removeClass('disabled')
+					$('#zoom-in-button').removeClass('disabled')
+				} else {
+					$('#zoom-in-button').addClass('disabled')
+				};
+			};
+
+			function zoomOut() {
+				if (window.jm.view.zoomOut()) {
+					$('#zoom-out-button').removeClass('disabled')
+					$('#zoom-in-button').removeClass('disabled')
+				} else {
+					$('#zoom-out-button').addClass('disabled')
+				};
+			};
 		</script>
 	</body>
 
