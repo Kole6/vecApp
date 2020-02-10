@@ -44,6 +44,26 @@ export default {
             that.$http({
                 url: '/zjq/mainpage/GetRqbd',
                 header: 'form',
+                load: true,
+                data: {
+                    ...param
+                }
+            }).then((res) => {
+                if (res.code == 0) {
+                    resolve(res.data.list);
+                } else {
+                    reject();
+                }
+            })
+        });
+    },
+    /* 查询各榜单情况  @type 榜单类型 eg:实习管理=sxgl；*/
+    getSchoolRank(that, param = {}) {
+        return new Promise((resolve, reject) => {
+            that.$http({
+                url: '/zjq/College/getSchoolRank',
+                header: 'form',
+                load: true,
                 data: {
                     ...param
                 }
@@ -432,12 +452,13 @@ export default {
             })
         });
     },
-    /* 点赞  @keyid 学校代码或专业代码 @type 1学校，2专业*/
-    apiLikeit(that, type, keyid) {
+    /* 点赞和取消点赞  @keyid 学校代码或专业代码 @type 1学校，2专业 @isDz false点赞，true取消点赞*/
+    apiLikeit(that, type, keyid, isDz) {
         return new Promise((resolve, reject) => {
             that.$http({
-                url: '/zjq/User/likeit',
+                url: `/zjq/User/${isDz?'dontlikeit':'likeit'}`,
                 header: 'form',
+                load: true,
                 data: {
                     keyid,
                     type,

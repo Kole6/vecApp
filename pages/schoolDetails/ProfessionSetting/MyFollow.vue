@@ -87,7 +87,7 @@ export default {
           ]
         },
         {
-          name: "院校类型", //这个前端定义
+          name: "学历层次", //这个前端定义
           type: "hierarchy",
           submenu: [
             {

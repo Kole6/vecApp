@@ -1,10 +1,10 @@
-<!--人气榜-->
+<!--人气榜，各大榜单-->
 <template>
   <view>
     <view class="school-list">
       <view class="list-item" v-for="(item, index) in dataArr" :key="index">
         <view class="rank">{{ index + 1 }}</view>
-        <school-list-item :showBorder="false" showType="4" :item="item" :handleTaped="true"/>
+        <school-list-item :showBorder="false" showType="4" :item="item" :handleTaped="true" />
       </view>
     </view>
     <!-- <uni-load-more :status="more"></uni-load-more> -->
@@ -20,7 +20,10 @@ export default {
     return {
       dataArr: [],
       pageIndex: 1,
-      more: "more"
+      pageSize: 50,
+      more: "more",
+      title: "",
+      type: ""
     };
   },
   /* onReachBottom() {
@@ -29,15 +32,31 @@ export default {
       this.getData();
     }
   }, */
-  onLoad() {
+  onLoad(e) {
+    uni.setNavigationBarTitle({
+      title: e.biao2
+    });
+    this.title = e.biao2;
+    this.type = e.type;
+    this.pageSize = e.size;
     this.getData();
   },
   methods: {
     async getData() {
-      let list = await this.$api.apiGetRqbd(this, {
-        pageIndex: this.pageIndex,
-        pageSize:100
-      });
+      //人气榜和其他榜接口不同
+      var list = [];
+      if (this.type == "rqb") {
+        list = await this.$api.apiGetRqbd(this, {
+          pageIndex: this.pageIndex,
+          pageSize: this.pageSize
+        });
+      } else {
+        list = await this.$api.getSchoolRank(this, {
+          pageIndex: this.pageIndex,
+          pageSize: this.pageSize,
+          type: this.type
+        });
+      }
       this.pageIndex = this.$tool.toolMore(
         this,
         "dataArr",

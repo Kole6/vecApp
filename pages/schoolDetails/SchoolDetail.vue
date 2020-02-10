@@ -381,7 +381,7 @@ export default {
       this.getCompareInfo();
     },
     getChance() {
-      this.$http({
+      /*  this.$http({
         url: "/zjq/User/GetUser",
         header: "form",
         data: {
@@ -394,7 +394,7 @@ export default {
           this.permission.ckzycs = res.data.ckzycs;
           this.permission.sjbdcs = res.data.sjbdcs;
         }
-      });
+      }); */
     },
     judgeHasSC() {
       this.$api.apiGetFavoriteList(this, "1", this.params.schoolno);
@@ -423,6 +423,7 @@ export default {
             website: data.website,
             baike: data.schoolBaikeUrl
           };
+          this.hasDZ = data.isZan;
         }
       });
     },
@@ -452,6 +453,12 @@ export default {
       uni.navigateBack();
     },
     handleDZ() {
+      if (this.$tool.toolToken(1)) {
+        this.apiDz();
+      }
+    },
+    async apiDz() {
+      await this.$api.apiLikeit(this, 1, this.schoolInfo.schoolno, this.hasDZ);
       this.hasDZ = !this.hasDZ;
       this.schoolInfo.dzNumber = this.hasDZ
         ? this.schoolInfo.dzNumber + 1
@@ -543,7 +550,7 @@ export default {
           });
           console.log(stringArr, "arr");
         }
-        this.$tool.toolistoolTiaoToken( item.url + "?" + stringArr.join("&"), 1);
+        this.$tool.toolistoolTiaoToken(item.url + "?" + stringArr.join("&"), 1);
         /* uni.navigateTo({
           url: item.url + "?" + stringArr.join("&")
         }); */

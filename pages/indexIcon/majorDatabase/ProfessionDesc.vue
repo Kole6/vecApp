@@ -274,10 +274,10 @@ export default {
           this.dzNumber = data.likenum;
           this.downloadLink = data.downloadlink;
           this.dataArr = this.$tool.toolMajorList(data.list);
-          this.list1 = (data.mainzylx + "").split("；");
-          this.list2 = (data.xjzgz + "").split("、");
-          this.list3 = (data.xjgz + "").split("、");
-          this.list4 = (data.xjbk + "").split("、");
+          this.list1 = (data.mainzylx + "").split(/[、；]/);
+          this.list2 = (data.xjzgz + "").split(/[、；]/);
+          this.list3 = (data.xjgz + "").split(/[、；]/);
+          this.list4 = (data.xjbk + "").split(/[、；]/);
         }
       });
     },

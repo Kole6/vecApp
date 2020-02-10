@@ -95,14 +95,12 @@ export default {
                 ...item,
                 title: item.majorname,
                 tags: [{
-                        name: '专业大类',
-                        value: item.zydl || ''
-                    },
-                    {
-                        name: '代码',
-                        value: item.majorcode
-                    }
-                ],
+                    name: '专业代码',
+                    value: item.majorcode
+                }, {
+                    name: '重点专业',
+                    value: item.keyspecialty || ''
+                }],
                 cards: [{
                         name: '学历层次',
                         value: item.xlcc || ''
@@ -220,6 +218,24 @@ export default {
             }
         }
         return index
+    },
+    /* 此操作是否需要登录  @kou kou为1判断token*/
+    toolToken(kou) {
+        if (!kou || uni.getStorageSync('token')) {
+            return true
+        } else {
+            uni.showModal({
+                content: '登录之后才可以操作哦!',
+                success: function (res) {
+                    if (res.confirm) {
+                        uni.reLaunch({
+                            url: '/pages/login/signIn/signIn'
+                        })
+                    }
+                }
+            });
+            return false;
+        }
     },
     /* 进入页面  @kou kou为1判断token*/
     toolistoolTiaoToken(url, kou) {

@@ -2,7 +2,7 @@
 <template>
   <view>
     <view class="nav">
-      <view @tap="navto(item.url)" class="nav-l" v-for="(item,i) of bangList" :key="i">
+      <view @tap="navto(item)" class="nav-l" v-for="(item,i) of bangList" :key="i">
         <image :src="item.img" mode="aspectFill" />
         <view class="tiao"></view>
         <view class="biao1">{{item.biao1}}</view>
@@ -19,59 +19,67 @@ export default {
         {
           img: "/static/p901.png",
           biao1: "2018年高等职业院校",
-          biao2: "育人成效50强"
+          biao2: "育人成效50强",
+          type: "yrcx",
+          size: 50
         },
         {
           img: "/static/p902.png",
           biao1: "2018年高等职业院校",
-          biao2: "教学资源50强"
+          biao2: "教学资源50强",
+          type: "jxzy",
+          size: 50
         },
         {
           img: "/static/p903.png",
           biao1: "2018年高等职业院校",
-          biao2: "国际影响力50强"
+          biao2: "国际影响力50强",
+          type: "gjyxl",
+          size: 50
         },
         {
           img: "/static/p904.png",
           biao1: "2018年高等职业院校",
-          biao2: "服务贡献50强"
+          biao2: "服务贡献50强",
+          type: "fwgx",
+          size: 50
         },
         {
           img: "/static/p905.png",
           biao1: "全国职业院校",
-          biao2: "教学管理50强"
+          biao2: "教学管理50强",
+          type: "jxgl",
+          size: 50
         },
         {
           img: "/static/p906.png",
           biao1: "全国职业院校",
-          biao2: "学生管理50强"
+          biao2: "学生管理50强",
+          type: "xsgl",
+          size: 50
         },
         {
           img: "/static/p907.png",
           biao1: "全国职业院校",
-          biao2: "实习管理50强"
+          biao2: "实习管理50强",
+          type: "sxgl",
+          size: 50
         },
         {
           img: "/static/p908.png",
           biao1: "",
           biao2: "人气榜",
-          url: "/pages/special/educationList/LikeList"
+          type: "rqb",
+          size: 100
         }
       ]
     };
   },
   methods: {
-    navto(url) {
-      if (!url) {
-        uni.showToast({
-          title: "暂未开通~",
-          icon: "none"
-        });
-        return;
-      }
-      uni.navigateTo({
-        url
-      });
+    navto(t) {
+      this.$tool.toolistoolTiaoToken(
+        `/pages/special/educationList/LikeList?biao2=${t.biao2}&type=${t.type}&size=${t.size}`
+      );
     }
   }
 };

@@ -34,25 +34,25 @@ export default {
       defaultSelected: [],
       pageIndex: 1,
       more: "more",
+      // {
+      //   name: "高职", //这个前端定义
+      //   type: "hierarchy",
+      //   submenu: [
+      //     {
+      //       name: "高职",
+      //       value: "1"
+      //     },
+      //     {
+      //       name: "中职",
+      //       value: "2"
+      //     }
+      //   ]
+      // },
       filterData: [
         {
           name: "城市",
           type: "hierarchy",
           submenu: [...city]
-        },
-        {
-          name: "高职", //这个前端定义
-          type: "hierarchy",
-          submenu: [
-            {
-              name: "高职",
-              value: "1"
-            },
-            {
-              name: "中职",
-              value: "2"
-            }
-          ]
         },
         {
           name: "性质类别",
@@ -97,10 +97,9 @@ export default {
               value: "3"
             }
           ]
-        },
-        
+        }
       ],
-      resValue:[]
+      resValue: []
     };
   },
   /* 上拉 */
@@ -117,13 +116,13 @@ export default {
   },
   onLoad() {
     //获取性质类别和学校属性 高职和中职不同
-    
+
     this.apiData();
   },
   methods: {
     confirm(e) {
-      this.resValue = this.$tool.toolHMfilter(e.value)
-      console.log('this.resValue',this.resValue)
+      this.resValue = this.$tool.toolHMfilter(e.value);
+      console.log("this.resValue", this.resValue);
       this.pageIndex = 1;
       this.apiData();
     },

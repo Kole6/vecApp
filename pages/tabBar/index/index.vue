@@ -160,7 +160,7 @@ export default {
   methods: {
     apiGetMain() {
       if (this.swiperList.length != 0) {
-        return;
+        return; //做一个首页缓存，每次杀掉进程进来才更新
       }
       this.$http({
         url: "/zjq/mainpage/GetMain",
@@ -206,10 +206,10 @@ export default {
     },
     navto(url) {
       if (!url) {
-		  uni.showToast({
-		    title: "暂未开通~",
-		    icon: "none"
-		  });
+        uni.showToast({
+          title: "暂未开通~",
+          icon: "none"
+        });
         return;
       }
       uni.navigateTo({
