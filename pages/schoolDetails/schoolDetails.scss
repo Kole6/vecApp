@@ -42,15 +42,6 @@
 			overflow: hidden;
 			margin-bottom: 40upx;
 		}
-		// .left-tag {
-		// 	// position: absolute;
-			
-		// 	color: #6451FC;
-		// 	font-size:24upx;
-		// 	margin-top: 150upx;
-		// 	margin-left: -6upx;
-		// 	// margin-left: ;
-		// }
 		.right {
 			display: flex;
 			flex-direction: column;
@@ -111,11 +102,13 @@
 		}
 	}
 	.left-tag {
-		// position: absolute;
+		position: sticky;
 		color: #6451FC;
 		font-size:24upx;
 		margin-top: -14px;
-		padding-left: 28upx;
+		z-index: 30;
+		width: 194upx;
+		text-align: center;
 	}
 	.tags-car {
 		padding-left: 28upx;

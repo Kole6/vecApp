@@ -1,8 +1,5 @@
 <template>
   <view class="h-top">
-    <!-- #ifdef APP-PLUS -->
-    <view style="height: 35px;background: #FFFFFF;"></view>
-    <!-- #endif -->
     <uni-nav-bar
       @clickLeft="handleBack"
       left-icon="arrowleft"
@@ -11,15 +8,19 @@
       fixed
       title="开设学校"
     >
-      <view class="f-sc" slot="right" @tap="handlePkOne">
-        <text>{{schoolType}}</text>
+      <view class="f-sc" slot="right" >
+        <picker @change="bindPickerChange" @cancel="cancel" @tap="clickup" :value="index" :range="array" range-key="name">
+          <text>{{array[index].name}}</text>
+          <uni-icons class="uicons" :type="arrow" color="#333333" size="20" />
+        </picker>
       </view>
     </uni-nav-bar>
     <HMfilterDropdown
       :filterData="filterData"
       :defaultSelected="defaultSelected"
       :updateMenuName="true"
-      :key="filterKey"
+      :key="filterkey"
+      hm
       @confirm="confirm"
     ></HMfilterDropdown>
     <!-- 占位 -->
@@ -37,13 +38,15 @@ import HMfilterDropdown from "@/components/HM-filterDropdown/HM-filterDropdown.v
 import schoolList from "@/components/vec-school-list/vec-school-list.vue";
 import uniNavBar from "@/components/uni-nav-bar/uni-nav-bar.vue";
 import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue";
+import uniIcons from "@/components/uni-icons/uni-icons.vue";
 import city from "@/common/city.js";
 export default {
   components: {
     HMfilterDropdown,
     schoolList,
     uniLoadMore,
-    uniNavBar
+    uniNavBar,
+    uniIcons
   },
   data() {
     return {
@@ -52,9 +55,12 @@ export default {
       defaultSelected: [],
       pageIndex: 1,
       more: "more",
+      index: 0,
       schoolType: "高职",
+      array: [{ name: "高职" }, { name: "中职" }],
       zyid: "510102",
-      filterKey: 0,
+      filterkey: 0,
+      arrow: "arrowdown",
       filterData: [
         {
           name: "城市",
@@ -63,13 +69,11 @@ export default {
         },
         {
           name: "性质类别",
-          type: "hierarchy",
-          submenu: []
+          type: "hierarchy"
         },
         {
           name: "学校属性",
-          type: "hierarchy",
-          submenu: []
+          type: "hierarchy"
         }
       ],
       resValue: ["", "", ""]
@@ -130,8 +134,23 @@ export default {
         this.$tool.toolSchoolList(list)
       );
     },
+    bindPickerChange: function(e) {
+      console.log("picker发送选择改变，携带值为：" + e.target.value);
+      if (this.index != e.target.value) {
+        this.handlePkOne();
+      }
+      this.index = e.target.value;
+      this.schoolType = this.array[e.target.value].name;
+      this.arrow = this.arrow == "arrowdown" ? "arrowup" : "arrowdown";
+    },
     handleBack() {
       uni.navigateBack();
+    },
+    clickup(){
+      this.arrow = this.arrow == "arrowdown" ? "arrowup" : "arrowdown";
+    },
+    cancel(){
+      this.arrow = this.arrow == "arrowdown" ? "arrowup" : "arrowdown";
     },
     handlePkOne() {
       this.schoolType = this.schoolType == "高职" ? "中职" : "高职";
@@ -143,33 +162,45 @@ export default {
         },
         {
           name: "性质类别",
-          type: "hierarchy"
+          type: "hierarchy",
+          submenu: [{ name: "", value: "" }]
         },
         {
           name: "学校属性",
-          type: "hierarchy"
+          type: "hierarchy",
+          submenu: [{ name: "", value: "" }]
         }
       ];
       this.resValue = ["", "", ""];
       this.pageIndex = 1;
-      this.filterKey++;
+      this.reFresh = false;
+      this.filterkey++;
       this.apiData();
       this.getProperty();
     }
   }
 };
 </script>
-<style scoped>
+<style>
 page {
   background-color: #fff;
 }
+</style>
+<style scoped lang="scss">
 .place {
   height: 44px;
+  /* #ifdef APP-PLUS */
+  height: 74px;
+  /* #endif */
 }
 .f-sc {
-  color: #4021df;
-  font-size: 24upx;
+  color: rgba(100, 81, 252, 1);
+  font-size: 26upx;
   width: 300upx;
   margin-top: -8upx;
+  margin-left: 30upx;
+  .uicons {
+    position: absolute;
+  }
 }
 </style>

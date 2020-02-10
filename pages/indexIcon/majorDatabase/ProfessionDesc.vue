@@ -1,8 +1,5 @@
 <template>
   <view>
-    <!-- #ifdef APP-PLUS -->
-    <view class style="height: 35px;background: #FFFFFF;"></view>
-    <!-- #endif -->
     <uni-nav-bar
       @clickLeft="handleBack"
       left-icon="arrowleft"
