@@ -137,13 +137,6 @@ export default {
         this.pageIndex,
         this.$tool.toolSchoolList(list)
       );
-      /* if (list.length) {
-        this.dataArr.push(...this.$tool.toolSchoolList(list));
-        this.pageIndex += 1;
-        this.more = "more";
-      } else {
-        this.more = "noMore";
-      } */
     },
     async apiGetMajorsMore() {
       let list = await this.$api.apiGetMajors(this, this.searchValue, {

@@ -543,9 +543,10 @@ export default {
           });
           console.log(stringArr, "arr");
         }
-        uni.navigateTo({
+        this.$tool.toolistoolTiaoToken( item.url + "?" + stringArr.join("&"), 1);
+        /* uni.navigateTo({
           url: item.url + "?" + stringArr.join("&")
-        });
+        }); */
       }
     }
   }

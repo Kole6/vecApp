@@ -210,7 +210,11 @@ export default {
             if (list.length) {
                 that[listArr].push(...list);
                 index += 1;
-                that[more] = "more";
+                if (list.length < 10) {
+                    that[more] = "noMore";
+                } else {
+                    that[more] = "more";
+                }
             } else {
                 that[more] = "noMore";
             }
@@ -256,7 +260,13 @@ export default {
         uni.navigateTo({
             url: `/pages/public/webview/webview?src=${src}&title=${title}&query=${query}`
         });
-    }
+    },
+    /* HM-filterDropdown组件数据选择后返回数据*/
+    toolHMfilter(list) {
+        return list.map(item => {
+            return item[item.length] || item[item.length - 1] || item[item.length - 2] || ""
+        });
+    },
 }
 
 /* 四个直辖市替换 */

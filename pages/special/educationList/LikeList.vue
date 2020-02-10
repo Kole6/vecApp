@@ -4,10 +4,10 @@
     <view class="school-list">
       <view class="list-item" v-for="(item, index) in dataArr" :key="index">
         <view class="rank">{{ index + 1 }}</view>
-        <school-list-item :showBorder="false" showType="4" :item="item" />
+        <school-list-item :showBorder="false" showType="4" :item="item" :handleTaped="true"/>
       </view>
     </view>
-    <uni-load-more :status="more"></uni-load-more>
+    <!-- <uni-load-more :status="more"></uni-load-more> -->
   </view>
 </template>
 
@@ -23,19 +23,20 @@ export default {
       more: "more"
     };
   },
-  onReachBottom() {
+  /* onReachBottom() {
     if (this.more == "more") {
       this.more = "loading";
       this.getData();
     }
-  },
+  }, */
   onLoad() {
     this.getData();
   },
   methods: {
     async getData() {
       let list = await this.$api.apiGetRqbd(this, {
-        pageIndex: this.pageIndex
+        pageIndex: this.pageIndex,
+        pageSize:100
       });
       this.pageIndex = this.$tool.toolMore(
         this,
@@ -73,10 +74,9 @@ export default {
     width: 46upx;
     height: 46upx;
     border-radius: 46upx;
+    line-height: 46upx;
     font-size: $uni-font-size-base;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
     background-color: #ff750f;
     color: #ffffff;
   }

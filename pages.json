@@ -181,19 +181,14 @@
 		{
 			"path": "pages/indexIcon/majorDatabase/ProfessionSchool",
 			"style": {
-				"navigationBarTitleText": "专业信息",
-				"app-plus": {
-					"bounce": "none"
-				}
+				"navigationBarTitleText": "开设学校",
+				"enablePullDownRefresh":true
 			}
 		},
 		{
 			"path": "pages/indexIcon/majorDatabase/ProfessionPK",
 			"style": {
-				"navigationBarTitleText": "专业对比",
-				"app-plus": {
-					"bounce": "none"
-				}
+				"navigationBarTitleText": "专业对比"
 			}
 		},
 		{
@@ -211,11 +206,7 @@
 				"navigationBarTitleText": "专业对比",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor":"#6451FC",
-				"app-plus": {
-					"titleNView": {
-						"type":"float"
-					}
-				}
+				"transparentTitle":"auto"
 			}
 		}, 
 		{
@@ -466,11 +457,7 @@
 				"navigationBarTitleText": "学校对比",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor":"#6451FC",
-				"app-plus": {
-					"titleNView": {
-						"type":"float"
-					}
-				}
+				"transparentTitle":"auto"
 			}
 		}, {
 			"path": "pages/schoolDetails/ourFaculty/ourFaculty",

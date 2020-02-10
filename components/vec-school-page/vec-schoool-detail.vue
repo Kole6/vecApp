@@ -244,14 +244,16 @@ export default {
     },
     /* 下拉 */
     onLoadMore() {
-      this.loadStatus = "loading";
-      this.getData().then(isLastPage => {
-        if (isLastPage) {
-          this.loadStatus = "noMore";
-        } else {
-          this.loadStatus = "more";
-        }
-      });
+      if (this.loadStatus == "more") {
+        this.loadStatus = "loading";
+        this.getData().then(isLastPage => {
+          if (isLastPage) {
+            this.loadStatus = "noMore";
+          } else {
+            this.loadStatus = "more";
+          }
+        });
+      }
     },
     /* 选择省份的时候进行城市赋值 */
     handleConditionTap({ key, list, index }) {

@@ -298,7 +298,7 @@ export default {
       });
     },
     toPankong(list){
-      if(list.length){
+      if(list[0]){
         return false
       }
       return true

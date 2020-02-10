@@ -79,7 +79,7 @@ export default {
 <style lang='scss' scoped>
 .nav {
   width: 750upx;
-  margin-bottom: 40upx;
+  padding-bottom: 40upx;
   .nav-l {
     display: inline-block;
     vertical-align: top;

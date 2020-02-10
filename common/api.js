@@ -490,4 +490,20 @@ export default {
             })
         });
     },
+    /* 根据专业获取开设学校列表 */
+    apiGetXxByZy(that, param = {}) {
+        return new Promise((resolve, reject) => {
+            that.$http({
+                url: '/zjq/College/GetXxByZy',
+                header: 'form',
+                data: param,
+            }).then((res) => {
+                if (res.code == 0) {
+                    resolve(res.data.list);
+                } else {
+                    reject();
+                }
+            })
+        });
+    }
 }
