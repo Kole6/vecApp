@@ -4,7 +4,7 @@
     <view class style="height: 35px;background: #FFFFFF;"></view>
     <!-- #endif -->
     <uni-nav-bar
-      @click-left="handleBack"
+      @clickLeft="handleBack"
       left-icon="arrowleft"
       :shadow="false"
       :border="false"
@@ -450,6 +450,7 @@ export default {
       });
     },
     handleBack() {
+      console.log('5666+',)
       uni.navigateBack();
     },
     handleDZ() {

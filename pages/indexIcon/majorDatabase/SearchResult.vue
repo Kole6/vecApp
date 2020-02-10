@@ -3,7 +3,7 @@
     <!-- #ifdef APP-PLUS -->
     <view style="height: 34px;background: #FFFFFF;"></view>
     <!-- #endif -->
-    <uni-nav-bar @click-left="handleBack" left-icon="arrowleft" :shadow="false" :border="false">
+    <uni-nav-bar @clickLeft="handleBack" left-icon="arrowleft" :shadow="false" :border="false">
       <uni-search-bar
         ref="search"
         style="width: 100%;"

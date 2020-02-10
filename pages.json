@@ -180,6 +180,9 @@
 		{
 			"path": "pages/indexIcon/majorDatabase/ProfessionSchool",
 			"style": {
+				"app-plus": {
+					"titleNView": false
+				},
 				"navigationBarTitleText": "开设学校",
 				"enablePullDownRefresh":true
 			}

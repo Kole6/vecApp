@@ -283,6 +283,13 @@ export default {
             return item[item.length] || item[item.length - 1] || item[item.length - 2] || ""
         });
     },
+    /*字典数据dict转化成HM-filterDropdown组件数据*/
+    toolHMfilterDict(list) {
+        return list.map(item => {
+            item.value = item.code
+            return item
+        });
+    },
 }
 
 /* 四个直辖市替换 */
