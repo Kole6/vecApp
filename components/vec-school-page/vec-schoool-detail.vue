@@ -144,13 +144,6 @@ export default {
     },
     /* 查询数据api */
     getData(isRefresh = false) {
-      console.log("kkkkkkkkkk", {
-        ...this.currentSearch,
-        schoolType: this.params.schoolType,
-        token: uni.getStorageSync("token"),
-        pageIndex: this.page.pageIndex,
-        pageSize: this.page.pageSize
-      });
       return new Promise((resolve, reject) => {
         this.$http({
           url: "/zjq/College/GetSchoolSearchList",

@@ -5,7 +5,7 @@
         ref="tabs"
         :current="current"
         :tabs="tabs"
-		:width="tabs.length?750/tabs.length:750"
+        :width="tabs.length?750/tabs.length:750"
         swiperWidth="750"
         activeColor="#6451FC"
         backgroundColor="#fff"
@@ -18,9 +18,9 @@
         @transition="transition"
         @animationfinish="animationfinish"
       >
-        <swiper-item class="swiper-item" v-for='(item,i) of tabs.length' :key='i'>
+        <swiper-item class="swiper-item" v-for="(item,i) of tabs.length" :key="i">
           <scroll-view scroll-y style="height: 100%;">
-            <view class="qiun-columns">
+            <view class="qiun-columns" v-if="jyshow">
               <view class="qiun-new">
                 <view class="new-tip">
                   <text>就业占比</text>
@@ -34,7 +34,7 @@
                   ></canvas>
                 </view>
               </view>
-              <view class="qiun-new">
+              <view class="qiun-new" v-if="cyshow">
                 <view class="new-tip">
                   <text>创业占比</text>
                 </view>
@@ -73,19 +73,21 @@ export default {
   data() {
     return {
       haveData: true,
-      tabs: ["2017年"],
+      tabs: ["2018年"],
       current: 0,
       cWidth: "",
       cHeight: "",
       pixelRatio: 1,
-      serverData: ""
+      serverData: "",
+      jyshow: true,
+      cyshow: false
     };
   },
   onLoad(e) {
     _self = this;
     this.cWidth = uni.upx2px(750);
-	this.cHeight = uni.upx2px(500);
-	this.apiData(e.sid)
+    this.cHeight = uni.upx2px(500);
+    this.apiData(e.sid);
   },
   computed: {
     scrollH() {
@@ -97,22 +99,28 @@ export default {
     }
   },
   methods: {
-	async apiData(sid){
-		let list = await this.$api.apiGetJycy(this,sid);
-		let jyb = list[0].jyb
-		let cyb = list[0].cyb
-		this.getServerData(jyb,cyb)
-	},
-    getServerData(jyb,cyb) {
+    async apiData(sid) {
+      let list = await this.$api.apiGetJycy(this, sid);
+      let jyb = list[0].jyb;
+      let cyb = list[0].cyb;
+      if (jyb == 0) {
+        this.jyshow = false;
+      }
+      if (cyb == 0) {
+        this.cyshow = false;
+      }
+      this.getServerData(jyb, cyb);
+    },
+    getServerData(jyb, cyb) {
       let Pie = {
         series: [
-          {  
+          {
             name: "就业率",
             data: jyb
           },
           {
             name: "未就业率",
-            data: 100-jyb
+            data: 100 - jyb
           }
         ]
       };
