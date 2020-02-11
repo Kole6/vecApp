@@ -2,7 +2,6 @@
   <view class="list-content" :class="{'has':showBorder}" @tap="handleTap">
     <view class="left">{{getFirst(item)}}</view>
     <view class="right">
-      <!-- 1: 仅显示文字描述 2 : 仅显示tags标签  3: 仅显示cards标签  4: 全部显示 -->
       <rich-text class="title" :nodes="item.title"></rich-text>
       <view class="right-tag tag1">
         <view>
@@ -32,10 +31,6 @@
 <script>
 export default {
   props: {
-    showType: {
-      type: [Number, String],
-      default: "1"
-    },
     item: {
       type: Object,
       default() {
@@ -47,7 +42,6 @@ export default {
       default: true
     },
     handleTaped: Boolean,
-    url: String,
     isSpecial: {
       type: Boolean, // 是否特殊显示cards，第二行有两种显示方式，专业true:[{name:value}] 院校false: [name]
       default: false
@@ -58,6 +52,13 @@ export default {
       console.log("this.handleTaped", this.handleTaped);
       if (!this.handleTaped) {
         this.$emit("taped", this.item); //不走学校详情，走其它url或者其它点击效果
+        return;
+      }
+      if (this.item.level == "本科") {
+        uni.showToast({
+          title: "本科院校暂未开放~",
+          icon: "none"
+        });
         return;
       }
       if (this.item.schoolno) {
