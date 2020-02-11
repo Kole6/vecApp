@@ -168,7 +168,7 @@ export default {
             uni.showToast({
                 title: res.message,
                 icon: 'none',
-                duration: 200
+                duration: 2000
             });
         });
     },
@@ -189,7 +189,7 @@ export default {
             uni.showToast({
                 title: res.message,
                 icon: 'none',
-                duration: 200
+                duration: 2000
             });
         });
     },

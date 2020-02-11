@@ -144,6 +144,13 @@ export default {
     },
     /* 查询数据api */
     getData(isRefresh = false) {
+      console.log("kkkkkkkkkk", {
+        ...this.currentSearch,
+        schoolType: this.params.schoolType,
+        token: uni.getStorageSync("token"),
+        pageIndex: this.page.pageIndex,
+        pageSize: this.page.pageSize
+      });
       return new Promise((resolve, reject) => {
         this.$http({
           url: "/zjq/College/GetSchoolSearchList",
@@ -159,7 +166,7 @@ export default {
           if (res.code == 0) {
             let data = this.$tool.toolSchoolList(res.data.list);
             if (isRefresh) {
-              this.page.pageIndex = 1;
+              this.page.pageIndex = 2;
               this.dataArr = data;
             } else {
               this.page.pageIndex++;
@@ -217,6 +224,7 @@ export default {
     },
     /* 点击查询 */
     handleSearch(result) {
+      console.log('result',result)
       let para = {};
       para.attribute = result.key_3; //学校属性
       para.provinceId = result.key_1; //省

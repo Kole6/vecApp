@@ -301,7 +301,9 @@ export default {
       return true
     },
     handleSC() {
-      this.$api.apiFavoriteZy(this, this.params.id);
+      if (this.$tool.toolToken(1)) {
+        this.$api.apiFavoriteZy(this, this.params.id);
+      }
     },
     handleDZ() {
       this.hasDZ = !this.hasDZ;
