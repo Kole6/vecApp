@@ -1,11 +1,19 @@
 <template>
   <view class="content">
     <view class="have-data">
-      <!-- <QSTabs ref="tabs" :current="current" :tabs="tabs" width="375" swiperWidth="750" activeColor="#6451FC"
-      backgroundColor="#fff" @change="change($event)" />-->
+      <QSTabs
+        ref="tabs"
+        :current="current"
+        :tabs="tabs"
+        width="375"
+        swiperWidth="750"
+        activeColor="#6451FC"
+        backgroundColor="#fff"
+        @change="change($event)"
+      />
       <!--scrollH-83-->
       <swiper
-        :style="{height:`${scrollH}upx`,borderTop: '1upx solid rgba(238, 238, 238, 0.3)'}"
+        :style="{height:`${scrollH-83}upx`,borderTop: '1upx solid rgba(238, 238, 238, 0.3)'}"
         :current="current"
         @change="swiperChange"
         @transition="transition"
@@ -13,7 +21,13 @@
       >
         <swiper-item class="swiper-item">
           <scroll-view scroll-y style="height: 100%;">
-            <view class="qiun-columns">
+            <view class="m-w" v-if="rankshow">
+              <image src="/static/no-ava.png" mode="aspectFill" />
+              <view class="tip">
+                <text>抱歉！数据正在整理中～</text>
+              </view>
+            </view>
+            <view class="qiun-columns" v-else>
               <view class="qiun-new">
                 <view class="new-tip">
                   <text>教师性别占比</text>
@@ -23,14 +37,16 @@
                     <view class="male">
                       <image src="/static/p602.png" mode="aspectFill" />
                       <p>
-                        {{teacherPec[0].name}}教师<br>
+                        {{teacherPec[0].name}}教师
+                        <br />
                         <span class="persent">{{teacherPec[0].value}}%</span>
                       </p>
                     </view>
                     <view class="female">
                       <image src="/static/p603.png" mode="aspectFill" />
                       <p>
-                        {{teacherPec[1].name}}教师<br>
+                        {{teacherPec[1].name}}教师
+                        <br />
                         <span class="persent">{{teacherPec[1].value}}%</span>
                       </p>
                     </view>
@@ -79,19 +95,23 @@
             </view>
           </scroll-view>
         </swiper-item>
-        <!-- <swiper-item class="swiper-item">
-					<scroll-view scroll-y style="height: 100%;">
-						<view class="m-list" v-for="(item,index) in dataArr" :key="index">
-							<view class="avatar">{{item.name.substr(0,1)}}</view>
-							<view class="name">{{item.name}}</view>
-							<view class="position">
-								<text>
-									{{item.position}}
-								</text>
-							</view>
-						</view>
-					</scroll-view>
-        </swiper-item>-->
+        <swiper-item class="swiper-item">
+          <scroll-view scroll-y style="height: 100%;">
+            <view class="m-w" v-if="rankshow2">
+              <image src="/static/no-ava.png" mode="aspectFill" />
+              <view class="tip">
+                <text>抱歉！数据正在整理中～</text>
+              </view>
+            </view>
+            <view class="m-list" v-else v-for="(item,index) in dataArr" :key="index">
+              <view class="avatar">{{item.name.substr(0,1)}}</view>
+              <view class="name">{{item.name}}</view>
+              <view class="position">
+                <text>{{item.position}}</text>
+              </view>
+            </view>
+          </scroll-view>
+        </swiper-item>
       </swiper>
     </view>
   </view>
@@ -112,7 +132,7 @@ export default {
     this.cWidth = uni.upx2px(750);
     this.cHeight = uni.upx2px(500);
     this.apiGetTeacherInfo();
-    // this.apiGetGgjs();
+    this.apiGetGgjs();
   },
   components: {
     QSTabs
@@ -127,6 +147,8 @@ export default {
       pixelRatio: 1,
       serverData: "",
       sid: "",
+      rankshow: false,
+      rankshow2: false,
       teacherPec: [
         {
           name: "男",
@@ -167,6 +189,9 @@ export default {
           for (let i of res.data) {
             if (i.title == "教师性别分布") {
               this.teacherPec = i.content;
+              if (!i.content || i.content[0].value == 0) {
+                this.rankshow = true;
+              }
             }
             if (i.title == "教师学历分布") {
               pie2 = this.getSeries(i.content);
@@ -209,6 +234,9 @@ export default {
       }).then(res => {
         if (res.code == 0) {
           this.dataArr = res.data;
+          if (res.data.length == 0) {
+            this.rankshow2 = true;
+          }
         } else {
           uni.showToast({
             title: res.message,
@@ -350,16 +378,16 @@ export default {
       });
     },
     change(index) {
-      // this.current = index;
+      this.current = index;
     },
     swiperChange({ detail: { current } }) {
-      // this.current = current;
+      this.current = current;
     },
     transition({ detail: { dx } }) {
-      // this.$refs.tabs.setDx(dx);
+      this.$refs.tabs.setDx(dx);
     },
     animationfinish({ detail: { current } }) {
-      // this.$refs.tabs.setFinishCurrent(current);
+      this.$refs.tabs.setFinishCurrent(current);
     }
   }
 };
@@ -509,6 +537,18 @@ export default {
       // border: solid 1upx $main-base-color;
       font-size: $uni-font-size-base;
     }
+  }
+}
+.m-w {
+  image {
+    padding: 150upx 184upx 50upx 184upx;
+    width: 382upx;
+    height: 318upx;
+  }
+  .tip {
+    color: #999999;
+    text-align: center;
+    font-size: $uni-font-size-base;
   }
 }
 </style>
