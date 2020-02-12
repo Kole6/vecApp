@@ -81,7 +81,7 @@ export default {
                         value: item.xlcc || ''
                     },
                     {
-                        name: '专业年限',
+                        name: '修业年限',
                         value: item.xynx || ''
                     }
                 ]
@@ -106,7 +106,7 @@ export default {
                         value: item.xlcc || ''
                     },
                     {
-                        name: '专业年限',
+                        name: '修业年限',
                         value: item.numberofyearsofschooling ? item.numberofyearsofschooling + '年' : ''
                     }
                 ]
@@ -133,7 +133,7 @@ export default {
                         value: item.xlcc || ''
                     },
                     {
-                        name: '专业年限',
+                        name: '修业年限',
                         value: item.xynx || ''
                     }
                 ]
@@ -161,7 +161,7 @@ export default {
                         value: item.xlcc || ''
                     },
                     {
-                        name: '专业年限',
+                        name: '修业年限',
                         value: item.xynx || ''
                     }
                 ]
