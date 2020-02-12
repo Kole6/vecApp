@@ -94,7 +94,8 @@ export default {
         if (res.code == 0) {
           this.vcode = res.data.vcode;
           uni.showToast({
-            title: "发送成功，请查看邮箱！"
+            title: "发送成功，请查看邮箱！",
+			icon:'none'
           });
         } else {
           uni.showModal({

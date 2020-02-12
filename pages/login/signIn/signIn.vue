@@ -116,6 +116,19 @@
 			},
 			toLogin() {
 				if (this.isPhoneSign) { //短信验证码登录
+					let str = ''
+					if(!this.phoneno){
+						str = '请输入手机号'
+					}else if(!this.code){
+						str = '请输入验证码'
+					}
+					if(str){
+						uni.showToast({
+							title:str,
+							icon:'none'
+						})
+						return
+					}
 					this.$http({
 						url: '/zjq/User/LoginCode',
 						header: 'form',
@@ -136,6 +149,19 @@
 						console.log(err)
 					})
 				} else { //账号密码登录
+					let str = ''
+					if(!this.userno){
+						str = '请输入账号'
+					}else if(!this.password){
+						str = '请输入密码'
+					}
+					if(str){
+						uni.showToast({
+							title:str,
+							icon:'none'
+						})
+						return
+					}
 					this.$http({
 						url: '/zjq/User/Login',
 						header: 'form',

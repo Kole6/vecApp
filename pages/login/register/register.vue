@@ -137,9 +137,10 @@ export default {
               title: res.message
             });
             setTimeout(() => {
-              uni.redirectTo({
-                url: "/pages/login/signIn/signIn"
-              });
+			  uni.navigateBack()
+              // uni.redirectTo({
+              //   url: "/pages/login/signIn/signIn"
+              // });
             }, 1000);
           } else {
             uni.showModal({
@@ -154,6 +155,15 @@ export default {
       );
     },
     toIndex() {
+		// 判断手机号
+	  if(!this.phoneno){
+		  uni.showModal({
+		    content: "请输入手机号！",
+		    showCancel: false
+		  });
+		  return;
+	  }
+	  // 判断密码
       let pl = this.password.length;
       if (pl > 5 && pl < 21) {
         this.apiRegister();
