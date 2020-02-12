@@ -366,6 +366,9 @@ export default {
       });
     },
     async apiMyComparison(optype) {
+      if (!this.$tool.toolToken(1)) {
+        return;
+      }
       if (this.numberDB >= ConfigContrast && optype == "A") {
         uni.showToast({
           title: `最多只能选取 ${ConfigContrast} 所院校进行对比哦！`,
@@ -430,7 +433,9 @@ export default {
       });
     },
     handleSC() {
-      this.$api.apiFavorite(this, this.schoolInfo.schoolno);
+      if (this.$tool.toolToken(1)) {
+        this.$api.apiFavorite(this, this.schoolInfo.schoolno);
+      }
     },
     modalChange() {},
     handleLogoTaped() {
@@ -447,7 +452,7 @@ export default {
       });
     },
     handleBack() {
-      console.log('5666+',)
+      console.log("5666+");
       uni.navigateBack();
     },
     handleDZ() {
@@ -514,7 +519,7 @@ export default {
     toWebsite() {
       if (!this.schoolInfo.website) {
         uni.showToast({
-          title: "没有找到本学校官网！",
+          title: "暂无官网信息！",
           duration: 2000,
           icon: "none"
         });
@@ -540,18 +545,22 @@ export default {
         });
         return;
       }
+      let src = "";
       if (item.url) {
         let stringArr = [];
         if (item.params) {
           item.params.forEach(item => {
             stringArr.push(`${item.key}=${this.schoolInfo[item.value]}`);
           });
-          console.log(stringArr, "arr");
         }
-        this.$tool.toolistoolTiaoToken(item.url + "?" + stringArr.join("&"), 1);
-        /* uni.navigateTo({
-          url: item.url + "?" + stringArr.join("&")
-        }); */
+        src = item.url + "?" + stringArr.join("&");
+        if (item.name == "学校简介" || item.name == "校领导") {
+          this.$tool.toolistoolTiaoToken(src);
+          return;
+        }
+        if (this.$tool.toolToken(1)) {
+          this.$tool.toolistoolTiaoToken(src);
+        }
       }
     }
   }

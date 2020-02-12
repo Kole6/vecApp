@@ -76,13 +76,13 @@ export default {
           ]
         },
         {
-          title: "学校属性",
+          title: this.type == 1 ? "学校类型" : "性质类别",
           key: "key_3",
           isMutiple: false,
           detailList: []
         },
         {
-          title: "性质类别",
+          title: "学校属性",
           key: "key_4",
           isMutiple: false,
           nowrap: true,
@@ -126,13 +126,13 @@ export default {
           type: this.type == 1 ? "xxsx_gz" : "xxsx_zz",
           pid: "0"
         });
-        this.menuList[2].detailList = this.transformData(xxsx);
+        this.menuList[3].detailList = this.transformData(xxsx);
         // 获取性质类别
         let xxxz = await this.$api.apiGetDict(this, {
           type: this.type == 1 ? "xxlx_gz" : "xxxz_zz",
           pid: "0"
         });
-        this.menuList[3].detailList = this.transformData(xxxz);
+        this.menuList[2].detailList = this.transformData(xxxz);
         this.$nextTick(() => {
           this.$refs.filter.resetMenuList(this.menuList);
         });
@@ -217,14 +217,14 @@ export default {
     },
     /* 点击查询 */
     handleSearch(result) {
-      console.log('result',result)
+      console.log("result", result);
       let para = {};
-      para.attribute = result.key_3; //学校属性
+      para.attribute = result.key_4; //性质类别
       para.provinceId = result.key_1; //省
       if (result.key_2) {
         para.cityId = result.key_2; //市
       }
-      para.property = result.key_4; //学校类别
+      para.property = result.key_3; //学校属性
       this.currentSearch = para;
       this.onPullDown();
     },
