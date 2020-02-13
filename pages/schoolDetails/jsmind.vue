@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view>
-			<web-view :src="src"></web-view>
+			<web-view :src="src" v-if="src"></web-view>
 		</view>
 	</view>
 </template>
@@ -10,11 +10,11 @@
 	export default {
 		data() {
 			return {
-				src:'/hybrid/html/jsmind.html?'
+				src:''
 			};
 		},
 		onLoad(e) {
-			this.src = this.src + `sid=${e.sid}&token=${uni.getStorageSync('token')}`
+			this.src = `/hybrid/html/jsmind.html?sid=${e.sid}&token=${uni.getStorageSync('token')}`
 		}
 	};
 </script>

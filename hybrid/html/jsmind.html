@@ -49,8 +49,12 @@
 				padding: 2px 5px;
 			}
 			.box.disabled{
-				background-color: #ff4d4d;
+				background-color: #F1C40F;
 				cursor: not-allowed;
+				color:#fff;
+			}
+			.box.disabled .icon{
+				color:#fff;
 			}
 			.icon{
 				display: inline-block;
@@ -58,12 +62,41 @@
 				height: 16px;
 				vertical-align: middle;
 			}
+			input[type=range]::-webkit-slider-runnable-track {
+			  height: 15px;
+			  border-radius: 10px;
+			  box-shadow: 0 1px 1px #def3f8, inset 0 .125em .125em #0d1112;
+			}
+			input[type=range]::-webkit-slider-thumb {
+				 -webkit-appearance: none; /* 去除滑块的默认样式 */
+				 height: 25px;
+				 width: 25px;
+				 margin-top: -5px;
+				 background:#7B05E0;
+				 border-radius: 50%;
+				 border: solid 0.125em rgba(205, 224, 230, 0.5);
+				 box-shadow: 0 .125em .125em #3b4547;
+			}
 		</style>
 	</head>
 
 	<body>
 		<div id="jsmind_container">
 			<div id="button-box">
+				<!-- <input type="range" name="points" min="0" max="100" step="any" id="h5pro"  list="tickmarks"/>
+				<datalist id="tickmarks">
+				    <option value="0" label="0%">
+				    <option value="10">
+				    <option value="20">
+				    <option value="30">
+				    <option value="40">
+				    <option value="50" label="50%">
+				    <option value="60">
+				    <option value="70">
+				    <option value="80">
+				    <option value="90">
+				    <option value="100" label="100%">
+				</datalist> -->
 				<div class="box" id="zoom-in-button" style="width:50px" onclick="zoomIn();">
 					<span class="icon">
 						<svg t="1581320083909" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4513" width="16" height="16"><path d="M871.722667 572.501333a19.968 19.968 0 0 0-23.381334 16.298667 320.64 320.64 0 0 1-316.16 264.533333C354.986667 853.333333 210.901333 709.290667 210.901333 532.138667A321.152 321.152 0 0 1 532.138667 210.944a321.066667 321.066667 0 0 1 316.202666 264.448 20.181333 20.181333 0 0 0 39.68-7.082667 357.504 357.504 0 0 0-56.192-138.368A361.301333 361.301333 0 0 0 532.138667 170.666667 361.386667 361.386667 0 0 0 170.666667 532.138667C170.666667 731.477333 332.842667 893.610667 532.138667 893.610667a360.917333 360.917333 0 0 0 355.882666-297.728 20.181333 20.181333 0 0 0-16.298666-23.381334" p-id="4514" fill="#f0ad4e"></path><path d="M531.712 784.341333a21.333333 21.333333 0 0 0 21.333333-21.333333v-209.493333h209.536a21.333333 21.333333 0 0 0 0-42.666667h-209.493333V301.226667a21.333333 21.333333 0 0 0-42.666667 0v209.578666H300.8a21.333333 21.333333 0 0 0 0 42.666667h209.578667v209.536a21.333333 21.333333 0 0 0 21.333333 21.333333" p-id="4515" fill="#f0ad4e"></path></svg>					

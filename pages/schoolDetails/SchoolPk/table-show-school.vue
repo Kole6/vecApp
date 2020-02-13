@@ -1,6 +1,6 @@
 <template>
   <view>
-    <view class="t-table" :style="{  maxHeight: tableHeight , width: tableWidth }">
+    <view class="t-table" >
       <view class="t-row t-title">
         <view class="t-th">学校名称</view>
         <view class="t-th" v-for="(item, index) in bodyList" :key="index">{{ item.schoolname }}</view>
