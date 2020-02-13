@@ -87,7 +87,7 @@ export default {
       .select(".school-list")
       .boundingClientRect(data => {
         this.wrapperHeight =
-          this.systemInfo.screenHeight - data.top - 85 + "px";
+          this.systemInfo.screenHeight - data.top - 72 + "px";
         // #ifdef H5
         this.wrapperHeight =
           this.systemInfo.screenHeight - data.top - 45 + "px";
