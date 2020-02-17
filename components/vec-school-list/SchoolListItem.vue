@@ -6,19 +6,17 @@
       <view class="right-tag tag1">
         <view>
           <text
-            :key="i"
-            :class="{'tag-text':i==0}"
-            v-for="(tag,i) in item.tags"
-          >{{ tag.name}}：{{tag.value}}</text>
+            :class="{'tag-text':item.tags[1].value}"
+          >{{ item.tags[0].name}}：{{item.tags[0].value}}</text>
+          <text v-if="item.tags[1].value">{{ item.tags[1].name}}：{{item.tags[1].value}}</text>
         </view>
       </view>
       <view class="right-tag">
         <view v-if="isSpecial">
           <text
-            :key="i"
-            :class="{'tag-text':i==0}"
-            v-for="(card,i) in item.cards"
-          >{{ card.name}}：{{card.value}}</text>
+            :class="{'tag-text':item.cards[1].value}"
+          >{{ item.cards[0].name}}：{{item.cards[0].value}}</text>
+          <text v-if="item.cards[1].value">{{ item.cards[1].name}}：{{item.cards[1].value}}</text>
         </view>
         <view class="right-card" v-else>
           <text v-for="(card,index) in item.cards" :key="index" class="card">{{ card.name}}</text>

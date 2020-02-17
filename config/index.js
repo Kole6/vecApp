@@ -1,6 +1,6 @@
 //全局请求入口
 export const ConfigBaseURL = 'http://47.103.69.156:18089'
-
+// export const ConfigBaseURL = 'https://cc.pthink.com.cn'
 //版本
 export const ConfigEdition = '1.2.6'
 
