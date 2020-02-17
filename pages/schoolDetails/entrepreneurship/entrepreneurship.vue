@@ -73,7 +73,7 @@ export default {
   data() {
     return {
       haveData: true,
-      tabs: ["2018年"],
+      tabs: ["2017年"],
       current: 0,
       cWidth: "",
       cHeight: "",
@@ -119,7 +119,7 @@ export default {
             data: jyb
           },
           {
-            name: "未就业率",
+            name: "其他",
             data: 100 - jyb
           }
         ]

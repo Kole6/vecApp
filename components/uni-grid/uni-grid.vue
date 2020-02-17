@@ -78,7 +78,7 @@ export default {
             setTimeout(this._getSize(fn))
             return
           }
-          let width = parseInt(ret[0].width / this.column) - 1 + 'px'
+          let width = parseInt(ret[0].width / this.column) - 1/this.column + 'px'
           typeof fn === 'function' && fn(width)
         })
     }

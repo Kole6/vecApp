@@ -532,7 +532,7 @@
 		}, {
 			"path": "pages/schoolDetails/ProfessionSetting/ProfessionSetting",
 			"style": {
-				"navigationBarTitleText": "专业设置",
+				"navigationBarTitleText": "优势专业",
 				"app-plus": {
 					"bounce": "none"
 				}

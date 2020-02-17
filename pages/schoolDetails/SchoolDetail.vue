@@ -8,7 +8,10 @@
       title="学校详情"
     >
       <view class="f-sc" slot="right" @tap="handlePkOne">
-        <text>秒懂学校</text>
+        <view class="f-sc-box">
+          <image src="/static/p703.png" mode="aspectFit" />
+          <!-- <text>秒懂</text> -->
+        </view>
       </view>
     </uni-nav-bar>
     <view class="m-wrapper" :style="{ height: wrapperHeight, overflow: 'auto' }">
@@ -60,7 +63,13 @@
       </view>
       <view class="line"></view>
       <!-- 对比列表 -->
-      <view class="m-tip">您还可以进行院校对比哦！ 您已经添加 {{numberDB}} 个学校</view>
+      <view class="m-tip">
+        <image src="/static/p704.png" mode="aspectFill" />
+        <text>升级为</text>
+        <text class="vip">VIP</text>
+        <text>，畅享无限量比对服务！</text>
+      </view>
+      <!-- <view class="m-tip">您还可以进行院校对比哦！ 您已经添加 {{numberDB}} 个学校</view> -->
       <view class="m-pk">
         <view class="left" v-if="hasDB" @tap="apiMyComparison('D')">
           <image
@@ -101,35 +110,26 @@
         <view class="u-title">
           <text>基本信息</text>
         </view>
-        <view class="tags">
-          <block v-for="(item, index) in schoolInfo1" :key="index">
-            <view class="item">
-              <text @tap="handleTap(item, index)">{{ item.name }}</text>
-            </view>
-          </block>
+        <view class="example-body">
+          <uni-grid @change="toIndexicon1" :column="4" border-color="#eee" :show-border="true">
+            <uni-grid-item v-for="(item, index) in detailList1" :key="index">
+              <image class="image" :src="`/static/detail/${item.img}.png`" mode="aspectFill" />
+              <text class="text">{{ item.name }}</text>
+            </uni-grid-item>
+          </uni-grid>
         </view>
       </view>
       <view class="m-info">
         <view class="u-title">
           <text>学校实力</text>
         </view>
-        <view class="tags">
-          <block v-for="(item, index) in schoolInfo2" :key="index">
-            <view class="item">
-              <text @tap="handleTap(item, index)">{{ item.name }}</text>
-            </view>
-          </block>
-        </view>
-      </view>
-      <view class="s-school_list" @tap="handleMind()">
-        <text>拓扑图</text>
-        <uni-icons type="arrowright" size="24" class="list-right" />
-        <view class="tuopu">
-          <image
-            src="/static/indexIcon/tpt.png"
-            mode="aspectFit"
-            style="width: 750upx; height:230upx;"
-          />
+        <view class="example-body">
+          <uni-grid @change="toIndexicon2" :column="4" border-color="#eee" :show-border="true">
+            <uni-grid-item v-for="(item, index) in detailList2" :key="index">
+              <image class="image" :src="`/static/detail/${item.img}.png`" mode="aspectFill" />
+              <text class="text">{{ item.name }}</text>
+            </uni-grid-item>
+          </uni-grid>
         </view>
       </view>
       <view
@@ -175,13 +175,17 @@ import uniNavBar from "@/components/uni-nav-bar/uni-nav-bar.vue";
 import uniIcons from "@/components/uni-icons/uni-icons";
 import ziXun from "@/components/ziXun/ziXunLeft.vue";
 import uniPopup from "@/components/uni-popup/uni-popup.vue";
+import uniGrid from "@/components/uni-grid/uni-grid.vue";
+import uniGridItem from "@/components/uni-grid-item/uni-grid-item.vue";
 import { ConfigContrast } from "@/config";
 export default {
   components: {
     uniNavBar,
     uniIcons,
     ziXun,
-    uniPopup
+    uniPopup,
+    uniGrid,
+    uniGridItem
   },
   data() {
     return {
@@ -211,10 +215,11 @@ export default {
         top: "250px"
       },
       // params  从schoolInfo中获取数据拼接到参数中
-      schoolInfo1: [
+      detailList1: [
         {
           name: "学校简介",
           url: "./schoolProfile",
+          img: "100",
           params: [
             {
               key: "schoolName",
@@ -225,6 +230,7 @@ export default {
         {
           name: "校领导",
           url: "./SchoolLeader/SchoolLeader",
+          img: "106",
           params: [
             {
               key: "sid",
@@ -235,6 +241,7 @@ export default {
         {
           name: "学校荣誉",
           url: "./schoolHonors/schoolHonors",
+          img: "109",
           params: [
             {
               key: "sid",
@@ -245,32 +252,20 @@ export default {
         {
           name: "奖助学金",
           url: "./assistanceScholarship/assistanceScholarship",
+          img: "102",
           params: [
             {
               key: "sid",
               value: "schoolno"
-            }
-          ]
-        },
-        {
-          name: "质量年报",
-          url: "/pages/indexIcon/materialDatabase/FileDetail?fileId=4",
-          params: [
-            {
-              key: "sid",
-              value: "schoolno"
-            },
-            {
-              key: "fileId",
-              value: "fileId"
             }
           ]
         }
       ],
-      schoolInfo2: [
+      detailList2: [
         {
           name: "师资情况",
           url: "./ourFaculty/ourFaculty",
+          img: "105",
           params: [
             {
               key: "sid",
@@ -279,8 +274,9 @@ export default {
           ]
         },
         {
-          name: "校企合作",
-          url: "./cooperation/cooperation",
+          name: "专业分布",
+          url: "./jsmind",
+          img: "108",
           params: [
             {
               key: "sid",
@@ -289,8 +285,9 @@ export default {
           ]
         },
         {
-          name: "专业设置",
+          name: "优势专业",
           url: "./ProfessionSetting/ProfessionSetting",
+          img: "110",
           params: [
             {
               key: "sid",
@@ -301,6 +298,7 @@ export default {
         {
           name: "技能大赛",
           url: "./skillsCompetition/skillsCompetition",
+          img: "101",
           params: [
             {
               key: "sid",
@@ -311,10 +309,37 @@ export default {
         {
           name: "就业创业",
           url: "./entrepreneurship/entrepreneurship",
+          img: "103",
           params: [
             {
               key: "sid",
               value: "schoolno"
+            }
+          ]
+        },
+        {
+          name: "校企合作",
+          url: "./cooperation/cooperation",
+          img: "107",
+          params: [
+            {
+              key: "sid",
+              value: "schoolno"
+            }
+          ]
+        },
+        {
+          name: "质量年报",
+          url: "/pages/indexIcon/materialDatabase/FileDetail?fileId=4",
+          img: "111",
+          params: [
+            {
+              key: "sid",
+              value: "schoolno"
+            },
+            {
+              key: "fileId",
+              value: "fileId"
             }
           ]
         }
@@ -437,7 +462,6 @@ export default {
         this.$api.apiFavorite(this, this.schoolInfo.schoolno);
       }
     },
-    modalChange() {},
     handleLogoTaped() {
       this.showModal = true;
     },
@@ -452,7 +476,6 @@ export default {
       });
     },
     handleBack() {
-      console.log("5666+");
       uni.navigateBack();
     },
     handleDZ() {
@@ -529,7 +552,13 @@ export default {
         url: `./schoolProfile?website=${this.schoolInfo.website}`
       });
     },
-    handleTap(item, index) {
+    toIndexicon1(e) {
+      this.handleTap(this.detailList1[e.detail.index]);
+    },
+    toIndexicon2(e) {
+      this.handleTap(this.detailList2[e.detail.index]);
+    },
+    handleTap(item) {
       //中职的暂时都不让进入
       /* if (item.name != "学校简介" && this.schoolInfo.schooltype == 2) {
         uni.showToast({
