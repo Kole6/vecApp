@@ -14,7 +14,9 @@
 			};
 		},
 		onLoad(e) {
-			this.src = `/hybrid/html/jsmind.html?sid=${e.sid}&token=${uni.getStorageSync('token')}`
+			this.$nextTick(()=>{
+				this.src = `/hybrid/html/jsmind.html?sid=${e.sid}&token=${uni.getStorageSync('token')}`
+			})
 		}
 	};
 </script>
